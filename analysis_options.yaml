@@ -1,0 +1,46 @@
+include: package:lint/analysis_options.yaml
+analyzer:
+    errors:
+        unused_element: false
+        unused_import: error
+        prefer_const_constructors: error
+        unused_field: error
+        file_names: false
+        unused_local_variable: error
+        prefer_final_locals: error
+        #    avoid_print: error
+        prefer_const_declarations: error
+        missing_return: error
+        sort_child_properties_last: error
+        unnecessary_new: error
+        prefer_collection_literals: error
+        prefer_constructors_over_static_methods: error
+        use_setters_to_change_properties: false
+        unnecessary_this: error
+        always_declare_return_types: error
+        avoid_bool_literals_in_conditional_expressions: error
+        avoid_unnecessary_containers: error
+        prefer_final_fields: error
+        prefer_const_literals_to_create_immutables: error
+        prefer_if_elements_to_conditional_expressions: error
+        avoid_void_async: error
+        curly_braces_in_flow_control_structures: error
+        unnecessary_parenthesis: error
+        prefer_equal_for_default_values: error
+        prefer_foreach: error
+        prefer_interpolation_to_compose_strings: error
+        prefer_is_empty: error
+        type_annotate_public_apis: error
+        prefer_typing_uninitialized_variables: error
+        parameter_assignments: error
+        void_checks: false
+        prefer_if_null_operators: error
+        avoid_classes_with_only_static_members: false
+        missing_required_param: error
+        avoid_positional_boolean_parameters: error
+        constant_identifier_names: false
+        # error in future
+        invalid_assignment: false
+        unsafe_html: false
+        #error in future
+        argument_type_not_assignable: false
