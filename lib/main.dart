@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/my_behavior.dart';
+import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/modules/homePageCantroller.dart';
-import 'package:whatsapp_auto/modules/homepage/home_page.dart';
-import 'package:whatsapp_auto/modules/homepage/welcome_message/welcome_message.dart';
-import 'package:whatsapp_auto/splashScreen.dart';
-import 'package:whatsapp_auto/theme/app_string.dart';
-import 'package:whatsapp_auto/widgets/bottom_navigation_bar.dart';
 
+import 'package:whatsapp_auto/theme/app_string.dart';
 import 'modules/homepage/welcome_message/welcome_controller.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -35,7 +32,6 @@ class MyApp extends StatelessWidget {
           );
         },
         initialBinding: AppBidding(),
-        initialRoute: SplashScreen.routeName,
         theme: ThemeData(
           fontFamily: AppString.fonts,
           splashColor: Colors.transparent,
@@ -44,34 +40,13 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.white,
             elevation: 0,
             textTheme: TextTheme(
-              headline6: TextStyle(
-                  color: Colors.black, fontSize: 18, fontFamily: "Customtext"),
+              headline6: TextStyle(color: Colors.black, fontSize: 18, fontFamily: "Customtext"),
             ),
             iconTheme: IconThemeData(color: Colors.black),
           ),
         ),
-        getPages: [
-          GetPage(
-            name: SplashScreen.routeName,
-            page: () => const SplashScreen(),
-            transition: Transition.rightToLeft,
-          ),
-          GetPage(
-            name: Bottom.routeName,
-            page: () => Bottom(),
-            transition: Transition.rightToLeft,
-          ),
-          GetPage(
-            name: HomePageScreen.routeName,
-            page: () => const HomePageScreen(),
-            transition: Transition.rightToLeft,
-          ),
-          GetPage(
-            name: WelcomeMessage.routeName,
-            page: () => WelcomeMessage(),
-            transition: Transition.rightToLeft,
-          ),
-        ],
+        initialRoute: Routes.splash,
+        getPages: Routes.pages,
       ),
     );
   }

@@ -5,11 +5,10 @@ import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/homepage/welcome_message/welcome_message.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
+import 'package:whatsapp_auto/widgets/app_text.dart';
 import 'package:whatsapp_auto/widgets/categories_box.dart';
 
 class HomePageScreen extends StatelessWidget {
-  static const routeName = '/Homepage_screen';
-
   const HomePageScreen({Key? key}) : super(key: key);
 
   @override
@@ -17,31 +16,13 @@ class HomePageScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.appBackgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: AppColor.appBarColors,
-        title: const Text(
+        title: const AppText(
           AppString.whatsAuto,
-          style: TextStyle(color: AppColor.whiteColor),
+          color: AppColor.whiteColor,
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-            child: Row(
-              children: [
-                Image.asset(
-                  AssetsPath.notification,
-                  width: SizeUtils.horizontalBlockSize * 6,
-                ),
-                SizedBox(
-                  width: SizeUtils.horizontalBlockSize * 4,
-                ),
-                const Icon(
-                  Icons.more_vert,
-                  color: AppColor.whiteColor,
-                )
-              ],
-            ),
-          ),
-        ],
       ),
       body: Stack(
         children: [
@@ -75,23 +56,17 @@ class HomePageScreen extends StatelessWidget {
           // ),
           Padding(
             padding: EdgeInsets.only(
-                top: SizeUtils.verticalBlockSize * 2,
-                left: SizeUtils.horizontalBlockSize * 5,
-                right: SizeUtils.horizontalBlockSize * 5),
+                top: SizeUtils.verticalBlockSize * 2, left: SizeUtils.horizontalBlockSize * 5, right: SizeUtils.horizontalBlockSize * 5),
             // padding: EdgeInsets.only(top: SizeUtils.verticalBlockSize * 14, left: SizeUtils.horizontalBlockSize * 5,right: SizeUtils.horizontalBlockSize * 5),
             child: Stack(
               children: [
                 const Text(
                   AppString.availableCategories,
-                  style: TextStyle(
-                      color: AppColor.textColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                  style: TextStyle(color: AppColor.textColor, fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 SingleChildScrollView(
                   child: Padding(
-                    padding:
-                        EdgeInsets.only(top: SizeUtils.verticalBlockSize * 5),
+                    padding: EdgeInsets.only(top: SizeUtils.verticalBlockSize * 5),
                     child: Column(
                       children: [
                         customCategoriesBox(
@@ -105,42 +80,48 @@ class HomePageScreen extends StatelessWidget {
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
                         customCategoriesBox(
-                            titleText: AppString.menuReplyTitle,
-                            subtitle: AppString.menuReplySubTile,
-                            image: AssetsPath.messages,
-                            onTap: () {}),
+                          titleText: AppString.emojiTitle,
+                          subtitle: AppString.emojiSubTile,
+                          image: AssetsPath.emoji,
+                          onTap: () {},
+                        ),
+                        // SizedBox(
+                        //   height: SizeUtils.verticalBlockSize * 1.5,
+                        // ),
+                        // customCategoriesBox(
+                        //   titleText: AppString.menuReplyTitle,
+                        //   subtitle: AppString.menuReplySubTile,
+                        //   image: AssetsPath.messages,
+                        //   onTap: () {},
+                        // ),
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
                         customCategoriesBox(
-                            titleText: AppString.emojiTitle,
-                            subtitle: AppString.emojiSubTile,
-                            image: AssetsPath.emoji,
-                            onTap: () {}),
+                          titleText: AppString.categoryTitle,
+                          subtitle: AppString.categorySubTile,
+                          image: AssetsPath.category,
+                          onTap: () {},
+                        ),
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
                         customCategoriesBox(
-                            titleText: AppString.settingTitle,
-                            subtitle: AppString.settingSubTile,
-                            image: AssetsPath.setting,
-                            onTap: () {}),
+                          titleText: AppString.settingTitle,
+                          subtitle: AppString.settingSubTile,
+                          image: AssetsPath.setting,
+                          onTap: () {},
+                        ),
+
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
                         customCategoriesBox(
-                            titleText: AppString.categoryTitle,
-                            subtitle: AppString.categorySubTile,
-                            image: AssetsPath.category,
-                            onTap: () {}),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
+                          titleText: AppString.documentTitle,
+                          subtitle: AppString.documentSubTile,
+                          image: AssetsPath.document,
+                          onTap: () {},
                         ),
-                        customCategoriesBox(
-                            titleText: AppString.documentTitle,
-                            subtitle: AppString.documentSubTile,
-                            image: AssetsPath.document,
-                            onTap: () {}),
                       ],
                     ),
                   ),

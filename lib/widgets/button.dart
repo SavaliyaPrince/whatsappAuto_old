@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
-Widget createButton({required String? text, required VoidCallback onTap}) {
+Widget createButton({
+  required String? text,
+  required VoidCallback onTap,
+}) {
   return InkWell(
     onTap: onTap,
     child: Container(
