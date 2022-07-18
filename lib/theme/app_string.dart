@@ -23,4 +23,25 @@ class AppString {
   static const cancel = 'Cancel';
   static const save = 'Save';
   static const selectWelcomeMessage = 'Select welcome message';
+
+  ///   setting page
+  static const setting = 'Settings';
+  static const autoReply = 'Auto reply message sent';
+  static const upgrade = 'Upgrade App';
+  static const advance = 'Advance Settings';
+  static const Appearance = 'Appearance';
+  static const Notification = 'Notification';
+  static const Privacy = 'Privacy';
+  static const Help = 'Help';
+  static const InviteFriends = 'Invite your friends';
+
+  ///  Auto reply message sent
+  static const autoReplyMassage = "Auto reply message sent";
+  static const massageSent = "Messages sent";
+  static const lastSync = "Last sync 2 mins ago";
+  static const WhatsApp = "WhatsApp";
+  static const Telegram = "Telegram";
+  static const Viber = "Viber";
+  static const Messanger = "Messanger";
+  static const LineMessenger = "Line Messenger";
 }
