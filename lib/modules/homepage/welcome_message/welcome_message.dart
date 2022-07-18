@@ -93,7 +93,7 @@ class WelcomeMessage extends StatelessWidget {
                                   return (_welcomeController
                                               .isMessageSelection.value ==
                                           i)
-                                      ? AppColor.splashScreenBackgroundColor
+                                      ? AppColor.primaryColor
                                       : AppColor.iconColor.withOpacity(0.2);
                                 }),
                                 onChanged: (value) {
@@ -221,7 +221,7 @@ class WelcomeMessage extends StatelessWidget {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                    color: AppColor.splashScreenBackgroundColor,
+                                    color: AppColor.primaryColor,
                                   ),
                                   boxShadow: [
                                     BoxShadow(
@@ -238,7 +238,7 @@ class WelcomeMessage extends StatelessWidget {
                                       fontSize: SizeUtils.fSize_16(),
                                       fontWeight: FontWeight.w600,
                                       color:
-                                          AppColor.splashScreenBackgroundColor,
+                                          AppColor.primaryColor,
                                     ),
                                   ),
                                 ),
@@ -251,10 +251,10 @@ class WelcomeMessage extends StatelessWidget {
                               child: Container(
                                 height: SizeUtils.horizontalBlockSize * 12,
                                 decoration: BoxDecoration(
-                                  color: AppColor.splashScreenBackgroundColor,
+                                  color: AppColor.primaryColor,
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                    color: AppColor.splashScreenBackgroundColor,
+                                    color: AppColor.primaryColor,
                                   ),
                                   boxShadow: [
                                     BoxShadow(
@@ -305,7 +305,7 @@ class WelcomeMessage extends StatelessWidget {
   Widget Box() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColor.splashScreenBackgroundColor10,
+        color: AppColor.primaryColor10,
         borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
       ),
       child: Padding(
@@ -335,7 +335,7 @@ class WelcomeMessage extends StatelessWidget {
                             !_welcomeController.isWelcomeMessage.value;
                       },
                       value: _welcomeController.isWelcomeMessage.value,
-                      activeColor: AppColor.splashScreenBackgroundColor,
+                      activeColor: AppColor.primaryColor,
                       activeTrackColor: AppColor.green38,
                       inactiveThumbColor: AppColor.whiteColor,
                       inactiveTrackColor: AppColor.textColor.withOpacity(0.2),

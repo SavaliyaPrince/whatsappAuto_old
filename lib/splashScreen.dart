@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Stack(
       children: [
         Container(
-          color: AppColor.splashScreenBackgroundColor,
+          color: AppColor.primaryColor,
           // decoration:  const BoxDecoration(
           //   image: DecorationImage(
           //     image: AssetImage(AppString.splashScreen),

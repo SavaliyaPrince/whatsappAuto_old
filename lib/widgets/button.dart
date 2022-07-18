@@ -10,7 +10,7 @@ Widget createButton({
     onTap: onTap,
     child: Container(
       decoration: BoxDecoration(
-        color: AppColor.splashScreenBackgroundColor,
+        color: AppColor.primaryColor,
         borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
       ),
       child: Padding(
