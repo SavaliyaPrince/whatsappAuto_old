@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
+import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
+
 import 'package:whatsapp_auto/Utils/size_utils.dart';
-import 'package:whatsapp_auto/modules/homepage/welcome_message/welcome_message.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
@@ -18,7 +19,6 @@ class HomePageScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: AppColor.appBarColors,
         title: const AppText(
           AppString.whatsAuto,
           color: AppColor.whiteColor,
@@ -47,7 +47,7 @@ class HomePageScreen extends StatelessWidget {
                         subtitle: AppString.welcomeMessageSubTile,
                         image: AssetsPath.star,
                         onTap: () {
-                          Get.toNamed(WelcomeMessage.routeName);
+                          // Get.toNamed(WelcomeMessage.routeName);
                         }),
                     SizedBox(
                       height: SizeUtils.verticalBlockSize * 1.5,
@@ -83,7 +83,9 @@ class HomePageScreen extends StatelessWidget {
                       titleText: AppString.settingTitle,
                       subtitle: AppString.settingSubTile,
                       image: AssetsPath.setting,
-                      onTap: () {},
+                      onTap: () {
+                        Navigation.pushNamed(Routes.settingPage);
+                      },
                     ),
 
                     SizedBox(

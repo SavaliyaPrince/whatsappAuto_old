@@ -9,4 +9,5 @@ class AppColor {
   static const textColor = Color(0xff3B4744);
   static const iconColor = Color(0xff838383);
   static const Color primaryColor10 = Color.fromRGBO(43, 184, 149, 0.1);
+  static const backIconColor = Color(0xff2C2C2C);
 }

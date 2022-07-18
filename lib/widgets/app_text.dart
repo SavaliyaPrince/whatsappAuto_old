@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:whatsapp_auto/theme/app_string.dart';
 
 class AppText extends StatelessWidget {
   final String text;
@@ -17,11 +18,7 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      ),
+      style: TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight, fontFamily: AppString.fonts),
     );
   }
 }

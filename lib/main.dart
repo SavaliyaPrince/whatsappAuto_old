@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/my_behavior.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/modules/homePageCantroller.dart';
+import 'package:whatsapp_auto/theme/app_color.dart';
 
 import 'package:whatsapp_auto/theme/app_string.dart';
-import 'modules/homepage/welcome_message/welcome_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColor.appBarColors,
             elevation: 0,
             textTheme: TextTheme(
               headline6: TextStyle(color: Colors.black, fontSize: 18, fontFamily: "Customtext"),
@@ -56,6 +56,5 @@ class AppBidding implements Bindings {
   @override
   void dependencies() {
     Get.put(HomePageController());
-    Get.put(WelcomeController());
   }
 }
