@@ -5,7 +5,10 @@ import 'package:whatsapp_auto/modules/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/homepage/home_page.dart';
 import 'package:whatsapp_auto/modules/homepage/welcome_message/welcome_message.dart';
 import 'package:whatsapp_auto/splashScreen.dart';
+import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/bottom_navigation_bar.dart';
+
+import 'modules/homepage/welcome_message/welcome_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +37,7 @@ class MyApp extends StatelessWidget {
         initialBinding: AppBidding(),
         initialRoute: SplashScreen.routeName,
         theme: ThemeData(
+          fontFamily: AppString.fonts,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           appBarTheme: const AppBarTheme(
@@ -64,7 +68,7 @@ class MyApp extends StatelessWidget {
           ),
           GetPage(
             name: WelcomeMessage.routeName,
-            page: () => const WelcomeMessage(),
+            page: () => WelcomeMessage(),
             transition: Transition.rightToLeft,
           ),
         ],
@@ -77,5 +81,6 @@ class AppBidding implements Bindings {
   @override
   void dependencies() {
     Get.put(HomePageController());
+    Get.put(WelcomeController());
   }
 }
