@@ -2,7 +2,7 @@
 // import 'package:get/get.dart';
 // import 'package:whatsapp_auto/Utils/assets_path.dart';
 // import 'package:whatsapp_auto/Utils/size_utils.dart';
-// import 'package:whatsapp_auto/modules/homePageCantroller.dart';
+// import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 // import 'package:whatsapp_auto/modules/homepage/home_page.dart';
 // import 'package:whatsapp_auto/modules/messages.dart';
 // import 'package:whatsapp_auto/theme/app_color.dart';
