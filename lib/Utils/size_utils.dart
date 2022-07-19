@@ -110,6 +110,10 @@ class SizeUtils {
   static double fSize_4() {
     return horizontalBlockSize * 1.120; //4
   }
+
+  static double fSize_1() {
+    return horizontalBlockSize * 0.28; //4
+  }
 }
 
 class Device {
@@ -174,7 +178,9 @@ class Device {
     if (isAndroid) {
       final adjustedWidth = _calWidth() / devicePixelRatio;
       final adjustedHeight = _calHeight() / devicePixelRatio;
-      final diagonalSizeInches = (math.sqrt(math.pow(adjustedWidth, 2) + math.pow(adjustedHeight, 2))) / _ppi;
+      final diagonalSizeInches = (math
+              .sqrt(math.pow(adjustedWidth, 2) + math.pow(adjustedHeight, 2))) /
+          _ppi;
 
       if (diagonalSizeInches >= 7) {
         isTablet = true;
@@ -203,12 +209,21 @@ class Device {
 
     if (_hasTopOrBottomPadding()) hasNotch = true;
 
-    return _device = Device(isTablet: isTablet, isPhone: isPhone, isAndroid: isAndroid, isIos: isIos, isIphoneX: isIphoneX, hasNotch: hasNotch);
+    return _device = Device(
+        isTablet: isTablet,
+        isPhone: isPhone,
+        isAndroid: isAndroid,
+        isIos: isIos,
+        isIphoneX: isIphoneX,
+        hasNotch: hasNotch);
   }
 
   static double _calWidth() {
     if (width > height) {
-      return width + (ui.window.viewPadding.left + ui.window.viewPadding.right) * width / height;
+      return width +
+          (ui.window.viewPadding.left + ui.window.viewPadding.right) *
+              width /
+              height;
     }
     return width + ui.window.viewPadding.left + ui.window.viewPadding.right;
   }

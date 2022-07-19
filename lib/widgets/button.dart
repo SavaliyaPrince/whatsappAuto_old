@@ -8,22 +8,28 @@ Widget createButton({
 }) {
   return InkWell(
     onTap: onTap,
-    child: Container(
-      decoration: BoxDecoration(
-        color: AppColor.primaryColor,
-        borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.horizontalBlockSize * 16,
-          vertical: SizeUtils.verticalBlockSize * 1.4,
+    child: Padding(
+      padding:
+          EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 5),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColor.primaryColor,
+          borderRadius:
+              BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
         ),
-        child: Text(
-          "$text",
-          style: TextStyle(
-            color: AppColor.whiteColor,
-            fontSize: SizeUtils.fSize_16(),
-            fontWeight: FontWeight.w600,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: SizeUtils.verticalBlockSize * 1.4,
+          ),
+          child: Text(
+            "$text",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColor.whiteColor,
+              fontSize: SizeUtils.fSize_16(),
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),

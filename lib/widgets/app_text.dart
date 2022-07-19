@@ -18,7 +18,12 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight, fontFamily: AppString.fonts),
+      style: TextStyle(
+        color: color,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontFamily: AppString.fonts,
+      ),
     );
   }
 }
