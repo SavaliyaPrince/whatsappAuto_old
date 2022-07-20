@@ -90,7 +90,9 @@ class HomePageScreen extends StatelessWidget {
                         titleText: AppString.categoryTitle,
                         subtitle: AppString.categorySubTile,
                         image: AssetsPath.category,
-                        onTap: () {},
+                        onTap: () {
+                          Navigation.pushNamed(Routes.supportedApp);
+                        },
                       ),
                       SizedBox(
                         height: SizeUtils.verticalBlockSize * 1.5,

@@ -37,4 +37,5 @@ class AppIcons {
   static const fbMessenger = "${icons}fb_messenger.png";
   static const line = "${icons}line.png";
   static const discord = "${icons}discord.png";
+  static const more = "${icons}more.png";
 }

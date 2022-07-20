@@ -12,4 +12,5 @@ class AppColor {
   static const backIconColor = Color(0xff2C2C2C);
   static const darkThem = Color(0xff3B4744);
   static const lightThem = Color(0xffFFFFFF);
+  static const greenColor = Color(0xff2BB895);
 }
