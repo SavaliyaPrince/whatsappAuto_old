@@ -6,15 +6,18 @@ class AppTextField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final String? hintText;
   int? maxLines = 1;
+  final TextEditingController? controller;
 
   AppTextField({
     this.contentPadding,
     this.maxLines,
     this.hintText,
+    this.controller,
   });
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       maxLines: maxLines,
       cursorColor: Colors.grey,
       decoration: InputDecoration(
