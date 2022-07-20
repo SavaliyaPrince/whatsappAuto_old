@@ -26,8 +26,22 @@ class SettingPage extends StatelessWidget {
           backgroundColor: homePageController.isSwitched.value
               ? AppColor.appBackgroundColor
               : AppColor.appBarColors,
-          centerTitle: true,
-          automaticallyImplyLeading: false,
+          // centerTitle: true,
+          leadingWidth: SizeUtils.fSize_40(),
+          leading: GestureDetector(
+            onTap: () {
+              Navigation.pop();
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
+              child: Image.asset(
+                AppIcons.backIcon,
+                color: homePageController.isSwitched.value
+                    ? AppColor.backIconColor
+                    : AppColor.whiteColor,
+              ),
+            ),
+          ),
           title: AppText(
             AppString.setting,
             color: homePageController.isSwitched.value
