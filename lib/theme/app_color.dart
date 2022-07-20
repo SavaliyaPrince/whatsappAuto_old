@@ -170,4 +170,5 @@ class ColorCollection {
 // static const Color detailScreenTwoContainerColorLight = Color(0xffd2e4fc);
 // static const Color updateScreenPhotoOnLoadColorLight = Color(0xffF2F7FF);
 // static const Color updateScreenBackContainerColorLight = Color(0xffFFFFFF);
+  static const greenColor = Color(0xff2BB895);
 }

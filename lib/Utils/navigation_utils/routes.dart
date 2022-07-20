@@ -6,6 +6,7 @@ import 'package:whatsapp_auto/modules/setting_page/setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/Advance_setting/advance_setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/appearance/appearance.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/auto_reply_message_sent/auto_reply_massege_page.dart';
+import 'package:whatsapp_auto/modules/supportedapp_page/supportedapp_page.dart';
 import 'package:whatsapp_auto/splashScreen.dart';
 
 mixin Routes {
@@ -19,6 +20,7 @@ mixin Routes {
   static const String sendMassagePage = "/sendMassagePage";
   static const String asPage = "/asPage";
   static const String chatPage = "/chatPage";
+  static const String supportedApp = "/supportedApp";
 
   static List<GetPage<dynamic>> pages = [
     GetPage(
@@ -59,6 +61,11 @@ mixin Routes {
     GetPage(
       name: chatPage,
       page: () => ChatPage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: supportedApp,
+      page: () => SupportedAppPage(),
       transition: defaultTransition,
     ),
   ];
