@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
-import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
 class AppTextField extends StatelessWidget {
-  final HomePageController homePageController = Get.find();
   final EdgeInsetsGeometry? contentPadding;
   final FormFieldValidator<String>? validator;
   final String? hintText;
@@ -22,9 +19,9 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       maxLines: maxLines,
       cursorColor: Colors.grey,
-      controller: controller,
       validator: validator,
       style: const TextStyle(
         color: AppColor.backIconColor,

@@ -87,6 +87,12 @@ class AppString {
   static const AppLockPasswordMassage =
       "Secure access to whatsAuto app by using the same Pattern/PIN/Password you use to unlock your phone.";
 
+  /// Supported Apps
+  static const supportedApps = 'Supported apps';
+  static const enableDisabble = 'Enable & disabble apps';
+  static const description = 'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
+
+
   /// create reply
   static const createReply = "Create reply";
   static const customReply = "custome reply";

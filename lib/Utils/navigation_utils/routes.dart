@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:whatsapp_auto/modules/create_reply_page/create_custom_reply/create_custom_reply_screen.dart';
-import 'package:whatsapp_auto/modules/create_reply_page/create_reply_screen.dart';
 import 'package:whatsapp_auto/modules/homepage/home_page.dart';
+import 'package:whatsapp_auto/modules/chat_page/chat_page.dart';
 import 'package:whatsapp_auto/modules/send_massage/send_massage_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/Advance_setting/advance_setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/appearance/appearance.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/auto_reply_message_sent/auto_reply_massege_page.dart';
+import 'package:whatsapp_auto/modules/supportedapp_page/supportedapp_page.dart';
 import 'package:whatsapp_auto/splashScreen.dart';
 
 mixin Routes {
@@ -59,13 +59,13 @@ mixin Routes {
       transition: defaultTransition,
     ),
     GetPage(
-      name: createReply,
-      page: () => CreateReply(),
+      name: chatPage,
+      page: () => ChatPage(),
       transition: defaultTransition,
     ),
     GetPage(
-      name: createCustomReply,
-      page: () => CreateCustomReply(),
+      name: supportedApp,
+      page: () => SupportedAppPage(),
       transition: defaultTransition,
     ),
   ];
