@@ -9,15 +9,21 @@ class AppString {
   static const menuReplyTitle = 'Menu reply';
   static const menuReplySubTile =
       'Create a list of menu to send it as an auto-reply';
+  static const testReplyTitle = 'Test reply';
+  static const testReplySubTile =
+      'Test your auto-reply message with this simulation';
   static const emojiTitle = 'Set Up Your Bot';
   static const emojiSubTile = 'Create your own chatbot by customising rep...';
   static const settingTitle = 'Settings';
   static const settingSubTile =
       'Test your auto-reply message with this simulation';
+  static const contactUsTitle = 'Contact Us';
+  static const contactUsSubTile =
+      'Generate notes to share with others messaging apps';
   static const categoryTitle = 'Supported apps';
   static const categorySubTile =
       'Turn on/off messaging apps to send auto reply';
-  static const documentTitle = 'Contact Us / Rate Us';
+  static const documentTitle = 'Rate Us';
   static const documentSubTile =
       'Generate notes to share with others messaging apps';
   static const sendWelcomeMessage = 'Send welcome message';

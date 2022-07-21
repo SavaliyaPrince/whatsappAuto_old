@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:whatsapp_auto/modules/chat_test_reply_page/chat_test_reply_screen.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_custom_reply/create_custom_reply_screen.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_screen.dart';
 import 'package:whatsapp_auto/modules/homepage/home_page.dart';
@@ -25,6 +26,7 @@ mixin Routes {
   static const String createCustomReply = "/createCustomReply";
   static const String chatPage = "/chatPage";
   static const String supportedApp = "/supportedApp";
+  static const String chatTestReply = "/chatTestReply";
 
   static List<GetPage<dynamic>> pages = [
     GetPage(
@@ -80,6 +82,11 @@ mixin Routes {
     GetPage(
       name: supportedApp,
       page: () => SupportedAppPage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: chatTestReply,
+      page: () => ChatTestReplyPage(),
       transition: defaultTransition,
     ),
   ];

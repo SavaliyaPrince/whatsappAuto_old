@@ -83,15 +83,30 @@ class HomePageScreen extends StatelessWidget {
                             Navigation.pushNamed(Routes.createReply);
                           },
                         ),
-                        // SizedBox(
-                        //   height: SizeUtils.verticalBlockSize * 1.5,
-                        // ),
-                        // customCategoriesBox(
-                        //   titleText: AppString.menuReplyTitle,
-                        //   subtitle: AppString.menuReplySubTile,
-                        //   image: AssetsPath.messages,
-                        //   onTap: () {},
-                        // ),
+                        SizedBox(
+                          height: SizeUtils.verticalBlockSize * 1.5,
+                        ),
+                        customCategoriesBox(
+                          context,
+                          titleText: AppString.testReplyTitle,
+                          subtitle: AppString.testReplySubTile,
+                          image: AssetsPath.messages,
+                          onTap: () {
+                            Navigation.pushNamed(Routes.chatTestReply);
+                          },
+                        ),
+                        SizedBox(
+                          height: SizeUtils.verticalBlockSize * 1.5,
+                        ),
+                        customCategoriesBox(
+                          context,
+                          titleText: AppString.contactUsTitle,
+                          subtitle: AppString.contactUsSubTile,
+                          image: AssetsPath.document,
+                          onTap: () {
+                            Navigation.pushNamed(Routes.supportedApp);
+                          },
+                        ),
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
@@ -116,7 +131,6 @@ class HomePageScreen extends StatelessWidget {
                             Navigation.pushNamed(Routes.settingPage);
                           },
                         ),
-
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
@@ -126,7 +140,7 @@ class HomePageScreen extends StatelessWidget {
                           subtitle: AppString.documentSubTile,
                           image: AssetsPath.document,
                           onTap: () {
-                            Navigation.pushNamed(Routes.chatPage);
+                            // Navigation.pushNamed(Routes.chatPage);
                           },
                         ),
                       ],

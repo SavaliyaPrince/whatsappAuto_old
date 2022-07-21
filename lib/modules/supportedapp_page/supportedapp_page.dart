@@ -92,13 +92,15 @@ class SupportedAppPage extends StatelessWidget {
               height: SizeUtils.verticalBlockSize * 2,
             ),
             Obx(
-              () => _enableApps(context,
-                  image: AppIcons.viber,
-                  text: AppString.Viber,
-                  value: supportedAppController.isSwitchViber.value,
-                  onChanged: (value) {
-                supportedAppController.isSwitchViber.value = value;
-              }),
+              () => _enableApps(
+                context,
+                image: AppIcons.viber,
+                text: AppString.Viber,
+                value: supportedAppController.isSwitchViber.value,
+                onChanged: (value) {
+                  supportedAppController.isSwitchViber.value = value;
+                },
+              ),
             )
           ],
         ),
