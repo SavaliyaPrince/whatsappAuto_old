@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
@@ -15,123 +17,126 @@ class HomePageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        backgroundColor: themeController.isSwitched.value
-            ? ColorCollection.backGroundColorDark
-            : AppColor.homeScreen,
-        appBar: AppBar(
-          elevation: 0.2,
-          backgroundColor: ColorRes.appBarBackground(context),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: AppText(
-            AppString.whatsAuto,
-            color: themeController.isSwitched.value
-                ? AppColor.appBarColors
-                : AppColor.whiteColor,
-            fontWeight: FontWeight.w600,
-            fontSize: SizeUtils.fSize_18(),
-          ),
-        ),
-        body: Padding(
-          padding: EdgeInsets.only(
-            top: SizeUtils.verticalBlockSize * 2,
-            left: SizeUtils.horizontalBlockSize * 5,
-            right: SizeUtils.horizontalBlockSize * 5,
-          ),
-          child: Stack(
-            children: [
-              Text(
-                AppString.availableCategories,
-                style: TextStyle(
-                  color: ColorRes.textColor(context),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+    return Obx(() => WillPopScope(
+          onWillPop: () {
+            exit(0);
+          },
+          child: Scaffold(
+            backgroundColor: themeController.isSwitched.value
+                ? ColorCollection.backGroundColorDark
+                : AppColor.homeScreen,
+            appBar: AppBar(
+              elevation: 0.2,
+              backgroundColor: ColorRes.appBarBackground(context),
+              automaticallyImplyLeading: false,
+              centerTitle: true,
+              title: AppText(
+                AppString.whatsAuto,
+                color: themeController.isSwitched.value
+                    ? AppColor.appBarColors
+                    : AppColor.whiteColor,
+                fontWeight: FontWeight.w600,
+                fontSize: SizeUtils.fSize_18(),
               ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(top: SizeUtils.verticalBlockSize * 5),
-                  child: Column(
-                    children: [
-                      customCategoriesBox(
-                        context,
-                        titleText: AppString.welcomeMessageTitle,
-                        subtitle: AppString.welcomeMessageSubTile,
-                        image: AssetsPath.star,
-                        onTap: () {
-                          // Navigation.pushNamed(Routes.sendMassagePage);
-                        },
-                      ),
-                      SizedBox(
-                        height: SizeUtils.verticalBlockSize * 1.5,
-                      ),
-                      customCategoriesBox(
-                        context,
-                        titleText: AppString.emojiTitle,
-                        subtitle: AppString.emojiSubTile,
-                        image: AssetsPath.emoji,
-                        onTap: () {
-                          Navigation.pushNamed(Routes.createReply);
-                        },
-                      ),
-                      // SizedBox(
-                      //   height: SizeUtils.verticalBlockSize * 1.5,
-                      // ),
-                      // customCategoriesBox(
-                      //   titleText: AppString.menuReplyTitle,
-                      //   subtitle: AppString.menuReplySubTile,
-                      //   image: AssetsPath.messages,
-                      //   onTap: () {},
-                      // ),
-                      SizedBox(
-                        height: SizeUtils.verticalBlockSize * 1.5,
-                      ),
-                      customCategoriesBox(
-                        context,
-                        titleText: AppString.categoryTitle,
-                        subtitle: AppString.categorySubTile,
-                        image: AssetsPath.category,
-                        onTap: () {
-                          Navigation.pushNamed(Routes.supportedApp);
-                        },
-                      ),
-                      SizedBox(
-                        height: SizeUtils.verticalBlockSize * 1.5,
-                      ),
-                      customCategoriesBox(
-                        context,
-                        titleText: AppString.settingTitle,
-                        subtitle: AppString.settingSubTile,
-                        image: AssetsPath.setting,
-                        onTap: () {
-                          Navigation.pushNamed(Routes.settingPage);
-                        },
-                      ),
-
-                      SizedBox(
-                        height: SizeUtils.verticalBlockSize * 1.5,
-                      ),
-                      customCategoriesBox(
-                        context,
-                        titleText: AppString.documentTitle,
-                        subtitle: AppString.documentSubTile,
-                        image: AssetsPath.document,
-                        onTap: () {
-                          Navigation.pushNamed(Routes.chatPage);
-                        },
-                      ),
-                    ],
+            ),
+            body: Padding(
+              padding: EdgeInsets.only(
+                top: SizeUtils.verticalBlockSize * 2,
+                left: SizeUtils.horizontalBlockSize * 5,
+                right: SizeUtils.horizontalBlockSize * 5,
+              ),
+              child: Stack(
+                children: [
+                  Text(
+                    AppString.availableCategories,
+                    style: TextStyle(
+                      color: ColorRes.textColor(context),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(top: SizeUtils.verticalBlockSize * 5),
+                      child: Column(
+                        children: [
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.welcomeMessageTitle,
+                            subtitle: AppString.welcomeMessageSubTile,
+                            image: AssetsPath.star,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.sendMassagePage);
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.emojiTitle,
+                            subtitle: AppString.emojiSubTile,
+                            image: AssetsPath.emoji,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.createReply);
+                            },
+                          ),
+                          // SizedBox(
+                          //   height: SizeUtils.verticalBlockSize * 1.5,
+                          // ),
+                          // customCategoriesBox(
+                          //   titleText: AppString.menuReplyTitle,
+                          //   subtitle: AppString.menuReplySubTile,
+                          //   image: AssetsPath.messages,
+                          //   onTap: () {},
+                          // ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.categoryTitle,
+                            subtitle: AppString.categorySubTile,
+                            image: AssetsPath.category,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.supportedApp);
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.settingTitle,
+                            subtitle: AppString.settingSubTile,
+                            image: AssetsPath.setting,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.settingPage);
+                            },
+                          ),
+
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.documentTitle,
+                            subtitle: AppString.documentSubTile,
+                            image: AssetsPath.document,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.chatPage);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Widget customCategoriesBox(

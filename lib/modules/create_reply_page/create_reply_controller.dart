@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/datasources/create_reply_model.dart';
-import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 
 class CreateReplyController extends GetxController {
@@ -18,7 +17,6 @@ class CreateReplyController extends GetxController {
     if (inComingKeywordController.text.isEmpty) {
       AppToast.toastMessage(
         AppString.enterInComingKeyword,
-        AppColor.backIconColor,
       );
     }
   }
@@ -27,7 +25,6 @@ class CreateReplyController extends GetxController {
     if (replyMassageController.text.isEmpty) {
       AppToast.toastMessage(
         AppString.enterReplyMassage,
-        AppColor.backIconColor,
       );
     }
   }

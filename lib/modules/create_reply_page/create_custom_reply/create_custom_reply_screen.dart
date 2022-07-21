@@ -103,7 +103,6 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                             .replyMassageController.text.isEmpty) {
                       AppToast.toastMessage(
                         AppString.invalidArgument,
-                        AppColor.backIconColor,
                       );
                     } else if (_createReplyController
                             .replyMassageController.text.isEmpty &&
@@ -111,7 +110,6 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                             .inComingKeywordController.text.isNotEmpty) {
                       AppToast.toastMessage(
                         AppString.enterReplyMassage,
-                        AppColor.backIconColor,
                       );
                     } else if (_createReplyController
                             .inComingKeywordController.text.isEmpty &&
@@ -119,7 +117,6 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                             .replyMassageController.text.isNotEmpty) {
                       AppToast.toastMessage(
                         AppString.enterInComingKeyword,
-                        AppColor.backIconColor,
                       );
                     } else {
                       createReplyModel.inComingKeyword =

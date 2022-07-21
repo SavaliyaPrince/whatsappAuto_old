@@ -23,9 +23,9 @@ class AppTextField extends StatelessWidget {
       maxLines: maxLines,
       cursorColor: Colors.grey,
       validator: validator,
-      style: const TextStyle(
-        color: AppColor.backIconColor,
-      ),
+      // style: const TextStyle(
+      //   color: AppColor.backIconColor,
+      // ),
       decoration: InputDecoration(
         contentPadding: contentPadding,
         filled: true,
