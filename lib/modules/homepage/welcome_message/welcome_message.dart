@@ -237,8 +237,7 @@ class WelcomeMessage extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: SizeUtils.fSize_16(),
                                       fontWeight: FontWeight.w600,
-                                      color:
-                                          AppColor.primaryColor,
+                                      color: AppColor.primaryColor,
                                     ),
                                   ),
                                 ),
@@ -330,12 +329,12 @@ class WelcomeMessage extends StatelessWidget {
                   () => Transform.scale(
                     scale: 1.2,
                     child: Switch(
+                      activeColor: AppColor.primaryColor,
                       onChanged: (value) {
                         _welcomeController.isWelcomeMessage.value =
                             !_welcomeController.isWelcomeMessage.value;
                       },
                       value: _welcomeController.isWelcomeMessage.value,
-                      activeColor: AppColor.primaryColor,
                       activeTrackColor: AppColor.green38,
                       inactiveThumbColor: AppColor.whiteColor,
                       inactiveTrackColor: AppColor.textColor.withOpacity(0.2),

@@ -96,6 +96,7 @@ class SettingPage extends StatelessWidget {
             ),
             trailing: Obx(
               () => Switch(
+                activeColor: AppColor.primaryColor,
                 value: settingController.isSwitch.value,
                 onChanged: (value) {
                   settingController.isSwitch.value = value;

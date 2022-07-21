@@ -48,5 +48,5 @@ class AppIcons {
   static const verify = "${icons}verify.png";
   static const more = "${icons}more.png";
   static const send = "${icons}Send.png";
-  static const more = "${icons}more.png";
+  static const iconBack = "${icons}back.png";
 }
