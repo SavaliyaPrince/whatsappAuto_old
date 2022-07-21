@@ -72,6 +72,7 @@ class AppearancePage extends StatelessWidget {
             ),
             const Spacer(),
             Switch(
+              activeColor: AppColor.primaryColor,
               value: themeController.isSwitched.value,
               onChanged: (value) {
                 themeController.isSwitched.value = value;

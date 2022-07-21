@@ -4,6 +4,7 @@ import 'package:whatsapp_auto/Utils/my_behavior.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/send_massage/send_message_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
@@ -50,5 +51,6 @@ class AppBidding implements Bindings {
   @override
   void dependencies() {
     // Get.put(HomePageController());
+    Get.put(SendMessageController());
   }
 }
