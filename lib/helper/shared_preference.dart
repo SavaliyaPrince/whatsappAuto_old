@@ -7,7 +7,7 @@ class AppPreference {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  void clearSharedPreferences() {
+  static void clearSharedPreferences() {
     _prefs.clear();
     return;
   }

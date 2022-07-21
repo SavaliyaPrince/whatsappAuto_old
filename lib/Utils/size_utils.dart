@@ -48,7 +48,7 @@ class SizeUtils {
   }
 
   static double fSize_28() {
-    return horizontalBlockSize * 7; //10
+    return horizontalBlockSize * 7.805; //10
   }
 
   static double fSize_24() {

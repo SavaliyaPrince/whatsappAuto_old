@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:whatsapp_auto/modules/chat_page/chat_page.dart';
 import 'package:whatsapp_auto/modules/homepage/home_page.dart';
 import 'package:whatsapp_auto/modules/send_massage/send_massage_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_page.dart';
@@ -18,6 +19,7 @@ mixin Routes {
   static const String appearance = "/appearance";
   static const String sendMassagePage = "/sendMassagePage";
   static const String asPage = "/asPage";
+  static const String chatPage = "/chatPage";
   static const String supportedApp = "/supportedApp";
 
   static List<GetPage<dynamic>> pages = [
@@ -54,6 +56,11 @@ mixin Routes {
     GetPage(
       name: asPage,
       page: () => ASpage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: chatPage,
+      page: () => ChatPage(),
       transition: defaultTransition,
     ),
     GetPage(
