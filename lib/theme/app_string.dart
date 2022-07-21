@@ -57,8 +57,11 @@ class AppString {
   static const typeMassage = "Type message here (optional)";
   static const send = "Send";
   static const sendMassage = "Send massage";
-  static const anyoneSend = "Send message to  anyone without saving their "
-      "contact";
+  static const openWhatsapp = 'Open Whatsapp';
+  static const openMessage = 'Open Message';
+  static const openCall = 'Open Call';
+  static const anyoneSend =
+      "Send message to  anyone without saving their contact";
 
   ///  Advance Settings
   static const modes = "Modes";

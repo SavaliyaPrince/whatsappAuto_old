@@ -102,6 +102,7 @@ class _ChatPageState extends State<ChatPage> {
             SizedBox(
               height: SizeUtils.verticalBlockSize * 78.5,
               child: SingleChildScrollView(
+                controller: scrollController,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: SizeUtils.horizontalBlockSize * 3,
@@ -113,8 +114,11 @@ class _ChatPageState extends State<ChatPage> {
                         child: Container(
                           // alignment: Alignment.center,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: AppColor.whiteColor),
+                            borderRadius: BorderRadius.circular(8),
+                            color: themeController.isSwitched.value
+                                ? AppColor.whiteColor
+                                : AppColor.textColor,
+                          ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: SizeUtils.verticalBlockSize * 1,
@@ -123,121 +127,153 @@ class _ChatPageState extends State<ChatPage> {
                               "Today",
                               fontWeight: FontWeight.w600,
                               fontSize: SizeUtils.fSize_14(),
-                              color: ColorRes.textColor(context),
+                              color: themeController.isSwitched.value
+                                  ? AppColor.textColor
+                                  : AppColor.whiteColor,
                             ),
                           ),
                         ),
                       ),
                       SizedBox(height: SizeUtils.verticalBlockSize * 1.5),
                       SizedBox(
-                        child: ListView.builder(
-                          controller: scrollController,
-                          shrinkWrap: true,
-                          itemCount: chatModel.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            log("--------->>>>${chatModel[index].message}");
-                            return chatModel[index].istype == "Left"
-                                ? Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            color: AppColor.primaryColor
-                                                .withOpacity(0.2)),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical:
-                                                SizeUtils.verticalBlockSize * 1,
-                                            horizontal:
-                                                SizeUtils.horizontalBlockSize *
-                                                    3,
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              AppText(
-                                                "${chatModel[index].message}",
-                                                fontSize: SizeUtils.fSize_14(),
-                                                fontWeight: FontWeight.w400,
-                                                color:
-                                                    ColorRes.textColor(context),
-                                              ),
-                                              SizedBox(
-                                                  height: SizeUtils
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                bottom: SizeUtils.verticalBlockSize * 0,
+                              ),
+                              child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: chatModel.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  // print(
+                                  //     "aniation ------${scrollController.position.maxScrollExtent}");
+
+                                  log("--------->>>>${chatModel[index].message}");
+                                  return chatModel[index].istype == "Left"
+                                      ? Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: AppColor.primaryColor
+                                                      .withOpacity(0.2)),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: SizeUtils
                                                           .verticalBlockSize *
-                                                      1),
-                                              AppText(
-                                                DateFormat("hh:mm a").format(
-                                                    chatModel[index].time!),
-                                                textAlign: TextAlign.end,
-                                                fontSize: SizeUtils.fSize_12(),
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    ColorRes.textColor(context),
+                                                      1,
+                                                  horizontal: SizeUtils
+                                                          .horizontalBlockSize *
+                                                      3,
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    AppText(
+                                                      "${chatModel[index].message}",
+                                                      fontSize:
+                                                          SizeUtils.fSize_14(),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: ColorRes.textColor(
+                                                          context),
+                                                    ),
+                                                    SizedBox(
+                                                        height: SizeUtils
+                                                                .verticalBlockSize *
+                                                            1),
+                                                    AppText(
+                                                      DateFormat("hh:mm a")
+                                                          .format(
+                                                              chatModel[index]
+                                                                  .time!),
+                                                      textAlign: TextAlign.end,
+                                                      fontSize:
+                                                          SizeUtils.fSize_12(),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: ColorRes.textColor(
+                                                          context),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: SizeUtils.verticalBlockSize *
-                                              1.5),
-                                    ],
-                                  )
-                                : Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          color: AppColor.primaryColor,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical:
-                                                SizeUtils.verticalBlockSize * 1,
-                                            horizontal:
-                                                SizeUtils.horizontalBlockSize *
-                                                    3,
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              AppText(
-                                                "${chatModel[index].message}",
-                                                fontSize: SizeUtils.fSize_14(),
-                                                fontWeight: FontWeight.w400,
-                                                color: AppColor.whiteColor,
+                                            ),
+                                            SizedBox(
+                                                height: SizeUtils
+                                                        .verticalBlockSize *
+                                                    1.5),
+                                          ],
+                                        )
+                                      : Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                color: AppColor.primaryColor,
                                               ),
-                                              SizedBox(
-                                                  height: SizeUtils
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: SizeUtils
                                                           .verticalBlockSize *
-                                                      1),
-                                              AppText(
-                                                DateFormat("hh:mm a").format(
-                                                    chatModel[index].time!),
-                                                fontSize: SizeUtils.fSize_12(),
-                                                fontWeight: FontWeight.w500,
-                                                color: AppColor.whiteColor
-                                                    .withOpacity(0.5),
-                                                textAlign: TextAlign.end,
+                                                      1,
+                                                  horizontal: SizeUtils
+                                                          .horizontalBlockSize *
+                                                      3,
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    AppText(
+                                                      "${chatModel[index].message}",
+                                                      fontSize:
+                                                          SizeUtils.fSize_14(),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          AppColor.whiteColor,
+                                                    ),
+                                                    SizedBox(
+                                                        height: SizeUtils
+                                                                .verticalBlockSize *
+                                                            1),
+                                                    AppText(
+                                                      DateFormat("hh:mm a")
+                                                          .format(
+                                                              chatModel[index]
+                                                                  .time!),
+                                                      fontSize:
+                                                          SizeUtils.fSize_12(),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: AppColor.whiteColor
+                                                          .withOpacity(0.5),
+                                                      textAlign: TextAlign.end,
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          height: SizeUtils.verticalBlockSize *
-                                              1.5),
-                                    ],
-                                  );
-                          },
+                                            ),
+                                            SizedBox(
+                                                height: SizeUtils
+                                                        .verticalBlockSize *
+                                                    2),
+                                          ],
+                                        );
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -256,7 +292,9 @@ class _ChatPageState extends State<ChatPage> {
                   ),
                   Container(
                     height: SizeUtils.verticalBlockSize * 10,
-                    color: AppColor.whiteColor,
+                    color: themeController.isSwitched.value
+                        ? AppColor.whiteColor
+                        : AppColor.textColor,
                     alignment: Alignment.center,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -273,15 +311,9 @@ class _ChatPageState extends State<ChatPage> {
                             _chatModelLeft.time = DateTime.now();
                             chatModel.add(_chatModelLeft);
                             chatController.clear();
-                            setState(() {
-                              scrollController.animateTo(
-                                scrollController.position.maxScrollExtent,
-                                duration: const Duration(microseconds: 0),
-                                curve: Curves.fastOutSlowIn,
-                              );
-                            });
 
                             save();
+                            scrollUp();
                             setState(() {});
                           },
                           child: CircleAvatar(
@@ -315,15 +347,8 @@ class _ChatPageState extends State<ChatPage> {
                             chatModel.add(_chatModelLeft);
                             chatController.clear();
 
-                            setState(() {
-                              scrollController.animateTo(
-                                scrollController.position.maxScrollExtent,
-                                duration: const Duration(microseconds: 0),
-                                curve: Curves.fastOutSlowIn,
-                              );
-                            });
-
                             save();
+                            scrollUp();
                             setState(() {});
                           },
                           child: CircleAvatar(
@@ -353,5 +378,15 @@ class _ChatPageState extends State<ChatPage> {
 
     chatModel.clear();
     chatModel.addAll(posts);
+  }
+
+  void scrollUp() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+    print("aniation ------${scrollController.position.maxScrollExtent}");
+    setState(() {});
   }
 }
