@@ -75,6 +75,7 @@ class ASpage extends StatelessWidget {
                       height: SizeUtils.verticalBlockSize * 2,
                       width: SizeUtils.horizontalBlockSize * 12,
                       child: Switch(
+                        activeColor: AppColor.primaryColor,
                         value: asController.phoneIdle.value,
                         onChanged: (value) {
                           asController.phoneIdle.value = value;
@@ -253,6 +254,7 @@ class ASpage extends StatelessWidget {
                   height: SizeUtils.verticalBlockSize * 2,
                   width: SizeUtils.horizontalBlockSize * 12,
                   child: Switch(
+                    activeColor: AppColor.primaryColor,
                     value: value,
                     onChanged: onChanged,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

@@ -11,7 +11,7 @@ class CreateReplyController extends GetxController {
   final TextEditingController inComingKeywordController =
       TextEditingController();
   final TextEditingController replyMassageController = TextEditingController();
-  List<CreateReplyModel> createModal = <CreateReplyModel>[];
+  RxList<CreateReplyModel> createModal = <CreateReplyModel>[].obs;
 
   String? inComingKeywordValidator() {
     if (inComingKeywordController.text.isEmpty) {

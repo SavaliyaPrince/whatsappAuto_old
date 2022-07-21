@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -8,9 +6,7 @@ import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
-import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_controller.dart';
-import 'package:whatsapp_auto/modules/create_reply_page/datasources/create_reply_model.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -31,11 +27,11 @@ class _CreateReplyState extends State<CreateReply> {
       Get.put(CreateReplyController());
   @override
   void initState() {
-    final Iterable l = json.decode(AppPreference.getString("CreateReplyModel"));
-    final List<CreateReplyModel> posts = List<CreateReplyModel>.from(
-        l.map((model) => CreateReplyModel.fromJson(model)));
-    _createReplyController.createModal.clear();
-    _createReplyController.createModal.addAll(posts);
+    // final Iterable l = json.decode(AppPreference.getString("CreateReplyModel"));
+    // final List<CreateReplyModel> posts = List<CreateReplyModel>.from(
+    //     l.map((model) => CreateReplyModel.fromJson(model)));
+    // _createReplyController.createModal.clear();
+    // _createReplyController.createModal.addAll(posts);
     super.initState();
   }
 
