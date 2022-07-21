@@ -181,7 +181,7 @@ class SupportedAppPage extends StatelessWidget {
             const Spacer(),
             Switch(
               value: value!,
-              activeColor: AppColor.greenColor,
+              activeColor: AppColor.primaryColor,
               onChanged: onChanged,
             ),
             SizedBox(

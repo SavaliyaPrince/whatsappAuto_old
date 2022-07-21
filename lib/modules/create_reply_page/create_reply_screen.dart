@@ -90,14 +90,17 @@ class _CreateReplyState extends State<CreateReply> {
               children: [
                 if (_createReplyController.createModal.isNotEmpty)
                   Expanded(
-                    child: Padding(
+                    child: ListView.builder(
+                      itemCount: _createReplyController.createModal.length,
                       padding: EdgeInsets.symmetric(
-                          vertical: SizeUtils.verticalBlockSize * 3,
-                          horizontal: SizeUtils.horizontalBlockSize * 3),
-                      child: ListView.builder(
-                        itemCount: _createReplyController.createModal.length,
-                        itemBuilder: (context, index) {
-                          return Row(
+                          vertical: SizeUtils.verticalBlockSize * 2),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            left: SizeUtils.horizontalBlockSize * 4,
+                            right: SizeUtils.horizontalBlockSize * 4,
+                          ),
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
@@ -227,9 +230,9 @@ class _CreateReplyState extends State<CreateReply> {
                                 ),
                               ),
                             ],
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   )
                 else
@@ -271,8 +274,8 @@ class _CreateReplyState extends State<CreateReply> {
             Padding(
               padding: EdgeInsets.only(
                 bottom: SizeUtils.horizontalBlockSize * 5,
-                left: SizeUtils.horizontalBlockSize * 5,
-                right: SizeUtils.horizontalBlockSize * 5,
+                left: SizeUtils.horizontalBlockSize * 4,
+                right: SizeUtils.horizontalBlockSize * 4,
               ),
               child: createButton(
                 onTap: () {

@@ -90,8 +90,8 @@ class AppString {
   /// Supported Apps
   static const supportedApps = 'Supported apps';
   static const enableDisabble = 'Enable & disabble apps';
-  static const description = 'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
-
+  static const description =
+      'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
 
   /// create reply
   static const createReply = "Create reply";
