@@ -89,8 +89,10 @@ class SendMassagePage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-                  EdgeInsets.only(bottom: SizeUtils.horizontalBlockSize * 5),
+              padding: EdgeInsets.only(
+                  bottom: SizeUtils.horizontalBlockSize * 5,
+                  right: SizeUtils.horizontalBlockSize * 5,
+                  left: SizeUtils.horizontalBlockSize * 5),
               child: createButton(
                 onTap: () {},
                 text: AppString.send,

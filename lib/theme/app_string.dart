@@ -86,4 +86,21 @@ class AppString {
   static const AppLockPassword = "App lock password";
   static const AppLockPasswordMassage =
       "Secure access to whatsAuto app by using the same Pattern/PIN/Password you use to unlock your phone.";
+
+  /// create reply
+  static const createReply = "Create reply";
+  static const customReply = "custome reply";
+  static const tapToBelow =
+      "Tap to below button to create\ncustome reply text easily";
+  static const create = "Create";
+
+  /// create custom reply
+  static const createCustomReply = "Create custome reply";
+  static const CreateYourOwnChatBot =
+      "Create your own chatbot by customizing\nincoming and reply massages";
+  static const incomingKeyword = "Incoming keyword";
+  static const replyMassage = "Reply massage";
+  static const enterInComingKeyword = "Please enter a incoming keyword.";
+  static const enterReplyMassage = "Please enter a enter reply massage.";
+  static const invalidArgument = "Invalid";
 }

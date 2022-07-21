@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:whatsapp_auto/modules/create_reply_page/create_custom_reply/create_custom_reply_screen.dart';
+import 'package:whatsapp_auto/modules/create_reply_page/create_reply_screen.dart';
 import 'package:whatsapp_auto/modules/homepage/home_page.dart';
 import 'package:whatsapp_auto/modules/send_massage/send_massage_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_page.dart';
@@ -17,6 +19,8 @@ mixin Routes {
   static const String appearance = "/appearance";
   static const String sendMassagePage = "/sendMassagePage";
   static const String asPage = "/asPage";
+  static const String createReply = "/createReply";
+  static const String createCustomReply = "/createCustomReply";
 
   static List<GetPage<dynamic>> pages = [
     GetPage(
@@ -52,6 +56,16 @@ mixin Routes {
     GetPage(
       name: asPage,
       page: () => ASpage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: createReply,
+      page: () => CreateReply(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: createCustomReply,
+      page: () => CreateCustomReply(),
       transition: defaultTransition,
     ),
   ];

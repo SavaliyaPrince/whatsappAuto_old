@@ -72,7 +72,9 @@ class HomePageScreen extends StatelessWidget {
                         titleText: AppString.emojiTitle,
                         subtitle: AppString.emojiSubTile,
                         image: AssetsPath.emoji,
-                        onTap: () {},
+                        onTap: () {
+                          Navigation.pushNamed(Routes.createReply);
+                        },
                       ),
                       // SizedBox(
                       //   height: SizeUtils.verticalBlockSize * 1.5,
