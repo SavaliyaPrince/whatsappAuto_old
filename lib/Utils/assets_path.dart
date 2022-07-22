@@ -18,22 +18,6 @@ class AssetsPath {
   static const settingBottomNavigationBarItem1 = "${image}setting-bottom-navigation1.png";
   static const userBottomNavigationBarItem1 = "${image}user-bottom-navigation1.png";
   static const profile = "${image}profile.png";
-  static const homeBottomNavigationBarItem =
-      "${image}home-bottom-navigation.png";
-  static const messageBottomNavigationBarItem =
-      "${image}message-notification-bottom-navigation.png";
-  static const settingBottomNavigationBarItem =
-      "${image}setting-bottom-navigation.png";
-  static const userBottomNavigationBarItem =
-      "${image}user-bottom-navigation.png";
-  static const homeBottomNavigationBarItem1 =
-      "${image}home-bottom-navigation1.png";
-  static const messageBottomNavigationBarItem1 =
-      "${image}message-notification-bottom-navigation1.png";
-  static const settingBottomNavigationBarItem1 =
-      "${image}setting-bottom-navigation1.png";
-  static const userBottomNavigationBarItem1 =
-      "${image}user-bottom-navigation1.png";
   static const edit = "${image}edit.png";
 }
 

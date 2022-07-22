@@ -9,8 +9,14 @@ import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
-class ContactListPage extends StatelessWidget {
+class ContactListPage extends StatefulWidget {
+  @override
+  State<ContactListPage> createState() => _ContactListPageState();
+}
+
+class _ContactListPageState extends State<ContactListPage> {
   final HomePageController homePageController = Get.find();
+
   final ContactListController contactListController = Get.find();
 
   @override
@@ -107,67 +113,69 @@ class ContactListPage extends StatelessWidget {
                     ? const Expanded(
                         child: Center(
                           child: CircularProgressIndicator(
-                            color: AppColor.greenColor,
+                            color: ColorCollection.greenColor,
                           ),
                         ),
                       )
                     : Expanded(
-                        child: ListView.builder(
-                          itemCount: contactListController.contacts.length,
-                          itemBuilder: (context, index) {
-                            print(
-                                '======${contactListController.contacts.length}');
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                top: SizeUtils.verticalBlockSize * 1,
-                                bottom: SizeUtils.verticalBlockSize * 1,
-                                right: SizeUtils.horizontalBlockSize * 1,
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    decoration: const BoxDecoration(
+                      child: ListView.builder(
+                        itemCount: contactListController.contacts.length,
+                        itemBuilder: (context, index) {
+                          print(
+                              '======${contactListController.contacts.length}');
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              top: SizeUtils.verticalBlockSize * 1,
+                              bottom: SizeUtils.verticalBlockSize * 1,
+                              right: SizeUtils.horizontalBlockSize * 1,
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
-                                    ),
-                                    child: Image.asset(
-                                      AssetsPath.profile,
-                                      width: SizeUtils.horizontalBlockSize * 7,
-                                      height: SizeUtils.verticalBlockSize * 4,
-                                    ),
+                                      color: Colors.red
                                   ),
-                                  SizedBox(
-                                    width: SizeUtils.horizontalBlockSize * 5,
+                                  child: Image.asset(
+                                    AssetsPath.profile,
+                                    width: SizeUtils.horizontalBlockSize * 7.6,
+                                    height: SizeUtils.verticalBlockSize * 4.5,
                                   ),
-                                  AppText(
-                                    contactListController
-                                        .contacts[index].displayName
-                                        .toString(),
-                                    fontWeight: FontWeight.w400,
-                                    color: homePageController.isSwitched.value
-                                        ? AppColor.whiteColor
-                                        : AppColor.textColor,
-                                    fontSize: SizeUtils.fSize_14(),
-                                  ),
-                                  const Spacer(),
-                                  Obx(
-                                    () => SizedBox(
-                                      width:
-                                          SizeUtils.horizontalBlockSize * 4.8,
-                                      height: SizeUtils.verticalBlockSize * 2.8,
-                                      child: Checkbox(
-                                        value: contactListController
-                                                .contacts[index].isselected ??
-                                            false,
-                                        activeColor: AppColor.greenColor,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        onChanged: (value) {
+                                ),
+                                SizedBox(
+                                  width: SizeUtils.horizontalBlockSize * 5,
+                                ),
+                                AppText(
+                                  contactListController
+                                      .contacts[index].displayName
+                                      .toString(),
+                                  fontWeight: FontWeight.w400,
+                                  color: homePageController.isSwitched.value
+                                      ? AppColor.whiteColor
+                                      : AppColor.textColor,
+                                  fontSize: SizeUtils.fSize_14(),
+                                ),
+                                const Spacer(),
+                                Obx(
+                                  () => SizedBox(
+                                    width:
+                                        SizeUtils.horizontalBlockSize * 4.8,
+                                    height: SizeUtils.verticalBlockSize * 2.8,
+                                    child: Checkbox(
+                                      value: contactListController
+                                              .contacts[index].isselected ??
+                                          false,
+                                      activeColor: ColorCollection.greenColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5),
+                                      ),
+                                      onChanged: (value) {
+                                        setState(() {
                                           if ((contactListController
-                                                      .contacts[index]
-                                                      .isselected ??
-                                                  false) ==
+                                              .contacts[index]
+                                              .isselected ??
+                                              false) ==
                                               false) {
                                             contactListController
                                                 .contacts[index]
@@ -177,95 +185,18 @@ class ContactListPage extends StatelessWidget {
                                                 .contacts[index]
                                                 .isselected = false;
                                           }
-                                          // for(var i=0;
-                                          // i<contactListController.contacts
-                                          //     .length; i++) {
-                                          //   if(contactListController
-                                          //       .contacts[i].isselected ==
-                                          //       true) {
-                                          //     contactListController
-                                          //         .contacts[i].isselected =
-                                          //     false;
-                                          //   } else {
-                                          //     contactListController
-                                          //         .contacts[index].isselected
-                                          //     = true;
-                                          //   }
-                                          // }
-                                        },
-                                      ),
+                                        });
+                                      },
                                     ),
                                   ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
+                    ),
               ),
-              // Expanded(
-              //   child: ListView.builder(
-              //     itemCount: contactListController.nList.length,
-              //     itemBuilder: (context, index) {
-              //       return Padding(
-              //         padding: EdgeInsets.only(
-              //           top: SizeUtils.verticalBlockSize * 1,
-              //           bottom: SizeUtils.verticalBlockSize * 1,
-              //           right: SizeUtils.horizontalBlockSize * 1,
-              //         ),
-              //         child: Row(
-              //           children: [
-              //             Container(
-              //               decoration: const BoxDecoration(
-              //                 shape: BoxShape.circle,
-              //               ),
-              //               child: Image.asset(
-              //                 AssetsPath.profile,
-              //                 width: SizeUtils.horizontalBlockSize * 7,
-              //                 height: SizeUtils.verticalBlockSize * 4,
-              //               ),
-              //             ),
-              //             SizedBox(
-              //               width: SizeUtils.horizontalBlockSize * 5,
-              //             ),
-              //             AppText(
-              //               contactListController.nList[index].userName,
-              //               fontWeight: FontWeight.w400,
-              //               color: homePageController.isSwitched.value
-              //                   ? AppColor.whiteColor
-              //                   : AppColor.textColor,
-              //               fontSize: SizeUtils.fSize_14(),
-              //             ),
-              //             const Spacer(),
-              //             SizedBox(
-              //               width: SizeUtils.horizontalBlockSize * 4.8,
-              //               height: SizeUtils.verticalBlockSize * 2.8,
-              //               child: ClipRRect(
-              //                 borderRadius: BorderRadius.circular(10),
-              //                 child: Checkbox(
-              //                   value:
-              //                       contactListController.nList[index].selected,
-              //                   activeColor: AppColor.greenColor,
-              //                   onChanged: (value) {
-              //                     if (contactListController
-              //                             .nList[index].selected ==
-              //                         true) {
-              //                       contactListController
-              //                           .nList[index].selected = false;
-              //                     } else {
-              //                       contactListController
-              //                           .nList[index].selected = true;
-              //                     }
-              //                   },
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // )
             ],
           ),
         ),

@@ -72,13 +72,13 @@ class ContactPage extends StatelessWidget {
             ),
           ],
         ),
-        body: Padding(
-          padding: EdgeInsets.only(
-            left: SizeUtils.horizontalBlockSize * 4.5,
-            right: SizeUtils.horizontalBlockSize * 4.5,
-            top: SizeUtils.horizontalBlockSize * 5.5,
-          ),
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: SizeUtils.horizontalBlockSize * 4.5,
+              right: SizeUtils.horizontalBlockSize * 4.5,
+              top: SizeUtils.horizontalBlockSize * 5.5,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -117,7 +117,7 @@ class ContactPage extends StatelessWidget {
                 ),
                 _autoReplyWidget(
                   title: AppString.exceptMyContactList,
-                  description: AppString.everyoneDescription,
+                  description: AppString.exceptContactDescription,
                   value: contactController.isSwitchExpectContact.value,
                   onChanged: (value) {
                     contactController.isSwitchExpectContact.value = value;
@@ -145,7 +145,7 @@ class ContactPage extends StatelessWidget {
                       color: Colors.transparent,
                       child: Checkbox(
                         value: contactController.checkEnable.value,
-                        activeColor: AppColor.greenColor,
+                        activeColor: ColorCollection.greenColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
@@ -207,7 +207,7 @@ class ContactPage extends StatelessWidget {
                         width: SizeUtils.horizontalBlockSize * 13.3,
                         height: SizeUtils.verticalBlockSize * 4.7,
                         decoration: BoxDecoration(
-                          color: AppColor.greenColor,
+                          color: ColorCollection.greenColor,
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
@@ -231,52 +231,52 @@ class ContactPage extends StatelessWidget {
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 2.7,
                 ),
-                SizedBox(
-                  height: SizeUtils.verticalBlockSize * 60,
-                  child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return  Padding(
-                        padding: EdgeInsets.only(
-                          top: SizeUtils.verticalBlockSize * 1,
-                          bottom: SizeUtils.verticalBlockSize * 1,
-                          right: SizeUtils.horizontalBlockSize * 1,
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                AssetsPath.profile,
-                                width: SizeUtils.horizontalBlockSize * 7,
-                                height: SizeUtils.verticalBlockSize * 4,
-                              ),
+                ListView.builder(
+                 shrinkWrap: true,
+            //      physics: const SingleChildScrollView(),
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return  Padding(
+                      padding: EdgeInsets.only(
+                        top: SizeUtils.verticalBlockSize * 1.3,
+                        bottom: SizeUtils.verticalBlockSize * 1,
+                        right: SizeUtils.horizontalBlockSize * 1,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red
                             ),
-                            SizedBox(
-                              width: SizeUtils.horizontalBlockSize * 5,
+                            child: Image.asset(
+                              AssetsPath.profile,
+                              width: SizeUtils.horizontalBlockSize * 7.6,
+                              height: SizeUtils.verticalBlockSize * 4.5,
                             ),
-                            AppText(
-                             'Hello contacts',
-                              fontWeight: FontWeight.w400,
-                              color: homePageController.isSwitched.value
-                                  ? AppColor.whiteColor
-                                  : AppColor.textColor,
-                              fontSize: SizeUtils.fSize_14(),
-                            ),
-                            const Spacer(),
-                            Icon(
-                              Icons.close,
-                              color: homePageController.isSwitched.value
-                                  ? AppColor.whiteColor.withOpacity(0.5)
-                                  : AppColor.textColor.withOpacity(0.5),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                          ),
+                          SizedBox(
+                            width: SizeUtils.horizontalBlockSize * 5,
+                          ),
+                          AppText(
+                           'Hello contacts',
+                            fontWeight: FontWeight.w400,
+                            color: homePageController.isSwitched.value
+                                ? AppColor.whiteColor
+                                : AppColor.textColor,
+                            fontSize: SizeUtils.fSize_14(),
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.close,
+                            color: homePageController.isSwitched.value
+                                ? AppColor.whiteColor.withOpacity(0.5)
+                                : AppColor.textColor.withOpacity(0.5),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 )
               ],
             ),
@@ -325,7 +325,7 @@ class ContactPage extends StatelessWidget {
           height: SizeUtils.verticalBlockSize * 2.7,
           child: Switch(
             value: value!,
-            activeColor: AppColor.greenColor,
+            activeColor: ColorCollection.greenColor,
             onChanged: onChanged,
           ),
         )

@@ -108,10 +108,10 @@ class AppString {
   static const exceptMyContactList = 'Except my contact list';
   static const exceptContactDescription = 'To send auto reply except your \n '
       'WhatAuto contact list';
-  static const exceptMyPhoneContacts = 'Except my phone contact';
+  static const exceptMyPhoneContacts = 'Except my phone contacts';
   static const exceptMyPhoneDescription = 'To send auto reply except your '
       'phone \n contact list';
-  static const enableGroups = 'EnableGroups';
+  static const enableGroups = 'Enable Groups';
   static const contactList = 'Contact list';
   static const gropeSetting = 'Group Settings';
 
@@ -120,18 +120,19 @@ class AppString {
 
   /// Group Screen
   static const allGroups = 'All groups';
-  static const allDescription = 'To send auto reply to all groups';
+  static const allDescription = 'To send auto reply to all group.';
   static const myGroupList = 'My group list';
   static const groupListDescription = 'To send auto reply only to group that '
-      '\navailable in your group list';
+      '\navailable in your group list.';
   static const expectList = 'Expect my group list';
   static const expectDescription = 'To send auto reply expect your '
-      '\nWhatsAuto contact list';
-  static const groupList = 'GroupList';
+      '\nWhatsAuto contact list.';
+  static const groupList = 'Group list';
+  static const noMoreContact = "No more contacts available";
 
   /// contactList Screen
   static const contacts = 'Contacts';
-  static const availableContactsList = 'Available Contacts List';
+  static const availableContactsList = 'Available contacts list';
 
   /// create reply
   static const createReply = "Create reply";

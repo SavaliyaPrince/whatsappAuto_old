@@ -55,102 +55,103 @@ class GroupsSettingsPage extends StatelessWidget {
                 : AppColor.textColor,
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.only(
-            left: SizeUtils.horizontalBlockSize * 4.5,
-            right: SizeUtils.horizontalBlockSize * 4.5,
-            top: SizeUtils.horizontalBlockSize * 5.5,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                AppString.autoReplyTo,
-                fontSize: SizeUtils.fSize_16(),
-                fontWeight: FontWeight.w500,
-                color: homePageController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.textColor,
-              ),
-              SizedBox(
-                height: SizeUtils.verticalBlockSize * 3.5,
-              ),
-              _autoReplyWidget(
-                title: AppString.allGroups,
-                description: AppString.allDescription,
-                value: groupController.isSwitchAllGroups.value,
-                onChanged: (value) {
-                  groupController.isSwitchAllGroups.value = value;
-                },
-              ),
-              SizedBox(
-                height: SizeUtils.verticalBlockSize * 3.5,
-              ),
-              _autoReplyWidget(
-                title: AppString.myContactList,
-                description: AppString.groupListDescription,
-                value: groupController.isSwitchGroupsList.value,
-                onChanged: (value) {
-                  groupController.isSwitchGroupsList.value = value;
-                },
-              ),
-              SizedBox(
-                height: SizeUtils.verticalBlockSize * 3.5,
-              ),
-              _autoReplyWidget(
-                title: AppString.expectList,
-                description: AppString.expectDescription,
-                value: groupController.isSwitchExpectList.value,
-                onChanged: (value) {
-                  groupController.isSwitchExpectList.value = value;
-                },
-              ),
-              SizedBox(
-                height: SizeUtils.verticalBlockSize * 4,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AppText(
-                    AppString.groupList,
-                    fontSize: SizeUtils.fSize_16(),
-                    color: homePageController.isSwitched.value
-                        ? AppColor.whiteColor
-                        : AppColor.textColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      contactListController.getContacts();
-                    },
-                    child: Container(
-                      width: SizeUtils.horizontalBlockSize * 13.3,
-                      height: SizeUtils.verticalBlockSize * 4.7,
-                      decoration: BoxDecoration(
-                        color: AppColor.greenColor,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColor.textColor.withOpacity(0.2),
-                            blurRadius: 8,
-                            offset: const Offset(1, 3),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.add,
-                        color: AppColor.whiteColor,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: SizeUtils.horizontalBlockSize * 4.5,
+              right: SizeUtils.horizontalBlockSize * 4.5,
+              top: SizeUtils.horizontalBlockSize * 5.5,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  AppString.autoReplyTo,
+                  fontSize: SizeUtils.fSize_16(),
+                  fontWeight: FontWeight.w500,
+                  color: homePageController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.textColor,
+                ),
+                SizedBox(
+                  height: SizeUtils.verticalBlockSize * 3.5,
+                ),
+                _autoReplyWidget(
+                  title: AppString.allGroups,
+                  description: AppString.allDescription,
+                  value: groupController.isSwitchAllGroups.value,
+                  onChanged: (value) {
+                    groupController.isSwitchAllGroups.value = value;
+                  },
+                ),
+                SizedBox(
+                  height: SizeUtils.verticalBlockSize * 3.5,
+                ),
+                _autoReplyWidget(
+                  title: AppString.myGroupList,
+                  description: AppString.groupListDescription,
+                  value: groupController.isSwitchGroupsList.value,
+                  onChanged: (value) {
+                    groupController.isSwitchGroupsList.value = value;
+                  },
+                ),
+                SizedBox(
+                  height: SizeUtils.verticalBlockSize * 3.5,
+                ),
+                _autoReplyWidget(
+                  title: AppString.expectList,
+                  description: AppString.expectDescription,
+                  value: groupController.isSwitchExpectList.value,
+                  onChanged: (value) {
+                    groupController.isSwitchExpectList.value = value;
+                  },
+                ),
+                SizedBox(
+                  height: SizeUtils.verticalBlockSize * 4,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppText(
+                      AppString.groupList,
+                      fontSize: SizeUtils.fSize_16(),
+                      color: homePageController.isSwitched.value
+                          ? AppColor.whiteColor
+                          : AppColor.textColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        contactListController.getContacts();
+                      },
+                      child: Container(
+                        width: SizeUtils.horizontalBlockSize * 13.3,
+                        height: SizeUtils.verticalBlockSize * 4.7,
+                        decoration: BoxDecoration(
+                          color: ColorCollection.greenColor,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColor.textColor.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(1, 3),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.add,
+                          color: AppColor.whiteColor,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: SizeUtils.verticalBlockSize * 2,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 3,
+                  ],
+                ),
+                SizedBox(
+                  height: SizeUtils.verticalBlockSize * 2,
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 10,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.only(
@@ -162,12 +163,13 @@ class GroupsSettingsPage extends StatelessWidget {
                         children: [
                           Container(
                             decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
+                                shape: BoxShape.circle,
+                                color: Colors.red
                             ),
                             child: Image.asset(
                               AssetsPath.profile,
-                              width: SizeUtils.horizontalBlockSize * 7,
-                              height: SizeUtils.verticalBlockSize * 4,
+                              width: SizeUtils.horizontalBlockSize * 7.6,
+                              height: SizeUtils.verticalBlockSize * 4.5,
                             ),
                           ),
                           SizedBox(
@@ -192,9 +194,9 @@ class GroupsSettingsPage extends StatelessWidget {
                       ),
                     );
                   },
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -240,7 +242,7 @@ class GroupsSettingsPage extends StatelessWidget {
           height: SizeUtils.verticalBlockSize * 2.7,
           child: Switch(
             value: value!,
-            activeColor: AppColor.greenColor,
+            activeColor: ColorCollection.greenColor,
             onChanged: onChanged,
           ),
         )
