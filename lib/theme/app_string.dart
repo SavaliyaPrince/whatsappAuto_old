@@ -95,4 +95,21 @@ class AppString {
   static const enableDisabble = 'Enable & disabble apps';
   static const description =
       'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
+
+  /// create reply
+  static const createReply = "Create reply";
+  static const customReply = "custome reply";
+  static const tapToBelow =
+      "Tap to below button to create\ncustome reply text easily";
+  static const create = "Create";
+
+  /// create custom reply
+  static const createCustomReply = "Create custome reply";
+  static const CreateYourOwnChatBot =
+      "Create your own chatbot by customizing\nincoming and reply massages";
+  static const incomingKeyword = "Incoming keyword";
+  static const replyMassage = "Reply massage";
+  static const enterInComingKeyword = "Please enter a incoming keyword.";
+  static const enterReplyMassage = "Please enter a enter reply massage.";
+  static const invalidArgument = "Invalid";
 }

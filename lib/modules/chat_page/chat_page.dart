@@ -29,16 +29,16 @@ class _ChatPageState extends State<ChatPage> {
   final List<ChatModel> chatModel = <ChatModel>[];
   final ScrollController scrollController = ScrollController();
 
-  @override
-  void initState() {
-    final Iterable l = json.decode(AppPreference.getString("chatModal"));
-    final List<ChatModel> posts =
-        List<ChatModel>.from(l.map((model) => ChatModel.fromJson(model)));
-
-    chatModel.clear();
-    chatModel.addAll(posts);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   final Iterable l = json.decode(AppPreference.getString("chatModal"));
+  //   final List<ChatModel> posts =
+  //       List<ChatModel>.from(l.map((model) => ChatModel.fromJson(model)));
+  //
+  //   chatModel.clear();
+  //   chatModel.addAll(posts);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -27,6 +27,10 @@ class SizeUtils {
 
   static bool isIphoneX() => Device.get().isIphoneX;
 
+  static double fSize_48() {
+    return horizontalBlockSize * 10.257; //40
+  }
+
   static double fSize_40() {
     return horizontalBlockSize * 10.257; //40
   }

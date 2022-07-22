@@ -171,4 +171,5 @@ class ColorCollection {
 // static const Color updateScreenPhotoOnLoadColorLight = Color(0xffF2F7FF);
 // static const Color updateScreenBackContainerColorLight = Color(0xffFFFFFF);
   static const greenColor = Color(0xff2BB895);
+  static const homePageThem = Color(0xffE9E9E9);
 }

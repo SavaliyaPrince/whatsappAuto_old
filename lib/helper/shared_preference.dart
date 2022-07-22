@@ -7,8 +7,8 @@ class AppPreference {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  static void clearSharedPreferences() {
-    _prefs.clear();
+  static void clearSharedPreferences(String value) {
+    _prefs.remove(value);
     return;
   }
 
@@ -49,6 +49,15 @@ class AppPreference {
   static int getInt(String key) {
     final int? value = _prefs.getInt(key);
     return value ?? 0;
+  }
+
+  static Future setInComingKeyword(String key, String value) async {
+    await _prefs.setString(key, value);
+  }
+
+  static String getInComingKeyword(String key) {
+    final String? value = _prefs.getString(key);
+    return value ?? "";
   }
 
 // static Future setUserToken(String token) async {

@@ -4,6 +4,7 @@ import 'package:whatsapp_auto/theme/app_color.dart';
 
 class AppTextField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
+  final FormFieldValidator<String>? validator;
   final String? hintText;
   int? maxLines = 1;
   final TextEditingController? controller;
@@ -17,6 +18,7 @@ class AppTextField extends StatelessWidget {
     this.maxLines,
     this.hintText,
     this.controller,
+    this.validator,
   });
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,10 @@ class AppTextField extends StatelessWidget {
       controller: controller,
       maxLines: maxLines,
       cursorColor: Colors.grey,
+      validator: validator,
+      // style: const TextStyle(
+      //   color: AppColor.backIconColor,
+      // ),
       decoration: InputDecoration(
         contentPadding: contentPadding,
         filled: true,

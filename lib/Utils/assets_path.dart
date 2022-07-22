@@ -25,6 +25,7 @@ class AssetsPath {
       "${image}setting-bottom-navigation1.png";
   static const userBottomNavigationBarItem1 =
       "${image}user-bottom-navigation1.png";
+  static const edit = "${image}edit.png";
 }
 
 class AppIcons {
