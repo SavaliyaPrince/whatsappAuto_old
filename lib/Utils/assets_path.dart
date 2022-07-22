@@ -17,6 +17,7 @@ class AssetsPath {
   static const messageBottomNavigationBarItem1 = "${image}message-notification-bottom-navigation1.png";
   static const settingBottomNavigationBarItem1 = "${image}setting-bottom-navigation1.png";
   static const userBottomNavigationBarItem1 = "${image}user-bottom-navigation1.png";
+  static const profile = "${image}profile.png";
 }
 
 class AppIcons {
@@ -25,7 +26,7 @@ class AppIcons {
   static const upgrade = "${icons}upgrade.png";
   static const advance = "${icons}advance_setting.png";
   static const appearance = "${icons}Appearance.png";
-  static const notification = "${icons}Notification.png";
+  static const notification = "${icons}notification.png";
   static const privacy = "${icons}Privacy.png";
   static const help = "${icons}help.png";
   static const inviteFriends = "${icons}invite.png";
@@ -38,4 +39,7 @@ class AppIcons {
   static const line = "${icons}line.png";
   static const discord = "${icons}discord.png";
   static const more = "${icons}more.png";
+  static const notification_bold = "${icons}notification_bold.png";
+  static const setting_bold = "${icons}settings-bold.png";
+  static const search = "${icons}search.png";
 }

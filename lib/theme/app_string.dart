@@ -18,6 +18,7 @@ class AppString {
   static const categorySubTile =
       'Turn on/off messaging apps to send auto reply';
   static const documentTitle = 'Contact Us / Rate Us';
+  static const contact = 'Contact';
   static const documentSubTile =
       'Generate notes to share with others messaging apps';
   static const sendWelcomeMessage = 'Send welcome message';
@@ -91,5 +92,41 @@ class AppString {
   static const supportedApps = 'Supported apps';
   static const enableDisabble = 'Enable & disabble apps';
   static const description = 'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
+
+  /// contact screen
+  static const autoReplyTo = 'Auto reply to';
+  static const everyone = 'Everyone';
+  static const everyoneDescription = 'To send auto reply to all your incoming'
+      ' \n messages.';
+  static const myContactList = 'My contact List';
+  static const contactListDescription = "To send auto reply only to your "
+      "contact \nlist you've added in WhatsAuto app.";
+  static const exceptMyContactList = 'Except my contact list';
+  static const exceptContactDescription = 'To send auto reply except your \n '
+      'WhatAuto contact list';
+  static const exceptMyPhoneContacts = 'Except my phone contact';
+  static const exceptMyPhoneDescription = 'To send auto reply except your '
+      'phone \n contact list';
+  static const enableGroups = 'EnableGroups';
+  static const contactList = 'Contact list';
+  static const gropeSetting = 'Group Settings';
+
+
+
+
+  /// Group Screen
+  static const allGroups = 'All groups';
+  static const allDescription = 'To send auto reply to all groups';
+  static const myGroupList = 'My group list';
+  static const groupListDescription = 'To send auto reply only to group that '
+      '\navailable in your group list';
+  static const expectList = 'Expect my group list';
+  static const expectDescription = 'To send auto reply expect your '
+      '\nWhatsAuto contact list';
+  static const groupList = 'GroupList';
+
+  /// contactList Screen
+  static const contacts = 'Contacts';
+  static const availableContactsList = 'Available Contacts List';
 
 }
