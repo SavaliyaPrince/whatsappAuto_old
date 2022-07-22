@@ -18,6 +18,23 @@ class AssetsPath {
   static const settingBottomNavigationBarItem1 = "${image}setting-bottom-navigation1.png";
   static const userBottomNavigationBarItem1 = "${image}user-bottom-navigation1.png";
   static const profile = "${image}profile.png";
+  static const homeBottomNavigationBarItem =
+      "${image}home-bottom-navigation.png";
+  static const messageBottomNavigationBarItem =
+      "${image}message-notification-bottom-navigation.png";
+  static const settingBottomNavigationBarItem =
+      "${image}setting-bottom-navigation.png";
+  static const userBottomNavigationBarItem =
+      "${image}user-bottom-navigation.png";
+  static const homeBottomNavigationBarItem1 =
+      "${image}home-bottom-navigation1.png";
+  static const messageBottomNavigationBarItem1 =
+      "${image}message-notification-bottom-navigation1.png";
+  static const settingBottomNavigationBarItem1 =
+      "${image}setting-bottom-navigation1.png";
+  static const userBottomNavigationBarItem1 =
+      "${image}user-bottom-navigation1.png";
+  static const edit = "${image}edit.png";
 }
 
 class AppIcons {
@@ -38,8 +55,11 @@ class AppIcons {
   static const fbMessenger = "${icons}fb_messenger.png";
   static const line = "${icons}line.png";
   static const discord = "${icons}discord.png";
+  static const verify = "${icons}verify.png";
   static const more = "${icons}more.png";
   static const notification_bold = "${icons}notification_bold.png";
   static const setting_bold = "${icons}settings-bold.png";
   static const search = "${icons}search.png";
+  static const send = "${icons}Send.png";
+  static const iconBack = "${icons}back.png";
 }

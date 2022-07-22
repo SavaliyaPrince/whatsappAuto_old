@@ -58,8 +58,11 @@ class AppString {
   static const typeMassage = "Type message here (optional)";
   static const send = "Send";
   static const sendMassage = "Send massage";
-  static const anyoneSend = "Send message to  anyone without saving their "
-      "contact";
+  static const openWhatsapp = 'Open Whatsapp';
+  static const openMessage = 'Open Message';
+  static const openCall = 'Open Call';
+  static const anyoneSend =
+      "Send message to  anyone without saving their contact";
 
   ///  Advance Settings
   static const modes = "Modes";
@@ -91,7 +94,8 @@ class AppString {
   /// Supported Apps
   static const supportedApps = 'Supported apps';
   static const enableDisabble = 'Enable & disabble apps';
-  static const description = 'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
+  static const description =
+      'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
 
   /// contact screen
   static const autoReplyTo = 'Auto reply to';
@@ -129,4 +133,20 @@ class AppString {
   static const contacts = 'Contacts';
   static const availableContactsList = 'Available Contacts List';
 
+  /// create reply
+  static const createReply = "Create reply";
+  static const customReply = "custome reply";
+  static const tapToBelow =
+      "Tap to below button to create\ncustome reply text easily";
+  static const create = "Create";
+
+  /// create custom reply
+  static const createCustomReply = "Create custome reply";
+  static const CreateYourOwnChatBot =
+      "Create your own chatbot by customizing\nincoming and reply massages";
+  static const incomingKeyword = "Incoming keyword";
+  static const replyMassage = "Reply massage";
+  static const enterInComingKeyword = "Please enter a incoming keyword.";
+  static const enterReplyMassage = "Please enter a enter reply massage.";
+  static const invalidArgument = "Invalid";
 }
