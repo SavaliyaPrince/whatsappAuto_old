@@ -5,29 +5,25 @@ import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/group_page/group_controller.dart';
-import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
-
 class GroupsSettingsPage extends StatelessWidget {
-  final HomePageController homePageController = Get.find();
+  final ThemeController themeController = Get.find();
   final GroupController groupController = Get.put(GroupController());
-  final ContactListController contactListController =
-  Get.find();
+  final ContactListController contactListController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: homePageController.isSwitched.value
-            ? AppColor.darkThem
-            : AppColor.lightThem,
+        backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.2,
-          backgroundColor: homePageController.isSwitched.value
-              ? AppColor.whiteColor
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
@@ -40,8 +36,8 @@ class GroupsSettingsPage extends StatelessWidget {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: homePageController.isSwitched.value
-                    ? AppColor.backIconColor
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
                     : AppColor.backIconColor,
               ),
             ),
@@ -50,9 +46,9 @@ class GroupsSettingsPage extends StatelessWidget {
             AppString.gropeSetting,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: homePageController.isSwitched.value
-                ? AppColor.textColor
-                : AppColor.textColor,
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
           ),
         ),
         body: SingleChildScrollView(
@@ -69,7 +65,7 @@ class GroupsSettingsPage extends StatelessWidget {
                   AppString.autoReplyTo,
                   fontSize: SizeUtils.fSize_16(),
                   fontWeight: FontWeight.w500,
-                  color: homePageController.isSwitched.value
+                  color: themeController.isSwitched.value
                       ? AppColor.whiteColor
                       : AppColor.textColor,
                 ),
@@ -115,7 +111,7 @@ class GroupsSettingsPage extends StatelessWidget {
                     AppText(
                       AppString.groupList,
                       fontSize: SizeUtils.fSize_16(),
-                      color: homePageController.isSwitched.value
+                      color: themeController.isSwitched.value
                           ? AppColor.whiteColor
                           : AppColor.textColor,
                       fontWeight: FontWeight.w500,
@@ -151,7 +147,8 @@ class GroupsSettingsPage extends StatelessWidget {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: 10,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 3,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.only(
@@ -163,9 +160,7 @@ class GroupsSettingsPage extends StatelessWidget {
                         children: [
                           Container(
                             decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red
-                            ),
+                                shape: BoxShape.circle, color: Colors.red),
                             child: Image.asset(
                               AssetsPath.profile,
                               width: SizeUtils.horizontalBlockSize * 7.6,
@@ -178,7 +173,7 @@ class GroupsSettingsPage extends StatelessWidget {
                           AppText(
                             'Hello contacts',
                             fontWeight: FontWeight.w400,
-                            color: homePageController.isSwitched.value
+                            color: themeController.isSwitched.value
                                 ? AppColor.whiteColor
                                 : AppColor.textColor,
                             fontSize: SizeUtils.fSize_14(),
@@ -186,7 +181,7 @@ class GroupsSettingsPage extends StatelessWidget {
                           const Spacer(),
                           Icon(
                             Icons.close,
-                            color: homePageController.isSwitched.value
+                            color: themeController.isSwitched.value
                                 ? AppColor.whiteColor.withOpacity(0.5)
                                 : AppColor.textColor.withOpacity(0.5),
                           ),
@@ -219,7 +214,7 @@ class GroupsSettingsPage extends StatelessWidget {
                 title!,
                 fontSize: SizeUtils.fSize_14(),
                 fontWeight: FontWeight.w500,
-                color: homePageController.isSwitched.value
+                color: themeController.isSwitched.value
                     ? AppColor.whiteColor
                     : AppColor.textColor,
               ),
@@ -230,7 +225,7 @@ class GroupsSettingsPage extends StatelessWidget {
                 description!,
                 fontWeight: FontWeight.w400,
                 fontSize: SizeUtils.fSize_14(),
-                color: homePageController.isSwitched.value
+                color: themeController.isSwitched.value
                     ? AppColor.whiteColor.withOpacity(0.6)
                     : AppColor.textColor.withOpacity(0.6),
               ),

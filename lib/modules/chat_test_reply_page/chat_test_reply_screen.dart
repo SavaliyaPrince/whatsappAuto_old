@@ -15,14 +15,14 @@ import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 import 'package:whatsapp_auto/widgets/app_textfield.dart';
 
-class ChatPage extends StatefulWidget {
-  ChatPage({Key? key}) : super(key: key);
+class ChatTestReplyPage extends StatefulWidget {
+  ChatTestReplyPage({Key? key}) : super(key: key);
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatTestReplyPage> createState() => _ChatTestReplyPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
   final ThemeController themeController = Get.find();
 
   TextEditingController chatController = TextEditingController();
@@ -48,7 +48,7 @@ class _ChatPageState extends State<ChatPage> {
             ? ColorCollection.backGroundColorDark
             : AppColor.homeScreen,
         appBar: AppBar(
-          elevation: 0.2,
+          elevation: 0.5,
           backgroundColor: themeController.isSwitched.value
               ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.whiteColor,
@@ -61,7 +61,9 @@ class _ChatPageState extends State<ChatPage> {
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: AppColor.backIconColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
+                    : AppColor.backIconColor,
               ),
             ),
           ),
@@ -71,7 +73,9 @@ class _ChatPageState extends State<ChatPage> {
                 AppString.whatsAuto,
                 fontSize: SizeUtils.fSize_17(),
                 fontWeight: FontWeight.w600,
-                color: AppColor.textColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
+                    : AppColor.backIconColor,
               ),
               SizedBox(width: SizeUtils.horizontalBlockSize * 1),
               GestureDetector(
@@ -93,7 +97,9 @@ class _ChatPageState extends State<ChatPage> {
                 child: Image.asset(
                   AppIcons.more,
                   width: SizeUtils.fSize_24(),
-                  color: AppColor.backIconColor,
+                  color: themeController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.backIconColor,
                 ),
               ),
             ),
@@ -295,72 +301,80 @@ class _ChatPageState extends State<ChatPage> {
                   Container(
                     height: SizeUtils.verticalBlockSize * 10,
                     color: themeController.isSwitched.value
-                        ? AppColor.whiteColor
-                        : AppColor.textColor,
+                        ? AppColor.darkThem.withOpacity(0.2)
+                        : AppColor.whiteColor,
                     alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            if (chatController.text.trim() == "") {
-                              chatController.clear();
-                              return;
-                            }
-                            final ChatModel _chatModelLeft = ChatModel();
-                            _chatModelLeft.istype = "Left";
-                            _chatModelLeft.message = chatController.text;
-                            _chatModelLeft.time = DateTime.now();
-                            chatModel.add(_chatModelLeft);
-                            chatController.clear();
-
-                            save();
-                            scrollUp();
-                            setState(() {});
-                          },
-                          child: CircleAvatar(
-                            radius: SizeUtils.horizontalBlockSize * 7,
-                            backgroundColor: AppColor.primaryColor,
-                            child: Image.asset(AppIcons.send,
-                                width: SizeUtils.horizontalBlockSize * 6),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     if (chatController.text.trim() == "") {
+                          //       chatController.clear();
+                          //       return;
+                          //     }
+                          //     final ChatModel _chatModelLeft = ChatModel();
+                          //     _chatModelLeft.istype = "Left";
+                          //     _chatModelLeft.message = chatController.text;
+                          //     _chatModelLeft.time = DateTime.now();
+                          //     chatModel.add(_chatModelLeft);
+                          //     chatController.clear();
+                          //
+                          //     save();
+                          //     scrollUp();
+                          //     setState(() {});
+                          //   },
+                          //   child: CircleAvatar(
+                          //     radius: SizeUtils.horizontalBlockSize * 7,
+                          //     backgroundColor: AppColor.primaryColor,
+                          //     child: Image.asset(AppIcons.send,
+                          //         width: SizeUtils.horizontalBlockSize * 6),
+                          //   ),
+                          // ),
+                          SizedBox(
+                            width: SizeUtils.horizontalBlockSize * 75,
+                            child: AppTextField(
+                              controller: chatController,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      SizeUtils.horizontalBlockSize * 4),
+                              hintText: "Good Morning",
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: SizeUtils.horizontalBlockSize * 65,
-                          child: AppTextField(
-                            controller: chatController,
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: SizeUtils.horizontalBlockSize * 4),
-                            hintText: "Good Morning",
+                          Padding(
+                            padding: EdgeInsets.only(
+                                right: SizeUtils.horizontalBlockSize * 2),
+                            child: GestureDetector(
+                              onTap: () {
+                                if (chatController.text.trim() == "") {
+                                  chatController.clear();
+                                  return;
+                                }
+
+                                final ChatModel _chatModelLeft = ChatModel();
+                                _chatModelLeft.istype = "Right";
+                                _chatModelLeft.message = chatController.text;
+                                _chatModelLeft.time = DateTime.now();
+
+                                chatModel.add(_chatModelLeft);
+                                chatController.clear();
+
+                                save();
+                                scrollUp();
+                                setState(() {});
+                              },
+                              child: CircleAvatar(
+                                radius: SizeUtils.horizontalBlockSize * 7,
+                                backgroundColor: AppColor.primaryColor,
+                                child: Image.asset(AppIcons.send,
+                                    width: SizeUtils.horizontalBlockSize * 6),
+                              ),
+                            ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            if (chatController.text.trim() == "") {
-                              chatController.clear();
-                              return;
-                            }
-
-                            final ChatModel _chatModelLeft = ChatModel();
-                            _chatModelLeft.istype = "Right";
-                            _chatModelLeft.message = chatController.text;
-                            _chatModelLeft.time = DateTime.now();
-
-                            chatModel.add(_chatModelLeft);
-                            chatController.clear();
-
-                            save();
-                            scrollUp();
-                            setState(() {});
-                          },
-                          child: CircleAvatar(
-                            radius: SizeUtils.horizontalBlockSize * 7,
-                            backgroundColor: AppColor.primaryColor,
-                            child: Image.asset(AppIcons.send,
-                                width: SizeUtils.horizontalBlockSize * 6),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:geolocator/geolocator.dart';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +12,7 @@ import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/send_massage/send_message_controller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_textfield.dart';
@@ -27,7 +27,7 @@ class SendMessageScreen extends StatefulWidget {
 
 class _SendMessageScreenState extends State<SendMessageScreen> {
   final SendMessageController _sendMessageController = Get.find();
-
+  final ThemeController themeController = Get.find();
   @override
   void initState() {
     // TODO: implement initState
@@ -40,7 +40,9 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.2,
-        backgroundColor: AppColor.whiteColor,
+        backgroundColor: themeController.isSwitched.value
+            ? AppColor.darkThem.withOpacity(0.2)
+            : AppColor.whiteColor,
         leadingWidth: SizeUtils.fSize_40(),
         leading: GestureDetector(
           onTap: () {
@@ -50,13 +52,19 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
             child: Image.asset(
               AppIcons.backIcon,
-              color: AppColor.backIconColor,
+              color: themeController.isSwitched.value
+                  ? AppColor.whiteColor
+                  : AppColor.backIconColor,
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           AppString.welcomeMessageTitle,
-          style: TextStyle(color: AppColor.textColor),
+          style: TextStyle(
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
+          ),
         ),
       ),
       // floatingActionButton: Obx(
@@ -192,25 +200,25 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 icon: Icons.message,
                 width: SizeUtils.horizontalBlockSize * 48,
               ),
-              SizedBox(
-                height: SizeUtils.verticalBlockSize * 3,
-              ),
-              ImageTextButton(
-                width: SizeUtils.horizontalBlockSize * 40,
-                onTap: () async {
-                  if (_sendMessageController.phoneController.text != "") {
-                    await FlutterPhoneDirectCaller.callNumber(
-                      _sendMessageController.phoneController.text,
-                    );
-                  } else {
-                    AppToast.toastMessage("Enter Mobile Number");
-                  }
-                },
-                text: AppString.openCall,
-                buttonColor: AppColor.primaryColor,
-                textColor: AppColor.whiteColor,
-                icon: Icons.call,
-              )
+              // SizedBox(
+              //   height: SizeUtils.verticalBlockSize * 3,
+              // ),
+              // ImageTextButton(
+              //   width: SizeUtils.horizontalBlockSize * 40,
+              //   onTap: () async {
+              //     if (_sendMessageController.phoneController.text != "") {
+              //       await FlutterPhoneDirectCaller.callNumber(
+              //         _sendMessageController.phoneController.text,
+              //       );
+              //     } else {
+              //       AppToast.toastMessage("Enter Mobile Number");
+              //     }
+              //   },
+              //   text: AppString.openCall,
+              //   buttonColor: AppColor.primaryColor,
+              //   textColor: AppColor.whiteColor,
+              //   icon: Icons.call,
+              // )
             ],
           ),
         ),

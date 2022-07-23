@@ -31,11 +31,15 @@ class CreateReplyController extends GetxController {
 
   @override
   void onInit() {
-    final Iterable l = json.decode(AppPreference.getString("CreateReplyModel"));
-    final List<CreateReplyModel> posts = List<CreateReplyModel>.from(
-        l.map((model) => CreateReplyModel.fromJson(model)));
-    createModal.clear();
-    createModal.addAll(posts);
+    if (AppPreference.getString("CreateReplyModel") != "") {
+      final Iterable l =
+          json.decode(AppPreference.getString("CreateReplyModel"));
+      final List<CreateReplyModel> posts = List<CreateReplyModel>.from(
+          l.map((model) => CreateReplyModel.fromJson(model)));
+      createModal.clear();
+      createModal.addAll(posts);
+    }
+
     super.onInit();
   }
 }

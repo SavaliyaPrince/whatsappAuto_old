@@ -6,7 +6,7 @@ import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 
 class ContactListController extends GetxController {
   RxBool isLoader = false.obs;
-  RxList<Contact> contacts = <Contact>[].obs;
+  List<Contact> contacts = <Contact>[];
 
   // permission handler contact
   Future<PermissionStatus> _contactsPermissions() async {
@@ -31,7 +31,7 @@ class ContactListController extends GetxController {
         print(
             '------GRANTED-------${PermissionStatus.granted}-------GRANTED-------');
         final List<Contact> _contacts = await ContactsService.getContacts();
-        contacts.value = _contacts;
+        contacts = _contacts;
         isLoader.value = false;
       }
     } catch (e, st) {

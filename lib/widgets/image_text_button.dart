@@ -23,6 +23,7 @@ class ImageTextButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             SizeUtils.horizontalBlockSize * 3,
@@ -35,6 +36,7 @@ class ImageTextButton extends StatelessWidget {
               vertical: SizeUtils.verticalBlockSize * 1.2),
           child: Row(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 icon,

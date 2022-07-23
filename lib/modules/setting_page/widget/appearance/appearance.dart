@@ -21,7 +21,9 @@ class AppearancePage extends StatelessWidget {
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
         elevation: 0.2,
-        backgroundColor: AppColor.appBackgroundColor,
+        backgroundColor: themeController.isSwitched.value
+            ? AppColor.darkThem.withOpacity(0.2)
+            : AppColor.whiteColor,
         leadingWidth: SizeUtils.fSize_40(),
         leading: GestureDetector(
           onTap: () {
@@ -31,7 +33,9 @@ class AppearancePage extends StatelessWidget {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
             child: Image.asset(
               AppIcons.backIcon,
-              color: AppColor.backIconColor,
+              color: themeController.isSwitched.value
+                  ? AppColor.whiteColor
+                  : AppColor.backIconColor,
             ),
           ),
         ),
@@ -39,7 +43,9 @@ class AppearancePage extends StatelessWidget {
           AppString.Appearance,
           fontSize: SizeUtils.fSize_17(),
           fontWeight: FontWeight.w600,
-          color: AppColor.textColor,
+          color: themeController.isSwitched.value
+              ? AppColor.whiteColor
+              : AppColor.backIconColor,
         ),
       ),
       body: Padding(

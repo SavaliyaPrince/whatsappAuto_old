@@ -10,7 +10,7 @@ import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_controller.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/datasources/create_reply_model.dart';
-import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
@@ -25,7 +25,7 @@ class CreateCustomReply extends StatefulWidget {
 }
 
 class _CreateCustomReplyState extends State<CreateCustomReply> {
-  final HomePageController homePageController = Get.find();
+  final ThemeController themeController = Get.find();
 
   final CreateReplyController _createReplyController = Get.find();
   GlobalKey<FormState> createReplyKey = GlobalKey<FormState>();
@@ -34,12 +34,12 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: homePageController.isSwitched.value
-            ? AppColor.darkThem
-            : AppColor.lightThem,
+        backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          elevation: 0.2,
-          backgroundColor: AppColor.whiteColor,
+          elevation: 0.5,
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
+              : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
@@ -49,7 +49,9 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: AppColor.backIconColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
+                    : AppColor.backIconColor,
               ),
             ),
           ),
@@ -57,7 +59,9 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
             AppString.createCustomReply,
             fontSize: SizeUtils.fSize_17(),
             fontWeight: FontWeight.w600,
-            color: AppColor.textColor,
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
           ),
         ),
         body: Padding(
@@ -68,15 +72,14 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
             key: createReplyKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 AppText(
                   AppString.CreateYourOwnChatBot,
                   fontSize: SizeUtils.fSize_14(),
                   fontWeight: FontWeight.w400,
-                  color: homePageController.isSwitched.value
+                  color: themeController.isSwitched.value
                       ? AppColor.whiteColor
-                      : AppColor.darkThem,
+                      : AppColor.textColor.withOpacity(0.5),
                 ),
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 4,

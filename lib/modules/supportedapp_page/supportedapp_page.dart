@@ -4,12 +4,14 @@ import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
 class SupportedAppPage extends StatelessWidget {
   SupportedAppPage({Key? key}) : super(key: key);
+  final ThemeController themeController = Get.find();
   final SupportedAppController supportedAppController =
       Get.put(SupportedAppController());
 
@@ -18,7 +20,9 @@ class SupportedAppPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
-        backgroundColor: ColorRes.appBarBackground(context),
+        backgroundColor: themeController.isSwitched.value
+            ? AppColor.darkThem.withOpacity(0.2)
+            : AppColor.whiteColor,
         leadingWidth: SizeUtils.fSize_40(),
         elevation: 0.2,
         leading: GestureDetector(
@@ -31,13 +35,18 @@ class SupportedAppPage extends StatelessWidget {
             ),
             child: Image.asset(
               AppIcons.backIcon,
+              color: themeController.isSwitched.value
+                  ? AppColor.whiteColor
+                  : AppColor.backIconColor,
             ),
           ),
         ),
         title: AppText(
           AppString.supportedApps,
           fontWeight: FontWeight.w600,
-          color: ColorRes.textColor(context),
+          color: themeController.isSwitched.value
+              ? AppColor.whiteColor
+              : AppColor.backIconColor,
         ),
       ),
       body: Padding(
@@ -92,13 +101,15 @@ class SupportedAppPage extends StatelessWidget {
               height: SizeUtils.verticalBlockSize * 2,
             ),
             Obx(
-              () => _enableApps(context,
-                  image: AppIcons.viber,
-                  text: AppString.Viber,
-                  value: supportedAppController.isSwitchViber.value,
-                  onChanged: (value) {
-                supportedAppController.isSwitchViber.value = value;
-              }),
+              () => _enableApps(
+                context,
+                image: AppIcons.viber,
+                text: AppString.Viber,
+                value: supportedAppController.isSwitchViber.value,
+                onChanged: (value) {
+                  supportedAppController.isSwitchViber.value = value;
+                },
+              ),
             )
           ],
         ),
