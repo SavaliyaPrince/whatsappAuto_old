@@ -42,11 +42,13 @@ dependencies:
   google_mobile_ads: ^1.2.0
   call_log: ^3.2.3
   url_launcher: ^6.1.0
-  permission_handler: ^8.3.0
+  #permission_handler: ^8.3.0
   flutter_keyboard_visibility: ^5.2.0
   flutter_phone_direct_caller: ^2.1.1
-  geolocator: ^8.0.0
+  geolocator: ^9.0.1
 
+  contacts_service: ^0.6.3
+  permission_handler: ^10.0.0
 
 dev_dependencies:
   flutter_test:

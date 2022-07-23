@@ -129,6 +129,18 @@ class HomePageScreen extends StatelessWidget {
                             Navigation.pushNamed(Routes.chatPage);
                           },
                         ),
+                        SizedBox(
+                          height: SizeUtils.verticalBlockSize * 1.5,
+                        ),
+                        customCategoriesBox(
+                          context,
+                          titleText: AppString.contact,
+                          subtitle: AppString.documentSubTile,
+                          image: AssetsPath.document,
+                          onTap: () {
+                            Navigation.pushNamed(Routes.contactPage);
+                          },
+                        ),
                       ],
                     ),
                   ),

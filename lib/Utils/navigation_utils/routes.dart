@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_custom_reply/create_custom_reply_screen.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_screen.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_page.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_page.dart';
+import 'package:whatsapp_auto/modules/contact_page/group_page/group_page.dart';
 import 'package:whatsapp_auto/modules/homepage/home_page.dart';
 import 'package:whatsapp_auto/modules/chat_page/chat_page.dart';
 import 'package:whatsapp_auto/modules/send_massage/send_message_screen.dart';
@@ -25,6 +28,9 @@ mixin Routes {
   static const String createCustomReply = "/createCustomReply";
   static const String chatPage = "/chatPage";
   static const String supportedApp = "/supportedApp";
+  static const String contactPage = "/contactPage";
+  static const String groupsSettingPage = "/groupsSettingPage";
+  static const String contactListPage = "/contactListPage";
 
   static List<GetPage<dynamic>> pages = [
     GetPage(
@@ -80,6 +86,21 @@ mixin Routes {
     GetPage(
       name: supportedApp,
       page: () => SupportedAppPage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: contactPage,
+      page: () => ContactPage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: groupsSettingPage,
+      page: () => GroupsSettingsPage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: contactListPage,
+      page: () => ContactListPage(),
       transition: defaultTransition,
     ),
   ];
