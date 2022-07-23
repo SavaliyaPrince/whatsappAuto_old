@@ -40,9 +40,7 @@ class _ContactListPageState extends State<ContactListPage> {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
+                color: ColorRes.appBarBackground(context),
               ),
             ),
           ),
@@ -50,9 +48,7 @@ class _ContactListPageState extends State<ContactListPage> {
             AppString.contacts,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value
-                ? AppColor.whiteColor
-                : AppColor.backIconColor,
+            color: ColorRes.textColor(context),
           ),
           actions: [
             Row(
@@ -65,9 +61,7 @@ class _ContactListPageState extends State<ContactListPage> {
                     child: Image.asset(
                       AppIcons.search,
                       width: SizeUtils.fSize_24(),
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.backIconColor,
+                      color: ColorRes.appBarBackground(context),
                     ),
                   ),
                 ),
@@ -79,9 +73,7 @@ class _ContactListPageState extends State<ContactListPage> {
                     child: Image.asset(
                       AppIcons.more,
                       width: SizeUtils.fSize_24(),
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.backIconColor,
+                      color: ColorRes.appBarBackground(context),
                     ),
                   ),
                 ),
@@ -148,9 +140,7 @@ class _ContactListPageState extends State<ContactListPage> {
                                         .contacts[index].displayName
                                         .toString(),
                                     fontWeight: FontWeight.w400,
-                                    color: themeController.isSwitched.value
-                                        ? AppColor.whiteColor
-                                        : AppColor.textColor,
+                                    color: ColorRes.textColor(context),
                                     fontSize: SizeUtils.fSize_14(),
                                   ),
                                   const Spacer(),
@@ -160,44 +150,41 @@ class _ContactListPageState extends State<ContactListPage> {
                                     child: Theme(
                                       data: ThemeData(
                                         unselectedWidgetColor:
-                                            themeController.isSwitched.value
-                                                ? AppColor.whiteColor
-                                                    .withOpacity(0.3)
-                                                : AppColor.textColor
-                                                    .withOpacity(0.3),
+                                            ColorRes.textColor(context)
+                                                .withOpacity(0.3),
                                       ),
                                       child: Transform.scale(
                                         scale: 1.1,
-                                        child: Checkbox(
-                                          value: contactListController
-                                                  .contacts[index].isselected ??
-                                              false,
-                                          activeColor:
-                                              themeController.isSwitched.value
-                                                  ? ColorCollection.greenColor
-                                                  : ColorCollection.greenColor,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              if ((contactListController
-                                                          .contacts[index]
-                                                          .isselected ??
-                                                      false) ==
-                                                  false) {
-                                                contactListController
-                                                    .contacts[index]
-                                                    .isselected = true;
-                                              } else {
-                                                contactListController
-                                                    .contacts[index]
-                                                    .isselected = false;
-                                              }
-                                            });
-                                          },
-                                        ),
+                                        // child: Checkbox(
+                                        //   value: contactListController
+                                        //           .contacts[index].isselected ??
+                                        //       false,
+                                        //   activeColor:
+                                        //       themeController.isSwitched.value
+                                        //           ? ColorCollection.greenColor
+                                        //           : ColorCollection.greenColor,
+                                        //   shape: RoundedRectangleBorder(
+                                        //     borderRadius:
+                                        //         BorderRadius.circular(5),
+                                        //   ),
+                                        //   onChanged: (value) {
+                                        //     setState(() {
+                                        //       if ((contactListController
+                                        //                   .contacts[index]
+                                        //                   .isselected ??
+                                        //               false) ==
+                                        //           false) {
+                                        //         contactListController
+                                        //             .contacts[index]
+                                        //             .isselected = true;
+                                        //       } else {
+                                        //         contactListController
+                                        //             .contacts[index]
+                                        //             .isselected = false;
+                                        //       }
+                                        //     });
+                                        //   },
+                                        // ),
                                       ),
                                     ),
                                   ),
