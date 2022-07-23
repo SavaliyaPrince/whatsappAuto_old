@@ -61,9 +61,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
+                color: ColorRes.appBarBackground(context),
               ),
             ),
           ),
@@ -73,9 +71,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                 AppString.whatsAuto,
                 fontSize: SizeUtils.fSize_17(),
                 fontWeight: FontWeight.w600,
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
+                color: ColorRes.textColor(context),
               ),
               SizedBox(width: SizeUtils.horizontalBlockSize * 1),
               GestureDetector(
@@ -97,9 +93,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                 child: Image.asset(
                   AppIcons.more,
                   width: SizeUtils.fSize_24(),
-                  color: themeController.isSwitched.value
-                      ? AppColor.whiteColor
-                      : AppColor.backIconColor,
+                  color: ColorRes.appBarBackground(context),
                 ),
               ),
             ),
@@ -123,9 +117,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                           // alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: themeController.isSwitched.value
-                                ? AppColor.whiteColor
-                                : AppColor.textColor,
+                            color: ColorRes.textColor(context),
                           ),
                           child: Padding(
                             padding: EdgeInsets.symmetric(

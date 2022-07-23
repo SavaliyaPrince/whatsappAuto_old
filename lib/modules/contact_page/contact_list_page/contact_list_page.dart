@@ -40,9 +40,7 @@ class _ContactListPageState extends State<ContactListPage> {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
+                color: ColorRes.appBarBackground(context),
               ),
             ),
           ),
@@ -50,9 +48,7 @@ class _ContactListPageState extends State<ContactListPage> {
             AppString.contacts,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value
-                ? AppColor.whiteColor
-                : AppColor.backIconColor,
+            color: ColorRes.textColor(context),
           ),
           actions: [
             Row(
@@ -65,9 +61,7 @@ class _ContactListPageState extends State<ContactListPage> {
                     child: Image.asset(
                       AppIcons.search,
                       width: SizeUtils.fSize_24(),
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.backIconColor,
+                      color: ColorRes.appBarBackground(context),
                     ),
                   ),
                 ),
@@ -79,9 +73,7 @@ class _ContactListPageState extends State<ContactListPage> {
                     child: Image.asset(
                       AppIcons.more,
                       width: SizeUtils.fSize_24(),
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.backIconColor,
+                      color: ColorRes.appBarBackground(context),
                     ),
                   ),
                 ),
