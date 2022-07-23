@@ -148,7 +148,7 @@ class _ContactListPageState extends State<ContactListPage> {
                                                   .toString(),
                                               fontWeight: FontWeight.w400,
                                               color:
-                                                  homePageController.isSwitched.value
+                                                  themeController.isSwitched.value
                                                       ? AppColor.whiteColor
                                                       : AppColor.textColor,
                                               fontSize: SizeUtils.fSize_14(),
