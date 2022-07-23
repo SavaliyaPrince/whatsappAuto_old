@@ -27,40 +27,49 @@ class HomePageScreen extends StatelessWidget {
               ? ColorCollection.backGroundColorDark
               : AppColor.homeScreen,
           appBar: AppBar(
-            elevation: 0.2,
-            backgroundColor: ColorRes.appBarBackground(context),
+            elevation: 0.5,
+            backgroundColor: themeController.isSwitched.value
+                ? AppColor.darkThem.withOpacity(0.2)
+                : AppColor.whiteColor,
             automaticallyImplyLeading: false,
             centerTitle: true,
             title: AppText(
               AppString.whatsAuto,
               color: themeController.isSwitched.value
-                  ? AppColor.appBarColors
-                  : AppColor.whiteColor,
+                  ? AppColor.whiteColor
+                  : AppColor.backIconColor,
               fontWeight: FontWeight.w600,
               fontSize: SizeUtils.fSize_18(),
             ),
           ),
           body: Padding(
             padding: EdgeInsets.only(
-              top: SizeUtils.verticalBlockSize * 2,
               left: SizeUtils.horizontalBlockSize * 5,
               right: SizeUtils.horizontalBlockSize * 5,
             ),
-            child: Stack(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  AppString.availableCategories,
-                  style: TextStyle(
-                    color: ColorRes.textColor(context),
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: SizeUtils.verticalBlockSize * 2,
+                  ),
+                  child: SizedBox(
+                    // height: SizeUtils.verticalBlockSize * 7,
+                    child: Text(
+                      AppString.availableCategories,
+                      style: TextStyle(
+                        color: ColorRes.textColor(context),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
-                SingleChildScrollView(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(top: SizeUtils.verticalBlockSize * 5),
+                Expanded(
+                  child: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         customCategoriesBox(
                           context,
@@ -104,7 +113,7 @@ class HomePageScreen extends StatelessWidget {
                           subtitle: AppString.contactUsSubTile,
                           image: AssetsPath.document,
                           onTap: () {
-                            Navigation.pushNamed(Routes.supportedApp);
+                            Navigation.pushNamed(Routes.contactPage);
                           },
                         ),
                         SizedBox(
@@ -146,15 +155,18 @@ class HomePageScreen extends StatelessWidget {
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.contact,
-                          subtitle: AppString.documentSubTile,
-                          image: AssetsPath.document,
-                          onTap: () {
-                            Navigation.pushNamed(Routes.contactPage);
-                          },
-                        ),
+                        // customCategoriesBox(
+                        //   context,
+                        //   titleText: AppString.contact,
+                        //   subtitle: AppString.documentSubTile,
+                        //   image: AssetsPath.document,
+                        //   onTap: () {
+                        //     Navigation.pushNamed(Routes.contactPage);
+                        //   },
+                        // ),
+                        // SizedBox(
+                        //   height: SizeUtils.verticalBlockSize * 1.5,
+                        // ),
                       ],
                     ),
                   ),

@@ -49,7 +49,9 @@ class _ChatPageState extends State<ChatPage> {
             : AppColor.homeScreen,
         appBar: AppBar(
           elevation: 0.2,
-          backgroundColor: AppColor.whiteColor,
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
+              : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {

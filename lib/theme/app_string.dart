@@ -1,33 +1,33 @@
 class AppString {
   static const fonts = 'Inter';
 
+  /// home page
   static const whatsAuto = 'WhatsAuto';
   static const availableCategories = 'Available Categories';
   static const welcomeMessageTitle = 'Send message';
   static const welcomeMessageSubTile =
-      'Send a message when someone message you first...';
+      'Send a message when\nsomeone message you first...';
   static const menuReplyTitle = 'Menu reply';
   static const menuReplySubTile =
-      'Create a list of menu to send it as an auto-reply';
+      'Create a list of menu to send it\nas an auto-reply';
   static const testReplyTitle = 'Test reply';
   static const testReplySubTile =
-      'Test your auto-reply message with this simulation';
+      'Test your auto-reply message\nwith this simulation';
   static const emojiTitle = 'Set Up Your Bot';
-  static const emojiSubTile = 'Create your own chatbot by customising rep...';
+  static const emojiSubTile = 'Create your own chatbot by \ncustomising rep...';
   static const settingTitle = 'Settings';
   static const settingSubTile =
-      'Test your auto-reply message with this simulation';
+      'Test your auto-reply message\nwith this simulation';
   static const contactUsTitle = 'Contact Us';
   static const contactUsSubTile =
-      'Generate notes to share with others messaging apps';
+      'Generate notes to share with\nothers messaging apps';
   static const categoryTitle = 'Supported apps';
   static const categorySubTile =
-      'Turn on/off messaging apps to send auto reply';
+      'Turn on/off messaging apps to\nsend auto reply';
   static const documentTitle = 'Rate Us';
-  static const documentTitle = 'Contact Us / Rate Us';
   static const contact = 'Contact';
   static const documentSubTile =
-      'Generate notes to share with others messaging apps';
+      'Generate notes to share with\nothers messaging apps';
   static const sendWelcomeMessage = 'Send welcome message';
   static const sendAWelcome =
       'send a welcome message when someone message you first time or every 3 days once';
@@ -121,9 +121,6 @@ class AppString {
   static const enableGroups = 'Enable Groups';
   static const contactList = 'Contact list';
   static const gropeSetting = 'Group Settings';
-
-
-
 
   /// Group Screen
   static const allGroups = 'All groups';
