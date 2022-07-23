@@ -6,13 +6,13 @@ import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
-import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
 class ContactPage extends StatelessWidget {
-  final HomePageController homePageController = Get.find();
+  final ThemeController themeController = Get.find();
   final ContactController contactController = Get.put(ContactController());
   final ContactListController contactListController =
       Get.put(ContactListController());
@@ -21,21 +21,20 @@ class ContactPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: homePageController.isSwitched.value
-            ? AppColor.darkThem
-            : AppColor.lightThem,
+        backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          backgroundColor: homePageController.isSwitched.value
-              ? AppColor.appBackgroundColor
-              : AppColor.textColor,
+          elevation: 0.2,
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
+              : AppColor.whiteColor,
           automaticallyImplyLeading: false,
           title: AppText(
             AppString.contact,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: homePageController.isSwitched.value
-                ? AppColor.textColor
-                : AppColor.whiteColor,
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
           ),
           actions: [
             Row(
@@ -48,9 +47,9 @@ class ContactPage extends StatelessWidget {
                     child: Image.asset(
                       AppIcons.notification_bold,
                       width: SizeUtils.fSize_24(),
-                      color: homePageController.isSwitched.value
-                          ? AppColor.textColor
-                          : AppColor.whiteColor,
+                      color: themeController.isSwitched.value
+                          ? AppColor.whiteColor
+                          : AppColor.backIconColor,
                     ),
                   ),
                 ),
@@ -62,9 +61,9 @@ class ContactPage extends StatelessWidget {
                     child: Image.asset(
                       AppIcons.more,
                       width: SizeUtils.fSize_24(),
-                      color: homePageController.isSwitched.value
-                          ? AppColor.textColor
-                          : AppColor.whiteColor,
+                      color: themeController.isSwitched.value
+                          ? AppColor.whiteColor
+                          : AppColor.backIconColor,
                     ),
                   ),
                 ),
@@ -86,7 +85,7 @@ class ContactPage extends StatelessWidget {
                   AppString.autoReplyTo,
                   fontSize: SizeUtils.fSize_16(),
                   fontWeight: FontWeight.w500,
-                  color: homePageController.isSwitched.value
+                  color: themeController.isSwitched.value
                       ? AppColor.whiteColor
                       : AppColor.textColor,
                 ),
@@ -143,15 +142,26 @@ class ContactPage extends StatelessWidget {
                       width: SizeUtils.horizontalBlockSize * 4.8,
                       height: SizeUtils.verticalBlockSize * 2.8,
                       color: Colors.transparent,
-                      child: Checkbox(
-                        value: contactController.checkEnable.value,
-                        activeColor: ColorCollection.greenColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
+                      child: Theme(
+                        data: ThemeData(
+                          unselectedWidgetColor:
+                              themeController.isSwitched.value
+                                  ? AppColor.whiteColor.withOpacity(0.3)
+                                  : AppColor.textColor.withOpacity(0.3),
                         ),
-                        onChanged: (value) {
-                          contactController.checkEnable.value = value!;
-                        },
+                        child: Transform.scale(
+                          scale: 1.1,
+                          child: Checkbox(
+                            value: contactController.checkEnable.value,
+                            activeColor: ColorCollection.greenColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            onChanged: (value) {
+                              contactController.checkEnable.value = value!;
+                            },
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -161,7 +171,7 @@ class ContactPage extends StatelessWidget {
                       AppString.enableGroups,
                       fontSize: SizeUtils.fSize_14(),
                       fontWeight: FontWeight.w500,
-                      color: homePageController.isSwitched.value
+                      color: themeController.isSwitched.value
                           ? AppColor.whiteColor
                           : AppColor.textColor,
                     ),
@@ -177,7 +187,7 @@ class ContactPage extends StatelessWidget {
                           AppIcons.setting_bold,
                           width: SizeUtils.horizontalBlockSize * 3,
                           height: SizeUtils.verticalBlockSize * 3,
-                          color: homePageController.isSwitched.value
+                          color: themeController.isSwitched.value
                               ? AppColor.whiteColor
                               : AppColor.textColor,
                         ),
@@ -194,7 +204,7 @@ class ContactPage extends StatelessWidget {
                       AppString.contactList,
                       fontSize: SizeUtils.fSize_16(),
                       fontWeight: FontWeight.w500,
-                      color: homePageController.isSwitched.value
+                      color: themeController.isSwitched.value
                           ? AppColor.whiteColor
                           : AppColor.textColor,
                     ),
@@ -232,11 +242,13 @@ class ContactPage extends StatelessWidget {
                   height: SizeUtils.verticalBlockSize * 2.7,
                 ),
                 ListView.builder(
-                 shrinkWrap: true,
-            //      physics: const SingleChildScrollView(),
-                  itemCount: 5,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 10,
                   itemBuilder: (context, index) {
-                    return  Padding(
+                    print(
+                        "contactListController.contacts.length -=-=-==-==-=-=-=- ${contactListController.contacts.length}");
+                    return Padding(
                       padding: EdgeInsets.only(
                         top: SizeUtils.verticalBlockSize * 1.3,
                         bottom: SizeUtils.verticalBlockSize * 1,
@@ -246,9 +258,7 @@ class ContactPage extends StatelessWidget {
                         children: [
                           Container(
                             decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.red
-                            ),
+                                shape: BoxShape.circle, color: Colors.red),
                             child: Image.asset(
                               AssetsPath.profile,
                               width: SizeUtils.horizontalBlockSize * 7.6,
@@ -259,9 +269,9 @@ class ContactPage extends StatelessWidget {
                             width: SizeUtils.horizontalBlockSize * 5,
                           ),
                           AppText(
-                           'Hello contacts',
+                            "Hello Contact",
                             fontWeight: FontWeight.w400,
-                            color: homePageController.isSwitched.value
+                            color: themeController.isSwitched.value
                                 ? AppColor.whiteColor
                                 : AppColor.textColor,
                             fontSize: SizeUtils.fSize_14(),
@@ -269,7 +279,7 @@ class ContactPage extends StatelessWidget {
                           const Spacer(),
                           Icon(
                             Icons.close,
-                            color: homePageController.isSwitched.value
+                            color: themeController.isSwitched.value
                                 ? AppColor.whiteColor.withOpacity(0.5)
                                 : AppColor.textColor.withOpacity(0.5),
                           ),
@@ -302,7 +312,7 @@ class ContactPage extends StatelessWidget {
                 title!,
                 fontSize: SizeUtils.fSize_14(),
                 fontWeight: FontWeight.w500,
-                color: homePageController.isSwitched.value
+                color: themeController.isSwitched.value
                     ? AppColor.whiteColor
                     : AppColor.textColor,
               ),
@@ -313,7 +323,7 @@ class ContactPage extends StatelessWidget {
                 description!,
                 fontWeight: FontWeight.w400,
                 fontSize: SizeUtils.fSize_14(),
-                color: homePageController.isSwitched.value
+                color: themeController.isSwitched.value
                     ? AppColor.whiteColor.withOpacity(0.6)
                     : AppColor.textColor.withOpacity(0.6),
               ),

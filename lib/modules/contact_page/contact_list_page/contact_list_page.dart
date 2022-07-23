@@ -4,7 +4,7 @@ import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
-import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
@@ -15,7 +15,7 @@ class ContactListPage extends StatefulWidget {
 }
 
 class _ContactListPageState extends State<ContactListPage> {
-  final HomePageController homePageController = Get.find();
+  final ThemeController themeController = Get.find();
 
   final ContactListController contactListController = Get.find();
 
@@ -23,13 +23,11 @@ class _ContactListPageState extends State<ContactListPage> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: homePageController.isSwitched.value
-            ? AppColor.darkThem
-            : AppColor.lightThem,
+        backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.2,
-          backgroundColor: homePageController.isSwitched.value
-              ? AppColor.whiteColor
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
@@ -42,8 +40,8 @@ class _ContactListPageState extends State<ContactListPage> {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: homePageController.isSwitched.value
-                    ? AppColor.backIconColor
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
                     : AppColor.backIconColor,
               ),
             ),
@@ -52,9 +50,9 @@ class _ContactListPageState extends State<ContactListPage> {
             AppString.contacts,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: homePageController.isSwitched.value
-                ? AppColor.textColor
-                : AppColor.textColor,
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
           ),
           actions: [
             Row(
@@ -67,9 +65,9 @@ class _ContactListPageState extends State<ContactListPage> {
                     child: Image.asset(
                       AppIcons.search,
                       width: SizeUtils.fSize_24(),
-                      color: homePageController.isSwitched.value
-                          ? AppColor.textColor
-                          : AppColor.textColor,
+                      color: themeController.isSwitched.value
+                          ? AppColor.whiteColor
+                          : AppColor.backIconColor,
                     ),
                   ),
                 ),
@@ -81,9 +79,9 @@ class _ContactListPageState extends State<ContactListPage> {
                     child: Image.asset(
                       AppIcons.more,
                       width: SizeUtils.fSize_24(),
-                      color: homePageController.isSwitched.value
-                          ? AppColor.textColor
-                          : AppColor.textColor,
+                      color: themeController.isSwitched.value
+                          ? AppColor.whiteColor
+                          : AppColor.backIconColor,
                     ),
                   ),
                 ),

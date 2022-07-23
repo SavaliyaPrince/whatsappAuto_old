@@ -7,7 +7,7 @@ import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_controller.dart';
-import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
@@ -21,7 +21,7 @@ class CreateReply extends StatefulWidget {
 }
 
 class _CreateReplyState extends State<CreateReply> {
-  final HomePageController homePageController = Get.find();
+  final ThemeController themeController = Get.find();
 
   final CreateReplyController _createReplyController =
       Get.put(CreateReplyController());
@@ -39,12 +39,12 @@ class _CreateReplyState extends State<CreateReply> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: homePageController.isSwitched.value
-            ? AppColor.darkThem
-            : AppColor.lightThem,
+        backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          elevation: 0.2,
-          backgroundColor: AppColor.whiteColor,
+          elevation: 0.5,
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
+              : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
@@ -54,7 +54,9 @@ class _CreateReplyState extends State<CreateReply> {
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: AppColor.backIconColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
+                    : AppColor.backIconColor,
               ),
             ),
           ),
@@ -62,7 +64,9 @@ class _CreateReplyState extends State<CreateReply> {
             AppString.createReply,
             fontSize: SizeUtils.fSize_17(),
             fontWeight: FontWeight.w600,
-            color: AppColor.textColor,
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
           ),
           actions: [
             Padding(
@@ -73,7 +77,9 @@ class _CreateReplyState extends State<CreateReply> {
                 child: Image.asset(
                   AppIcons.more,
                   width: SizeUtils.fSize_24(),
-                  color: AppColor.backIconColor,
+                  color: themeController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.backIconColor,
                 ),
               ),
             ),
@@ -120,10 +126,10 @@ class _CreateReplyState extends State<CreateReply> {
                                         children: [
                                           AppText(
                                             "${_createReplyController.createModal[index].inComingKeyword}",
-                                            color: homePageController
-                                                    .isSwitched.value
-                                                ? AppColor.whiteColor
-                                                : AppColor.darkThem,
+                                            color:
+                                                themeController.isSwitched.value
+                                                    ? AppColor.whiteColor
+                                                    : AppColor.darkThem,
                                             fontSize: SizeUtils.fSize_16(),
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -141,10 +147,10 @@ class _CreateReplyState extends State<CreateReply> {
                                             textAlign: TextAlign.end,
                                             fontSize: SizeUtils.fSize_10(),
                                             fontWeight: FontWeight.w500,
-                                            color: homePageController
-                                                    .isSwitched.value
-                                                ? AppColor.whiteColor
-                                                : AppColor.backIconColor,
+                                            color:
+                                                themeController.isSwitched.value
+                                                    ? AppColor.whiteColor
+                                                    : AppColor.backIconColor,
                                           ),
                                         ],
                                       ),
@@ -171,10 +177,10 @@ class _CreateReplyState extends State<CreateReply> {
                                         children: [
                                           AppText(
                                             "${_createReplyController.createModal[index].replyMassage}",
-                                            color: homePageController
-                                                    .isSwitched.value
-                                                ? AppColor.whiteColor
-                                                : AppColor.darkThem,
+                                            color:
+                                                themeController.isSwitched.value
+                                                    ? AppColor.whiteColor
+                                                    : AppColor.darkThem,
                                             fontSize: SizeUtils.fSize_16(),
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -192,10 +198,10 @@ class _CreateReplyState extends State<CreateReply> {
                                             textAlign: TextAlign.end,
                                             fontSize: SizeUtils.fSize_10(),
                                             fontWeight: FontWeight.w500,
-                                            color: homePageController
-                                                    .isSwitched.value
-                                                ? AppColor.whiteColor
-                                                : AppColor.backIconColor,
+                                            color:
+                                                themeController.isSwitched.value
+                                                    ? AppColor.whiteColor
+                                                    : AppColor.backIconColor,
                                           ),
                                         ],
                                       ),
@@ -205,7 +211,7 @@ class _CreateReplyState extends State<CreateReply> {
                                       height: SizeUtils.verticalBlockSize * 1),
                                   Divider(
                                     thickness: 0.2,
-                                    color: homePageController.isSwitched.value
+                                    color: themeController.isSwitched.value
                                         ? AppColor.whiteColor
                                         : AppColor.darkThem,
                                   )
@@ -220,7 +226,7 @@ class _CreateReplyState extends State<CreateReply> {
                                 },
                                 child: Icon(
                                   Icons.close,
-                                  color: homePageController.isSwitched.value
+                                  color: themeController.isSwitched.value
                                       ? AppColor.whiteColor.withOpacity(0.5)
                                       : AppColor.textColor.withOpacity(0.5),
                                 ),
@@ -247,7 +253,7 @@ class _CreateReplyState extends State<CreateReply> {
                         AppString.customReply,
                         fontSize: SizeUtils.fSize_18(),
                         fontWeight: FontWeight.w600,
-                        color: homePageController.isSwitched.value
+                        color: themeController.isSwitched.value
                             ? AppColor.whiteColor
                             : AppColor.backIconColor,
                       ),
@@ -259,7 +265,7 @@ class _CreateReplyState extends State<CreateReply> {
                         textAlign: TextAlign.center,
                         fontSize: SizeUtils.fSize_14(),
                         fontWeight: FontWeight.w400,
-                        color: homePageController.isSwitched.value
+                        color: themeController.isSwitched.value
                             ? AppColor.whiteColor
                             : AppColor.darkThem,
                       ),

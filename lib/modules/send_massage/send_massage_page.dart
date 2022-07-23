@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
-import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
@@ -12,20 +12,16 @@ import 'package:whatsapp_auto/widgets/button.dart';
 
 class SendMassagePage extends StatelessWidget {
   SendMassagePage({Key? key}) : super(key: key);
-  final HomePageController homePageController = Get.find();
+  final ThemeController themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: homePageController.isSwitched.value
-            ? AppColor.darkThem
-            : AppColor.lightThem,
+        backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.2,
-          backgroundColor: homePageController.isSwitched.value
-              ? AppColor.appBarColors
-              : AppColor.appBackgroundColor,
+          backgroundColor: ColorRes.appBarBackground(context),
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
@@ -35,9 +31,9 @@ class SendMassagePage extends StatelessWidget {
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: homePageController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.appBarColors
+                    : AppColor.whiteColor,
               ),
             ),
           ),
@@ -45,9 +41,9 @@ class SendMassagePage extends StatelessWidget {
             AppString.sendMassage,
             fontSize: SizeUtils.fSize_17(),
             fontWeight: FontWeight.w600,
-            color: homePageController.isSwitched.value
-                ? AppColor.whiteColor
-                : AppColor.textColor,
+            color: themeController.isSwitched.value
+                ? AppColor.appBarColors
+                : AppColor.whiteColor,
           ),
         ),
         body: Stack(
@@ -62,7 +58,7 @@ class SendMassagePage extends StatelessWidget {
                     AppString.anyoneSend,
                     fontSize: SizeUtils.fSize_14(),
                     fontWeight: FontWeight.w400,
-                    color: homePageController.isSwitched.value
+                    color: themeController.isSwitched.value
                         ? AppColor.whiteColor
                         : AppColor.textColor.withOpacity(0.5),
                   ),

@@ -22,7 +22,9 @@ class SettingPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.2,
 
-        backgroundColor: ColorRes.appBarBackground(context),
+        backgroundColor: themeController.isSwitched.value
+            ? AppColor.darkThem.withOpacity(0.2)
+            : AppColor.whiteColor,
         // centerTitle: true,
         leadingWidth: SizeUtils.fSize_40(),
         leading: GestureDetector(
@@ -34,16 +36,16 @@ class SettingPage extends StatelessWidget {
             child: Image.asset(
               AppIcons.backIcon,
               color: themeController.isSwitched.value
-                  ? AppColor.appBarColors
-                  : AppColor.whiteColor,
+                  ? AppColor.whiteColor
+                  : AppColor.backIconColor,
             ),
           ),
         ),
         title: AppText(
           AppString.setting,
           color: themeController.isSwitched.value
-              ? AppColor.appBarColors
-              : AppColor.whiteColor,
+              ? AppColor.whiteColor
+              : AppColor.backIconColor,
           fontWeight: FontWeight.w600,
         ),
       ),

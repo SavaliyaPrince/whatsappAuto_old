@@ -5,6 +5,7 @@ import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/Advance_setting/advance_controller.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
@@ -13,14 +14,16 @@ class ASpage extends StatelessWidget {
   ASpage({Key? key}) : super(key: key);
   final ASController asController = Get.put(ASController());
   final ValueNotifier<bool> _isDisable = ValueNotifier(true);
-
+  final ThemeController themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
         elevation: 0.2,
-        backgroundColor: AppColor.appBackgroundColor,
+        backgroundColor: themeController.isSwitched.value
+            ? AppColor.darkThem.withOpacity(0.2)
+            : AppColor.whiteColor,
         leadingWidth: SizeUtils.fSize_40(),
         leading: GestureDetector(
           onTap: () {
@@ -30,7 +33,9 @@ class ASpage extends StatelessWidget {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
             child: Image.asset(
               AppIcons.backIcon,
-              color: AppColor.backIconColor,
+              color: themeController.isSwitched.value
+                  ? AppColor.whiteColor
+                  : AppColor.backIconColor,
             ),
           ),
         ),
@@ -38,7 +43,9 @@ class ASpage extends StatelessWidget {
           AppString.advance,
           fontSize: SizeUtils.fSize_17(),
           fontWeight: FontWeight.w600,
-          color: AppColor.textColor,
+          color: themeController.isSwitched.value
+              ? AppColor.whiteColor
+              : AppColor.backIconColor,
         ),
       ),
       body: Padding(
