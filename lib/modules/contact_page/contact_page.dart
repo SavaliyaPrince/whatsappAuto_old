@@ -32,9 +32,7 @@ class ContactPage extends StatelessWidget {
             AppString.contact,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value
-                ? AppColor.whiteColor
-                : AppColor.backIconColor,
+            color: ColorRes.textColor(context),
           ),
           actions: [
             Row(
@@ -47,9 +45,7 @@ class ContactPage extends StatelessWidget {
                     child: Image.asset(
                       AppIcons.notification_bold,
                       width: SizeUtils.fSize_24(),
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.backIconColor,
+                      color: ColorRes.textColor(context),
                     ),
                   ),
                 ),
@@ -61,9 +57,7 @@ class ContactPage extends StatelessWidget {
                     child: Image.asset(
                       AppIcons.more,
                       width: SizeUtils.fSize_24(),
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.backIconColor,
+                      color: ColorRes.textColor(context),
                     ),
                   ),
                 ),
@@ -85,14 +79,13 @@ class ContactPage extends StatelessWidget {
                   AppString.autoReplyTo,
                   fontSize: SizeUtils.fSize_16(),
                   fontWeight: FontWeight.w500,
-                  color: themeController.isSwitched.value
-                      ? AppColor.whiteColor
-                      : AppColor.textColor,
+                  color: ColorRes.textColor(context),
                 ),
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 3.5,
                 ),
                 _autoReplyWidget(
+                  context,
                   title: AppString.everyone,
                   description: AppString.everyoneDescription,
                   value: contactController.isSwitchEveryone.value,
@@ -104,6 +97,7 @@ class ContactPage extends StatelessWidget {
                   height: SizeUtils.verticalBlockSize * 3,
                 ),
                 _autoReplyWidget(
+                  context,
                   title: AppString.myContactList,
                   description: AppString.contactListDescription,
                   value: contactController.isSwitchMyContact.value,
@@ -115,6 +109,7 @@ class ContactPage extends StatelessWidget {
                   height: SizeUtils.verticalBlockSize * 3,
                 ),
                 _autoReplyWidget(
+                  context,
                   title: AppString.exceptMyContactList,
                   description: AppString.exceptContactDescription,
                   value: contactController.isSwitchExpectContact.value,
@@ -126,6 +121,7 @@ class ContactPage extends StatelessWidget {
                   height: SizeUtils.verticalBlockSize * 3,
                 ),
                 _autoReplyWidget(
+                  context,
                   title: AppString.exceptMyPhoneContacts,
                   description: AppString.exceptMyPhoneDescription,
                   value: contactController.isSwitchPhoneContact.value,
@@ -145,9 +141,7 @@ class ContactPage extends StatelessWidget {
                       child: Theme(
                         data: ThemeData(
                           unselectedWidgetColor:
-                              themeController.isSwitched.value
-                                  ? AppColor.whiteColor.withOpacity(0.3)
-                                  : AppColor.textColor.withOpacity(0.3),
+                              ColorRes.textColor(context).withOpacity(0.3),
                         ),
                         child: Transform.scale(
                           scale: 1.1,
@@ -171,9 +165,7 @@ class ContactPage extends StatelessWidget {
                       AppString.enableGroups,
                       fontSize: SizeUtils.fSize_14(),
                       fontWeight: FontWeight.w500,
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.textColor,
+                      color: ColorRes.textColor(context),
                     ),
                     const Spacer(),
                     InkWell(
@@ -187,9 +179,7 @@ class ContactPage extends StatelessWidget {
                           AppIcons.setting_bold,
                           width: SizeUtils.horizontalBlockSize * 3,
                           height: SizeUtils.verticalBlockSize * 3,
-                          color: themeController.isSwitched.value
-                              ? AppColor.whiteColor
-                              : AppColor.textColor,
+                          color: ColorRes.textColor(context),
                         ),
                       ),
                     ),
@@ -204,9 +194,7 @@ class ContactPage extends StatelessWidget {
                       AppString.contactList,
                       fontSize: SizeUtils.fSize_16(),
                       fontWeight: FontWeight.w500,
-                      color: themeController.isSwitched.value
-                          ? AppColor.whiteColor
-                          : AppColor.textColor,
+                      color: ColorRes.textColor(context),
                     ),
                     const Spacer(),
                     InkWell(
@@ -271,17 +259,13 @@ class ContactPage extends StatelessWidget {
                           AppText(
                             "Hello Contact",
                             fontWeight: FontWeight.w400,
-                            color: themeController.isSwitched.value
-                                ? AppColor.whiteColor
-                                : AppColor.textColor,
+                            color: ColorRes.textColor(context),
                             fontSize: SizeUtils.fSize_14(),
                           ),
                           const Spacer(),
                           Icon(
                             Icons.close,
-                            color: themeController.isSwitched.value
-                                ? AppColor.whiteColor.withOpacity(0.5)
-                                : AppColor.textColor.withOpacity(0.5),
+                            color: ColorRes.textColor(context).withOpacity(0.5),
                           ),
                         ],
                       ),
@@ -296,7 +280,8 @@ class ContactPage extends StatelessWidget {
     );
   }
 
-  Widget _autoReplyWidget({
+  Widget _autoReplyWidget(
+    BuildContext context, {
     final String? title,
     final String? description,
     final bool? value,
@@ -312,9 +297,7 @@ class ContactPage extends StatelessWidget {
                 title!,
                 fontSize: SizeUtils.fSize_14(),
                 fontWeight: FontWeight.w500,
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.textColor,
+                color: ColorRes.textColor(context),
               ),
               SizedBox(
                 height: SizeUtils.verticalBlockSize * 0.7,
@@ -323,9 +306,7 @@ class ContactPage extends StatelessWidget {
                 description!,
                 fontWeight: FontWeight.w400,
                 fontSize: SizeUtils.fSize_14(),
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor.withOpacity(0.6)
-                    : AppColor.textColor.withOpacity(0.6),
+                color: ColorRes.textColor(context).withOpacity(0.6),
               ),
             ],
           ),
