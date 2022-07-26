@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
@@ -114,6 +115,7 @@ class SupportedAppPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomSheet: const BannerAdView(),
     );
   }
 

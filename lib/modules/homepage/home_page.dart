@@ -23,6 +23,7 @@ class HomePageScreen extends StatelessWidget {
           exit(0);
         },
         child: Scaffold(
+          // bottomSheet: const BannerAdView(),
           backgroundColor: themeController.isSwitched.value
               ? ColorCollection.backGroundColorDark
               : AppColor.homeScreen,
@@ -155,6 +156,14 @@ class HomePageScreen extends StatelessWidget {
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
+                        // Obx(
+                        //   () => SizedBox(
+                        //     height: isBannerLoaded.value
+                        //         ? SizeUtils.verticalBlockSize * 5
+                        //         : 0,
+                        //   ),
+                        // ),
+
                         // customCategoriesBox(
                         //   context,
                         //   titleText: AppString.contact,
@@ -163,9 +172,6 @@ class HomePageScreen extends StatelessWidget {
                         //   onTap: () {
                         //     Navigation.pushNamed(Routes.contactPage);
                         //   },
-                        // ),
-                        // SizedBox(
-                        //   height: SizeUtils.verticalBlockSize * 1.5,
                         // ),
                       ],
                     ),

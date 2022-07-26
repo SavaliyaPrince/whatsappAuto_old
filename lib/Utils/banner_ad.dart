@@ -1,7 +1,11 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+RxBool isBannerLoaded = false.obs;
 
 class BannerAdView extends StatefulWidget {
   const BannerAdView({Key? key}) : super(key: key);
@@ -22,6 +26,8 @@ class _BannerAdViewState extends State<BannerAdView> {
   @override
   void dispose() {
     _anchoredBanner?.dispose();
+    isBannerLoaded.value = false;
+    log("isBannerAdLoad--<${isBannerLoaded.value.toString()}");
     super.dispose();
   }
 
@@ -34,7 +40,7 @@ class _BannerAdViewState extends State<BannerAdView> {
           _createAnchoredBanner(context);
         }
         return Container(
-          height: _anchoredBanner == null ? 0 : 70,
+          height: _anchoredBanner == null ? 0 : 50,
           alignment: Alignment.center,
           child: _anchoredBanner == null
               ? const SizedBox()
@@ -59,7 +65,8 @@ class _BannerAdViewState extends State<BannerAdView> {
     }
 
     final BannerAd banner = BannerAd(
-      size: const AdSize(width: 320, height: 70),
+      // size: const AdSize(width: 320, height: 70),
+      size: AdSize.smartBanner,
       request: request,
 
       // ///live
@@ -68,18 +75,20 @@ class _BannerAdViewState extends State<BannerAdView> {
       //     : '',
 
       ///test
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
-          : 'ca-app-pub-3940256099942544/2934735716',
+      adUnitId:
+          Platform.isAndroid ? 'ca-app-pub-3940256099942544/6300978111' : '',
 
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           print('AdMob Banner Ad onAdLoaded:');
           setState(() {
+            isBannerLoaded.value = true;
+            log("isBannerAdLoad===${isBannerLoaded.toString()}");
             _anchoredBanner = ad as BannerAd?;
           });
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          isBannerLoaded.value = false;
           print('AdMob Banner Ad failedToLoad: $error');
           ad.dispose();
         },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
@@ -16,143 +17,144 @@ class AutoReply extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorRes.backgroundColor(context),
-      appBar: AppBar(
-        elevation: 0.2,
-        backgroundColor: themeController.isSwitched.value
-            ? AppColor.darkThem.withOpacity(0.2)
-            : AppColor.whiteColor,
-        leadingWidth: SizeUtils.fSize_40(),
-        leading: GestureDetector(
-          onTap: () {
-            Navigation.pop();
-          },
-          child: Padding(
-            padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
-            child: Image.asset(
-              AppIcons.backIcon,
-              color: themeController.isSwitched.value
-                  ? AppColor.whiteColor
-                  : AppColor.backIconColor,
-            ),
-          ),
-        ),
-        title: AppText(
-          AppString.autoReplyMassage,
-          fontSize: SizeUtils.fSize_17(),
-          fontWeight: FontWeight.w600,
-          color: themeController.isSwitched.value
-              ? AppColor.whiteColor
-              : AppColor.backIconColor,
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-            child: GestureDetector(
-              onTap: () {},
+        backgroundColor: ColorRes.backgroundColor(context),
+        appBar: AppBar(
+          elevation: 0.2,
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
+              : AppColor.whiteColor,
+          leadingWidth: SizeUtils.fSize_40(),
+          leading: GestureDetector(
+            onTap: () {
+              Navigation.pop();
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
               child: Image.asset(
-                AppIcons.import,
-                width: SizeUtils.fSize_24(),
+                AppIcons.backIcon,
                 color: themeController.isSwitched.value
                     ? AppColor.whiteColor
                     : AppColor.backIconColor,
               ),
             ),
           ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: SizeUtils.verticalBlockSize * 2.7),
-            AppText(
-              "27",
-              color: AppColor.primaryColor,
-              fontSize: SizeUtils.fSize_24(),
-              fontWeight: FontWeight.w600,
-            ),
-            SizedBox(height: SizeUtils.verticalBlockSize * 0.7),
-            AppText(
-              AppString.massageSent,
-              color: ColorRes.textColor(context),
-              fontSize: SizeUtils.fSize_16(),
-              fontWeight: FontWeight.w600,
-            ),
-            SizedBox(height: SizeUtils.verticalBlockSize * 0.7),
-            AppText(
-              AppString.lastSync,
-              color: ColorRes.textColor(context),
-              fontSize: SizeUtils.fSize_14(),
-            ),
-            SizedBox(height: SizeUtils.verticalBlockSize * 3.2),
-            ValueListenableBuilder(
-              valueListenable: _isDisable,
-              builder: (BuildContext context, bool value, Widget? child) {
-                return Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        replyMassageItem(
-                          context,
-                          AppIcons.whatsapp,
-                          AppString.welcomeMessage,
-                          "${AppString.massageSent} 20",
-                          colorText: value,
-                        ),
-                        replyMassageItem(
-                          context,
-                          AppIcons.telegram,
-                          AppString.Telegram,
-                          "${AppString.massageSent} 7",
-                          colorText: value,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        replyMassageItem(
-                          context,
-                          AppIcons.viber,
-                          AppString.Viber,
-                          "${AppString.massageSent} 0",
-                        ),
-                        replyMassageItem(
-                          context,
-                          AppIcons.fbMessenger,
-                          AppString.Messanger,
-                          "${AppString.massageSent} 0",
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        replyMassageItem(
-                          context,
-                          AppIcons.line,
-                          AppString.LineMessenger,
-                          "${AppString.massageSent} 0",
-                        ),
-                        replyMassageItem(
-                          context,
-                          AppIcons.discord,
-                          AppString.Messanger,
-                          "${AppString.massageSent} 0",
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              },
+          title: AppText(
+            AppString.autoReplyMassage,
+            fontSize: SizeUtils.fSize_17(),
+            fontWeight: FontWeight.w600,
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
+          ),
+          actions: [
+            Padding(
+              padding:
+                  EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
+              child: GestureDetector(
+                onTap: () {},
+                child: Image.asset(
+                  AppIcons.import,
+                  width: SizeUtils.fSize_24(),
+                  color: themeController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.backIconColor,
+                ),
+              ),
             ),
           ],
         ),
-      ),
-    );
+        body: Center(
+          child: Column(
+            children: [
+              SizedBox(height: SizeUtils.verticalBlockSize * 2.7),
+              AppText(
+                "27",
+                color: AppColor.primaryColor,
+                fontSize: SizeUtils.fSize_24(),
+                fontWeight: FontWeight.w600,
+              ),
+              SizedBox(height: SizeUtils.verticalBlockSize * 0.7),
+              AppText(
+                AppString.massageSent,
+                color: ColorRes.textColor(context),
+                fontSize: SizeUtils.fSize_16(),
+                fontWeight: FontWeight.w600,
+              ),
+              SizedBox(height: SizeUtils.verticalBlockSize * 0.7),
+              AppText(
+                AppString.lastSync,
+                color: ColorRes.textColor(context),
+                fontSize: SizeUtils.fSize_14(),
+              ),
+              SizedBox(height: SizeUtils.verticalBlockSize * 3.2),
+              ValueListenableBuilder(
+                valueListenable: _isDisable,
+                builder: (BuildContext context, bool value, Widget? child) {
+                  return Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          replyMassageItem(
+                            context,
+                            AppIcons.whatsapp,
+                            AppString.welcomeMessage,
+                            "${AppString.massageSent} 20",
+                            colorText: value,
+                          ),
+                          replyMassageItem(
+                            context,
+                            AppIcons.telegram,
+                            AppString.Telegram,
+                            "${AppString.massageSent} 7",
+                            colorText: value,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          replyMassageItem(
+                            context,
+                            AppIcons.viber,
+                            AppString.Viber,
+                            "${AppString.massageSent} 0",
+                          ),
+                          replyMassageItem(
+                            context,
+                            AppIcons.fbMessenger,
+                            AppString.Messanger,
+                            "${AppString.massageSent} 0",
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          replyMassageItem(
+                            context,
+                            AppIcons.line,
+                            AppString.LineMessenger,
+                            "${AppString.massageSent} 0",
+                          ),
+                          replyMassageItem(
+                            context,
+                            AppIcons.discord,
+                            AppString.Messanger,
+                            "${AppString.massageSent} 0",
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        bottomSheet: const BannerAdView());
   }
 
   Widget replyMassageItem(
