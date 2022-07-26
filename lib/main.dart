@@ -8,6 +8,8 @@ import 'package:whatsapp_auto/modules/send_massage/send_message_controller.dart'
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
+import 'modules/create_reply_page/create_reply_controller.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreference.initMySharedPreferences();
@@ -52,5 +54,6 @@ class AppBidding implements Bindings {
   void dependencies() {
     // Get.put(HomePageController());
     Get.put(SendMessageController());
+    Get.put(CreateReplyController());
   }
 }
