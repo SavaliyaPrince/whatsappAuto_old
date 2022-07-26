@@ -23,17 +23,7 @@ class CreateReply extends StatefulWidget {
 class _CreateReplyState extends State<CreateReply> {
   final ThemeController themeController = Get.find();
 
-  final CreateReplyController _createReplyController =
-      Get.put(CreateReplyController());
-  @override
-  void initState() {
-    // final Iterable l = json.decode(AppPreference.getString("CreateReplyModel"));
-    // final List<CreateReplyModel> posts = List<CreateReplyModel>.from(
-    //     l.map((model) => CreateReplyModel.fromJson(model)));
-    // _createReplyController.createModal.clear();
-    // _createReplyController.createModal.addAll(posts);
-    super.initState();
-  }
+  final CreateReplyController _createReplyController = Get.find();
 
   @override
   Widget build(BuildContext context) {

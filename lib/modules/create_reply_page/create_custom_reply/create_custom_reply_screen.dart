@@ -123,7 +123,7 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                       createReplyModel.time = DateTime.now();
                       _createReplyController.createModal.add(createReplyModel);
                       saveMethode();
-                      setState(() {});
+                      // setState(() {});
                       Navigation.pushNamed(Routes.createReply);
                     }
                   },
