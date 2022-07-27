@@ -6,6 +6,7 @@ import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
+import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -14,9 +15,13 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({Key? key}) : super(key: key);
   final ThemeController themeController = Get.find();
+  final HomePageController homePageController = Get.put(HomePageController());
 
   @override
   Widget build(BuildContext context) {
+    // homePageController.getWhatsAuto();
+    // print(
+    //     "----------homePageController.getWhatsAuto-----------${homePageController.getWhatsAuto()}");
     return Obx(
       () => WillPopScope(
         onWillPop: () {

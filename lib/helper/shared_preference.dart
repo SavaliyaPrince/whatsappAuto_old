@@ -2,6 +2,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreference {
   static late SharedPreferences _prefs;
+  static const _whatsApp = 'whatsApp';
+  static const _autoResponse = 'autoResponse';
+  static const _fbMassager = 'fbMassager';
+  static const _viber = 'viber';
 
   static Future initMySharedPreferences() async {
     _prefs = await SharedPreferences.getInstance();
@@ -58,6 +62,47 @@ class AppPreference {
   static String getInComingKeyword(String key) {
     final String? value = _prefs.getString(key);
     return value ?? "";
+  }
+
+  ///
+  static Future<void> setWhatsApp({required bool whatsApp}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_whatsApp, whatsApp);
+  }
+
+  static Future<void> setAutoResponse({required bool autoResponse}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_autoResponse, autoResponse);
+  }
+
+  static Future<void> setFbMassager({required bool fbMassager}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_fbMassager, fbMassager);
+  }
+
+  static Future<void> setViber({required bool viber}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_viber, viber);
+  }
+
+  static bool get whatsApp {
+    final bool value = _prefs.getBool(_whatsApp) ?? false;
+    return value;
+  }
+
+  static bool get autoResponse {
+    final bool value = _prefs.getBool(_autoResponse) ?? false;
+    return value;
+  }
+
+  static bool get fbMassager {
+    final bool value = _prefs.getBool(_fbMassager) ?? false;
+    return value;
+  }
+
+  static bool get viber {
+    final bool value = _prefs.getBool(_viber) ?? false;
+    return value;
   }
 
 // static Future setUserToken(String token) async {

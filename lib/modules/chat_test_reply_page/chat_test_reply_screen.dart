@@ -9,6 +9,7 @@ import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/chat_page/data_source/chat_modal.dart';
+import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -28,7 +29,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
   TextEditingController chatController = TextEditingController();
   final List<ChatModel> chatModel = <ChatModel>[];
   final ScrollController scrollController = ScrollController();
-
+  final HomePageController homePageController = Get.find();
   // @override
   // void initState() {
   //   final Iterable l = json.decode(AppPreference.getString("chatModal"));
@@ -363,6 +364,9 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
 
                                 save();
                                 scrollUp();
+                                // homePageController.getWhatsAuto();
+                                // print(
+                                //     "----------homePageController.getWhatsAuto-----------${homePageController.getWhatsAuto()}");
                                 setState(() {});
                               },
                               child: CircleAvatar(
