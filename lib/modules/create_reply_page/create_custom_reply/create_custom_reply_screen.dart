@@ -50,9 +50,7 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
+                color: ColorRes.appBarBackground(context),
               ),
             ),
           ),
@@ -60,9 +58,7 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
             AppString.createCustomReply,
             fontSize: SizeUtils.fSize_17(),
             fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value
-                ? AppColor.whiteColor
-                : AppColor.backIconColor,
+            color: ColorRes.textColor(context),
           ),
         ),
         body: Padding(
@@ -78,9 +74,7 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                   AppString.CreateYourOwnChatBot,
                   fontSize: SizeUtils.fSize_14(),
                   fontWeight: FontWeight.w400,
-                  color: themeController.isSwitched.value
-                      ? AppColor.whiteColor
-                      : AppColor.textColor.withOpacity(0.5),
+                  color: ColorRes.textColor(context),
                 ),
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 4,
@@ -130,7 +124,7 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                       createReplyModel.time = DateTime.now();
                       _createReplyController.createModal.add(createReplyModel);
                       saveMethode();
-                      setState(() {});
+                      // setState(() {});
                       Navigation.pushNamed(Routes.createReply);
                     }
                   },
