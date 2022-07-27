@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
@@ -145,5 +146,14 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
         l.map((model) => CreateReplyModel.fromJson(model)));
     _createReplyController.createModal.clear();
     _createReplyController.createModal.addAll(posts);
+
+    const platform = MethodChannel('samples.flutter.dev/battery');
+
+    platform.invokeMethod('addNewMessage', {
+      "message": _createReplyController.inComingKeywordController.text
+          .toLowerCase()
+          .trim(),
+      "replyMessage": _createReplyController.replyMassageController.text.trim(),
+    });
   }
 }
