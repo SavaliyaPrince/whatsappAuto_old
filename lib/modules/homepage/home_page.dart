@@ -3,17 +3,56 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/interstitial_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
+import 'package:whatsapp_auto/Utils/open_ad.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatefulWidget {
   HomePageScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen>
+    with WidgetsBindingObserver {
   final ThemeController themeController = Get.find();
+  bool isPaused = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // AppOpenAdManager.loadAd();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.paused) {
+      isPaused = true;
+      print("user go to background");
+    }
+    if (state == AppLifecycleState.resumed && isPaused) {
+      print("State Resumed===========");
+      AppOpenAdManager.showOpenAdIfAvailable();
+      isPaused = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +62,6 @@ class HomePageScreen extends StatelessWidget {
           exit(0);
         },
         child: Scaffold(
-          // bottomSheet: const BannerAdView(),
           backgroundColor: themeController.isSwitched.value
               ? ColorCollection.backGroundColorDark
               : AppColor.homeScreen,
@@ -78,6 +116,7 @@ class HomePageScreen extends StatelessWidget {
                           subtitle: AppString.welcomeMessageSubTile,
                           image: AssetsPath.star,
                           onTap: () {
+                            InterstitalAd.showInterstitialAd();
                             Navigation.pushNamed(Routes.sendMassagePage);
                           },
                         ),
@@ -156,14 +195,6 @@ class HomePageScreen extends StatelessWidget {
                         SizedBox(
                           height: SizeUtils.verticalBlockSize * 1.5,
                         ),
-                        // Obx(
-                        //   () => SizedBox(
-                        //     height: isBannerLoaded.value
-                        //         ? SizeUtils.verticalBlockSize * 5
-                        //         : 0,
-                        //   ),
-                        // ),
-
                         // customCategoriesBox(
                         //   context,
                         //   titleText: AppString.contact,
