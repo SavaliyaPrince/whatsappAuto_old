@@ -60,6 +60,9 @@ class AppPreference {
     return value ?? "";
   }
 
+
+
+
 // static Future setUserToken(String token) async {
 //   await _prefs.setString(Constants.keyToken, token);
 // }

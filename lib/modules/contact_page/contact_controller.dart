@@ -6,4 +6,6 @@ class ContactController extends GetxController {
   RxBool isSwitchExpectContact = false.obs;
   RxBool isSwitchPhoneContact = false.obs;
   RxBool checkEnable = false.obs;
+
+
 }

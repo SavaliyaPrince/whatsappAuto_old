@@ -76,6 +76,14 @@ class SettingPage extends StatelessWidget {
           ),
           _settingItem(
             context,
+            AppIcons.inviteFriends,
+            AppString.contactUsTitle,
+            onTap: () {
+              Navigation.pushNamed(Routes.contactPage);
+            },
+          ),
+          _settingItem(
+            context,
             AppIcons.appearance,
             AppString.Appearance,
             onTap: () {

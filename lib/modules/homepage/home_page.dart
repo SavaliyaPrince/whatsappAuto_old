@@ -109,18 +109,6 @@ class HomePageScreen extends StatelessWidget {
                         ),
                         customCategoriesBox(
                           context,
-                          titleText: AppString.contactUsTitle,
-                          subtitle: AppString.contactUsSubTile,
-                          image: AssetsPath.document,
-                          onTap: () {
-                            Navigation.pushNamed(Routes.contactPage);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        customCategoriesBox(
-                          context,
                           titleText: AppString.categoryTitle,
                           subtitle: AppString.categorySubTile,
                           image: AssetsPath.category,

@@ -4,20 +4,22 @@ import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_list_page/data_source/group_contact_select_screen.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_list_page/demo_controller.dart';
+import 'package:whatsapp_auto/modules/contact_page/group_page/group_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
-class ContactListPage extends StatefulWidget {
-  @override
-  State<ContactListPage> createState() => _ContactListPageState();
-}
+class ContactListPage extends StatelessWidget {
+  ContactListPage({Key? key}) : super(key: key);
 
-class _ContactListPageState extends State<ContactListPage> {
   final ThemeController themeController = Get.find();
-
   final ContactListController contactListController = Get.find();
+  final ContactServiceController demoController = Get.find();
+  final GroupController groupController = Get.find();
+  RxBool val = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,7 @@ class _ContactListPageState extends State<ContactListPage> {
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.2,
-          backgroundColor: themeController.isSwitched.value
-              ? AppColor.darkThem.withOpacity(0.2)
-              : AppColor.whiteColor,
+          backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
@@ -50,36 +50,6 @@ class _ContactListPageState extends State<ContactListPage> {
             fontWeight: FontWeight.w600,
             color: ColorRes.textColor(context),
           ),
-          actions: [
-            Row(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Image.asset(
-                      AppIcons.search,
-                      width: SizeUtils.fSize_24(),
-                      color: ColorRes.appBarBackground(context),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Image.asset(
-                      AppIcons.more,
-                      width: SizeUtils.fSize_24(),
-                      color: ColorRes.appBarBackground(context),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
         ),
         body: Padding(
           padding: EdgeInsets.only(
@@ -99,7 +69,7 @@ class _ContactListPageState extends State<ContactListPage> {
                 height: SizeUtils.verticalBlockSize * 2,
               ),
               Obx(
-                () =>  contactListController.isFirstLoadRunning.value
+                () => demoController.isLoader.value == true
                     ? const Expanded(
                         child: Center(
                           child: CircularProgressIndicator(
@@ -108,115 +78,110 @@ class _ContactListPageState extends State<ContactListPage> {
                         ),
                       )
                     : Expanded(
-                          child: Column(
-                            children: [
-                              Expanded(
-                                  child: ListView.builder(
-                                    controller: contactListController.scrollController,
-                                    itemCount: contactListController.contacts.length,
-                                    itemBuilder: (context, index) {
-                                      print(
-                                          '======${contactListController
-                                              .contacts[index].isselected}');
-                                      return Padding(
-                                        padding: EdgeInsets.only(
-                                          top: SizeUtils.verticalBlockSize * 1,
-                                          bottom: SizeUtils.verticalBlockSize * 1,
-                                          right: SizeUtils.horizontalBlockSize * 1,
+                        child: ListView.builder(
+                          itemCount: demoController.contactModel.length,
+                          itemBuilder: (context, index) {
+                            final contact = demoController.contactModel[index];
+                            print('=====${demoController.contactModel[index].avatar}=====');
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                top: SizeUtils.verticalBlockSize * 1,
+                                bottom: SizeUtils.verticalBlockSize * 1,
+                                right: SizeUtils.horizontalBlockSize * 1,
+                              ),
+                              child: Row(
+                                children: [
+                                  if (contact.avatar != null)
+                                    Container(
+                                      width: SizeUtils.horizontalBlockSize * 7.6,
+                                      height: SizeUtils.verticalBlockSize * 4.5,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: MemoryImage(
+                                            contact.avatar!,
+                                          ),
                                         ),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Colors.red),
-                                              child: Image.asset(
-                                                AssetsPath.profile,
-                                                width: SizeUtils.horizontalBlockSize *
-                                                    7.6,
-                                                height:
-                                                    SizeUtils.verticalBlockSize * 4.5,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width:
-                                                  SizeUtils.horizontalBlockSize * 5,
-                                            ),
-                                            AppText(
-                                              contactListController
-                                                  .contacts[index].displayName
-                                                  .toString(),
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  themeController.isSwitched.value
-                                                      ? AppColor.whiteColor
-                                                      : AppColor.textColor,
-                                              fontSize: SizeUtils.fSize_14(),
-                                            ),
-                                            const Spacer(),
-                                            SizedBox(
-                                              width: SizeUtils.horizontalBlockSize *
-                                                  4.8,
-                                              height:
-                                              SizeUtils.verticalBlockSize * 2.8,
-                                              child: Checkbox(
-                                                value: contactListController
-                                                    .contacts[index]
-                                                    .isselected ??
-                                                    false,
-                                                activeColor:
-                                                ColorCollection.greenColor,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(5),
-                                                ),
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    if ((contactListController
-                                                        .contacts[index]
-                                                        .isselected ??
-                                                        false) ==
-                                                        false) {
-                                                      contactListController
-                                                          .contacts[index]
-                                                          .isselected = true;
-                                                    } else {
-                                                      contactListController
-                                                          .contacts[index]
-                                                          .isselected = false;
-                                                    }
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                          ],
+                                        color: Colors.red,
+                                      ),
+                                    )
+                                  else
+                                    Container(
+                                      width: SizeUtils.horizontalBlockSize * 7.6,
+                                      height: SizeUtils.verticalBlockSize * 4.5,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColor.primaryColor,
+                                      ),
+                                      child: Center(
+                                        child: AppText(
+                                          contact.displayName![0],
+                                          fontWeight: FontWeight.w600,
+                                          color: AppColor.whiteColor,
                                         ),
-                                      );
-                                    },
+                                      ),
+                                    ),
+                                  // if (contact.avatar == null)
+                                  //   const CircleAvatar(child: Icon(Icons.person))
+                                  // else
+                                  //   CircleAvatar(
+                                  //     backgroundImage: MemoryImage(contact.avatar!),
+                                  //   ),
+                                  SizedBox(
+                                    width: SizeUtils.horizontalBlockSize * 5,
                                   ),
-                                ),
-
-                              if (contactListController.isLoadMoreRunning.value ==
-                                  true)
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 10, bottom: 40),
-                                  child: Center(
-                                    child: LinearProgressIndicator(),
+                                  AppText(
+                                    contact.displayName.toString(),
+                                    fontWeight: FontWeight.w400,
+                                    color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
+                                    fontSize: SizeUtils.fSize_14(),
                                   ),
-                                ),
-
-                              if (contactListController.hasNextPage.value ==
-                                  false)
-                                Container(
-                                  padding: const EdgeInsets.only(top: 30, bottom: 40),
-                                  color: Colors.amber,
-                                  child: const Center(
-                                    child: Text('You have fetched all of the content'),
+                                  const Spacer(),
+                                  Container(
+                                    width: SizeUtils.horizontalBlockSize * 4.8,
+                                    height: SizeUtils.verticalBlockSize * 2.8,
+                                    color: Colors.transparent,
+                                    child: Theme(
+                                      data: ThemeData(
+                                        unselectedWidgetColor: ColorRes.textColor(context).withOpacity(0.3),
+                                      ),
+                                      child: Transform.scale(
+                                        scale: 1.1,
+                                        child: Obx(
+                                          () => Checkbox(
+                                            value: contact.isCheck?.value,
+                                            activeColor: ColorCollection.greenColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                            onChanged: (value) async {
+                                              if (contact.isCheck?.value == false) {
+                                                contact.isCheck?.value = true;
+                                                final groupSelectedModel selectedContactModels = groupSelectedModel(
+                                                  displayName: contact.displayName,
+                                                  mobileNumber: contact.mobileNumber,
+                                                  avatar: contact.avatar,
+                                                );
+                                                demoController.selectedContactModel.add(
+                                                  selectedContactModels,
+                                                );
+                                                await demoController.contactStoreModel();
+                                                demoController.selectedContactModel.refresh();
+                                              } else {
+                                                contact.isCheck?.value = false;
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                            ],
-                          ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
+                      ),
               ),
             ],
           ),
