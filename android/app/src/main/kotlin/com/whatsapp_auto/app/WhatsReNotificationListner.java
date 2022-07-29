@@ -62,8 +62,6 @@ WhatsReNotificationListner extends NotificationListenerService {
     // Constants
     private static final int ID_SERVICE = 101;
 
-    public int replyCount = 0;
-
     public List<Long> waLastRawId = new ArrayList<>();
 
     @Override
@@ -188,7 +186,7 @@ WhatsReNotificationListner extends NotificationListenerService {
 
         boolean isReplyEnable = false;
         Bundle bundle = sbn.getNotification().extras;
-        Log.d("TAG", "bundle~~>-=-=-=-" + bundle.toString());
+        Log.d("TAG", "bundle~~>----" + bundle.toString());
         String packageName = sbn.getPackageName();
         if (packageName.equals(BuildConfig.APPLICATION_ID)) {
             return;
@@ -196,13 +194,14 @@ WhatsReNotificationListner extends NotificationListenerService {
         Log.d("TAG", "id~~>1");
 
         String sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
-        String message = bundle.getString(InterceptedNotificationParseCode.ANDROID_TEXT);
+        String message = "" + bundle.getString(InterceptedNotificationParseCode.ANDROID_TEXT);
 
 //        Log.d("message-=-=-=-111111=-=-=--==-" + message);
         Log.d("TAG", "id~~>2");
         String[] senders = sender.split(":");
         if (senders.length > 1) {
-            sender = null;
+            sender = senders[1];
+            sender = sender.replaceAll(" ", "");
         }
         Log.d("TAG", "id~~>3");
         switch (packageName) {
@@ -247,7 +246,10 @@ WhatsReNotificationListner extends NotificationListenerService {
                 break;
             case ApplicationPackageNames.WHATSAPP_PACKNAME:
             case ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS:
+                Log.d("TAG", "TEST-REPLY 0");
                 if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME, false)) {
+                    Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS");
+
                     if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME))
                         return;
                 }
@@ -255,9 +257,11 @@ WhatsReNotificationListner extends NotificationListenerService {
                     if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS))
                         return;
                 }
-
+                Log.d("TAG", "TEST-REPLY sender: " + sender);
                 if (sender != null && !sender.equalsIgnoreCase("tú") && !sender.equalsIgnoreCase("you")) {
+                    Log.d("TAG", "arrayList --1 start");
                     ArrayList<Parcelable> arrayList = bundle.getParcelableArrayList("android.people.list");
+                    Log.d("TAG", "arrayList --1 end:" + arrayList);
                     if (arrayList != null && arrayList.size() > 0) {
                         String phoneNo = getphoneNo(((Person) (arrayList.get(0))).getUri());
                         if (!phoneNo.isEmpty()) {
@@ -266,9 +270,13 @@ WhatsReNotificationListner extends NotificationListenerService {
                         }
                     }
                     long lastRowId = bundle.getLong(InterceptedNotificationParseCode.ANDROID_LAST_ROW_ID);
+                    appendLog("arrayList----lastRowId" + lastRowId);
+                    Log.d("TAG", "TEST-REPLY 1 lastRowId: " + lastRowId);
                     if (lastRowId != 0) {
                         if (waLastRawId.size() == 0 || !waLastRawId.contains(lastRowId)) {
+                            appendLog("arrayList----lastRowId 0");
                             waLastRawId.add(lastRowId);
+                            Log.d("TAG", "TEST-REPLY 2");
                             isReplyEnable = true;
                         }
                     }
@@ -318,16 +326,17 @@ WhatsReNotificationListner extends NotificationListenerService {
 
         if (isReplyEnable) {
 
+
             replyCount++;
             appendLog("sender----:" + (sender));
             appendLog("message---: " + (message));
-            appendLog("replyCount---: " + (replyCount));
 
             String key = "botMessage-" + message.toLowerCase();
             String repliedMessage = prefs.getString(key, "Hi");
 
             appendLog("repliedMessage---: " + repliedMessage);
             appendLog("key----------: " + key);
+
 
             replayNotification(sbn, bundle, repliedMessage);
 
@@ -520,6 +529,12 @@ WhatsReNotificationListner extends NotificationListenerService {
         RemoteInput.addResultsToIntent(remoteInputArr, intent, bundle);
         if (pendingIntent != null) {
             try {
+
+                SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int messageCount = prefs.getInt("messageCount", 0);
+                messageCount = messageCount + 1;
+                prefs.edit().putInt("messageCount", messageCount).apply();
+
                 pendingIntent.send(this, 0, intent);
 
             } catch (PendingIntent.CanceledException e2) {

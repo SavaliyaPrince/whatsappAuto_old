@@ -5,6 +5,7 @@ import 'package:whatsapp_auto/helper/shared_preference.dart';
 
 class ThemeController extends GetxController {
   RxBool isSwitched = false.obs;
+
   // static bool isDarkMode = false;
   RxBool isDarkMode = false.obs;
   RxString whatsAppMassageSent = "".obs;
@@ -18,6 +19,7 @@ class ThemeController extends GetxController {
   @override
   void onInit() {
     getTheme();
+    getMessageCount();
     super.onInit();
   }
 
@@ -37,5 +39,14 @@ class ThemeController extends GetxController {
   void getTheme() {
     isSwitched.value = AppPreference.getBoolean("theme");
     isDarkMode.value = isSwitched.value;
+  }
+
+  Future<String> getMessageCount() async {
+    totalMassageSent.value = whatsAppMassageSent.value;
+    const platform = MethodChannel('samples.flutter.dev/battery');
+    final String result = await platform.invokeMethod('getMessageCount');
+    whatsAppMassageSent.value = result;
+    print('getMessageCount messageCount: $result');
+    return result;
   }
 }
