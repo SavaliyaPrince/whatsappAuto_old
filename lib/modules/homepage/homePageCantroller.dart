@@ -16,21 +16,13 @@ class HomePageController extends GetxController {
   RxBool facebook = false.obs;
   RxBool whatsappBusiness = false.obs;
   RxBool autoMassageOnOff = false.obs;
+  RxBool telegram = false.obs;
+  RxBool twitter = false.obs;
+  RxBool instagram = false.obs;
 
   void onThemeChange() {
     isSwitched.value = AppPreference.getBoolean("theme");
   }
-
-  // Future<PermissionStatus> _contactsPermissions() async {
-  //   final PermissionStatus permission = await Permission.contacts.status;
-  //   if (permission != PermissionStatus.granted) {
-  //     final Map<Permission, PermissionStatus> permissionStatus =
-  //         await [Permission.contacts].request();
-  //     return permissionStatus[Permission.contacts] ?? PermissionStatus.denied;
-  //   } else {
-  //     return permission;
-  //   }
-  // }
 
   Future<void> getWhatsAuto() async {
     const platform = MethodChannel('samples.flutter.dev/battery');
@@ -109,7 +101,11 @@ class HomePageController extends GetxController {
     // TODO: implement onReady
     super.onReady();
     whatsApp.value = AppPreference.whatsApp;
-    // whatsappBusiness.value = AppPreference.whatsAppBusi;
+    whatsappBusiness.value = AppPreference.whatsAppBusi;
+    facebook.value = AppPreference.fbMassager;
+    instagram.value = AppPreference.instagrams;
+    telegram.value = AppPreference.telegram;
+    twitter.value = AppPreference.twitter;
   }
 
   @override

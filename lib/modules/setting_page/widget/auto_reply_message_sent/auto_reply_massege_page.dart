@@ -124,13 +124,8 @@ class AutoReply extends StatelessWidget {
                         replyMassageItem(
                           context,
                           AppIcons.viber,
-                          AppString.Viber,
-                          "${AppString.massageSent} ${themeController.viberMassageSent.isEmpty ? 0 : themeController.viberMassageSent}",
-                          colorText:
-                              // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.viberMassageSent.isEmpty
-                                  ? false
-                                  : value,
+                          AppString.instagram,
+                          "${AppString.massageSent} 0",
                         ),
                         replyMassageItem(
                           context,
