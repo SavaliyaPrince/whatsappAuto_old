@@ -440,6 +440,14 @@ class MainActivity : FlutterActivity() {
                 Log.d("tag", "newCreatedMessage === >>>> " + botMessage)
             }
 
+            if (call.method == "getMessageCount") {
+
+                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+                var messageCount = get.getInt("messageCount", 0)
+                result.success(messageCount.toString())
+
+            }
+
 //            }
 
 
@@ -450,7 +458,7 @@ class MainActivity : FlutterActivity() {
     private fun isNotificationServiceEnabled(): Boolean {
         val pkgName = packageName
         val flat = Settings.Secure.getString(contentResolver,
-            ENABLED_NOTIFICATION_LISTENERS)
+                ENABLED_NOTIFICATION_LISTENERS)
         if (!TextUtils.isEmpty(flat)) {
             val names = flat.split(":".toRegex()).toTypedArray()
             for (i in names.indices) {

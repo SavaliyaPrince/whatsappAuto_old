@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -103,28 +104,28 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                   child: Column(
                     children: [
                       SizedBox(height: SizeUtils.verticalBlockSize * 3),
-                      // Center(
-                      //   child: Container(
-                      //     // alignment: Alignment.center,
-                      //     decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(8),
-                      //       color: ColorRes.textColor(context),
-                      //     ),
-                      //     child: Padding(
-                      //       padding: EdgeInsets.symmetric(
-                      //           vertical: SizeUtils.verticalBlockSize * 1,
-                      //           horizontal: SizeUtils.horizontalBlockSize * 3),
-                      //       child: AppText(
-                      //         "Today",
-                      //         fontWeight: FontWeight.w600,
-                      //         fontSize: SizeUtils.fSize_14(),
-                      //         color: themeController.isSwitched.value
-                      //             ? AppColor.textColor
-                      //             : AppColor.whiteColor,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      Center(
+                        child: Container(
+                          // alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: ColorRes.textColor(context),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: SizeUtils.verticalBlockSize * 1,
+                                horizontal: SizeUtils.horizontalBlockSize * 3),
+                            child: AppText(
+                              "Today",
+                              fontWeight: FontWeight.w600,
+                              fontSize: SizeUtils.fSize_14(),
+                              color: themeController.isSwitched.value
+                                  ? AppColor.textColor
+                                  : AppColor.whiteColor,
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(height: SizeUtils.verticalBlockSize * 1.5),
                       SizedBox(
                         child: Column(
@@ -138,10 +139,13 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                 shrinkWrap: true,
                                 itemCount: chatTestController.chatModal.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  // print(
-                                  //     "aniation ------${scrollController.position.maxScrollExtent}");
+                                  // final current = _homeController.currentMatch
+                                  //     .value.matches?.notstarted?[index];
+                                  // final backTime = index == 0
+                                  //     ? chatTestController.chatModal[index].time
+                                  //     : chatTestController
+                                  //         .chatModal[index].time?[(index - 1)];
 
-                                  // log("--------->>>>${chatModel[index].message}");
                                   return chatTestController
                                               .chatModal[index].istype ==
                                           "Left"
@@ -149,6 +153,43 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
+                                            Center(
+                                              child: Container(
+                                                // alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: ColorRes.textColor(
+                                                      context),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: SizeUtils
+                                                              .verticalBlockSize *
+                                                          1,
+                                                      horizontal: SizeUtils
+                                                              .horizontalBlockSize *
+                                                          3),
+                                                  child: AppText(
+                                                    // "${chatTestController.chatModal[index].time ?? DateTime.now()}",
+                                                    DateFormat("yyyy-MM-dd")
+                                                        .format(
+                                                            chatTestController
+                                                                    .chatModal[
+                                                                        index]
+                                                                    .time ??
+                                                                DateTime.now()),
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize:
+                                                        SizeUtils.fSize_14(),
+                                                    color: themeController
+                                                            .isSwitched.value
+                                                        ? AppColor.textColor
+                                                        : AppColor.whiteColor,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                             Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
