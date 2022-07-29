@@ -12,7 +12,7 @@ class AutoReply extends StatelessWidget {
   AutoReply({Key? key}) : super(key: key);
 
   final ValueNotifier<bool> _isDisable = ValueNotifier(true);
-  final ThemeController themeController = Get.find();
+  final ThemeController themeController = Get.find()..getMessageCount();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +66,7 @@ class AutoReply extends StatelessWidget {
           children: [
             SizedBox(height: SizeUtils.verticalBlockSize * 2.7),
             AppText(
-              "27",
+              "${themeController.totalMassageSent}",
               color: AppColor.primaryColor,
               fontSize: SizeUtils.fSize_24(),
               fontWeight: FontWeight.w600,
@@ -97,15 +97,23 @@ class AutoReply extends StatelessWidget {
                           context,
                           AppIcons.whatsapp,
                           AppString.welcomeMessage,
-                          "${AppString.massageSent} 20",
-                          colorText: value,
+                          "${AppString.massageSent}  ${themeController.whatsAppMassageSent.isEmpty ? 0 : themeController.whatsAppMassageSent}",
+                          colorText:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              themeController.whatsAppMassageSent.isEmpty
+                                  ? false
+                                  : value,
                         ),
                         replyMassageItem(
                           context,
                           AppIcons.telegram,
                           AppString.Telegram,
-                          "${AppString.massageSent} 7",
-                          colorText: value,
+                          "${AppString.massageSent} ${themeController.telegramMassageSent.isEmpty ? 0 : themeController.telegramMassageSent}",
+                          colorText:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              themeController.telegramMassageSent.isEmpty
+                                  ? false
+                                  : value,
                         ),
                       ],
                     ),
@@ -117,13 +125,23 @@ class AutoReply extends StatelessWidget {
                           context,
                           AppIcons.viber,
                           AppString.Viber,
-                          "${AppString.massageSent} 0",
+                          "${AppString.massageSent} ${themeController.viberMassageSent.isEmpty ? 0 : themeController.viberMassageSent}",
+                          colorText:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              themeController.viberMassageSent.isEmpty
+                                  ? false
+                                  : value,
                         ),
                         replyMassageItem(
                           context,
                           AppIcons.fbMessenger,
                           AppString.Messanger,
-                          "${AppString.massageSent} 0",
+                          "${AppString.massageSent} ${themeController.fbMassangerMassageSent.isEmpty ? 0 : themeController.fbMassangerMassageSent}",
+                          colorText:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              themeController.fbMassangerMassageSent.isEmpty
+                                  ? false
+                                  : value,
                         ),
                       ],
                     ),
@@ -135,13 +153,24 @@ class AutoReply extends StatelessWidget {
                           context,
                           AppIcons.line,
                           AppString.LineMessenger,
-                          "${AppString.massageSent} 0",
+                          "${AppString.massageSent} ${themeController.lineMassangerMassageSent.isEmpty ? 0 : themeController.lineMassangerMassageSent}",
+                          colorText:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              themeController.lineMassangerMassageSent.isEmpty
+                                  ? false
+                                  : value,
                         ),
                         replyMassageItem(
                           context,
                           AppIcons.discord,
                           AppString.Messanger,
-                          "${AppString.massageSent} 0",
+                          "${AppString.massageSent} ${themeController.discordMassangerMassageSent.isEmpty ? 0 : themeController.discordMassangerMassageSent}",
+                          colorText:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              themeController
+                                      .discordMassangerMassageSent.isEmpty
+                                  ? false
+                                  : value,
                         ),
                       ],
                     ),
