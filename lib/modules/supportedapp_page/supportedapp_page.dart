@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
+import 'package:whatsapp_auto/helper/shared_preference.dart';
+import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
@@ -14,6 +19,7 @@ class SupportedAppPage extends StatelessWidget {
   final ThemeController themeController = Get.find();
   final SupportedAppController supportedAppController =
       Get.put(SupportedAppController());
+  final HomePageController _homePageController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -77,25 +83,147 @@ class SupportedAppPage extends StatelessWidget {
               height: SizeUtils.verticalBlockSize * 4,
             ),
             Obx(
-              () => _enableApps(context,
-                  image: AppIcons.whatsapp,
-                  text: AppString.WhatsApp,
-                  value: supportedAppController.isSwitchWhatsApp.value,
-                  onChanged: (value) {
-                supportedAppController.isSwitchWhatsApp.value = value;
-              }),
+              () => _enableApps(
+                context,
+                image: AppIcons.whatsapp,
+                text: AppString.WhatsApp,
+                value: supportedAppController.isSwitchWhatsApp.value,
+                onChanged: (value) async {
+                  print('checkService check 0 $value');
+                  supportedAppController.isSwitchWhatsApp.value = value;
+                  AppPreference.setWhatsApp(
+                    whatsApp: _homePageController.whatsApp.value,
+                  );
+                  const platform = MethodChannel('samples.flutter.dev/battery');
+
+                  if (value == false) {
+                    _homePageController.autoMassageOnOff.value = value;
+                    _homePageController.whatsApp.value = value;
+                    _homePageController.whatsappBusiness.value = value;
+                    _homePageController.facebook.value = value;
+                    _homePageController.instagram.value = value;
+                    // _homePageController.twitter.value = value;
+                    AppPreference.setAutoResponse(autoResponse: false);
+                    await platform.invokeMethod('notificationDisable');
+                  } else {
+                    log('val ==>> ${value.toString()}');
+                    _homePageController.autoMassageOnOff.value = value;
+                    AppPreference.setAutoResponse(autoResponse: true);
+                    _homePageController.whatsApp.value = value;
+                    AppPreference.setWhatsApp(whatsApp: true);
+                    await platform.invokeMethod(
+                      'setWhatsApp',
+                      {"whatsapp": _homePageController.whatsApp.value},
+                    );
+                  }
+                  print('checkService check 1');
+                  if (value == false) {
+                    _homePageController.whatsApp.value = value;
+                    AppPreference.setWhatsApp(
+                      whatsApp: _homePageController.whatsApp.value,
+                    );
+                    platform.invokeMethod(
+                      'setWhatsApp',
+                      {"whatsapp": _homePageController.whatsApp.value},
+                    );
+                  } else {
+                    _homePageController.whatsApp.value = value;
+                    AppPreference.setWhatsApp(whatsApp: true);
+                    print('checkService check 2');
+                    try {
+                      await platform.invokeMethod(
+                        'setWhatsApp',
+                        {"whatsapp": _homePageController.whatsApp.value},
+                      );
+                    } catch (e) {
+                      print('checkService check 2 exception: $e');
+                    }
+                  }
+                  final result = await platform
+                      .invokeMethod('checkNotificationServiceEnabled');
+
+                  if (result == false) {
+                    platform.invokeMethod('serviceEnable');
+                  }
+                  print("result-=-=-=-=-==-=-==---=$result");
+                },
+              ),
             ),
             SizedBox(
               height: SizeUtils.verticalBlockSize * 2,
             ),
             Obx(
-              () => _enableApps(context,
-                  image: AppIcons.fbMessenger,
-                  text: AppString.Messanger,
-                  value: supportedAppController.isSwitchMessanger.value,
-                  onChanged: (value) {
-                supportedAppController.isSwitchMessanger.value = value;
-              }),
+              () => _enableApps(
+                context,
+                image: AppIcons.fbMessenger,
+                text: AppString.whatsAppBusi,
+                value: supportedAppController.isSwitchWhatsAppBusi.value,
+                onChanged: (value) {
+                  supportedAppController.isSwitchWhatsAppBusi.value = value;
+                  AppPreference.setWhatsAppBusi(
+                    whatsAppBusi:
+                        supportedAppController.isSwitchWhatsAppBusi.value,
+                  );
+                  const platform = MethodChannel('samples.flutter.dev/battery');
+
+                  if (value == false) {
+                    _homePageController.whatsappBusiness.value = value;
+
+                    AppPreference.setWhatsAppBusi(whatsAppBusi: false);
+                    platform.invokeMethod(
+                      'setWhatsappBusiness',
+                      {
+                        "whatsappBusiness":
+                            _homePageController.whatsappBusiness.value
+                      },
+                    );
+                  } else {
+                    _homePageController.whatsappBusiness.value = value;
+                    AppPreference.setWhatsAppBusi(whatsAppBusi: true);
+
+                    platform.invokeMethod(
+                      'setWhatsappBusiness',
+                      {
+                        "whatsappBusiness":
+                            _homePageController.whatsappBusiness.value
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+            SizedBox(
+              height: SizeUtils.verticalBlockSize * 2,
+            ),
+            Obx(
+              () => _enableApps(
+                context,
+                image: AppIcons.fbMessenger,
+                text: AppString.Messanger,
+                value: supportedAppController.isSwitchMessanger.value,
+                onChanged: (value) {
+                  supportedAppController.isSwitchMessanger.value = value;
+                  AppPreference.setFbMassager(
+                    fbMassager: supportedAppController.isSwitchMessanger.value,
+                  );
+                  const platform = MethodChannel('samples.flutter.dev/battery');
+                  if (value == false) {
+                    _homePageController.facebook.value = value;
+                    AppPreference.setFbMassager(fbMassager: false);
+                    platform.invokeMethod(
+                      'setFacebook',
+                      {"facebook": _homePageController.facebook.value},
+                    );
+                  } else {
+                    _homePageController.facebook.value = value;
+                    AppPreference.setFbMassager(fbMassager: true);
+                    platform.invokeMethod(
+                      'setFacebook',
+                      {"facebook": _homePageController.facebook.value},
+                    );
+                  }
+                },
+              ),
             ),
             SizedBox(
               height: SizeUtils.verticalBlockSize * 2,
@@ -104,13 +232,108 @@ class SupportedAppPage extends StatelessWidget {
               () => _enableApps(
                 context,
                 image: AppIcons.viber,
-                text: AppString.Viber,
-                value: supportedAppController.isSwitchViber.value,
+                text: AppString.instagram,
+                value: supportedAppController.isSwitchInstagram.value,
                 onChanged: (value) {
-                  supportedAppController.isSwitchViber.value = value;
+                  supportedAppController.isSwitchInstagram.value = value;
+                  AppPreference.setInstagram(
+                    instagram: supportedAppController.isSwitchInstagram.value,
+                  );
+                  const platform = MethodChannel('samples.flutter.dev/battery');
+                  if (value == false) {
+                    _homePageController.instagram.value = value;
+                    AppPreference.setInstagram(instagram: false);
+                    platform.invokeMethod(
+                      'setInstagramResponse',
+                      {
+                        "instagramResponse": _homePageController.instagram.value
+                      },
+                    );
+                  } else {
+                    _homePageController.instagram.value = value;
+                    AppPreference.setInstagram(instagram: true);
+                    platform.invokeMethod(
+                      'setInstagramResponse',
+                      {
+                        "instagramResponse": _homePageController.instagram.value
+                      },
+                    );
+                  }
                 },
               ),
-            )
+            ),
+            SizedBox(
+              height: SizeUtils.verticalBlockSize * 2,
+            ),
+            Obx(
+              () => _enableApps(
+                context,
+                image: AppIcons.fbMessenger,
+                text: AppString.telegram,
+                value: supportedAppController.isSwitchTelegram.value,
+                onChanged: (value) {
+                  supportedAppController.isSwitchTelegram.value = value;
+                  AppPreference.setWhatsAppBusi(
+                    whatsAppBusi: supportedAppController.isSwitchTelegram.value,
+                  );
+                  const platform = MethodChannel('samples.flutter.dev/battery');
+
+                  if (value == false) {
+                    _homePageController.telegram.value = value;
+
+                    AppPreference.setTelegram(telegram: false);
+                    platform.invokeMethod(
+                      'setTelegram',
+                      {"telegram": _homePageController.telegram.value},
+                    );
+                  } else {
+                    _homePageController.telegram.value = value;
+                    AppPreference.setTelegram(telegram: true);
+
+                    platform.invokeMethod(
+                      'setTelegram',
+                      {"telegram": _homePageController.telegram.value},
+                    );
+                  }
+                },
+              ),
+            ),
+            SizedBox(
+              height: SizeUtils.verticalBlockSize * 2,
+            ),
+            Obx(
+              () => _enableApps(
+                context,
+                image: AppIcons.fbMessenger,
+                text: AppString.twitter,
+                value: supportedAppController.isSwitchTwitter.value,
+                onChanged: (value) {
+                  supportedAppController.isSwitchTwitter.value = value;
+                  AppPreference.setTwitter(
+                    twitter: supportedAppController.isSwitchTwitter.value,
+                  );
+                  const platform = MethodChannel('samples.flutter.dev/battery');
+
+                  if (value == false) {
+                    _homePageController.twitter.value = value;
+
+                    AppPreference.setTwitter(twitter: false);
+                    platform.invokeMethod(
+                      'setTwitter',
+                      {"twitter": _homePageController.twitter.value},
+                    );
+                  } else {
+                    _homePageController.twitter.value = value;
+                    AppPreference.setTelegram(telegram: true);
+
+                    platform.invokeMethod(
+                      'setTwitter',
+                      {"twitter": _homePageController.twitter.value},
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),

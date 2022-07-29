@@ -55,8 +55,11 @@ class AppString {
   static const lastSync = "Last sync 2 mins ago";
   static const WhatsApp = "WhatsApp";
   static const Telegram = "Telegram";
-  static const Viber = "Viber";
+  static const instagram = "Instagram";
   static const Messanger = "Messanger";
+  static const whatsAppBusi = "WhatsApp Business";
+  static const telegram = "Telegram";
+  static const twitter = "Twitter";
   static const LineMessenger = "Line Messenger";
   static const Theme = "Theme";
   static const SystemDefault = "System default";

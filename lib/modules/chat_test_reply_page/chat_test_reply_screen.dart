@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +8,8 @@ import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/chat_page/data_source/chat_modal.dart';
+import 'package:whatsapp_auto/modules/chat_test_reply_page/chat_test_controller.dart';
+import 'package:whatsapp_auto/modules/create_reply_page/create_reply_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -26,19 +27,10 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
   final ThemeController themeController = Get.find();
 
   TextEditingController chatController = TextEditingController();
-  final List<ChatModel> chatModel = <ChatModel>[];
-  final ScrollController scrollController = ScrollController();
 
-  // @override
-  // void initState() {
-  //   final Iterable l = json.decode(AppPreference.getString("chatModal"));
-  //   final List<ChatModel> posts =
-  //       List<ChatModel>.from(l.map((model) => ChatModel.fromJson(model)));
-  //
-  //   chatModel.clear();
-  //   chatModel.addAll(posts);
-  //   super.initState();
-  // }
+  final ScrollController scrollController = ScrollController();
+  final CreateReplyController _createReplyController = Get.find();
+  final ChatTestController chatTestController = Get.put(ChatTestController());
 
   @override
   Widget build(BuildContext context) {
@@ -145,17 +137,59 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                               child: ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: chatModel.length,
+                                itemCount: chatTestController.chatModal.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  // print(
-                                  //     "aniation ------${scrollController.position.maxScrollExtent}");
+                                  // final current = _homeController.currentMatch
+                                  //     .value.matches?.notstarted?[index];
+                                  // final backTime = index == 0
+                                  //     ? chatTestController.chatModal[index].time
+                                  //     : chatTestController
+                                  //         .chatModal[index].time?[(index - 1)];
 
-                                  log("--------->>>>${chatModel[index].message}");
-                                  return chatModel[index].istype == "Left"
+                                  return chatTestController
+                                              .chatModal[index].istype ==
+                                          "Left"
                                       ? Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
+                                            Center(
+                                              child: Container(
+                                                // alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  color: ColorRes.textColor(
+                                                      context),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: SizeUtils
+                                                              .verticalBlockSize *
+                                                          1,
+                                                      horizontal: SizeUtils
+                                                              .horizontalBlockSize *
+                                                          3),
+                                                  child: AppText(
+                                                    // "${chatTestController.chatModal[index].time ?? DateTime.now()}",
+                                                    DateFormat("yyyy-MM-dd")
+                                                        .format(
+                                                            chatTestController
+                                                                    .chatModal[
+                                                                        index]
+                                                                    .time ??
+                                                                DateTime.now()),
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize:
+                                                        SizeUtils.fSize_14(),
+                                                    color: themeController
+                                                            .isSwitched.value
+                                                        ? AppColor.textColor
+                                                        : AppColor.whiteColor,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                             Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
@@ -176,7 +210,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     AppText(
-                                                      "${chatModel[index].message}",
+                                                      "${chatTestController.chatModal[index].message}",
                                                       fontSize:
                                                           SizeUtils.fSize_14(),
                                                       fontWeight:
@@ -191,7 +225,9 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                                     AppText(
                                                       DateFormat("hh:mm a")
                                                           .format(
-                                                              chatModel[index]
+                                                              chatTestController
+                                                                  .chatModal[
+                                                                      index]
                                                                   .time!),
                                                       textAlign: TextAlign.end,
                                                       fontSize:
@@ -235,7 +271,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     AppText(
-                                                      "${chatModel[index].message}",
+                                                      "${chatTestController.chatModal[index].message}",
                                                       fontSize:
                                                           SizeUtils.fSize_14(),
                                                       fontWeight:
@@ -250,7 +286,9 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                                     AppText(
                                                       DateFormat("hh:mm a")
                                                           .format(
-                                                              chatModel[index]
+                                                              chatTestController
+                                                                  .chatModal[
+                                                                      index]
                                                                   .time!),
                                                       fontSize:
                                                           SizeUtils.fSize_12(),
@@ -340,7 +378,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                 right: SizeUtils.horizontalBlockSize * 2),
                             child: GestureDetector(
                               onTap: () {
-                                if (chatController.text.trim() == "") {
+                                if (chatController.text == "") {
                                   chatController.clear();
                                   return;
                                 }
@@ -350,12 +388,27 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                                 _chatModelLeft.message = chatController.text;
                                 _chatModelLeft.time = DateTime.now();
 
-                                chatModel.add(_chatModelLeft);
+                                chatTestController.chatModal
+                                    .add(_chatModelLeft);
+
+                                final int index = _createReplyController
+                                    .createModal
+                                    .indexWhere((element) {
+                                  return chatController.text ==
+                                      element.inComingKeyword;
+                                });
+
+                                final ChatModel _chatModelLeft1 = ChatModel();
+                                _chatModelLeft1.istype = "Left";
+                                _chatModelLeft1.message = _createReplyController
+                                    .createModal[index].replyMassage;
+                                _chatModelLeft1.time = DateTime.now();
+                                chatTestController.chatModal
+                                    .add(_chatModelLeft1);
                                 chatController.clear();
 
                                 save();
                                 scrollUp();
-                                setState(() {});
                               },
                               child: CircleAvatar(
                                 radius: SizeUtils.horizontalBlockSize * 7,
@@ -371,7 +424,7 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -379,13 +432,16 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
   }
 
   void save() {
-    AppPreference.setString("chatModal", json.encode(chatModel));
+    AppPreference.setString(
+      "chatModal",
+      json.encode(chatTestController.chatModal),
+    );
     final Iterable l = json.decode(AppPreference.getString("chatModal"));
     final List<ChatModel> posts =
         List<ChatModel>.from(l.map((model) => ChatModel.fromJson(model)));
 
-    chatModel.clear();
-    chatModel.addAll(posts);
+    chatTestController.chatModal.clear();
+    chatTestController.chatModal.addAll(posts);
   }
 
   void scrollUp() {
@@ -395,6 +451,6 @@ class _ChatTestReplyPageState extends State<ChatTestReplyPage> {
       curve: Curves.easeInOut,
     );
     print("aniation ------${scrollController.position.maxScrollExtent}");
-    setState(() {});
+    // setState(() {});
   }
 }

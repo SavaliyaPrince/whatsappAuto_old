@@ -130,7 +130,9 @@ class SettingPage extends StatelessWidget {
             context,
             AppIcons.inviteFriends,
             AppString.InviteFriends,
-            onTap: () {},
+            onTap: () async {
+              settingController.shareNoteLink(title: "Test");
+            },
           ),
         ],
       ),

@@ -2,6 +2,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreference {
   static late SharedPreferences _prefs;
+  static const _whatsApp = 'whatsApp';
+  static const _autoResponse = 'autoResponse';
+  static const _fbMassager = 'fbMassager';
+  static const _instagram = 'instagram';
+  static const _whatsAppBusi = 'whatsAppBusi';
+  static const _telegram = 'telegram';
+  static const _twitter = 'twitter';
 
   static Future initMySharedPreferences() async {
     _prefs = await SharedPreferences.getInstance();
@@ -60,8 +67,76 @@ class AppPreference {
     return value ?? "";
   }
 
+  ///
+  static Future<void> setWhatsApp({required bool whatsApp}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_whatsApp, whatsApp);
+  }
 
+  static Future<void> setAutoResponse({required bool autoResponse}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_autoResponse, autoResponse);
+  }
 
+  static Future<void> setFbMassager({required bool fbMassager}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_fbMassager, fbMassager);
+  }
+
+  static Future<void> setInstagram({required bool instagram}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_instagram, instagram);
+  }
+
+  static Future<void> setWhatsAppBusi({required bool whatsAppBusi}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_whatsAppBusi, whatsAppBusi);
+  }
+
+  static Future<void> setTelegram({required bool telegram}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_telegram, telegram);
+  }
+
+  static Future<void> setTwitter({required bool twitter}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_twitter, twitter);
+  }
+
+  static bool get whatsApp {
+    final bool value = _prefs.getBool(_whatsApp) ?? false;
+    return value;
+  }
+
+  static bool get autoResponse {
+    final bool value = _prefs.getBool(_autoResponse) ?? false;
+    return value;
+  }
+
+  static bool get fbMassager {
+    final bool value = _prefs.getBool(_fbMassager) ?? false;
+    return value;
+  }
+
+  static bool get instagrams {
+    final bool value = _prefs.getBool(_instagram) ?? false;
+    return value;
+  }
+
+  static bool get whatsAppBusi {
+    final bool value = _prefs.getBool(_whatsAppBusi) ?? false;
+    return value;
+  }
+
+  static bool get telegram {
+    final bool value = _prefs.getBool(_telegram) ?? false;
+    return value;
+  }
+
+  static bool get twitter {
+    final bool value = _prefs.getBool(_twitter) ?? false;
+    return value;
+  }
 
 // static Future setUserToken(String token) async {
 //   await _prefs.setString(Constants.keyToken, token);
