@@ -429,6 +429,20 @@ class MainActivity : FlutterActivity() {
                 Log.d("tag", "twitter === >>>> " + language)
             }
 
+            if (call.method == "setTelegram") {
+                var text: Boolean? = call.argument<Boolean>("telegram");
+                val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+                if (text == true) {
+                    editor.putBoolean("org.telegram.messenger", true);
+                } else {
+                    editor.putBoolean("org.telegram.messenger", false);
+                }
+                editor.apply()
+                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+                var language = get.getBoolean("org.telegram.messenger", false)
+                Log.d("tag", "telegram === >>>> " + language)
+            }
+
             if (call.method == "addNewMessage") {
                 val message = call.argument<String>("message");
                 val replyMessage = call.argument<String>("replyMessage");
@@ -439,6 +453,13 @@ class MainActivity : FlutterActivity() {
                 var botMessage = get.getString("botMessage-" + message, "")
                 Log.d("tag", "newCreatedMessage === >>>> " + botMessage)
             }
+
+//            if (call.method == "getMessageCount") {
+//
+//                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+//                var messageCount = get.getInt("messageCount", 0)
+//                result.success(messageCount.toString())
+//            }
 
 //            }
 

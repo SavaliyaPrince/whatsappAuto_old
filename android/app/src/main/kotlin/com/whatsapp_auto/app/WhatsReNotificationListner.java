@@ -62,6 +62,8 @@ WhatsReNotificationListner extends NotificationListenerService {
     // Constants
     private static final int ID_SERVICE = 101;
 
+    public int replyCount = 0;
+
     public List<Long> waLastRawId = new ArrayList<>();
 
     @Override
@@ -130,6 +132,7 @@ WhatsReNotificationListner extends NotificationListenerService {
         public static final String INSTA_PACKNAME = "com.instagram.android";
         public static final String TWITTER_PACKNAME = "com.twitter.android";
         public static final String FACEBOOK_PACKNAME = "com.facebook.orca";
+        public static final String TELEGRAM_PACKNAME = "org.telegram.messenger";
     }
 
     public static final class InterceptedNotificationCode {
@@ -222,6 +225,8 @@ WhatsReNotificationListner extends NotificationListenerService {
                         }
                         return;
                     }
+                    android.util.Log.d("TAG~~~", "onNotificationPosted: " + prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "") + " : " + secUser);
+//                    isReplyEnable = true;
                     if (!prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
                         isReplyEnable = true;
                         appendLog("----------isReplyEnable=========" + isReplyEnable);
@@ -290,17 +295,39 @@ WhatsReNotificationListner extends NotificationListenerService {
                 }
                 Log.d("TAG", "id~~>41");
                 break;
+            case ApplicationPackageNames.TELEGRAM_PACKNAME:
+                if (!prefs.getBoolean(ApplicationPackageNames.TELEGRAM_PACKNAME, false)) {
+                    return;
+                }
+                if (sender != null) {
+                    isReplyEnable = true;
+                }
+                Log.d("TAG", "id~~>50");
+                break;
+//            case ApplicationPackageNames.INSTA_PACKNAME:
+//                if (!prefs.getBoolean(ApplicationPackageNames.INSTA_PACKNAME, false)) {
+//                    return;
+//                }
+//                if (sender != null) {
+//                    isReplyEnable = true;
+//                }
+//                Log.d("TAG", "id~~>60");
+//                break;
 
         }
 
         if (isReplyEnable) {
+
+            replyCount++;
             appendLog("sender----:" + (sender));
             appendLog("message---: " + (message));
+            appendLog("replyCount---: " + (replyCount));
 
             String key = "botMessage-" + message.toLowerCase();
             String repliedMessage = prefs.getString(key, "Hi");
 
-
+            appendLog("repliedMessage---: " + repliedMessage);
+            appendLog("key----------: " + key);
 
             replayNotification(sbn, bundle, repliedMessage);
 

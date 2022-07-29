@@ -5,7 +5,10 @@ class AppPreference {
   static const _whatsApp = 'whatsApp';
   static const _autoResponse = 'autoResponse';
   static const _fbMassager = 'fbMassager';
-  static const _viber = 'viber';
+  static const _instagram = 'instagram';
+  static const _whatsAppBusi = 'whatsAppBusi';
+  static const _telegram = 'telegram';
+  static const _twitter = 'twitter';
 
   static Future initMySharedPreferences() async {
     _prefs = await SharedPreferences.getInstance();
@@ -80,9 +83,24 @@ class AppPreference {
     prefs.setBool(_fbMassager, fbMassager);
   }
 
-  static Future<void> setViber({required bool viber}) async {
+  static Future<void> setInstagram({required bool instagram}) async {
     final SharedPreferences prefs = _prefs;
-    prefs.setBool(_viber, viber);
+    prefs.setBool(_instagram, instagram);
+  }
+
+  static Future<void> setWhatsAppBusi({required bool whatsAppBusi}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_whatsAppBusi, whatsAppBusi);
+  }
+
+  static Future<void> setTelegram({required bool telegram}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_telegram, telegram);
+  }
+
+  static Future<void> setTwitter({required bool twitter}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_twitter, twitter);
   }
 
   static bool get whatsApp {
@@ -100,8 +118,23 @@ class AppPreference {
     return value;
   }
 
-  static bool get viber {
-    final bool value = _prefs.getBool(_viber) ?? false;
+  static bool get instagrams {
+    final bool value = _prefs.getBool(_instagram) ?? false;
+    return value;
+  }
+
+  static bool get whatsAppBusi {
+    final bool value = _prefs.getBool(_whatsAppBusi) ?? false;
+    return value;
+  }
+
+  static bool get telegram {
+    final bool value = _prefs.getBool(_telegram) ?? false;
+    return value;
+  }
+
+  static bool get twitter {
+    final bool value = _prefs.getBool(_twitter) ?? false;
     return value;
   }
 

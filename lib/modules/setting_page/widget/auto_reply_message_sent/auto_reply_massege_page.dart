@@ -116,7 +116,7 @@ class AutoReply extends StatelessWidget {
                         replyMassageItem(
                           context,
                           AppIcons.viber,
-                          AppString.Viber,
+                          AppString.instagram,
                           "${AppString.massageSent} 0",
                         ),
                         replyMassageItem(
@@ -157,10 +157,10 @@ class AutoReply extends StatelessWidget {
 
   Widget replyMassageItem(
     BuildContext context,
-    final String icon,
-    final String iconName,
-    final String massageSent, {
-    final bool colorText = false,
+    String icon,
+    String iconName,
+    String massageSent, {
+    bool colorText = false,
   }) {
     return Container(
       width: SizeUtils.horizontalBlockSize * 43,
