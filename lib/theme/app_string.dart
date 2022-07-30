@@ -56,7 +56,8 @@ class AppString {
   static const WhatsApp = "WhatsApp";
   static const Telegram = "Telegram";
   static const instagram = "Instagram";
-  static const Messanger = "Messanger";
+  static const massanger = "Massanger";
+  static const whatsappBusiness = "Whatsapp Business";
   static const whatsAppBusi = "WhatsApp Business";
   static const telegram = "Telegram";
   static const twitter = "Twitter";

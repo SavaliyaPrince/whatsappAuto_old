@@ -155,8 +155,8 @@ class SupportedAppPage extends StatelessWidget {
             Obx(
               () => _enableApps(
                 context,
-                image: AppIcons.fbMessenger,
-                text: AppString.whatsAppBusi,
+                image: AppIcons.whatsappBusiness,
+                text: AppString.whatsappBusiness,
                 value: supportedAppController.isSwitchWhatsAppBusi.value,
                 onChanged: (value) {
                   supportedAppController.isSwitchWhatsAppBusi.value = value;
@@ -199,7 +199,7 @@ class SupportedAppPage extends StatelessWidget {
               () => _enableApps(
                 context,
                 image: AppIcons.fbMessenger,
-                text: AppString.Messanger,
+                text: AppString.massanger,
                 value: supportedAppController.isSwitchMessanger.value,
                 onChanged: (value) {
                   supportedAppController.isSwitchMessanger.value = value;
@@ -231,7 +231,7 @@ class SupportedAppPage extends StatelessWidget {
             Obx(
               () => _enableApps(
                 context,
-                image: AppIcons.viber,
+                image: AppIcons.instagram,
                 text: AppString.instagram,
                 value: supportedAppController.isSwitchInstagram.value,
                 onChanged: (value) {
@@ -268,7 +268,7 @@ class SupportedAppPage extends StatelessWidget {
             Obx(
               () => _enableApps(
                 context,
-                image: AppIcons.fbMessenger,
+                image: AppIcons.telegram,
                 text: AppString.telegram,
                 value: supportedAppController.isSwitchTelegram.value,
                 onChanged: (value) {
@@ -304,7 +304,7 @@ class SupportedAppPage extends StatelessWidget {
             Obx(
               () => _enableApps(
                 context,
-                image: AppIcons.fbMessenger,
+                image: AppIcons.twitter,
                 text: AppString.twitter,
                 value: supportedAppController.isSwitchTwitter.value,
                 onChanged: (value) {
