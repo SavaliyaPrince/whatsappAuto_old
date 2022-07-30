@@ -38,7 +38,7 @@ class ThemeController extends GetxController {
   }
 
   Future<String> getWhatsappMessageCount() async {
-    print("------000000--------");
+    print("-----instagramResponse-000000--------");
 
     const platform = MethodChannel('samples.flutter.dev/battery');
     final String result = await platform.invokeMethod('getMessageCount');
