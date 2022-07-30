@@ -66,14 +66,14 @@ class SettingPage extends StatelessWidget {
             AppString.upgrade,
             onTap: () {},
           ),
-          _settingItem(
-            context,
-            AppIcons.advance,
-            AppString.advance,
-            onTap: () {
-              Navigation.pushNamed(Routes.asPage);
-            },
-          ),
+          // _settingItem(
+          //   context,
+          //   AppIcons.advance,
+          //   AppString.advance,
+          //   onTap: () {
+          //     Navigation.pushNamed(Routes.asPage);
+          //   },
+          // ),
           _settingItem(
             context,
             AppIcons.appearance,
