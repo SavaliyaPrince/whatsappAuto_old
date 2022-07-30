@@ -22,9 +22,7 @@ class SettingPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.2,
 
-        backgroundColor: themeController.isSwitched.value
-            ? AppColor.darkThem.withOpacity(0.2)
-            : AppColor.whiteColor,
+        backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
         // centerTitle: true,
         leadingWidth: SizeUtils.fSize_40(),
         leading: GestureDetector(
@@ -35,17 +33,13 @@ class SettingPage extends StatelessWidget {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
             child: Image.asset(
               AppIcons.backIcon,
-              color: themeController.isSwitched.value
-                  ? AppColor.whiteColor
-                  : AppColor.backIconColor,
+              color: themeController.isSwitched.value ? AppColor.whiteColor : Colors.black,
             ),
           ),
         ),
         title: AppText(
           AppString.setting,
-          color: themeController.isSwitched.value
-              ? AppColor.whiteColor
-              : AppColor.backIconColor,
+          color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -105,6 +99,14 @@ class SettingPage extends StatelessWidget {
                 },
               ),
             ),
+          ),
+          _settingItem(
+            context,
+            AppIcons.profileContact,
+            AppString.contact,
+            onTap: () {
+              Navigation.pushNamed(Routes.contactPage);
+            },
           ),
           _settingItem(
             context,

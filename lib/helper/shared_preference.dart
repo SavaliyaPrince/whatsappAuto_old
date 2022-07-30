@@ -138,6 +138,11 @@ class AppPreference {
     return value;
   }
 
+
+    // final bool value = _prefs.getBool(_everyone) ?? false;
+    // return value;
+
+
 // static Future setUserToken(String token) async {
 //   await _prefs.setString(Constants.keyToken, token);
 // }

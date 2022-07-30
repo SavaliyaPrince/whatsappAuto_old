@@ -27,6 +27,7 @@ class AppIcons {
   static const upgrade = "${icons}upgrade.png";
   static const advance = "${icons}advance_setting.png";
   static const appearance = "${icons}Appearance.png";
+  static const profileContact = "${icons}profilecircle.png";
   static const notification = "${icons}notification.png";
   static const privacy = "${icons}Privacy.png";
   static const help = "${icons}help.png";
