@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/demo_controller.dart';
 
 class GroupController extends GetxController {
@@ -7,6 +8,19 @@ class GroupController extends GetxController {
   RxBool isSwitchExpectList = false.obs;
   RxList<String> groupContact = <String>[].obs;
   ContactServiceController demoController = Get.find();
+
+  @override
+  void onInit() {
+    isSwitchAllGroups.value = AppPreference.getBoolean("switchAllGroups");
+    print("switchAllGroups  ----->:${AppPreference.getBoolean("switchAllGroups")}");
+
+    isSwitchGroupsList.value = AppPreference.getBoolean("isSwitchGroupsList");
+    print("isSwitchGroupsList  ----->:${AppPreference.getBoolean("isSwitchGroupsList")}");
+
+    isSwitchExpectList.value = AppPreference.getBoolean('isSwitchExpectList');
+    print("isSwitchExpectList  ----->:${AppPreference.getBoolean("isSwitchExpectList")}");
+    super.onInit();
+  }
 
 
   // Future<void> addToSP(List<List<SelectedContactModel>> tList) async {
@@ -23,12 +37,4 @@ class GroupController extends GetxController {
   //         l.map((models) => SelectedContactModel.fromJson(models)),
   //       );
   // }
-
-
-  @override
-  void onInit() {
-    // getPersons();
-    // print("---00--");
-    super.onInit();
-  }
 }

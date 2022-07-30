@@ -461,6 +461,17 @@ class MainActivity : FlutterActivity() {
                 result.success(messageCount.toString())
 
             }
+            if (call.method == "autoReplyTo") {
+                val contactList = call.argument<String>("contactList");
+                Log.d("tag", "contactList === >>>> " + contactList)
+
+                val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+                editor.putString("contactString-" + contactList,"")
+                editor.apply()
+                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+                var botMessage = get.getString("botMessage-" + contactList, "")
+                Log.d("tag", "newCreatedMessage === >>>> " + botMessage)
+            }
 
 //            }
 

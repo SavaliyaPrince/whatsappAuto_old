@@ -21,6 +21,8 @@ class ContactListPage extends StatelessWidget {
   final GroupController groupController = Get.find();
   RxBool val = false.obs;
 
+
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -115,7 +117,7 @@ class ContactListPage extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: AppText(
-                                          contact.displayName![0],
+                                          contact.displayName![0].toUpperCase(),
                                           fontWeight: FontWeight.w600,
                                           color: AppColor.whiteColor,
                                         ),
@@ -131,7 +133,7 @@ class ContactListPage extends StatelessWidget {
                                     width: SizeUtils.horizontalBlockSize * 5,
                                   ),
                                   AppText(
-                                    contact.displayName.toString(),
+                                    contact.displayName.toString().toString().toLowerCase(),
                                     fontWeight: FontWeight.w400,
                                     color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
                                     fontSize: SizeUtils.fSize_14(),
