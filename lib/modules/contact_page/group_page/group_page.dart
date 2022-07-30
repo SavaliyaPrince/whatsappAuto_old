@@ -4,6 +4,7 @@ import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_list_page/demo_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/group_page/group_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
@@ -12,8 +13,9 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 
 class GroupsSettingsPage extends StatelessWidget {
   final ThemeController themeController = Get.find();
-  final GroupController groupController = Get.put(GroupController());
+  final GroupController groupController = Get.find();
   final ContactListController contactListController = Get.find();
+  final ContactServiceController demoController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,8 @@ class GroupsSettingsPage extends StatelessWidget {
                   value: groupController.isSwitchAllGroups.value,
                   onChanged: (value) {
                     groupController.isSwitchAllGroups.value = value;
+                    groupController.isSwitchGroupsList.value = false;
+                    groupController.isSwitchExpectList.value= false;
                   },
                 ),
                 SizedBox(
@@ -89,6 +93,8 @@ class GroupsSettingsPage extends StatelessWidget {
                   value: groupController.isSwitchGroupsList.value,
                   onChanged: (value) {
                     groupController.isSwitchGroupsList.value = value;
+                    groupController.isSwitchAllGroups.value = false;
+                    groupController.isSwitchExpectList.value = false;
                   },
                 ),
                 SizedBox(
@@ -100,6 +106,8 @@ class GroupsSettingsPage extends StatelessWidget {
                   value: groupController.isSwitchExpectList.value,
                   onChanged: (value) {
                     groupController.isSwitchExpectList.value = value;
+                    groupController.isSwitchGroupsList.value = false;
+                    groupController.isSwitchAllGroups.value = false;
                   },
                 ),
                 SizedBox(
@@ -118,7 +126,7 @@ class GroupsSettingsPage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        contactListController.getContacts();
+                        demoController.getContacts1();
                       },
                       child: Container(
                         width: SizeUtils.horizontalBlockSize * 13.3,
@@ -148,8 +156,10 @@ class GroupsSettingsPage extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 3,
+                  itemCount: demoController.selectedContactModel.length,
                   itemBuilder: (context, index) {
+                    final selectedContact = demoController
+                        .selectedContactModel[index];
                     return Padding(
                       padding: EdgeInsets.only(
                         top: SizeUtils.verticalBlockSize * 1,
@@ -158,20 +168,27 @@ class GroupsSettingsPage extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.red),
-                            child: Image.asset(
-                              AssetsPath.profile,
-                              width: SizeUtils.horizontalBlockSize * 7.6,
+                            Container(
+                              width:
+                              SizeUtils.horizontalBlockSize * 7.6,
                               height: SizeUtils.verticalBlockSize * 4.5,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColor.primaryColor,
+                              ),
+                              child: Center(
+                                child: AppText(
+                                  selectedContact.displayName![0],
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.whiteColor,
+                                ),
+                              ),
                             ),
-                          ),
                           SizedBox(
                             width: SizeUtils.horizontalBlockSize * 5,
                           ),
                           AppText(
-                            'Hello contacts',
+                            selectedContact.displayName.toString(),
                             fontWeight: FontWeight.w400,
                             color: themeController.isSwitched.value
                                 ? AppColor.whiteColor
@@ -179,11 +196,16 @@ class GroupsSettingsPage extends StatelessWidget {
                             fontSize: SizeUtils.fSize_14(),
                           ),
                           const Spacer(),
-                          Icon(
-                            Icons.close,
-                            color: themeController.isSwitched.value
-                                ? AppColor.whiteColor.withOpacity(0.5)
-                                : AppColor.textColor.withOpacity(0.5),
+                          GestureDetector(
+                            onTap: () async {
+                                   demoController.selectedContactModel.removeAt(index);
+                            },
+                            child: Icon(
+                              Icons.close,
+                              color: themeController.isSwitched.value
+                                  ? AppColor.whiteColor.withOpacity(0.5)
+                                  : AppColor.textColor.withOpacity(0.5),
+                            ),
                           ),
                         ],
                       ),

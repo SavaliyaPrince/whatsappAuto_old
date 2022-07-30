@@ -198,6 +198,7 @@ WhatsReNotificationListner extends NotificationListenerService {
         String sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
         String message = "" + bundle.getString(InterceptedNotificationParseCode.ANDROID_TEXT);
 
+
 //        Log.d("message-=-=-=-111111=-=-=--==-" + message);
         Log.d("TAG", "id~~>2");
         if (sender != null && sender.equals(" ")) {
@@ -334,6 +335,17 @@ WhatsReNotificationListner extends NotificationListenerService {
 
         if (isReplyEnable) {
 
+//            SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+//            String autoReplyType = prefs.getBoolean("autoReplyTo", new ArrayList<>);
+//            List allCointacts = prefs.getBoolean("allContacts", new ArrayList<>);
+//
+//            if (autoReplyType == "myContacts") {
+//                if (!allCointacts.contrains(sender)) {
+//                    return;
+//                }
+//            }
+
+//            replyCount++;
             appendLog("sender----:" + (sender));
             appendLog("message---: " + (message));
 
