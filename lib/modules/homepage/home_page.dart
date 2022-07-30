@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -77,7 +76,7 @@ class _HomePageScreenState extends State<HomePageScreen>
             elevation: 0.5,
             backgroundColor: themeController.isSwitched.value
                 ? AppColor.darkThem.withOpacity(0.2)
-                : AppColor.whiteColor,
+                : AppColor.homeScreen,
             automaticallyImplyLeading: false,
             centerTitle: true,
             title: AppText(
@@ -249,18 +248,18 @@ class _HomePageScreenState extends State<HomePageScreen>
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.testReplyTitle,
-                          //   subtitle: AppString.testReplySubTile,
-                          //   image: AssetsPath.messages,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.chatTestReply);
-                          //   },
-                          // ),
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.testReplyTitle,
+                            subtitle: AppString.testReplySubTile,
+                            image: AssetsPath.messages,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.chatTestReply);
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
                           customCategoriesBox(
                             context,
                             titleText: AppString.contactUsTitle,

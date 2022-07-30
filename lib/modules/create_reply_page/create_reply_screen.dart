@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
@@ -54,20 +55,20 @@ class _CreateReplyState extends State<CreateReply> {
             fontWeight: FontWeight.w600,
             color: ColorRes.textColor(context),
           ),
-          actions: [
-            Padding(
-              padding:
-                  EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-              child: GestureDetector(
-                onTap: () {},
-                child: Image.asset(
-                  AppIcons.more,
-                  width: SizeUtils.fSize_24(),
-                  color: ColorRes.appBarBackground(context),
-                ),
-              ),
-            ),
-          ],
+          // actions: [
+          //   Padding(
+          //     padding:
+          //         EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
+          //     child: GestureDetector(
+          //       onTap: () {},
+          //       child: Image.asset(
+          //         AppIcons.more,
+          //         width: SizeUtils.fSize_24(),
+          //         color: ColorRes.appBarBackground(context),
+          //       ),
+          //     ),
+          //   ),
+          // ],
         ),
         body: Stack(
           alignment: Alignment.bottomCenter,
@@ -81,63 +82,81 @@ class _CreateReplyState extends State<CreateReply> {
                       padding: EdgeInsets.symmetric(
                           vertical: SizeUtils.verticalBlockSize * 2),
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            left: SizeUtils.horizontalBlockSize * 4,
-                            right: SizeUtils.horizontalBlockSize * 4,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        return Slidable(
+                          direction: Axis.horizontal,
+                          key: const ValueKey(0),
+                          endActionPane: ActionPane(
+                            motion: const ScrollMotion(),
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: AppColor.primaryColor
-                                            .withOpacity(0.2)),
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        vertical:
-                                            SizeUtils.verticalBlockSize * 1,
-                                        horizontal:
-                                            SizeUtils.horizontalBlockSize * 3,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          AppText(
-                                            "${_createReplyController.createModal[index].inComingKeyword}",
-                                            color: ColorRes.textColor(context),
-                                            fontSize: SizeUtils.fSize_16(),
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                          SizedBox(
-                                            height:
-                                                SizeUtils.verticalBlockSize *
-                                                    0.5,
-                                          ),
-                                          AppText(
-                                            DateFormat("hh:mm a").format(
-                                                _createReplyController
-                                                        .createModal[index]
-                                                        .time ??
-                                                    DateTime.now()),
-                                            textAlign: TextAlign.end,
-                                            fontSize: SizeUtils.fSize_10(),
-                                            fontWeight: FontWeight.w500,
-                                            color: ColorRes.textColor(context),
-                                          ),
-                                        ],
-                                      ),
+                              SlidableAction(
+                                onPressed: (value) {
+                                  setState(() {
+                                    _createReplyController.createModal
+                                        .removeAt(index);
+                                  });
+                                },
+                                backgroundColor: AppColor.primaryColor,
+                                foregroundColor: Colors.white,
+                                icon: Icons.delete,
+                                label: 'Delete',
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: SizeUtils.horizontalBlockSize * 4,
+                              right: SizeUtils.horizontalBlockSize * 4,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        AppColor.primaryColor.withOpacity(0.2),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: SizeUtils.verticalBlockSize * 1,
+                                      horizontal:
+                                          SizeUtils.horizontalBlockSize * 3,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        AppText(
+                                          "${_createReplyController.createModal[index].inComingKeyword}",
+                                          color: ColorRes.textColor(context),
+                                          fontSize: SizeUtils.fSize_16(),
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        SizedBox(
+                                          height:
+                                              SizeUtils.verticalBlockSize * 0.5,
+                                        ),
+                                        AppText(
+                                          DateFormat("hh:mm a").format(
+                                              _createReplyController
+                                                      .createModal[index]
+                                                      .time ??
+                                                  DateTime.now()),
+                                          textAlign: TextAlign.end,
+                                          fontSize: SizeUtils.fSize_10(),
+                                          fontWeight: FontWeight.w500,
+                                          color: ColorRes.textColor(context),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: SizeUtils.verticalBlockSize * 1,
-                                  ),
-                                  Container(
+                                ),
+                                SizedBox(
+                                  height: SizeUtils.verticalBlockSize * 1,
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(8),
                                         color: AppColor.primaryColor
@@ -179,28 +198,15 @@ class _CreateReplyState extends State<CreateReply> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                      height: SizeUtils.verticalBlockSize * 1),
-                                  Divider(
-                                    thickness: 0.2,
-                                    color: ColorRes.textColor(context),
-                                  )
-                                ],
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _createReplyController.createModal
-                                        .removeAt(index);
-                                  });
-                                },
-                                child: Icon(
-                                  Icons.close,
-                                  color: ColorRes.textColor(context)
-                                      .withOpacity(0.5),
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                    height: SizeUtils.verticalBlockSize * 1),
+                                // Divider(
+                                //   thickness: 0.2,
+                                //   color: ColorRes.textColor(context),
+                                // )
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -258,4 +264,19 @@ class _CreateReplyState extends State<CreateReply> {
       ),
     );
   }
+
+  // InkWell(
+  // onTap: () {
+  // setState(() {
+  // _createReplyController.createModal
+  //     .removeAt(index);
+  // });
+  // },
+  // child: Icon(
+  // Icons.close,
+  // color: ColorRes.textColor(context)
+  //     .withOpacity(0.5),
+  // ),
+  // ),
+
 }
