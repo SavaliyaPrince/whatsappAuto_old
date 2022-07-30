@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
@@ -22,7 +24,9 @@ class SettingPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0.2,
 
-        backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
+        backgroundColor: themeController.isSwitched.value
+            ? AppColor.darkThem.withOpacity(0.2)
+            : AppColor.whiteColor,
         // centerTitle: true,
         leadingWidth: SizeUtils.fSize_40(),
         leading: GestureDetector(
@@ -33,101 +37,181 @@ class SettingPage extends StatelessWidget {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
             child: Image.asset(
               AppIcons.backIcon,
-              color: themeController.isSwitched.value ? AppColor.whiteColor : Colors.black,
+              color: themeController.isSwitched.value
+                  ? AppColor.whiteColor
+                  : Colors.black,
             ),
           ),
         ),
         title: AppText(
           AppString.setting,
-          color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
+          color: themeController.isSwitched.value
+              ? AppColor.whiteColor
+              : AppColor.backIconColor,
           fontWeight: FontWeight.w600,
         ),
       ),
       body: Column(
         children: [
           SizedBox(height: SizeUtils.verticalBlockSize * 1),
-          _settingItem(
-            context,
-            AppIcons.autoReply,
-            AppString.autoReply,
-            onTap: () {
-              Navigation.pushNamed(Routes.autoReplyMassage);
-            },
-          ),
-          _settingItem(
-            context,
-            AppIcons.upgrade,
-            AppString.upgrade,
-            onTap: () {},
-          ),
-          // _settingItem(
-          //   context,
-          //   AppIcons.advance,
-          //   AppString.advance,
-          //   onTap: () {
-          //     Navigation.pushNamed(Routes.asPage);
-          //   },
-          // ),
-          _settingItem(
-            context,
-            AppIcons.appearance,
-            AppString.Appearance,
-            onTap: () {
-              Navigation.pushNamed(Routes.appearance);
-            },
-          ),
-          ListTile(
-            horizontalTitleGap: SizeUtils.horizontalBlockSize * 1,
-            visualDensity: const VisualDensity(vertical: -3),
-            leading: Image.asset(
-              AppIcons.notification,
-              width: SizeUtils.fSize_24(),
-              color: ColorRes.textColor(context),
-            ),
-            title: AppText(
-              AppString.Notification,
-              color: ColorRes.textColor(context),
-              fontWeight: FontWeight.w600,
-              fontSize: SizeUtils.fSize_14(),
-            ),
-            trailing: Obx(
-              () => Switch(
-                activeColor: AppColor.primaryColor,
-                value: settingController.isSwitch.value,
-                onChanged: (value) {
-                  settingController.isSwitch.value = value;
-                },
-              ),
-            ),
-          ),
-          _settingItem(
-            context,
-            AppIcons.profileContact,
-            AppString.contact,
-            onTap: () {
-              Navigation.pushNamed(Routes.contactPage);
-            },
-          ),
-          _settingItem(
-            context,
-            AppIcons.privacy,
-            AppString.Privacy,
-            onTap: () {},
-          ),
-          _settingItem(
-            context,
-            AppIcons.help,
-            AppString.Help,
-            onTap: () {},
-          ),
-          _settingItem(
-            context,
-            AppIcons.inviteFriends,
-            AppString.InviteFriends,
-            onTap: () async {
-              settingController.shareNoteLink(title: "Test");
-            },
-          ),
+          if (Platform.isIOS)
+            Column(
+              children: [
+                _settingItem(
+                  context,
+                  AppIcons.upgrade,
+                  AppString.upgrade,
+                  onTap: () {},
+                ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.advance,
+                //   AppString.advance,
+                //   onTap: () {
+                //     Navigation.pushNamed(Routes.asPage);
+                //   },
+                // ),
+                _settingItem(
+                  context,
+                  AppIcons.appearance,
+                  AppString.Appearance,
+                  onTap: () {
+                    Navigation.pushNamed(Routes.appearance);
+                  },
+                ),
+                ListTile(
+                  horizontalTitleGap: SizeUtils.horizontalBlockSize * 1,
+                  visualDensity: const VisualDensity(vertical: -3),
+                  leading: Image.asset(
+                    AppIcons.notification,
+                    width: SizeUtils.fSize_24(),
+                    color: ColorRes.textColor(context),
+                  ),
+                  title: AppText(
+                    AppString.Notification,
+                    color: ColorRes.textColor(context),
+                    fontWeight: FontWeight.w600,
+                    fontSize: SizeUtils.fSize_14(),
+                  ),
+                  trailing: Obx(
+                    () => Switch(
+                      activeColor: AppColor.primaryColor,
+                      value: settingController.isSwitch.value,
+                      onChanged: (value) {
+                        settingController.isSwitch.value = value;
+                      },
+                    ),
+                  ),
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.privacy,
+                  AppString.Privacy,
+                  onTap: () {},
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.help,
+                  AppString.Help,
+                  onTap: () {},
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.inviteFriends,
+                  AppString.InviteFriends,
+                  onTap: () async {
+                    settingController.shareNoteLink(title: "Test");
+                  },
+                )
+              ],
+            )
+          else
+            Column(
+              children: [
+                _settingItem(
+                  context,
+                  AppIcons.autoReply,
+                  AppString.autoReply,
+                  onTap: () {
+                    Navigation.pushNamed(Routes.autoReplyMassage);
+                  },
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.upgrade,
+                  AppString.upgrade,
+                  onTap: () {},
+                ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.advance,
+                //   AppString.advance,
+                //   onTap: () {
+                //     Navigation.pushNamed(Routes.asPage);
+                //   },
+                // ),
+                _settingItem(
+                  context,
+                  AppIcons.appearance,
+                  AppString.Appearance,
+                  onTap: () {
+                    Navigation.pushNamed(Routes.appearance);
+                  },
+                ),
+                ListTile(
+                  horizontalTitleGap: SizeUtils.horizontalBlockSize * 1,
+                  visualDensity: const VisualDensity(vertical: -3),
+                  leading: Image.asset(
+                    AppIcons.notification,
+                    width: SizeUtils.fSize_24(),
+                    color: ColorRes.textColor(context),
+                  ),
+                  title: AppText(
+                    AppString.Notification,
+                    color: ColorRes.textColor(context),
+                    fontWeight: FontWeight.w600,
+                    fontSize: SizeUtils.fSize_14(),
+                  ),
+                  trailing: Obx(
+                    () => Switch(
+                      activeColor: AppColor.primaryColor,
+                      value: settingController.isSwitch.value,
+                      onChanged: (value) {
+                        settingController.isSwitch.value = value;
+                      },
+                    ),
+                  ),
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.profileContact,
+                  AppString.contact,
+                  onTap: () {
+                    Navigation.pushNamed(Routes.contactPage);
+                  },
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.privacy,
+                  AppString.Privacy,
+                  onTap: () {},
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.help,
+                  AppString.Help,
+                  onTap: () {},
+                ),
+                _settingItem(
+                  context,
+                  AppIcons.inviteFriends,
+                  AppString.InviteFriends,
+                  onTap: () async {
+                    settingController.shareNoteLink(title: "Test");
+                  },
+                ),
+              ],
+            )
         ],
       ),
     );
