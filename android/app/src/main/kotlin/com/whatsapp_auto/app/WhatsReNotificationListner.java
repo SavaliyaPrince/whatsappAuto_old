@@ -41,6 +41,7 @@ import java.util.Map;
 
 import com.whatsapp_auto.app.BuildConfig;
 import com.whatsapp_auto.app.R;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -55,7 +56,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class
- WhatsReNotificationListner extends NotificationListenerService {
+WhatsReNotificationListner extends NotificationListenerService {
 
 
     // Constants
@@ -89,7 +90,7 @@ public class
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 channel = new NotificationChannel("1",
                         "iMoe_Service", NotificationManager.IMPORTANCE_LOW);
-                channel.setDescription("Gangala WhatsAuto");
+                channel.setDescription("WhatsappTools WhatsAuto");
                 channel.setSound(null, null);
                 channel.enableLights(false);
                 channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
@@ -129,6 +130,7 @@ public class
         public static final String INSTA_PACKNAME = "com.instagram.android";
         public static final String TWITTER_PACKNAME = "com.twitter.android";
         public static final String FACEBOOK_PACKNAME = "com.facebook.orca";
+        public static final String TELEGRAM_PACKNAME = "org.telegram.messenger";
     }
 
     public static final class InterceptedNotificationCode {
@@ -184,19 +186,22 @@ public class
 
         boolean isReplyEnable = false;
         Bundle bundle = sbn.getNotification().extras;
-        Log.d("TAG", "bundle~~>" + bundle.toString());
+        Log.d("TAG", "bundle~~>----" + bundle.toString());
         String packageName = sbn.getPackageName();
         if (packageName.equals(BuildConfig.APPLICATION_ID)) {
             return;
         }
         Log.d("TAG", "id~~>1");
-        String sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
-        String message = bundle.getString(InterceptedNotificationParseCode.ANDROID_TEXT);
 
+        String sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
+        String message = "" + bundle.getString(InterceptedNotificationParseCode.ANDROID_TEXT);
+
+//        Log.d("message-=-=-=-111111=-=-=--==-" + message);
         Log.d("TAG", "id~~>2");
         String[] senders = sender.split(":");
         if (senders.length > 1) {
-            sender = null;
+            sender = senders[1];
+            sender = sender.replaceAll(" ", "");
         }
         Log.d("TAG", "id~~>3");
         switch (packageName) {
@@ -206,31 +211,45 @@ public class
                     return;
                 }
                 CharSequence[] textLine = bundle.getCharSequenceArray(InterceptedNotificationParseCode.ANDROID_TEXT_LINE);
+                appendLog("textLine**********1213123132132123*********" + textLine);
                 if (textLine != null) {
+                    appendLog("textLine*******************" + textLine);
                     String firstUser = textLine[textLine.length - 2].toString().split(":")[0];
                     String secUser = textLine[textLine.length - 1].toString().split(":")[0];
                     if (prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, null) == null) {
                         if (!firstUser.equalsIgnoreCase(secUser)) {
+                            appendLog("secUser*******************" + secUser);
+                            appendLog("firstUser*******12121212121************" + firstUser);
                             prefs.edit().putString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, secUser).apply();
                         }
                         return;
                     }
+                    android.util.Log.d("TAG~~~", "onNotificationPosted: " + prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "") + " : " + secUser);
+//                    isReplyEnable = true;
                     if (!prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
                         isReplyEnable = true;
+                        appendLog("----------isReplyEnable=========" + isReplyEnable);
                     }
                 } else {
                     isReplyEnable = true;
+                    appendLog("isReplyEnable" + isReplyEnable);
                 }
                 if (isReplyEnable) {
                     String[] messageStr = message.split(":");
                     message = messageStr[messageStr.length - 1];
                     sender = messageStr[messageStr.length - 2];
+                    appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
+                    appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
+                    appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
                 }
                 Log.d("TAG", "id~~>11");
                 break;
             case ApplicationPackageNames.WHATSAPP_PACKNAME:
             case ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS:
+                Log.d("TAG", "TEST-REPLY 0");
                 if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME, false)) {
+                    Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS");
+
                     if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME))
                         return;
                 }
@@ -238,19 +257,26 @@ public class
                     if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS))
                         return;
                 }
-
+                Log.d("TAG", "TEST-REPLY sender: " + sender);
                 if (sender != null && !sender.equalsIgnoreCase("tú") && !sender.equalsIgnoreCase("you")) {
+                    Log.d("TAG", "arrayList --1 start");
                     ArrayList<Parcelable> arrayList = bundle.getParcelableArrayList("android.people.list");
+                    Log.d("TAG", "arrayList --1 end:" + arrayList);
                     if (arrayList != null && arrayList.size() > 0) {
                         String phoneNo = getphoneNo(((Person) (arrayList.get(0))).getUri());
                         if (!phoneNo.isEmpty()) {
                             sender = phoneNo;
+                            appendLog("arrayList----" + arrayList);
                         }
                     }
                     long lastRowId = bundle.getLong(InterceptedNotificationParseCode.ANDROID_LAST_ROW_ID);
+                    appendLog("arrayList----lastRowId" + lastRowId);
+                    Log.d("TAG", "TEST-REPLY 1 lastRowId: " + lastRowId);
                     if (lastRowId != 0) {
                         if (waLastRawId.size() == 0 || !waLastRawId.contains(lastRowId)) {
+                            appendLog("arrayList----lastRowId 0");
                             waLastRawId.add(lastRowId);
+                            Log.d("TAG", "TEST-REPLY 2");
                             isReplyEnable = true;
                         }
                     }
@@ -277,34 +303,67 @@ public class
                 }
                 Log.d("TAG", "id~~>41");
                 break;
+            case ApplicationPackageNames.TELEGRAM_PACKNAME:
+                if (!prefs.getBoolean(ApplicationPackageNames.TELEGRAM_PACKNAME, false)) {
+                    return;
+                }
+                if (sender != null) {
+                    isReplyEnable = true;
+                }
+                Log.d("TAG", "id~~>50");
+                break;
+//            case ApplicationPackageNames.INSTA_PACKNAME:
+//                if (!prefs.getBoolean(ApplicationPackageNames.INSTA_PACKNAME, false)) {
+//                    return;
+//                }
+//                if (sender != null) {
+//                    isReplyEnable = true;
+//                }
+//                Log.d("TAG", "id~~>60");
+//                break;
 
         }
 
         if (isReplyEnable) {
-            requestMessage(message, sender).subscribeOn(Schedulers.trampoline())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableObserver<String>() {
-                        @Override
-                        public void onNext(String object) {
-                            try {
-                                replayNotification(sbn, bundle, object);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            e.printStackTrace();
-                        }
 
-                        @Override
-                        public void onComplete() {
-                        }
-                    });
+            replyCount++;
+            appendLog("sender----:" + (sender));
+            appendLog("message---: " + (message));
+
+            String key = "botMessage-" + message.toLowerCase();
+            String repliedMessage = prefs.getString(key, "Hi");
+
+            appendLog("repliedMessage---: " + repliedMessage);
+            appendLog("key----------: " + key);
+
+
+            replayNotification(sbn, bundle, repliedMessage);
+
+
+//            requestMessage(message, sender).subscribeOn(Schedulers.trampoline())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribeWith(new DisposableObserver<String>() {
+//                        @Override
+//                        public void onNext(String object) {
+//                            try {
+//                                replayNotification(sbn, bundle, object);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                        @Override
+//                        public void onComplete() {
+//                        }
+//                    });
         }
-
-        appendLog("packageName>>>" + packageName);
+        appendLog("packageName ---:" + packageName);
     }
 
     @SuppressLint("Range")
@@ -385,18 +444,23 @@ public class
                 matadata.put("buyer_city", "Na");
                 matadata.put("buyer_street", "Na");
                 jsonParams.put("metadata", matadata);
-
+                appendLog("Send>>> 0");
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(jsonParams)).toString());
 
                 APIinterface apiService = retrofit.create(APIinterface.class);
                 Call<ResponseBody> response = apiService.requestAd(body);
+                appendLog("Send>>> 1");
                 response.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        appendLog("Send>>> 2 onResponse");
                         if (response.isSuccessful() && response.body() != null) {
+                            appendLog("Send>>> 3");
                             try {
+                                appendLog("Send>>> 4");
                                 emitter.onNext(response.body().string());
                             } catch (IOException e) {
+                                appendLog("Send>>> 5");
                                 e.printStackTrace();
                             }
                         }
@@ -404,17 +468,22 @@ public class
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        appendLog("Send>>> 2 onFailure");
                         if (t instanceof SocketTimeoutException) {
                             // "Connection Timeout";
+                            appendLog("Send>>> 2 onFailure SocketTimeoutException");
                         } else if (t instanceof IOException) {
                             // "Timeout";
+                            appendLog("Send>>> 2 onFailure IOException");
                         } else {
                             emitter.onError(t);
+                            appendLog("Send>>> 2 onFailure elseException");
                         }
                     }
                 });
             } catch (Exception e) {
                 emitter.onError(e);
+                appendLog("Send>>> main exception: " + e.getLocalizedMessage());
                 e.getLocalizedMessage();
             }
         });
@@ -425,9 +494,13 @@ public class
     private void replayNotification(StatusBarNotification statusBarNotification, Bundle bundle, String messages) {
         RemoteInput[] remoteInputArr = new RemoteInput[0];
         Intent intent = new Intent();
+        appendLog("intent--------");
         intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+        appendLog("intent.setFlags-----------");
         PendingIntent pendingIntent = null;
+        appendLog("-----------remoteInputArr");
         if (Build.VERSION.SDK_INT >= 24) {
+            appendLog("Build.VERSION.SDK_INT-----------");
             Notification.Action[] actionArr = statusBarNotification.getNotification().actions;
             if (actionArr == null) {
                 return;
@@ -452,15 +525,23 @@ public class
                 bundle.putCharSequence(remoteInput2.getResultKey(), messages);
             }
         }
+
         RemoteInput.addResultsToIntent(remoteInputArr, intent, bundle);
         if (pendingIntent != null) {
             try {
+
+                SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int messageCount = prefs.getInt("messageCount", 0);
+                messageCount = messageCount + 1;
+                prefs.edit().putInt("messageCount", messageCount).apply();
+
                 pendingIntent.send(this, 0, intent);
 
             } catch (PendingIntent.CanceledException e2) {
                 e2.printStackTrace();
             }
         }
+        appendLog("-----------RemoteInput.addResultsToIntent");
     }
 
 
@@ -495,6 +576,7 @@ public class
 
 
     public void appendLog(String text) {
+        Log.d("TAG", "appendLog~~>" + text);
 //        File logFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Gangala.file");
 //        if (!logFile.exists()) {
 //            try {

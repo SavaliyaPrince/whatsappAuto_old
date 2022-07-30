@@ -38,7 +38,7 @@ class _CreateReplyState extends State<CreateReply> {
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
-              Navigation.pop();
+              Navigation.pushNamed(Routes.homePage);
             },
             child: Padding(
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),

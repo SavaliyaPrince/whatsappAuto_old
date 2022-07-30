@@ -117,8 +117,6 @@ class _ContactListPageState extends State<ContactListPage> {
                                 itemCount:
                                     contactListController.contacts.length,
                                 itemBuilder: (context, index) {
-                                  // print(
-                                  //     '======${contactListController.contacts[index].isselected}');
                                   return Padding(
                                     padding: EdgeInsets.only(
                                       top: SizeUtils.verticalBlockSize * 1,
@@ -164,34 +162,34 @@ class _ContactListPageState extends State<ContactListPage> {
                                               SizeUtils.verticalBlockSize * 2.8,
                                           // child: Checkbox(
                                           //   value: contactListController
-                                          //           .contacts[index]
-                                          //           .isselected ??
+                                          //       .contacts[index]
+                                          //       .isselected ??
                                           //       false,
                                           //   activeColor:
-                                          //       ColorCollection.greenColor,
+                                          //   ColorCollection.greenColor,
                                           //   shape: RoundedRectangleBorder(
                                           //     borderRadius:
-                                          //         BorderRadius.circular(5),
+                                          //     BorderRadius.circular(5),
                                           //   ),
-                                          // onChanged: (value) {
-                                          //   setState(() {
-                                          //     if ((contactListController
-                                          //                 .contacts[index]
-                                          //                 .isselected ??
-                                          //             false) ==
-                                          //         false) {
-                                          //       contactListController
+                                          //   onChanged: (value) {
+                                          //     setState(() {
+                                          //       if ((contactListController
                                           //           .contacts[index]
-                                          //           .isselected = true;
-                                          //     } else {
-                                          //       contactListController
-                                          //           .contacts[index]
-                                          //           .isselected = false;
-                                          //     }
-                                          //   });
-                                          // },
-                                          //  ),
-                                        )
+                                          //           .isselected ??
+                                          //           false) ==
+                                          //           false) {
+                                          //         contactListController
+                                          //             .contacts[index]
+                                          //             .isselected = true;
+                                          //       } else {
+                                          //         contactListController
+                                          //             .contacts[index]
+                                          //             .isselected = false;
+                                          //       }
+                                          //     });
+                                          //   },
+                                          // ),
+                                        ),
                                       ],
                                     ),
                                   );
