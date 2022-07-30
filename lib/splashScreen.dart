@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/interstitial_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
+import 'package:whatsapp_auto/Utils/open_ad.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
 import 'Utils/size_utils.dart';
@@ -20,6 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    AppOpenAdManager.loadAd();
     startTimeOut();
   }
 
@@ -54,6 +57,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 5),
       () {
+        AppOpenAdManager.showOpenAdIfAvailable();
+        InterstitalAd.createInterstitialAd();
         Navigation.pushNamed(Routes.homePage);
       },
     );

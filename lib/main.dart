@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:whatsapp_auto/Utils/my_behavior.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
@@ -13,7 +14,7 @@ import 'modules/homepage/homePageCantroller.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreference.initMySharedPreferences();
-
+  MobileAds.instance.initialize();
   runApp(MyApp());
 }
 
