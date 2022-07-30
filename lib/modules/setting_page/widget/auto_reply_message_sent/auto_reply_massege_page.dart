@@ -17,58 +17,58 @@ class AutoReply extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorRes.backgroundColor(context),
-        appBar: AppBar(
-          elevation: 0.2,
-          backgroundColor: themeController.isSwitched.value
-              ? AppColor.darkThem.withOpacity(0.2)
-              : AppColor.whiteColor,
-          leadingWidth: SizeUtils.fSize_40(),
-          leading: GestureDetector(
-            onTap: () {
-              Navigation.pop();
-            },
-            child: Padding(
-              padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
+      backgroundColor: ColorRes.backgroundColor(context),
+      appBar: AppBar(
+        elevation: 0.2,
+        backgroundColor: themeController.isSwitched.value
+            ? AppColor.darkThem.withOpacity(0.2)
+            : AppColor.whiteColor,
+        leadingWidth: SizeUtils.fSize_40(),
+        leading: GestureDetector(
+          onTap: () {
+            Navigation.pop();
+          },
+          child: Padding(
+            padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
+            child: Image.asset(
+              AppIcons.backIcon,
+              color: themeController.isSwitched.value
+                  ? AppColor.whiteColor
+                  : AppColor.backIconColor,
+            ),
+          ),
+        ),
+        title: AppText(
+          AppString.autoReplyMassage,
+          fontSize: SizeUtils.fSize_17(),
+          fontWeight: FontWeight.w600,
+          color: themeController.isSwitched.value
+              ? AppColor.whiteColor
+              : AppColor.backIconColor,
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
+            child: GestureDetector(
+              onTap: () {},
               child: Image.asset(
-                AppIcons.backIcon,
+                AppIcons.import,
+                width: SizeUtils.fSize_24(),
                 color: themeController.isSwitched.value
                     ? AppColor.whiteColor
                     : AppColor.backIconColor,
               ),
             ),
           ),
-          title: AppText(
-            AppString.autoReplyMassage,
-            fontSize: SizeUtils.fSize_17(),
-            fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value
-                ? AppColor.whiteColor
-                : AppColor.backIconColor,
-          ),
-          actions: [
-            Padding(
-              padding:
-                  EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-              child: GestureDetector(
-                onTap: () {},
-                child: Image.asset(
-                  AppIcons.import,
-                  width: SizeUtils.fSize_24(),
-                  color: themeController.isSwitched.value
-                      ? AppColor.whiteColor
-                      : AppColor.backIconColor,
-                ),
-              ),
-            ),
-          ],
-        ),
-        body: Center(
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
             children: [
               SizedBox(height: SizeUtils.verticalBlockSize * 2.7),
               AppText(
-                "27",
+                "${themeController.totalMassageSent}",
                 color: AppColor.primaryColor,
                 fontSize: SizeUtils.fSize_24(),
                 fontWeight: FontWeight.w600,
@@ -99,15 +99,23 @@ class AutoReply extends StatelessWidget {
                             context,
                             AppIcons.whatsapp,
                             AppString.welcomeMessage,
-                            "${AppString.massageSent} 20",
-                            colorText: value,
+                            "${AppString.massageSent}  ${themeController.whatsAppMassageSent.isEmpty ? 0 : themeController.whatsAppMassageSent}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.whatsAppMassageSent.isEmpty
+                                    ? false
+                                    : value,
                           ),
                           replyMassageItem(
                             context,
                             AppIcons.telegram,
                             AppString.Telegram,
-                            "${AppString.massageSent} 7",
-                            colorText: value,
+                            "${AppString.massageSent} ${themeController.telegramMassageSent.isEmpty ? 0 : themeController.telegramMassageSent}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.telegramMassageSent.isEmpty
+                                    ? false
+                                    : value,
                           ),
                         ],
                       ),
@@ -118,14 +126,19 @@ class AutoReply extends StatelessWidget {
                           replyMassageItem(
                             context,
                             AppIcons.viber,
-                            AppString.Viber,
+                            AppString.instagram,
                             "${AppString.massageSent} 0",
                           ),
                           replyMassageItem(
                             context,
                             AppIcons.fbMessenger,
                             AppString.Messanger,
-                            "${AppString.massageSent} 0",
+                            "${AppString.massageSent} ${themeController.fbMassangerMassageSent.isEmpty ? 0 : themeController.fbMassangerMassageSent}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.fbMassangerMassageSent.isEmpty
+                                    ? false
+                                    : value,
                           ),
                         ],
                       ),
@@ -137,13 +150,24 @@ class AutoReply extends StatelessWidget {
                             context,
                             AppIcons.line,
                             AppString.LineMessenger,
-                            "${AppString.massageSent} 0",
+                            "${AppString.massageSent} ${themeController.lineMassangerMassageSent.isEmpty ? 0 : themeController.lineMassangerMassageSent}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.lineMassangerMassageSent.isEmpty
+                                    ? false
+                                    : value,
                           ),
                           replyMassageItem(
                             context,
                             AppIcons.discord,
                             AppString.Messanger,
-                            "${AppString.massageSent} 0",
+                            "${AppString.massageSent} ${themeController.discordMassangerMassageSent.isEmpty ? 0 : themeController.discordMassangerMassageSent}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController
+                                        .discordMassangerMassageSent.isEmpty
+                                    ? false
+                                    : value,
                           ),
                         ],
                       ),
@@ -151,10 +175,19 @@ class AutoReply extends StatelessWidget {
                   );
                 },
               ),
+              Obx(
+                () => SizedBox(
+                  height: isBannerLoaded.value
+                      ? SizeUtils.verticalBlockSize * 8
+                      : 0,
+                ),
+              ),
             ],
           ),
         ),
-        bottomSheet: const BannerAdView());
+      ),
+      bottomSheet: const BannerAdView(),
+    );
   }
 
   Widget replyMassageItem(

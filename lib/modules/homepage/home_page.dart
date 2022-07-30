@@ -113,109 +113,6 @@ class _HomePageScreenState extends State<HomePageScreen>
                     ),
                   ),
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.welcomeMessageTitle,
-                          subtitle: AppString.welcomeMessageSubTile,
-                          image: AssetsPath.star,
-                          onTap: () {
-                            InterstitalAd.showInterstitialAd();
-                            Navigation.pushNamed(Routes.sendMassagePage);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.emojiTitle,
-                          subtitle: AppString.emojiSubTile,
-                          image: AssetsPath.emoji,
-                          onTap: () {
-                            Navigation.pushNamed(Routes.createReply);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.testReplyTitle,
-                          subtitle: AppString.testReplySubTile,
-                          image: AssetsPath.messages,
-                          onTap: () {
-                            Navigation.pushNamed(Routes.chatTestReply);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.contactUsTitle,
-                          subtitle: AppString.contactUsSubTile,
-                          image: AssetsPath.document,
-                          onTap: () {
-                            Navigation.pushNamed(Routes.contactPage);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.categoryTitle,
-                          subtitle: AppString.categorySubTile,
-                          image: AssetsPath.category,
-                          onTap: () {
-                            Navigation.pushNamed(Routes.supportedApp);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.settingTitle,
-                          subtitle: AppString.settingSubTile,
-                          image: AssetsPath.setting,
-                          onTap: () {
-                            Navigation.pushNamed(Routes.settingPage);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        customCategoriesBox(
-                          context,
-                          titleText: AppString.documentTitle,
-                          subtitle: AppString.documentSubTile,
-                          image: AssetsPath.document,
-                          onTap: () {
-                            // Navigation.pushNamed(Routes.chatPage);
-                          },
-                        ),
-                        SizedBox(
-                          height: SizeUtils.verticalBlockSize * 1.5,
-                        ),
-                        // customCategoriesBox(
-                        //   context,
-                        //   titleText: AppString.contact,
-                        //   subtitle: AppString.documentSubTile,
-                        //   image: AssetsPath.document,
-                        //   onTap: () {
-                        //     Navigation.pushNamed(Routes.contactPage);
-                        //   },
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
                 if (Platform.isIOS)
                   Expanded(
                     child: SingleChildScrollView(
@@ -345,6 +242,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.emojiSubTile,
                             image: AssetsPath.emoji,
                             onTap: () {
+                              InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.createReply);
                             },
                           ),

@@ -327,7 +327,7 @@ WhatsReNotificationListner extends NotificationListenerService {
         if (isReplyEnable) {
 
 
-            replyCount++;
+//            replyCount++;
             appendLog("sender----:" + (sender));
             appendLog("message---: " + (message));
 

@@ -11,8 +11,8 @@ class AppOpenAdManager {
   static Future<void> loadAd() async {
     AppOpenAd.load(
       adUnitId: Platform.isAndroid
-          ? "ca-app-pub-3940256099942544/3419835294"
-          : "ca-app-pub-3940256099942544/5662855259",
+          ? 'ca-app-pub-3940256099942544/3419835294'
+          : 'ca-app-pub-3940256099942544/5662855259',
       orientation: AppOpenAd.orientationPortrait,
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(

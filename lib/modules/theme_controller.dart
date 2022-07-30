@@ -40,13 +40,13 @@ class ThemeController extends GetxController {
     isSwitched.value = AppPreference.getBoolean("theme");
     isDarkMode.value = isSwitched.value;
   }
-
-  Future<String> getMessageCount() async {
-    totalMassageSent.value = whatsAppMassageSent.value;
-    const platform = MethodChannel('samples.flutter.dev/battery');
-    final String result = await platform.invokeMethod('getMessageCount');
-    whatsAppMassageSent.value = result;
-    print('getMessageCount messageCount: $result');
-    return result;
-  }
+  //
+  // Future<String> getMessageCount() async {
+  //   totalMassageSent.value = whatsAppMassageSent.value;
+  //   const platform = MethodChannel('samples.flutter.dev/battery');
+  //   final String result = await platform.invokeMethod('getMessageCount');
+  //   whatsAppMassageSent.value = result;
+  //   print('getMessageCount messageCount: $result');
+  //   return result;
+  // }
 }
