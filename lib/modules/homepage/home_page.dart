@@ -26,7 +26,8 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen>
     with WidgetsBindingObserver {
   final ThemeController themeController = Get.find();
-  final HomePageController homePageController = Get.put(HomePageController());
+  final HomePageController homePageController = Get.put(HomePageController())
+    ..getWhatsAuto();
   final InAppReview inAppReview = InAppReview.instance;
   bool isPaused = false;
   @override
