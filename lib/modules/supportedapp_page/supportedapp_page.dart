@@ -93,9 +93,13 @@ class SupportedAppPage extends StatelessWidget {
                   onChanged: (value) async {
                     print('checkService check 0 $value');
                     supportedAppController.isSwitchWhatsApp.value = value;
+                    if (supportedAppController.isSwitchWhatsApp.value == true) {
+                      supportedAppController.getPhoneContacts();
+                    }
                     AppPreference.setWhatsApp(
                       whatsApp: _homePageController.whatsApp.value,
                     );
+
                     const platform =
                         MethodChannel('samples.flutter.dev/battery');
 
