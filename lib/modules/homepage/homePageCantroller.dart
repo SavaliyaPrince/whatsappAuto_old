@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,10 +20,6 @@ class HomePageController extends GetxController {
   RxBool twitter = false.obs;
   RxBool instagram = false.obs;
 
-  void onThemeChange() {
-    isSwitched.value = AppPreference.getBoolean("theme");
-  }
-
   Future<void> getWhatsAuto() async {
     const platform = MethodChannel('samples.flutter.dev/battery');
 
@@ -35,6 +31,7 @@ class HomePageController extends GetxController {
       if (result == false) {
         Get.dialog(
           SimpleDialog(
+            backgroundColor: AppColor.primaryColor,
             title: Text(
               "Do you want to activate whatsapp auto response service?",
               style: TextStyle(
@@ -51,7 +48,7 @@ class HomePageController extends GetxController {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: AppColor.appBackgroundColor,
+                      primary: AppColor.green38,
                     ),
                     child: const Text('Not Now'),
                   ),
@@ -62,7 +59,7 @@ class HomePageController extends GetxController {
                         await platform.invokeMethod('serviceEnable');
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: AppColor.appBackgroundColor,
+                        primary: AppColor.green38,
                       ),
                       child: const Text('Activate')),
                   const SizedBox(width: 10),
@@ -108,17 +105,15 @@ class HomePageController extends GetxController {
     twitter.value = AppPreference.twitter;
   }
 
-  @override
-  Future<void> onInit() async {
-    // TODO: implement onInit
-    super.onInit();
-    if (!Platform.isIOS) {
-      sendWhatsAppSellerId();
-      sendLanguage();
-    }
-
-    getWhatsAuto();
-
-    print("-=-=-=-=-getWhatsAuto-=-=-=-=-==-${getWhatsAuto()}");
-  }
+  // @override
+// Future<void> onInit() async {
+//   // TODO: implement onInit
+//   super.onInit();
+//   // if (!Platform.isIOS) {
+//   //   sendWhatsAppSellerId();
+//   //   sendLanguage();
+//   // }
+//
+//   print("-=-=-=-=-getWhatsAuto-=-=-=-=-==-${getWhatsAuto()}");
+// }
 }

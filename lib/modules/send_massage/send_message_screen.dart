@@ -1,13 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
@@ -38,6 +40,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: const BannerAdView(),
       appBar: AppBar(
         elevation: 0.2,
         backgroundColor: themeController.isSwitched.value
@@ -200,9 +203,15 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 icon: Icons.message,
                 width: SizeUtils.horizontalBlockSize * 48,
               ),
-              // SizedBox(
-              //   height: SizeUtils.verticalBlockSize * 3,
-              // ),
+
+              Obx(
+                () => SizedBox(
+                  height: isBannerLoaded.value
+                      ? SizeUtils.verticalBlockSize * 8
+                      : 0,
+                ),
+              ),
+
               // ImageTextButton(
               //   width: SizeUtils.horizontalBlockSize * 40,
               //   onTap: () async {

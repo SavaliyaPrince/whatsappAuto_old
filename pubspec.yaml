@@ -51,7 +51,7 @@ dependencies:
   flutter_share: ^2.0.0
   in_app_review: ^2.0.4
   flutter_launcher_icons: ^0.9.3
-  flutter_slidable: ^2.0.0
+  flutter_slidable: ^1.1.0
   flutter_contacts: ^1.1.5
   flutter_update_dialog: ^2.0.0
   new_version: ^0.3.1
