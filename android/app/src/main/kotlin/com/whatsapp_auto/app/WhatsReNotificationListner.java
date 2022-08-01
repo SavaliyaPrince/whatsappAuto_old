@@ -237,20 +237,21 @@ WhatsReNotificationListner extends NotificationListenerService {
 //                    isReplyEnable = true;
                     if (!prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
                         isReplyEnable = true;
+                        if (isReplyEnable) {
+                            String[] messageStr = message.split(":");
+                            message = messageStr[messageStr.length - 1].trim();
+                            sender = messageStr[messageStr.length - 2];
+                            appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
+                            appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
+                            appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
+                        }
                         appendLog("----------isReplyEnable=========" + isReplyEnable);
                     }
                 } else {
                     isReplyEnable = true;
                     appendLog("isReplyEnable" + isReplyEnable);
                 }
-                if (isReplyEnable) {
-                    String[] messageStr = message.split(":");
-                    message = messageStr[messageStr.length - 1];
-                    sender = messageStr[messageStr.length - 2];
-                    appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
-                    appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
-                    appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
-                }
+
                 Log.d("TAG", "id~~>11");
                 break;
             case ApplicationPackageNames.WHATSAPP_PACKNAME:

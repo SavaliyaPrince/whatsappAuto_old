@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/my_behavior.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
-import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_controller.dart';
 import 'package:whatsapp_auto/modules/send_massage/send_message_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
@@ -10,9 +11,21 @@ import 'package:whatsapp_auto/theme/app_color.dart';
 
 import 'modules/homepage/homePageCantroller.dart';
 
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   final FirebaseCrashlytics crashlytics = FirebaseCrashlytics.instance;
+//   runZonedGuarded<Future<void>>(() async {
+//     await crashlytics.setCrashlyticsCollectionEnabled(true);
+//     FlutterError.onError = crashlytics.recordFlutterError;
+//     await AppPreference.initMySharedPreferences();
+//
+//     runApp(MyApp());
+//   }, (error, stack) => crashlytics.recordError(error, stack));
+// }
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AppPreference.initMySharedPreferences();
 
   runApp(MyApp());
 }
