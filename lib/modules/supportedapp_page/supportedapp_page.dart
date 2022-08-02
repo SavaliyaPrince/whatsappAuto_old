@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -18,8 +16,7 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class SupportedAppPage extends StatelessWidget {
   SupportedAppPage({Key? key}) : super(key: key);
   final ThemeController themeController = Get.find();
-  final SupportedAppController supportedAppController =
-      Get.put(SupportedAppController());
+  final SupportedAppController supportedAppController = Get.find();
   final HomePageController _homePageController = Get.find();
 
   @override
@@ -103,26 +100,26 @@ class SupportedAppPage extends StatelessWidget {
                     const platform =
                         MethodChannel('samples.flutter.dev/battery');
 
-                    if (value == false) {
-                      _homePageController.autoMassageOnOff.value = value;
-                      _homePageController.whatsApp.value = value;
-                      _homePageController.whatsappBusiness.value = value;
-                      _homePageController.facebook.value = value;
-                      _homePageController.instagram.value = value;
-                      // _homePageController.twitter.value = value;
-                      AppPreference.setAutoResponse(autoResponse: false);
-                      await platform.invokeMethod('notificationDisable');
-                    } else {
-                      log('val ==>> ${value.toString()}');
-                      _homePageController.autoMassageOnOff.value = value;
-                      AppPreference.setAutoResponse(autoResponse: true);
-                      _homePageController.whatsApp.value = value;
-                      AppPreference.setWhatsApp(whatsApp: true);
-                      await platform.invokeMethod(
-                        'setWhatsApp',
-                        {"whatsapp": _homePageController.whatsApp.value},
-                      );
-                    }
+                    // if (value == false) {
+                    //   _homePageController.autoMassageOnOff.value = value;
+                    //   _homePageController.whatsApp.value = value;
+                    //   _homePageController.whatsappBusiness.value = value;
+                    //   _homePageController.facebook.value = value;
+                    //   _homePageController.instagram.value = value;
+                    //   // _homePageController.twitter.value = value;
+                    //   AppPreference.setAutoResponse(autoResponse: false);
+                    //   // await platform.invokeMethod('notificationDisable');
+                    // } else {
+                    //   log('val ==>> ${value.toString()}');
+                    //   _homePageController.autoMassageOnOff.value = value;
+                    //   AppPreference.setAutoResponse(autoResponse: true);
+                    //   _homePageController.whatsApp.value = value;
+                    //   AppPreference.setWhatsApp(whatsApp: true);
+                    //   await platform.invokeMethod(
+                    //     'setWhatsApp',
+                    //     {"whatsapp": _homePageController.whatsApp.value},
+                    //   );
+                    // }
                     print('checkService check 1');
                     if (value == false) {
                       _homePageController.whatsApp.value = value;
