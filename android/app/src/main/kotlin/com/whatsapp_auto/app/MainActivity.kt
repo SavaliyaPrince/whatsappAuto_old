@@ -71,14 +71,24 @@ class MainActivity : FlutterActivity() {
             }
 
             if (call.method == "notificationDisable") {
-                // off
+                Log.d("tag", "notificationDisable --->>> 1")
                 val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+                Log.d("tag", "notificationDisable --->>> 2")
+
                 editor.putBoolean("isChecked", false)
+                Log.d("tag", "notificationDisable --->>> 3")
 
                 val intent = Intent(this@MainActivity, WhatsReNotificationListner::class.java)
+                Log.d("tag", "notificationDisable --->>> 4")
+
                 intent.action = "STOP_FOREGROUND_REMOVE"
+                Log.d("tag", "notificationDisable --->>> 5")
+
                 startForegroundService(intent)
+                Log.d("tag", "notificationDisable --->>> 6")
                 editor.apply()
+                Log.d("tag", "notificationDisable --->>> 7")
+
 
             }
 
