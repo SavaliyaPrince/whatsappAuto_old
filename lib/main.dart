@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -12,10 +16,24 @@ import 'package:whatsapp_auto/theme/app_color.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AppPreference.initMySharedPreferences();
-  MobileAds.instance.initialize();
-  runApp(MyApp());
+  await Firebase.initializeApp();
+  final FirebaseCrashlytics crashlytics = FirebaseCrashlytics.instance;
+  runZonedGuarded<Future<void>>(() async {
+    await crashlytics.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = crashlytics.recordFlutterError;
+    await AppPreference.initMySharedPreferences();
+    MobileAds.instance.initialize();
+    runApp(MyApp());
+  }, (error, stack) => crashlytics.recordError(error, stack));
 }
+
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//
+//   await AppPreference.initMySharedPreferences();
+//   MobileAds.instance.initialize();
+//   runApp(MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);

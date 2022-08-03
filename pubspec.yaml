@@ -53,8 +53,10 @@ dependencies:
   flutter_launcher_icons: ^0.9.3
   flutter_slidable: ^1.1.0
   flutter_contacts: ^1.1.5
-
-
+  flutter_update_dialog: ^2.0.0
+  package_info_plus: ^1.4.3
+  firebase_crashlytics: ^2.8.6
+  firebase_core: ^1.20.0
 
 dev_dependencies:
   flutter_test:

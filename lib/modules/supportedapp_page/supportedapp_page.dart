@@ -16,7 +16,8 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class SupportedAppPage extends StatelessWidget {
   SupportedAppPage({Key? key}) : super(key: key);
   final ThemeController themeController = Get.find();
-  final SupportedAppController supportedAppController = Get.find();
+  final SupportedAppController supportedAppController =
+      Get.put(SupportedAppController());
   final HomePageController _homePageController = Get.find();
 
   @override
@@ -88,68 +89,102 @@ class SupportedAppPage extends StatelessWidget {
                   text: AppString.WhatsApp,
                   value: supportedAppController.isSwitchWhatsApp.value,
                   onChanged: (value) async {
-                    print('checkService check 0 $value');
-                    supportedAppController.isSwitchWhatsApp.value = value;
-                    if (supportedAppController.isSwitchWhatsApp.value == true) {
-                      supportedAppController.getPhoneContacts();
-                    }
-                    AppPreference.setWhatsApp(
-                      whatsApp: _homePageController.whatsApp.value,
-                    );
+                    print("_enableApps 0");
 
-                    const platform =
-                        MethodChannel('samples.flutter.dev/battery');
-
-                    // if (value == false) {
-                    //   _homePageController.autoMassageOnOff.value = value;
-                    //   _homePageController.whatsApp.value = value;
-                    //   _homePageController.whatsappBusiness.value = value;
-                    //   _homePageController.facebook.value = value;
-                    //   _homePageController.instagram.value = value;
-                    //   // _homePageController.twitter.value = value;
-                    //   AppPreference.setAutoResponse(autoResponse: false);
-                    //   // await platform.invokeMethod('notificationDisable');
-                    // } else {
-                    //   log('val ==>> ${value.toString()}');
-                    //   _homePageController.autoMassageOnOff.value = value;
-                    //   AppPreference.setAutoResponse(autoResponse: true);
-                    //   _homePageController.whatsApp.value = value;
-                    //   AppPreference.setWhatsApp(whatsApp: true);
-                    //   await platform.invokeMethod(
-                    //     'setWhatsApp',
-                    //     {"whatsapp": _homePageController.whatsApp.value},
-                    //   );
-                    // }
-                    print('checkService check 1');
-                    if (value == false) {
-                      _homePageController.whatsApp.value = value;
+                    try {
+                      print("_enableApps 1");
+                      print('checkService check 0 $value');
+                      supportedAppController.isSwitchWhatsApp.value = value;
+                      print("_enableApps 2");
+                      if (supportedAppController.isSwitchWhatsApp.value ==
+                          true) {
+                        print("_enableApps 3");
+                        supportedAppController.getPhoneContacts();
+                      }
+                      print("_enableApps 4");
                       AppPreference.setWhatsApp(
                         whatsApp: _homePageController.whatsApp.value,
                       );
-                      platform.invokeMethod(
-                        'setWhatsApp',
-                        {"whatsapp": _homePageController.whatsApp.value},
-                      );
-                    } else {
-                      _homePageController.whatsApp.value = value;
-                      AppPreference.setWhatsApp(whatsApp: true);
-                      print('checkService check 2');
-                      try {
-                        await platform.invokeMethod(
+                      print("_enableApps 5");
+
+                      const platform =
+                          MethodChannel('samples.flutter.dev/battery');
+                      print("_enableApps 6");
+
+                      // if (value == false) {
+                      //   print("_enableApps 7");
+                      //   _homePageController.autoMassageOnOff.value = value;
+                      //   _homePageController.whatsApp.value = value;
+                      //   _homePageController.whatsappBusiness.value = value;
+                      //   _homePageController.facebook.value = value;
+                      //   _homePageController.instagram.value = value;
+                      //   // _homePageController.twitter.value = value;
+                      //   AppPreference.setAutoResponse(autoResponse: false);
+                      //   print("_enableApps 8");
+                      //   await platform.invokeMethod('notificationDisable');
+                      //   print("_enableApps 9");
+                      // } else {
+                      //   print("_enableApps 10");
+                      //   log('val ==>> ${value.toString()}');
+                      //   _homePageController.autoMassageOnOff.value = value;
+                      //   AppPreference.setAutoResponse(autoResponse: true);
+                      //   print("_enableApps 11");
+                      //   _homePageController.whatsApp.value = value;
+                      //   AppPreference.setWhatsApp(whatsApp: true);
+                      //   print("_enableApps 12");
+                      //   await platform.invokeMethod(
+                      //     'setWhatsApp',
+                      //     {"whatsapp": _homePageController.whatsApp.value},
+                      //   );
+                      //   print("_enableApps 13");
+                      // }
+                      print("_enableApps 14");
+                      print('checkService check 1');
+                      if (value == false) {
+                        print("_enableApps 15");
+                        _homePageController.whatsApp.value = value;
+                        AppPreference.setWhatsApp(
+                          whatsApp: _homePageController.whatsApp.value,
+                        );
+                        print("_enableApps 16");
+                        platform.invokeMethod(
                           'setWhatsApp',
                           {"whatsapp": _homePageController.whatsApp.value},
                         );
-                      } catch (e) {
-                        print('checkService check 2 exception: $e');
+                        print("_enableApps 17");
+                      } else {
+                        print("_enableApps 18");
+                        _homePageController.whatsApp.value = value;
+                        AppPreference.setWhatsApp(whatsApp: true);
+                        print("_enableApps 19");
+                        print('checkService check 2');
+                        try {
+                          print("_enableApps 20");
+                          await platform.invokeMethod(
+                            'setWhatsApp',
+                            {"whatsapp": _homePageController.whatsApp.value},
+                          );
+                          print("_enableApps 21");
+                        } catch (e) {
+                          print("_enableApps 22");
+                          print('checkService check 2 exception: $e');
+                        }
                       }
-                    }
-                    final result = await platform
-                        .invokeMethod('checkNotificationServiceEnabled');
+                      print("_enableApps 23");
+                      final result = await platform
+                          .invokeMethod('checkNotificationServiceEnabled');
 
-                    if (result == false) {
-                      platform.invokeMethod('serviceEnable');
+                      print("_enableApps 24");
+                      if (result == false) {
+                        print("_enableApps 25");
+                        platform.invokeMethod('serviceEnable');
+                      }
+                      print("_enableApps 26");
+                      print("result-=-=-=-=-==-=-==---=");
+                    } catch (e, st) {
+                      print("_enableApps 27");
+                      print("eeeeeee-=-=-=$e-=-==-=-==-st--=$st");
                     }
-                    print("result-=-=-=-=-==-=-==---=$result");
                   },
                 ),
               ),
@@ -364,10 +399,10 @@ class SupportedAppPage extends StatelessWidget {
 
   Widget _enableApps(
     BuildContext context, {
-    final String? image,
-    final String? text,
-    final bool? value,
-    final ValueChanged<bool>? onChanged,
+    String? image,
+    String? text,
+    bool? value,
+    ValueChanged<bool>? onChanged,
   }) {
     return Container(
       height: SizeUtils.verticalBlockSize * 10.5,

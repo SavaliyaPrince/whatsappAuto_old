@@ -12,7 +12,6 @@ import 'package:whatsapp_auto/Utils/open_ad.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
-import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -29,10 +28,9 @@ class _HomePageScreenState extends State<HomePageScreen>
     with WidgetsBindingObserver {
   final ThemeController themeController = Get.find();
   final HomePageController homePageController = Get.put(HomePageController());
-  final SupportedAppController supportedAppController =
-      Get.put(SupportedAppController());
   final InAppReview inAppReview = InAppReview.instance;
   bool isPaused = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -65,9 +63,6 @@ class _HomePageScreenState extends State<HomePageScreen>
 
   @override
   Widget build(BuildContext context) {
-    // homePageController.getWhatsAuto();
-    // print(
-    //     "----------homePageController.getWhatsAuto-----------${homePageController.getWhatsAuto()}");
     return Obx(
       () => WillPopScope(
         onWillPop: () {

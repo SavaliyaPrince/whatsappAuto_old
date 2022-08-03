@@ -76,6 +76,7 @@ WhatsReNotificationListner extends NotificationListenerService {
             stopSelf();
             Log.d("TAG", "id~~>002");
         } else if (intent != null && intent.getAction() != null && intent.getAction().equals("START_FOREGROUND_REMOVE")) {
+            Log.d("TAG", "id~~>003");
 //            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 //            String channelId = createNotificationChannel(notificationManager);
 //            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId);
@@ -237,20 +238,21 @@ WhatsReNotificationListner extends NotificationListenerService {
 //                    isReplyEnable = true;
                     if (!prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
                         isReplyEnable = true;
+                        if (isReplyEnable) {
+                            String[] messageStr = message.split(":");
+                            message = messageStr[messageStr.length - 1].trim();
+                            sender = messageStr[messageStr.length - 2];
+                            appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
+                            appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
+                            appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
+                        }
                         appendLog("----------isReplyEnable=========" + isReplyEnable);
                     }
                 } else {
                     isReplyEnable = true;
                     appendLog("isReplyEnable" + isReplyEnable);
                 }
-                if (isReplyEnable) {
-                    String[] messageStr = message.split(":");
-                    message = messageStr[messageStr.length - 1];
-                    sender = messageStr[messageStr.length - 2];
-                    appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
-                    appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
-                    appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
-                }
+
                 Log.d("TAG", "id~~>11");
                 break;
             case ApplicationPackageNames.WHATSAPP_PACKNAME:
