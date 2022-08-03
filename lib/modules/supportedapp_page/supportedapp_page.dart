@@ -16,7 +16,8 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class SupportedAppPage extends StatelessWidget {
   SupportedAppPage({Key? key}) : super(key: key);
   final ThemeController themeController = Get.find();
-  final SupportedAppController supportedAppController = Get.find();
+  final SupportedAppController supportedAppController =
+      Get.put(SupportedAppController());
   final HomePageController _homePageController = Get.find();
 
   @override
