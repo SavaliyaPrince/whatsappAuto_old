@@ -18,7 +18,7 @@ class ContactServiceController extends GetxController {
 
   Future<void> getPhoneContacts() async {
     try {
-      isLoader.value = true;
+      isLoader.value = true;//84c090b1 //e1989614 //21531
       print("getPhoneContacts :- 1 ${isLoader.value}");
       final PermissionStatus contactsPermissionsStatus = await _contactsPermissions();
       print("getPhoneContacts :- 2 $contactsPermissionsStatus");
@@ -26,22 +26,22 @@ class ContactServiceController extends GetxController {
         Navigation.pushNamed(Routes.contactPage);
         print('------GET-------${PermissionStatus.granted}-------GET-------');
         final List<Contact> contacts = await FlutterContacts.getContacts(withPhoto: true,withProperties: true);
-        print("getPhoneContacts :- 3 ${contacts.toString()}");
-        for (var i = 0; i <= contacts.length; i++) {
-          print("getPhoneContacts :- 4 ${contacts.length} ===>>$i");
+        print("getPhoneContacts :- 3 ${contacts.length}");
+        for (var i = 0; i < contacts.length; i++) {
+          final String number = contacts[i].phones.isNotEmpty ? contacts[i].phones[0].number : contacts[i].displayName;
+          log("getPhoneContacts :- 4 displayName: ${contacts[i].displayName} number $number ===>>$i");
           final ContactModel model = ContactModel(
             displayName: contacts[i].displayName,
-            mobileNumber: contacts[i].phones.toString(),
-            avatar: contacts[i].photo ,
+            mobileNumber: number,
+            avatar: contacts[i].photo,
             isCheck: false.obs,
           );
-          print("getPhoneContacts :- 5 ${model.mobileNumber}");
           contactModel.add(model);
         }
         isLoader.value = false;
       }
-    } catch (e, st) {
-      print('------e----$e----+----st-------$st-----');
+    } catch (e) {
+      print('---------e---------');
     }
   }
 
@@ -82,11 +82,11 @@ class ContactServiceController extends GetxController {
       log("groupStore 3:");
       final String musicsString = AppPreference.getString('selectedContactModel');
       log("groupStore 4: $musicsString");
-      final List<groupSelectedModel> musics = groupSelectedModel.decode(musicsString);
-      log("groupStore 5: $musics");
+      final List<groupSelectedModel> groupSelected = groupSelectedModel.decode(musicsString);
+      log("groupStore 5: $groupSelected");
 
       selectedContactModel.clear();
-      selectedContactModel.addAll(musics);
+      selectedContactModel.addAll(groupSelected);
     } catch (e, st) {
       print('-----$e-----GET MODEL-----$st------');
     }

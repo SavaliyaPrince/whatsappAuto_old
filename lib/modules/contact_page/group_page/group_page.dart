@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
+import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
-import 'package:whatsapp_auto/modules/contact_page/contact_list_page/demo_controller.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_service_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/group_page/group_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
@@ -79,9 +80,17 @@ class GroupsSettingsPage extends StatelessWidget {
                   description: AppString.allDescription,
                   value: groupController.isSwitchAllGroups.value,
                   onChanged: (value) {
-                    groupController.isSwitchAllGroups.value = value;
-                    groupController.isSwitchGroupsList.value = false;
-                    groupController.isSwitchExpectList.value= false;
+                    if (groupController.isSwitchAllGroups.value == false) {
+                      groupController.isSwitchAllGroups.value = true;
+                      AppPreference.setBoolean("SwitchAllGroups", value: groupController.isSwitchAllGroups.value);
+                      AppPreference.clearSharedPreferences("SwitchGroupsList");
+                      AppPreference.clearSharedPreferences("expectContact");
+                      groupController.isSwitchGroupsList.value = false;
+                      groupController.isSwitchExpectList.value = false;
+                    } else {
+                      groupController.isSwitchAllGroups.value = false;
+                      AppPreference.clearSharedPreferences("SwitchAllGroups");
+                    }
                   },
                 ),
                 SizedBox(
@@ -92,9 +101,17 @@ class GroupsSettingsPage extends StatelessWidget {
                   description: AppString.groupListDescription,
                   value: groupController.isSwitchGroupsList.value,
                   onChanged: (value) {
-                    groupController.isSwitchGroupsList.value = value;
-                    groupController.isSwitchAllGroups.value = false;
-                    groupController.isSwitchExpectList.value = false;
+                    if (groupController.isSwitchGroupsList.value == false) {
+                      groupController.isSwitchGroupsList.value = true;
+                      AppPreference.setBoolean("SwitchGroupsList", value: groupController.isSwitchGroupsList.value);
+                      AppPreference.clearSharedPreferences("SwitchAllGroups");
+                      AppPreference.clearSharedPreferences("expectContact");
+                      groupController.isSwitchAllGroups.value = false;
+                      groupController.isSwitchExpectList.value = false;
+                    } else {
+                      groupController.isSwitchGroupsList.value = false;
+                      AppPreference.clearSharedPreferences("SwitchGroupsList");
+                    }
                   },
                 ),
                 SizedBox(
@@ -105,9 +122,17 @@ class GroupsSettingsPage extends StatelessWidget {
                   description: AppString.expectDescription,
                   value: groupController.isSwitchExpectList.value,
                   onChanged: (value) {
-                    groupController.isSwitchExpectList.value = value;
-                    groupController.isSwitchGroupsList.value = false;
-                    groupController.isSwitchAllGroups.value = false;
+                    if (groupController.isSwitchExpectList.value == false) {
+                      groupController.isSwitchExpectList.value = true;
+                      AppPreference.setBoolean("ExpectList", value: groupController.isSwitchExpectList.value);
+                      AppPreference.clearSharedPreferences("SwitchAllGroups");
+                      AppPreference.clearSharedPreferences("SwitchGroupsList");
+                      groupController.isSwitchAllGroups.value = false;
+                      groupController.isSwitchGroupsList.value = false;
+                    } else {
+                      groupController.isSwitchExpectList.value = false;
+                      AppPreference.clearSharedPreferences("ExpectList");
+                    }
                   },
                 ),
                 SizedBox(
@@ -153,65 +178,65 @@ class GroupsSettingsPage extends StatelessWidget {
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 2,
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: demoController.selectedContactModel.length,
-                  itemBuilder: (context, index) {
-                    final selectedContact = demoController
-                        .selectedContactModel[index];
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        top: SizeUtils.verticalBlockSize * 1,
-                        bottom: SizeUtils.verticalBlockSize * 1,
-                        right: SizeUtils.horizontalBlockSize * 1,
-                      ),
-                      child: Row(
-                        children: [
-                            Container(
-                              width:
-                              SizeUtils.horizontalBlockSize * 7.6,
-                              height: SizeUtils.verticalBlockSize * 4.5,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColor.primaryColor,
-                              ),
-                              child: Center(
-                                child: AppText(
-                                  selectedContact.displayName![0],
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.whiteColor,
-                                ),
-                              ),
-                            ),
-                          SizedBox(
-                            width: SizeUtils.horizontalBlockSize * 5,
-                          ),
-                          AppText(
-                            selectedContact.displayName.toString(),
-                            fontWeight: FontWeight.w400,
-                            color: themeController.isSwitched.value
-                                ? AppColor.whiteColor
-                                : AppColor.textColor,
-                            fontSize: SizeUtils.fSize_14(),
-                          ),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () async {
-                                   demoController.selectedContactModel.removeAt(index);
-                            },
-                            child: Icon(
-                              Icons.close,
-                              color: themeController.isSwitched.value
-                                  ? AppColor.whiteColor.withOpacity(0.5)
-                                  : AppColor.textColor.withOpacity(0.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                )
+                // ListView.builder(
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   itemCount: demoController.selectedContactModel.length,
+                //   itemBuilder: (context, index) {
+                //     final selectedContact = demoController
+                //         .selectedContactModel[index];
+                //     return Padding(
+                //       padding: EdgeInsets.only(
+                //         top: SizeUtils.verticalBlockSize * 1,
+                //         bottom: SizeUtils.verticalBlockSize * 1,
+                //         right: SizeUtils.horizontalBlockSize * 1,
+                //       ),
+                //       child: Row(
+                //         children: [
+                //             Container(
+                //               width:
+                //               SizeUtils.horizontalBlockSize * 7.6,
+                //               height: SizeUtils.verticalBlockSize * 4.5,
+                //               decoration: const BoxDecoration(
+                //                 shape: BoxShape.circle,
+                //                 color: AppColor.primaryColor,
+                //               ),
+                //               child: Center(
+                //                 child: AppText(
+                //                   selectedContact.displayName![0].toUpperCase(),
+                //                   fontWeight: FontWeight.w600,
+                //                   color: AppColor.whiteColor,
+                //                 ),
+                //               ),
+                //             ),
+                //           SizedBox(
+                //             width: SizeUtils.horizontalBlockSize * 5,
+                //           ),
+                //           AppText(
+                //             selectedContact.displayName.toString().toLowerCase(),
+                //             fontWeight: FontWeight.w400,
+                //             color: themeController.isSwitched.value
+                //                 ? AppColor.whiteColor
+                //                 : AppColor.textColor,
+                //             fontSize: SizeUtils.fSize_14(),
+                //           ),
+                //           const Spacer(),
+                //           GestureDetector(
+                //             onTap: () async {
+                //                    demoController.selectedContactModel.removeAt(index);
+                //             },
+                //             child: Icon(
+                //               Icons.close,
+                //               color: themeController.isSwitched.value
+                //                   ? AppColor.whiteColor.withOpacity(0.5)
+                //                   : AppColor.textColor.withOpacity(0.5),
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     );
+                //   },
+                // )
               ],
             ),
           ),

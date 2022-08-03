@@ -83,4 +83,9 @@ dependencies {
 
     implementation 'org.jsoup:jsoup:1.10.2'
 
+
+    implementation 'com.google.guava:guava:27.0.1-android'
+
+
+
 }

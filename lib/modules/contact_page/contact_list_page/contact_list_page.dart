@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_service_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/data_source/group_contact_select_screen.dart';
-import 'package:whatsapp_auto/modules/contact_page/contact_list_page/demo_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/group_page/group_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
@@ -17,11 +18,10 @@ class ContactListPage extends StatelessWidget {
 
   final ThemeController themeController = Get.find();
   final ContactListController contactListController = Get.find();
-  final ContactServiceController demoController = Get.find();
+  final ContactController contactController = Get.find();
+  final ContactServiceController contactServiceController = Get.find();
   final GroupController groupController = Get.find();
   RxBool val = false.obs;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class ContactListPage extends StatelessWidget {
                 height: SizeUtils.verticalBlockSize * 2,
               ),
               Obx(
-                () => demoController.isLoader.value == true
+                () => contactServiceController.isLoader.value == true
                     ? const Expanded(
                         child: Center(
                           child: CircularProgressIndicator(
@@ -81,10 +81,10 @@ class ContactListPage extends StatelessWidget {
                       )
                     : Expanded(
                         child: ListView.builder(
-                          itemCount: demoController.contactModel.length,
+                          itemCount: contactServiceController.contactModel.length,
                           itemBuilder: (context, index) {
-                            final contact = demoController.contactModel[index];
-                            print('=====${demoController.contactModel[index].avatar}=====');
+                            final contact = contactServiceController.contactModel[index];
+                            print('=====${contactServiceController.contactModel[index].avatar}=====');
                             return Padding(
                               padding: EdgeInsets.only(
                                 top: SizeUtils.verticalBlockSize * 1,
@@ -123,12 +123,6 @@ class ContactListPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                  // if (contact.avatar == null)
-                                  //   const CircleAvatar(child: Icon(Icons.person))
-                                  // else
-                                  //   CircleAvatar(
-                                  //     backgroundImage: MemoryImage(contact.avatar!),
-                                  //   ),
                                   SizedBox(
                                     width: SizeUtils.horizontalBlockSize * 5,
                                   ),
@@ -151,26 +145,29 @@ class ContactListPage extends StatelessWidget {
                                         scale: 1.1,
                                         child: Obx(
                                           () => Checkbox(
-                                            value: contact.isCheck?.value,
+                                            value: contact.isCheck!.value,
                                             activeColor: ColorCollection.greenColor,
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(5),
                                             ),
                                             onChanged: (value) async {
+                                              final groupSelectedModel selectedContactModels = groupSelectedModel(
+                                                displayName: contact.displayName,
+                                                mobileNumber: contact.mobileNumber,
+                                                avatar: contact.avatar,
+                                              );
                                               if (contact.isCheck?.value == false) {
                                                 contact.isCheck?.value = true;
-                                                final groupSelectedModel selectedContactModels = groupSelectedModel(
-                                                  displayName: contact.displayName,
-                                                  mobileNumber: contact.mobileNumber,
-                                                  avatar: contact.avatar,
-                                                );
-                                                demoController.selectedContactModel.add(
+                                                contactServiceController.selectedContactModel.add(
                                                   selectedContactModels,
                                                 );
-                                                await demoController.contactStoreModel();
-                                                demoController.selectedContactModel.refresh();
+                                                await contactServiceController.contactStoreModel();
+                                                contactServiceController.contactModel.refresh();
                                               } else {
                                                 contact.isCheck?.value = false;
+                                                contactServiceController.selectedContactModel.removeWhere(
+                                                  (element) => element.displayName == contactServiceController.contactModel[index].displayName,
+                                                );
                                               }
                                             },
                                           ),

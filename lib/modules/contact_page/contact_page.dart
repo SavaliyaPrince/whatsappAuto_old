@@ -8,7 +8,7 @@ import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_list_controller.dart';
-import 'package:whatsapp_auto/modules/contact_page/contact_list_page/demo_controller.dart';
+import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_service_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/group_page/group_controller.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
@@ -23,6 +23,7 @@ class ContactPage extends StatelessWidget {
   final ContactServiceController demoController = Get.put(ContactServiceController());
   final GroupController groupController = Get.put(GroupController());
   final HomePageController homePageController = Get.find();
+  final ContactServiceController contactServiceController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +83,7 @@ class ContactPage extends StatelessWidget {
                     if (contactController.isSwitchEveryone.value == false) {
                       contactController.isSwitchEveryone.value = true;
                       AppPreference.setBoolean("everyone", value: contactController.isSwitchEveryone.value);
-                      contactController.nativeCode();
-                      print("everyone  ----->:${AppPreference.getBoolean("everyone")}");
+                      contactController.changeAutoReplyTo(AutoReplyTo.everyone);
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
                       AppPreference.clearSharedPreferences("phoneContact");
@@ -108,8 +108,8 @@ class ContactPage extends StatelessWidget {
                     if (contactController.isSwitchMyContact.value == false) {
                       contactController.isSwitchMyContact.value = true;
                       AppPreference.setBoolean("contactList", value: contactController.isSwitchMyContact.value);
-                      contactController.nativeCode();
-                      print("contactList  ----->:${AppPreference.getBoolean("contactList")}");
+                      //       contactController.changeAutoReplyTo(contactController.isSwitchMyContact.value);
+                      contactController.changeAutoReplyTo(AutoReplyTo.my_contact_list);
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("expectContact");
                       AppPreference.clearSharedPreferences("phoneContact");
@@ -134,8 +134,8 @@ class ContactPage extends StatelessWidget {
                     if (contactController.isSwitchExpectContact.value == false) {
                       contactController.isSwitchExpectContact.value = true;
                       AppPreference.setBoolean("expectContact", value: contactController.isSwitchExpectContact.value);
-                      contactController.nativeCode();
-                      print("expectContact  ----->:${AppPreference.getBoolean("expectContact")}");
+                      //       contactController.changeAutoReplyTo(contactController.isSwitchExpectContact.value);
+                      contactController.changeAutoReplyTo(AutoReplyTo.except_my_contact_list);
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("phoneContact");
@@ -161,8 +161,8 @@ class ContactPage extends StatelessWidget {
                     if (contactController.isSwitchPhoneContact.value == false) {
                       contactController.isSwitchPhoneContact.value = true;
                       AppPreference.setBoolean("phoneContact", value: contactController.isSwitchPhoneContact.value);
-                      contactController.nativeCode();
-                      print("phoneContact  ---ff-->:${AppPreference.getBoolean("phoneContact")}");
+                      //     contactController.changeAutoReplyTo(contactController.isSwitchPhoneContact.value);
+                      contactController.changeAutoReplyTo(AutoReplyTo.except_my_phone_contacts);
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -277,64 +277,62 @@ class ContactPage extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: demoController.contactModel.length,
+                  itemCount: demoController.selectedContactModel.length,
                   itemBuilder: (context, index) {
-                    print("contactListController.contacts.length -=-=-==-==-=-=-=- ${demoController.contactModel.length}");
+                    final selectedContact = demoController.selectedContactModel[index];
                     return Padding(
                       padding: EdgeInsets.only(
-                        top: SizeUtils.verticalBlockSize * 1.3,
+                        top: SizeUtils.verticalBlockSize * 1,
                         bottom: SizeUtils.verticalBlockSize * 1,
                         right: SizeUtils.horizontalBlockSize * 1,
                       ),
                       child: Row(
                         children: [
-                          if (demoController.contactModel[index].avatar != null)
-                            Container(
-                              width: SizeUtils.horizontalBlockSize * 7.6,
-                              height: SizeUtils.verticalBlockSize * 4.5,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: MemoryImage(
-                                    demoController.contactModel[index].avatar!,
-                                  ),
-                                ),
-                                color: Colors.red,
-                              ),
-                            )
-                          else
-                            Container(
-                              width: SizeUtils.horizontalBlockSize * 7.6,
-                              height: SizeUtils.verticalBlockSize * 4.5,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColor.primaryColor,
-                              ),
-                              child: Center(
-                                child: AppText(
-                                  demoController.contactModel[index].displayName![0].toUpperCase(),
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColor.whiteColor,
-                                ),
+                          Container(
+                            width: SizeUtils.horizontalBlockSize * 7.6,
+                            height: SizeUtils.verticalBlockSize * 4.5,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColor.primaryColor,
+                            ),
+                            child: Center(
+                              child: AppText(
+                                selectedContact.displayName![0].toUpperCase(),
+                                fontWeight: FontWeight.w600,
+                                color: AppColor.whiteColor,
                               ),
                             ),
+                          ),
                           SizedBox(
                             width: SizeUtils.horizontalBlockSize * 5,
                           ),
                           AppText(
-                            demoController.contactModel[index].displayName.toString().toLowerCase(),
+                            selectedContact.displayName.toString().toLowerCase(),
                             fontWeight: FontWeight.w400,
-                            color: ColorRes.textColor(context),
+                            color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
                             fontSize: SizeUtils.fSize_14(),
                           ),
                           const Spacer(),
-                          InkWell(
-                            onTap: () {
-                              demoController.contactModel.removeAt(index);
+                          GestureDetector(
+                            onTap: () async {
+                              try {
+                                if (contactServiceController.contactModel[index].isCheck?.value == true) {
+                                  contactServiceController.contactModel[index].isCheck?.value = false;
+                                  demoController.selectedContactModel.removeAt(index);
+                                } else {
+                                  contactServiceController.contactModel[index].isCheck?.value = true;
+                                }
+                              } catch (e, st) {
+                                print('-------$e-------$st------');
+                              }
                             },
                             child: Icon(
                               Icons.close,
-                              color: ColorRes.textColor(context).withOpacity(0.5),
+                              color: themeController.isSwitched.value
+                                  ? AppColor.whiteColor.withOpacity(0.5)
+                                  : AppColor.textColor.withOpacity(
+                                      0.5,
+                                    ),
                             ),
                           ),
                         ],
