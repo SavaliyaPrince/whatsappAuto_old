@@ -155,5 +155,9 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
           .trim(),
       "replyMessage": _createReplyController.replyMassageController.text.trim(),
     });
+    print(
+        "message---------->>>>>>>> ${_createReplyController.inComingKeywordController.text}");
+    print(
+        "replyMessage---------->>>>>>>> ${_createReplyController.replyMassageController.text.trim()}");
   }
 }

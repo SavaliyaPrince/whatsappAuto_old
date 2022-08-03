@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/Advance_setting/advance_controller.dart';
@@ -18,6 +19,7 @@ class ASpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: const BannerAdView(),
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
         elevation: 0.2,
@@ -220,6 +222,13 @@ class ASpage extends StatelessWidget {
                           },
                         ),
                         SizedBox(height: SizeUtils.verticalBlockSize * 4),
+                        Obx(
+                          () => SizedBox(
+                            height: isBannerLoaded.value
+                                ? SizeUtils.verticalBlockSize * 4
+                                : 0,
+                          ),
+                        ),
                       ],
                     ),
                   );

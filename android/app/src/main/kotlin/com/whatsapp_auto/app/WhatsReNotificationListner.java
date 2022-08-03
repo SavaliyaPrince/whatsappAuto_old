@@ -65,6 +65,8 @@ WhatsReNotificationListner extends NotificationListenerService {
 
     // Constants
     private static final int ID_SERVICE = 101;
+    String packageName;
+    String[] senders;
 
     public List<Long> waLastRawId = new ArrayList<>();
 
@@ -78,6 +80,7 @@ WhatsReNotificationListner extends NotificationListenerService {
             stopSelf();
             Log.d("TAG", "id~~>002");
         } else if (intent != null && intent.getAction() != null && intent.getAction().equals("START_FOREGROUND_REMOVE")) {
+            Log.d("TAG", "id~~>003");
 //            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 //            String channelId = createNotificationChannel(notificationManager);
 //            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId);
@@ -198,7 +201,7 @@ WhatsReNotificationListner extends NotificationListenerService {
         boolean isReplyEnable = false;
         Bundle bundle = sbn.getNotification().extras;
         Log.d("TAG", "bundle~~>----" + bundle.toString());
-        String packageName = sbn.getPackageName();
+        packageName = sbn.getPackageName();
         if (packageName.equals(BuildConfig.APPLICATION_ID)) {
             return;
         }
@@ -218,11 +221,17 @@ WhatsReNotificationListner extends NotificationListenerService {
             return;
         }
         Log.d("TAG", "id~~>2");
-        String[] senders = sender.split(":");
-        if (senders.length > 1) {
-            sender = senders[1];
-            sender = sender.replaceAll(" ", "");
+        if (sender != null && sender.equals(" ")) {
+
+            Log.d("TAG", "id~~>2222");
+            senders = sender.split(":");
+
+            if (senders.length > 1) {
+                sender = senders[1];
+                sender = sender.replaceAll(" ", "");
+            }
         }
+
         Log.d("TAG", "id~~>3");
         switch (packageName) {
 
@@ -248,20 +257,21 @@ WhatsReNotificationListner extends NotificationListenerService {
 //                    isReplyEnable = true;
                     if (!prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
                         isReplyEnable = true;
+                        if (isReplyEnable) {
+                            String[] messageStr = message.split(":");
+                            message = messageStr[messageStr.length - 1].trim();
+                            sender = messageStr[messageStr.length - 2];
+                            appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
+                            appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
+                            appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
+                        }
                         appendLog("----------isReplyEnable=========" + isReplyEnable);
                     }
                 } else {
                     isReplyEnable = true;
                     appendLog("isReplyEnable" + isReplyEnable);
                 }
-                if (isReplyEnable) {
-                    String[] messageStr = message.split(":");
-                    message = messageStr[messageStr.length - 1];
-                    sender = messageStr[messageStr.length - 2];
-                    appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
-                    appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
-                    appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
-                }
+
                 Log.d("TAG", "id~~>11");
                 break;
             case ApplicationPackageNames.WHATSAPP_PACKNAME:
@@ -588,11 +598,77 @@ WhatsReNotificationListner extends NotificationListenerService {
         RemoteInput.addResultsToIntent(remoteInputArr, intent, bundle);
         if (pendingIntent != null) {
             try {
+                switch (packageName) {
+                    case ApplicationPackageNames.INSTA_PACKNAME:
 
-                SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                        SharedPreferences prefInsta = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                        int instaCount = prefInsta.getInt("instaMessageCount", 0);
+                        instaCount = instaCount + 1;
+                        prefInsta.edit().putInt("instaMessageCount", instaCount).apply();
+                        break;
+
+                    case ApplicationPackageNames.TELEGRAM_PACKNAME:
+
+                        SharedPreferences prefsTelegram = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                        int telegramCount = prefsTelegram.getInt("telegramMessageCount", 0);
+                        telegramCount = telegramCount + 1;
+
+                        Log.d("TAG", "telegramCount~~ 0" + telegramCount);
+
+                        prefsTelegram.edit().putInt("telegramMessageCount", telegramCount).apply();
+                        break;
+
+
+                    case ApplicationPackageNames.FACEBOOK_PACKNAME:
+                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 0");
+
+                        SharedPreferences prefsFacebook = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                        int facebookCount = prefsFacebook.getInt("facebookMessageCount", 0);
+                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 1" + facebookCount);
+
+                        facebookCount = facebookCount + 1;
+                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 2" + facebookCount);
+
+                        prefsFacebook.edit().putInt("facebookMessageCount", facebookCount).apply();
+                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 3" + pendingIntent);
+
+                        pendingIntent.send(this, 0, intent);
+                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 4" + facebookCount);
+                        break;
+
+
+                    case ApplicationPackageNames.TWITTER_PACKNAME:
+
+                        SharedPreferences prefsTwitter = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                        int twitterCount = prefsTwitter.getInt("twitterMessageCount", 0);
+                        twitterCount = twitterCount + 1;
+                        prefsTwitter.edit().putInt("twitterMessageCount", twitterCount).apply();
+                        break;
+
+
+                    case ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS:
+
+                        SharedPreferences prefsWhatsappBusi = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                        int whatsappBusinessCount = prefsWhatsappBusi.getInt("whatsAppBusinessMessageCount", 0);
+                        whatsappBusinessCount = whatsappBusinessCount + 1;
+                        prefsWhatsappBusi.edit().putInt("whatsAppBusinessMessageCount", whatsappBusinessCount).apply();
+                        break;
+
+
+                    case ApplicationPackageNames.WHATSAPP_PACKNAME:
+
+                        SharedPreferences prefsWhatsapp = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                        int whatsappCount = prefsWhatsapp.getInt("messageCount", 0);
+                        whatsappCount = whatsappCount + 1;
+                        prefsWhatsapp.edit().putInt("messageCount", whatsappCount).apply();
+                        break;
+
+                }
+
+                /*SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
                 int messageCount = prefs.getInt("messageCount", 0);
                 messageCount = messageCount + 1;
-                prefs.edit().putInt("messageCount", messageCount).apply();
+                prefs.edit().putInt("messageCount", messageCount).apply();*/
 
                 pendingIntent.send(this, 0, intent);
 

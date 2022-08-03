@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
@@ -12,7 +13,15 @@ class AutoReply extends StatelessWidget {
   AutoReply({Key? key}) : super(key: key);
 
   final ValueNotifier<bool> _isDisable = ValueNotifier(true);
-  final ThemeController themeController = Get.find()..getMessageCount();
+  final ThemeController themeController = Get.find()
+    ..getWhatsappMessageCount()
+    ..getFbMessageCount()
+    ..getTelegramMessageCount()
+    ..getTwitterMessageCount()
+    ..getWhatsappBusiMessageCount()
+    ..getInstaMessageCount()
+    ..getTotalCount();
+  // ..getMessageCount();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,28 +54,28 @@ class AutoReply extends StatelessWidget {
               ? AppColor.whiteColor
               : AppColor.backIconColor,
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-            child: GestureDetector(
-              onTap: () {},
-              child: Image.asset(
-                AppIcons.import,
-                width: SizeUtils.fSize_24(),
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
+        //     child: GestureDetector(
+        //       onTap: () {},
+        //       child: Image.asset(
+        //         AppIcons.import,
+        //         width: SizeUtils.fSize_24(),
+        //         color: themeController.isSwitched.value
+        //             ? AppColor.whiteColor
+        //             : AppColor.backIconColor,
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ),
       body: Center(
         child: Column(
           children: [
             SizedBox(height: SizeUtils.verticalBlockSize * 2.7),
             AppText(
-              "${themeController.totalMassageSent}",
+              "${themeController.totalMassageSent.value}",
               color: AppColor.primaryColor,
               fontSize: SizeUtils.fSize_24(),
               fontWeight: FontWeight.w600,
@@ -97,10 +106,10 @@ class AutoReply extends StatelessWidget {
                           context,
                           AppIcons.whatsapp,
                           AppString.welcomeMessage,
-                          "${AppString.massageSent}  ${themeController.whatsAppMassageSent.isEmpty ? 0 : themeController.whatsAppMassageSent}",
+                          "${AppString.massageSent} ${themeController.whatsAppMassageSent == 0 ? 0 : themeController.whatsAppMassageSent}",
                           colorText:
                               // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.whatsAppMassageSent.isEmpty
+                              themeController.whatsAppMassageSent == 0
                                   ? false
                                   : value,
                         ),
@@ -108,10 +117,10 @@ class AutoReply extends StatelessWidget {
                           context,
                           AppIcons.telegram,
                           AppString.Telegram,
-                          "${AppString.massageSent} ${themeController.telegramMassageSent.isEmpty ? 0 : themeController.telegramMassageSent}",
+                          "${AppString.massageSent} ${themeController.telegramMassageSent == 0 ? 0 : themeController.telegramMassageSent}",
                           colorText:
                               // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.telegramMassageSent.isEmpty
+                              themeController.telegramMassageSent == 0
                                   ? false
                                   : value,
                         ),
@@ -123,18 +132,23 @@ class AutoReply extends StatelessWidget {
                       children: [
                         replyMassageItem(
                           context,
-                          AppIcons.viber,
+                          AppIcons.instagram,
                           AppString.instagram,
-                          "${AppString.massageSent} 0",
+                          "${AppString.massageSent} ${themeController.instaMassageSent == 0 ? 0 : themeController.instaMassageSent}",
+                          colorText:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              themeController.instaMassageSent == 0
+                                  ? false
+                                  : value,
                         ),
                         replyMassageItem(
                           context,
                           AppIcons.fbMessenger,
-                          AppString.Messanger,
-                          "${AppString.massageSent} ${themeController.fbMassangerMassageSent.isEmpty ? 0 : themeController.fbMassangerMassageSent}",
+                          AppString.massanger,
+                          "${AppString.massageSent} ${themeController.fbMassangerMassageSent == 0 ? 0 : themeController.fbMassangerMassageSent}",
                           colorText:
                               // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.fbMassangerMassageSent.isEmpty
+                              themeController.fbMassangerMassageSent == 0
                                   ? false
                                   : value,
                         ),
@@ -146,24 +160,23 @@ class AutoReply extends StatelessWidget {
                       children: [
                         replyMassageItem(
                           context,
-                          AppIcons.line,
-                          AppString.LineMessenger,
-                          "${AppString.massageSent} ${themeController.lineMassangerMassageSent.isEmpty ? 0 : themeController.lineMassangerMassageSent}",
+                          AppIcons.twitter,
+                          AppString.twitter,
+                          "${AppString.massageSent} ${themeController.twitterMassageSent == 0 ? 0 : themeController.twitterMassageSent}",
                           colorText:
                               // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.lineMassangerMassageSent.isEmpty
+                              themeController.twitterMassageSent == 0
                                   ? false
                                   : value,
                         ),
                         replyMassageItem(
                           context,
-                          AppIcons.discord,
-                          AppString.Messanger,
-                          "${AppString.massageSent} ${themeController.discordMassangerMassageSent.isEmpty ? 0 : themeController.discordMassangerMassageSent}",
+                          AppIcons.whatsappBusiness,
+                          AppString.whatsappBusiness,
+                          "${AppString.massageSent} ${themeController.whatsAppBusiMassageSent == 0 ? 0 : themeController.whatsAppBusiMassageSent}",
                           colorText:
                               // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController
-                                      .discordMassangerMassageSent.isEmpty
+                              themeController.whatsAppBusiMassageSent == 0
                                   ? false
                                   : value,
                         ),
@@ -176,6 +189,7 @@ class AutoReply extends StatelessWidget {
           ],
         ),
       ),
+      bottomSheet: const BannerAdView(),
     );
   }
 
