@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
+import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/interstitial_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
@@ -289,6 +290,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.settingSubTile,
                             image: AssetsPath.setting,
                             onTap: () {
+                              InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.settingPage);
                             },
                           ),
@@ -337,6 +339,7 @@ class _HomePageScreenState extends State<HomePageScreen>
               ],
             ),
           ),
+          bottomSheet: const BannerAdView(),
         ),
       ),
     );
