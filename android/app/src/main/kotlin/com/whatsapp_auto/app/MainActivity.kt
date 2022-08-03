@@ -462,20 +462,28 @@ class MainActivity : FlutterActivity() {
 
             }
             if (call.method == "autoReplyTo") {
-                val contactList = call.argument<String>("contactList");
-                Log.d("tag", "contactList === >>>> " + contactList)
+                val autoReplyTo = call.argument<String>("autoReplyTo");
+                Log.d("tag", "AUTO REPLY TO contactList === >>>> " + autoReplyTo)
 
                 val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
-                editor.putString("contactString-" + contactList,"")
+                editor.putString("autoReplyTo", autoReplyTo)
                 editor.apply()
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
-                var botMessage = get.getString("botMessage-" + contactList, "")
-                Log.d("tag", "newCreatedMessage === >>>> " + botMessage)
+                var botMessage = get.getString("autoReplyTo", "")
+                Log.d("tag", "AUTO REPLY TO autoReplyTo === >>>> " + autoReplyTo)
             }
 
-//            }
+            if (call.method == "allContacts") {
+                val contactList = call.argument<String>("contactList");
+                Log.d("tag", "ALL CONTACTS contactList === >>>> " + contactList)
 
-
+                val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+                editor.putString("contactList", contactList)
+                editor.apply()
+                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+                var allContactList = get.getString("contactList", "")
+                Log.d("tag", "ALL CONTACTS contactList === >>>> " + allContactList)
+            }
         }
 
     }

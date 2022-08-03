@@ -36,9 +36,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.whatsapp_auto.app.BuildConfig;
 import com.whatsapp_auto.app.R;
 
@@ -152,6 +156,13 @@ WhatsReNotificationListner extends NotificationListenerService {
         public static final String PREF_SELLER_CHANNEL = "sellerchannel"; // We ignore all notification with code == 4
     }
 
+    private static final class AutoReplyToType {
+        public static final String everyone = "everyone";
+        public static final String myContactList = "my_contact_list";
+        public static final String exceptMyContactList = "except_my_contact_list";
+        public static final String exceptMyPhoneContacts = "except_my_phone_contacts";
+    }
+
     private String createNotificationChannel(NotificationManager notificationManager) {
         String channelId = "Gangala_id_one";
         String channelName = "AutoReplay ON";
@@ -193,11 +204,19 @@ WhatsReNotificationListner extends NotificationListenerService {
         }
         Log.d("TAG", "id~~>1");
 
-        String sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
+        String sender = null;
+        try {
+            sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String message = "" + bundle.getString(InterceptedNotificationParseCode.ANDROID_TEXT);
 
 
 //        Log.d("message-=-=-=-111111=-=-=--==-" + message);
+        if(sender == null) {
+            return;
+        }
         Log.d("TAG", "id~~>2");
         String[] senders = sender.split(":");
         if (senders.length > 1) {
@@ -248,16 +267,18 @@ WhatsReNotificationListner extends NotificationListenerService {
             case ApplicationPackageNames.WHATSAPP_PACKNAME:
             case ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS:
                 Log.d("TAG", "TEST-REPLY 0");
-                if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME, false)) {
-                    Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS");
-
-                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME))
-                        return;
-                }
-                if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS, false)) {
-                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS))
-                        return;
-                }
+//                if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME, false)) {
+//                    Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS");
+//
+//                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME))
+//                        Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS 0 return");
+//                        return;
+//                }
+//                if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS, false)) {
+//                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS))
+//                        Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS 1 return");
+//                        return;
+//                }
                 Log.d("TAG", "TEST-REPLY sender: " + sender);
                 if (sender != null && !sender.equalsIgnoreCase("tú") && !sender.equalsIgnoreCase("you")) {
                     Log.d("TAG", "arrayList --1 start");
@@ -326,29 +347,57 @@ WhatsReNotificationListner extends NotificationListenerService {
         }
 
         if (isReplyEnable) {
+            Log.d("TAG", "isReplyEnable" + isReplyEnable);
 
-//            SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-//            String autoReplyType = prefs.getBoolean("autoReplyTo", new ArrayList<>);
-//            List allCointacts = prefs.getBoolean("allContacts", new ArrayList<>);
-//
-//            if (autoReplyType == "myContacts") {
-//                if (!allCointacts.contrains(sender)) {
-//                    return;
-//                }
-//            }
-
-//            replyCount++;
             appendLog("sender----:" + (sender));
             appendLog("message---: " + (message));
+            Log.d("TAG", "isReplyEnable 0");
+            String autoReplyTo = prefs.getString("autoReplyTo", AutoReplyToType.everyone);
+            String allContacts = prefs.getString("contactList", "");
+            Log.d("TAG", "isReplyEnable 1 autoReplyTo: " + autoReplyTo);
+            Log.d("TAG", "isReplyEnable 2 allContacts: " + allContacts.length());
+            if(autoReplyTo.equalsIgnoreCase(AutoReplyToType.everyone)) {
 
-            String key = "botMessage-" + message.toLowerCase();
-            String repliedMessage = prefs.getString(key, "Hi");
+                String key = "botMessage-" + message.toLowerCase();
+                String repliedMessage = prefs.getString(key, "Hi");
 
-            appendLog("repliedMessage---: " + repliedMessage);
-            appendLog("key----------: " + key);
+                appendLog("repliedMessage---: " + repliedMessage);
+                appendLog("key----------: " + key);
 
 
-            replayNotification(sbn, bundle, repliedMessage);
+                replayNotification(sbn, bundle, repliedMessage);
+            } else if(autoReplyTo.equalsIgnoreCase(AutoReplyToType.myContactList)) {
+                if(!allContacts.isEmpty()) {
+
+                    // String data = "[Raj, Paras]";
+                    // List<String> = [Raj, Paras];
+
+//                    String[] sArr = allContacts.split(",");
+//                    List<String> lst = Arrays.asList(Arrays.toString(sArr).trim());
+//                    List<String> lst = Arrays.asList(sArr);
+                    List<String> lst = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(allContacts));
+
+                    for (int i = 0; i < lst.size(); i++) {
+                        Log.d("checkAllData--", "--" + lst.get(i).trim() + "--");
+
+                    }
+
+                    Log.d("checkAllData11--", "--" + lst.contains(sender.trim()));
+
+
+                    if(lst.contains(sender.trim())) {
+
+                        String key = "botMessage-" + message.toLowerCase();
+                        String repliedMessage = prefs.getString(key, "Hi");
+
+                        appendLog("repliedMessage---: " + repliedMessage);
+                        appendLog("key----------: " + key);
+
+
+                        replayNotification(sbn, bundle, repliedMessage);
+                    }
+                }
+            }
 
 
 //            requestMessage(message, sender).subscribeOn(Schedulers.trampoline())

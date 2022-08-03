@@ -18,7 +18,6 @@ class AppPreference {
     _prefs.remove(value);
     return;
   }
-
   // static const String theme = "theme";
 
   ///-------------
