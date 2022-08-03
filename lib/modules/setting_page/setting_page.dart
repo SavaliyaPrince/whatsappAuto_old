@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
@@ -37,13 +39,17 @@ class SettingPage extends StatelessWidget {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
             child: Image.asset(
               AppIcons.backIcon,
-              color: themeController.isSwitched.value ? AppColor.whiteColor : Colors.black,
+              color: themeController.isSwitched.value
+                  ? AppColor.whiteColor
+                  : Colors.black,
             ),
           ),
         ),
         title: AppText(
           AppString.setting,
-          color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
+          color: themeController.isSwitched.value
+              ? AppColor.whiteColor
+              : AppColor.backIconColor,
           fontWeight: FontWeight.w600,
         ),
       ),

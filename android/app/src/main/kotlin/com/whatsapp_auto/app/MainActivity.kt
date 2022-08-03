@@ -18,11 +18,14 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
+import android.content.Context
+
 
 class MainActivity : FlutterActivity() {
 
     private val CHANNEL = "samples.flutter.dev/battery"
-    private val ACTION_NOTIFICATION_LISTENER_SETTINGS = "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"
+    private val ACTION_NOTIFICATION_LISTENER_SETTINGS =
+        "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"
     private val ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners"
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -34,20 +37,56 @@ class MainActivity : FlutterActivity() {
 //        try {
 //
 //            String newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=com.imangi.templerun2" + "&hl=en")
-//            .timeout(30000)
+//                .timeout(30000)
 //                .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-//            .referrer("http://www.google.com")
-//                    .get()
+//                .referrer("http://www.google.com")
+//                .get()
 //                .select("div[itemprop=softwareVersion]")
-//            .first()
+//                .first()
 //                .ownText();
 //            Log.d("storeVersion", newVersion);
-////        } catch (IOException e) {
+//        } catch (IOException e) {
 //            Log.d("storeVersion exception", e.getLocalizeMessage());
 //            e.printStackTrace();
 //        }
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
+        ///
+//        val versionChecker = VersionChecker()
+//        val latestVersion: String = versionChecker.execute().get()
+//
+//
+//        val versionChecker: VersionChecker = VersionChecker()
+//        try {
+//            val latestVersion: Document = versionChecker.execute().get()
+//            Log.d("TAG~~~", "onCreate: $latestVersion")
+//        } catch (e: ExecutionException) {
+//            e.printStackTrace()
+//            Log.d("TAG~~~", "onCreate: Exception :  " + e.localizedMessage)
+//        } catch (e: InterruptedException) {
+//            Log.d("TAG~~~", "onCreate: InterruptedException :  " + e.localizedMessage)
+//            e.printStackTrace()
+//        }
+
+//        try {
+//            val newVersion: String =
+//                Jsoup.connect("https://play.google.com/store/apps/details?id=com.imangi.templerun2" + "&hl=en")
+//                    .timeout(30000)
+//                    .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+//                    .referrer("http://www.google.com")
+//                    .get()
+//                    .select("div[itemprop=softwareVersion]")
+//                    .first()
+//                    .ownText()
+//            Log.d("tag", "storeVersion:  $newVersion")
+//        } catch (e) {
+//            e
+//            Log.d("tag", "storeVersion exception:  ${e}")
+//        }
+
+        MethodChannel(
+            flutterEngine.dartExecutor.binaryMessenger,
+            CHANNEL
+        ).setMethodCallHandler { call, result ->
 
             if (call.method == "checkNotificationServiceEnabled") {
                 var res = isNotificationServiceEnabled();
@@ -249,60 +288,70 @@ class MainActivity : FlutterActivity() {
 
             }
             if (call.method == "getFbMessageCount") {
-                Log.d("TAG", "getFbMessageCount~~ " );
+                Log.d("TAG", "getFbMessageCount~~ ");
 
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
                 var fbMessageCount = get.getInt("facebookMessageCount", 0)
-                Log.d("TAG", "getFbMessageCount~~ 1 :"
-                      +  fbMessageCount);
+                Log.d(
+                    "TAG", "getFbMessageCount~~ 1 :"
+                            + fbMessageCount
+                );
 
                 result.success(fbMessageCount.toString())
                 Log.d("TAG", "result.success--- :");
 
             }
             if (call.method == "getTelegramMessageCount") {
-                Log.d("TAG", "getTelegramMessageCount~~ " );
+                Log.d("TAG", "getTelegramMessageCount~~ ");
 
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
                 var telegramMessageCount = get.getInt("telegramMessageCount", 0)
-                Log.d("TAG", "telegramMessageCount~~ 1 :"
-                        +  telegramMessageCount);
+                Log.d(
+                    "TAG", "telegramMessageCount~~ 1 :"
+                            + telegramMessageCount
+                );
 
                 result.success(telegramMessageCount.toString())
                 Log.d("TAG", "result.success--- :");
 
             }
             if (call.method == "getTwitterMessageCount") {
-                Log.d("TAG", "getTwitterMessageCount~~ " );
+                Log.d("TAG", "getTwitterMessageCount~~ ");
 
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
                 var twitterMessageCount = get.getInt("twitterMessageCount", 0)
-                Log.d("TAG", "twitterMessageCount~~ 1 :"
-                        +  twitterMessageCount);
+                Log.d(
+                    "TAG", "twitterMessageCount~~ 1 :"
+                            + twitterMessageCount
+                );
 
                 result.success(twitterMessageCount.toString())
                 Log.d("TAG", "result.success--- :");
 
             }
             if (call.method == "getWhatsappBusiMessageCount") {
-                Log.d("TAG", "getWhatsappBusiMessageCount~~ " );
+                Log.d("TAG", "getWhatsappBusiMessageCount~~ ");
 
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
                 var whatsAppBusinessMessageCount = get.getInt("whatsAppBusinessMessageCount", 0)
-                Log.d("TAG", "whatsAppBusinessMessageCount~~ 1 :"
-                        +  whatsAppBusinessMessageCount);
+                Log.d(
+                    "TAG", "whatsAppBusinessMessageCount~~ 1 :"
+                            + whatsAppBusinessMessageCount
+                );
 
                 result.success(whatsAppBusinessMessageCount.toString())
                 Log.d("TAG", "result.success--- :");
 
             }
             if (call.method == "getInstaMessageCount") {
-                Log.d("TAG", "getInstaMessageCount~~ " );
+                Log.d("TAG", "getInstaMessageCount~~ ");
 
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
                 var instaMessageCount = get.getInt("instaMessageCount", 0)
-                Log.d("TAG", "instaMessageCount~~ 1 :"
-                        +  instaMessageCount);
+                Log.d(
+                    "TAG", "instaMessageCount~~ 1 :"
+                            + instaMessageCount
+                );
 
                 result.success(instaMessageCount.toString())
                 Log.d("TAG", "result.success--- :");
@@ -313,7 +362,7 @@ class MainActivity : FlutterActivity() {
                 Log.d("tag", "contactList === >>>> " + contactList)
 
                 val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
-                editor.putString("contactString-" + contactList,"")
+                editor.putString("contactString-" + contactList, "")
                 editor.apply()
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
                 var botMessage = get.getString("botMessage-" + contactList, "")
@@ -329,8 +378,10 @@ class MainActivity : FlutterActivity() {
 
     private fun isNotificationServiceEnabled(): Boolean {
         val pkgName = packageName
-        val flat = Settings.Secure.getString(contentResolver,
-                ENABLED_NOTIFICATION_LISTENERS)
+        val flat = Settings.Secure.getString(
+            contentResolver,
+            ENABLED_NOTIFICATION_LISTENERS
+        )
         if (!TextUtils.isEmpty(flat)) {
             val names = flat.split(":".toRegex()).toTypedArray()
             for (i in names.indices) {
@@ -344,5 +395,31 @@ class MainActivity : FlutterActivity() {
         }
         return false
     }
+
+//    class VersionChecke : AsyncTask<String, String, String>() {
+//         fun doInBackground(vararg params: String?): String {
+//            TODO("Not yet implemented")
+//
+//            val newVersion: String
+//
+//            try {
+//                newVersion =
+//                    Jsoup.connect("https://play.google.com/store/apps/details?id=com.whatsapp.w4b" + "&hl=en")
+//                        .timeout(20000)
+//                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+//                        .referrer("http://www.google.com")
+//                        .get()
+//                        .select("div.hAyfc:nth-child(4) > span:nth-child(2) > div:nth-child(1) > span:nth-child(1)")
+//                        .first()
+//                        .ownText()
+//                Log.d("tag", "storeVersion:  $newVersion")
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//                Log.d("tag", "storeVersion exception:  ${e.localizedMessage}")
+//            }
+//            return newVersion
+//        }
+//
+//    }
 
 }

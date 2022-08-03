@@ -54,21 +54,21 @@ class AutoReply extends StatelessWidget {
               ? AppColor.whiteColor
               : AppColor.backIconColor,
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-            child: GestureDetector(
-              onTap: () {},
-              child: Image.asset(
-                AppIcons.import,
-                width: SizeUtils.fSize_24(),
-                color: themeController.isSwitched.value
-                    ? AppColor.whiteColor
-                    : AppColor.backIconColor,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
+        //     child: GestureDetector(
+        //       onTap: () {},
+        //       child: Image.asset(
+        //         AppIcons.import,
+        //         width: SizeUtils.fSize_24(),
+        //         color: themeController.isSwitched.value
+        //             ? AppColor.whiteColor
+        //             : AppColor.backIconColor,
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ),
       body: Center(
         child: Column(

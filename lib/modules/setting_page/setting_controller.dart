@@ -1,10 +1,8 @@
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
-import 'package:new_version/new_version.dart';
 
 class SettingController extends GetxController {
   RxBool isSwitch = false.obs;
-  NewVersion? newVersion;
   Future<void> shareNoteLink({required String title}) async {
     try {
       await FlutterShare.share(

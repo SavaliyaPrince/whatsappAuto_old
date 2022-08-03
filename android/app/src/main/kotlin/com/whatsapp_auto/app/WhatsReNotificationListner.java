@@ -76,6 +76,7 @@ WhatsReNotificationListner extends NotificationListenerService {
             stopSelf();
             Log.d("TAG", "id~~>002");
         } else if (intent != null && intent.getAction() != null && intent.getAction().equals("START_FOREGROUND_REMOVE")) {
+            Log.d("TAG", "id~~>003");
 //            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 //            String channelId = createNotificationChannel(notificationManager);
 //            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId);

@@ -26,10 +26,10 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen>
     with WidgetsBindingObserver {
   final ThemeController themeController = Get.find();
-  final HomePageController homePageController = Get.put(HomePageController())
-    ..getWhatsAuto();
+  final HomePageController homePageController = Get.put(HomePageController());
   final InAppReview inAppReview = InAppReview.instance;
   bool isPaused = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -62,9 +62,6 @@ class _HomePageScreenState extends State<HomePageScreen>
 
   @override
   Widget build(BuildContext context) {
-    // homePageController.getWhatsAuto();
-    // print(
-    //     "----------homePageController.getWhatsAuto-----------${homePageController.getWhatsAuto()}");
     return Obx(
       () => WillPopScope(
         onWillPop: () {
