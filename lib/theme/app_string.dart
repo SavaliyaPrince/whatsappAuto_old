@@ -143,11 +143,11 @@ class AppString {
   static const availableContactsList = 'Available contacts list';
 
   /// create reply
-  static const createReply = "Create reply";
+  static const createReply = "Auto reply";
   static const customReply = "custome reply";
   static const tapToBelow =
       "Tap to below button to create\ncustome reply text easily";
-  static const create = "Create";
+  static const create = "Auto Create";
 
   /// create custom reply
   static const createCustomReply = "Create custome reply";
