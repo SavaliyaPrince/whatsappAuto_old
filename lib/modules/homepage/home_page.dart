@@ -12,6 +12,7 @@ import 'package:whatsapp_auto/Utils/open_ad.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -28,6 +29,8 @@ class _HomePageScreenState extends State<HomePageScreen>
     with WidgetsBindingObserver {
   final ThemeController themeController = Get.find();
   final HomePageController homePageController = Get.put(HomePageController());
+  final SupportedAppController supportedAppController =
+      Get.put(SupportedAppController())..getWhatsAuto();
   final InAppReview inAppReview = InAppReview.instance;
   bool isPaused = false;
 
@@ -36,6 +39,7 @@ class _HomePageScreenState extends State<HomePageScreen>
     // TODO: implement initState
     super.initState();
     // AppOpenAdManager.loadAd();
+
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -257,18 +261,18 @@ class _HomePageScreenState extends State<HomePageScreen>
                           //     Navigation.pushNamed(Routes.chatTestReply);
                           //   },
                           // ),
-                          SizedBox(
-                            height: SizeUtils.verticalBlockSize * 1.5,
-                          ),
-                          customCategoriesBox(
-                            context,
-                            titleText: AppString.contactUsTitle,
-                            subtitle: AppString.contactUsSubTile,
-                            image: AssetsPath.document,
-                            onTap: () {
-                              Navigation.pushNamed(Routes.contactPage);
-                            },
-                          ),
+                          // SizedBox(
+                          //   height: SizeUtils.verticalBlockSize * 1.5,
+                          // ),
+                          // customCategoriesBox(
+                          //   context,
+                          //   titleText: AppString.contactUsTitle,
+                          //   subtitle: AppString.contactUsSubTile,
+                          //   image: AssetsPath.document,
+                          //   onTap: () {
+                          //     Navigation.pushNamed(Routes.contactPage);
+                          //   },
+                          // ),
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),

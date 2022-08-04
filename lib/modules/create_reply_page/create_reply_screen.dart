@@ -40,7 +40,7 @@ class _CreateReplyState extends State<CreateReply> {
           leading: GestureDetector(
             onTap: () {
               // Navigation.pop();
-              Navigation.pushNamed(Routes.homePage);
+              Navigation.replaceAll(Routes.homePage);
             },
             child: Padding(
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
