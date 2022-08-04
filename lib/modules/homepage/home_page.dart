@@ -12,6 +12,7 @@ import 'package:whatsapp_auto/Utils/open_ad.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/setting_page/setting_controller.dart';
 import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
@@ -31,6 +32,7 @@ class _HomePageScreenState extends State<HomePageScreen>
   final HomePageController homePageController = Get.put(HomePageController());
   final SupportedAppController supportedAppController =
       Get.put(SupportedAppController())..getWhatsAuto();
+  final SettingController settingController = Get.put(SettingController());
   final InAppReview inAppReview = InAppReview.instance;
   bool isPaused = false;
 
@@ -126,11 +128,12 @@ class _HomePageScreenState extends State<HomePageScreen>
                             context,
                             titleText: AppString.welcomeMessageTitle,
                             subtitle: AppString.welcomeMessageSubTile,
-                            image: AssetsPath.star,
+                            image: AssetsPath.messages,
                             onTap: () {
                               Navigation.pushNamed(Routes.sendMassagePage);
                             },
                           ),
+
                           // SizedBox(
                           //   height: SizeUtils.verticalBlockSize * 1.5,
                           // ),
@@ -155,21 +158,34 @@ class _HomePageScreenState extends State<HomePageScreen>
                           //     Navigation.pushNamed(Routes.chatTestReply);
                           //   },
                           // ),
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.contactUsTitle,
-                          //   subtitle: AppString.contactUsSubTile,
-                          //   image: AssetsPath.document,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.contactPage);
-                          //   },
-                          // ),
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.InviteFriends,
+                            subtitle: AppString.testReplySubTile,
+                            image: AppIcons.inviteFriends,
+                            onTap: () {
+                              settingController.shareNoteLink(
+                                  title: AppString.InviteFriends);
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.contactUsTitle,
+                            subtitle: AppString.contactUsSubTile,
+                            image: AssetsPath.document,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.contactPage);
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
                           // customCategoriesBox(
                           //   context,
                           //   titleText: AppString.categoryTitle,
@@ -198,7 +214,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             context,
                             titleText: AppString.documentTitle,
                             subtitle: AppString.documentSubTile,
-                            image: AssetsPath.document,
+                            image: AssetsPath.star,
                             onTap: () async {
                               if (await inAppReview.isAvailable()) {
                                 print(
@@ -231,7 +247,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             context,
                             titleText: AppString.welcomeMessageTitle,
                             subtitle: AppString.welcomeMessageSubTile,
-                            image: AssetsPath.star,
+                            image: AssetsPath.messages,
                             onTap: () {
                               Navigation.pushNamed(Routes.sendMassagePage);
                             },
@@ -249,18 +265,31 @@ class _HomePageScreenState extends State<HomePageScreen>
                               Navigation.pushNamed(Routes.createReply);
                             },
                           ),
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.testReplyTitle,
-                          //   subtitle: AppString.testReplySubTile,
-                          //   image: AssetsPath.messages,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.chatTestReply);
-                          //   },
-                          // ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.contact,
+                            subtitle: AppString.documentSubTile,
+                            image: AssetsPath.document,
+                            onTap: () {
+                              Navigation.pushNamed(Routes.contactPage);
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.InviteFriends,
+                            subtitle: AppString.testReplySubTile,
+                            image: AssetsPath.category,
+                            onTap: () {
+                              settingController.shareNoteLink(
+                                  title: AppString.InviteFriends);
+                            },
+                          ),
                           // SizedBox(
                           //   height: SizeUtils.verticalBlockSize * 1.5,
                           // ),
@@ -276,18 +305,8 @@ class _HomePageScreenState extends State<HomePageScreen>
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),
-                          customCategoriesBox(
-                            context,
-                            titleText: AppString.categoryTitle,
-                            subtitle: AppString.categorySubTile,
-                            image: AssetsPath.category,
-                            onTap: () {
-                              Navigation.pushNamed(Routes.supportedApp);
-                            },
-                          ),
-                          SizedBox(
-                            height: SizeUtils.verticalBlockSize * 1.5,
-                          ),
+                          //
+
                           customCategoriesBox(
                             context,
                             titleText: AppString.settingTitle,
@@ -301,11 +320,12 @@ class _HomePageScreenState extends State<HomePageScreen>
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),
+
                           customCategoriesBox(
                             context,
                             titleText: AppString.documentTitle,
                             subtitle: AppString.documentSubTile,
-                            image: AssetsPath.document,
+                            image: AssetsPath.star,
                             onTap: () async {
                               if (await inAppReview.isAvailable()) {
                                 print(
@@ -317,25 +337,12 @@ class _HomePageScreenState extends State<HomePageScreen>
                                 AppToast.toastMessage(
                                     "app review not available at time.");
                               }
-
                               // Navigation.pushNamed(Routes.chatPage);
                             },
                           ),
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.contact,
-                          //   subtitle: AppString.documentSubTile,
-                          //   image: AssetsPath.document,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.contactPage);
-                          //   },
-                          // ),
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
                         ],
                       ),
                     ),

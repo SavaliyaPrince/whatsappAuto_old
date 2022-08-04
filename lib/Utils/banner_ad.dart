@@ -40,7 +40,7 @@ class _BannerAdViewState extends State<BannerAdView> {
           _createAnchoredBanner(context);
         }
         return Container(
-          height: _anchoredBanner == null ? 0 : 50,
+          height: _anchoredBanner == null ? 0 : 70,
           alignment: Alignment.center,
           child: _anchoredBanner == null
               ? const SizedBox()
@@ -65,8 +65,8 @@ class _BannerAdViewState extends State<BannerAdView> {
     }
 
     final BannerAd banner = BannerAd(
-      // size: const AdSize(width: 320, height: 70),
-      size: AdSize.smartBanner,
+      size: const AdSize(width: 320, height: 70),
+      // size: AdSize.fullBanner,
       request: request,
 
       // ///live
