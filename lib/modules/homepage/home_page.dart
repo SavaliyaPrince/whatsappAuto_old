@@ -95,29 +95,29 @@ class _HomePageScreenState extends State<HomePageScreen>
             ),
           ),
           body: Padding(
-            padding: EdgeInsets.only(
-              left: SizeUtils.horizontalBlockSize * 5,
-              right: SizeUtils.horizontalBlockSize * 5,
+            padding: EdgeInsets.symmetric(
+              vertical: SizeUtils.verticalBlockSize * 2,
+              horizontal: SizeUtils.horizontalBlockSize * 5,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: SizeUtils.verticalBlockSize * 2,
-                  ),
-                  child: SizedBox(
-                    // height: SizeUtils.verticalBlockSize * 7,
-                    child: Text(
-                      AppString.availableCategories,
-                      style: TextStyle(
-                        color: ColorRes.textColor(context),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(
+                //     vertical: SizeUtils.verticalBlockSize * 2,
+                //   ),
+                //   child: SizedBox(
+                //     // height: SizeUtils.verticalBlockSize * 7,
+                //     child: Text(
+                //       AppString.availableCategories,
+                //       style: TextStyle(
+                //         color: ColorRes.textColor(context),
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 if (Platform.isIOS)
                   Expanded(
                     child: SingleChildScrollView(

@@ -17,7 +17,14 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class SettingPage extends StatelessWidget {
   SettingPage({Key? key}) : super(key: key);
   final SettingController settingController = Get.find();
-  final ThemeController themeController = Get.find();
+  final ThemeController themeController = Get.find()
+    ..getWhatsappMessageCount()
+    ..getFbMessageCount()
+    ..getTelegramMessageCount()
+    ..getTwitterMessageCount()
+    ..getWhatsappBusiMessageCount()
+    ..getInstaMessageCount()
+    ..getTotalCount();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
