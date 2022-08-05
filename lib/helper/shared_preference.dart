@@ -19,7 +19,9 @@ class AppPreference {
     _prefs.remove(value);
     return;
   }
+
   // static const String theme = "theme";
+
 
   ///-------------
   static Future setString(String key, String value) async {

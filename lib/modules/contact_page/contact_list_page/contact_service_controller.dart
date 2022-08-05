@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:developer';
+import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -15,6 +16,7 @@ class ContactServiceController extends GetxController {
   RxBool isSelectedContactsView = false.obs;
   final RxList<ContactModel> contactModel = <ContactModel>[].obs;
   RxList<groupSelectedModel> selectedContactModel = <groupSelectedModel>[].obs;
+  static const platform = MethodChannel('samples.flutter.dev/battery');
 
   Future<void> getPhoneContacts() async {
     try {
@@ -38,11 +40,27 @@ class ContactServiceController extends GetxController {
           );
           contactModel.add(model);
         }
+        passAllContacts();
         isLoader.value = false;
       }
     } catch (e) {
       print('---------e---------');
     }
+  }
+
+  void passAllContacts() {
+
+    final List<String> allContacts = [];
+    for(final items in contactModel){
+      allContacts.add(items.displayName.toString().trim());
+      print('checkNumber --${items.mobileNumber.toString().trim()}--');
+      allContacts.add(items.mobileNumber.toString().trim());
+    }
+
+    platform.invokeMethod(
+      'allContacts',
+      {"contactList": allContacts.toString()},
+    );
   }
 
   Future<PermissionStatus> _contactsPermissions() async {
@@ -71,6 +89,12 @@ class ContactServiceController extends GetxController {
       final String encodedData = groupSelectedModel.encode(selectedContactModel);
       log("groupStore 1: $encodedData");
       await AppPreference.setString('selectedContactModel', encodedData);
+
+      platform.invokeMethod(
+        'selectedContact',
+        {"selectedContact": encodedData},
+      );
+
       log("groupStore 2:");
     } catch (e, st) {
       print('-----$e-----STORE MODEL-----$st------');
