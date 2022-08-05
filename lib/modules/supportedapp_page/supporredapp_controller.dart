@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +18,15 @@ class SupportedAppController extends GetxController {
   RxString responseFromNativeCode = 'Waiting for Response...'.obs;
   RxString response = "".obs;
 
+  RxInt selectedIndex = 0.obs;
+  RxBool whatsApp = false.obs;
+  RxBool facebook = false.obs;
+  RxBool whatsappBusiness = false.obs;
+  RxBool autoMassageOnOff = false.obs;
+  RxBool telegram = false.obs;
+  RxBool twitter = false.obs;
+  RxBool instagram = false.obs;
+
   @override
   void onInit() {
     isSwitchWhatsApp.value = AppPreference.whatsApp;
@@ -29,12 +37,10 @@ class SupportedAppController extends GetxController {
     isSwitchTwitter.value = AppPreference.twitter;
 
     ///
-    if (!Platform.isIOS) {
-      sendWhatsAppSellerId();
-      sendLanguage();
-    }
-    getWhatsAuto();
-    // print("-=-=-=-=-getWhatsAuto-=-=-=-=-==-${getWhatsAuto()}");
+    // if (!Platform.isIOS) {
+    //   sendWhatsAppSellerId();
+    //   sendLanguage();
+    // } // print("-=-=-=-=-getWhatsAuto-=-=-=-=-==-${getWhatsAuto()}");
 
     super.onInit();
   }
@@ -112,8 +118,6 @@ class SupportedAppController extends GetxController {
             ],
           ),
         );
-      } else {
-        Get.back();
       }
     } catch (e) {
       batteryLevel = "Failed to get battery level: '$e'.";
@@ -135,6 +139,18 @@ class SupportedAppController extends GetxController {
       'setLanguage',
       {"languageCode": '91'},
     );
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
+    whatsApp.value = AppPreference.whatsApp;
+    whatsappBusiness.value = AppPreference.whatsAppBusi;
+    facebook.value = AppPreference.fbMassager;
+    instagram.value = AppPreference.instagrams;
+    telegram.value = AppPreference.telegram;
+    twitter.value = AppPreference.twitter;
   }
 
   // @override

@@ -1,17 +1,7 @@
 import 'package:get/get.dart';
-import 'package:whatsapp_auto/helper/shared_preference.dart';
 
 class HomePageController extends GetxController {
   RxBool isSwitched = false.obs;
-
-  RxInt selectedIndex = 0.obs;
-  RxBool whatsApp = false.obs;
-  RxBool facebook = false.obs;
-  RxBool whatsappBusiness = false.obs;
-  RxBool autoMassageOnOff = false.obs;
-  RxBool telegram = false.obs;
-  RxBool twitter = false.obs;
-  RxBool instagram = false.obs;
 
   // Future<void> getWhatsAuto() async {
   //   const platform = MethodChannel('samples.flutter.dev/battery');
@@ -86,17 +76,17 @@ class HomePageController extends GetxController {
   //   );
   // }
 
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-    whatsApp.value = AppPreference.whatsApp;
-    whatsappBusiness.value = AppPreference.whatsAppBusi;
-    facebook.value = AppPreference.fbMassager;
-    instagram.value = AppPreference.instagrams;
-    telegram.value = AppPreference.telegram;
-    twitter.value = AppPreference.twitter;
-  }
+  // @override
+  // void onReady() {
+  //   // TODO: implement onReady
+  //   super.onReady();
+  //   whatsApp.value = AppPreference.whatsApp;
+  //   whatsappBusiness.value = AppPreference.whatsAppBusi;
+  //   facebook.value = AppPreference.fbMassager;
+  //   instagram.value = AppPreference.instagrams;
+  //   telegram.value = AppPreference.telegram;
+  //   twitter.value = AppPreference.twitter;
+  // }
 
   // @override
   // Future<void> onInit() async {

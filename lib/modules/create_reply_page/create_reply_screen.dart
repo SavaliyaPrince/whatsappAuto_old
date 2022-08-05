@@ -40,7 +40,7 @@ class _CreateReplyState extends State<CreateReply> {
           leading: GestureDetector(
             onTap: () {
               // Navigation.pop();
-              Navigation.pushNamed(Routes.homePage);
+              Navigation.replaceAll(Routes.homePage);
             },
             child: Padding(
               padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
@@ -83,147 +83,178 @@ class _CreateReplyState extends State<CreateReply> {
                       padding: EdgeInsets.symmetric(
                           vertical: SizeUtils.verticalBlockSize * 2),
                       itemBuilder: (context, index) {
-                        return Slidable(
-                          direction: Axis.horizontal,
-                          key: const ValueKey(0),
-                          endActionPane: ActionPane(
-                            motion: const ScrollMotion(),
-                            children: [
-                              SlidableAction(
-                                onPressed: (value) {
-                                  setState(() {
-                                    _createReplyController.createModal
-                                        .removeAt(index);
-                                  });
-                                },
-                                backgroundColor: AppColor.primaryColor,
-                                foregroundColor: Colors.white,
-                                icon: Icons.delete,
-                                label: 'Delete',
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: SizeUtils.horizontalBlockSize * 4,
-                              right: SizeUtils.horizontalBlockSize * 4,
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeUtils.horizontalBlockSize * 2.5,
+                              vertical: SizeUtils.verticalBlockSize * 0.5),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: themeController.isSwitched.value
+                                  ? AppColor.homeScreen.withOpacity(0.1)
+                                  : AppColor.appBackgroundColor,
+                              // border: Border.all(width: 0.1, color: AppColor.textColor),
+                              borderRadius: BorderRadius.circular(
+                                  SizeUtils.horizontalBlockSize * 3),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 60),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(20),
-                                        bottomRight: Radius.circular(20),
-                                        bottomLeft: Radius.circular(20),
-                                      ),
-                                      color: AppColor.primaryColor
-                                          .withOpacity(0.2),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        vertical:
-                                            SizeUtils.verticalBlockSize * 1,
-                                        horizontal:
-                                            SizeUtils.horizontalBlockSize * 3,
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          AppText(
-                                            "${_createReplyController.createModal[index].inComingKeyword}",
-                                            color: ColorRes.textColor(context),
-                                            fontSize: SizeUtils.fSize_16(),
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                          SizedBox(
-                                            height:
-                                                SizeUtils.verticalBlockSize * 1,
-                                          ),
-                                          AppText(
-                                            DateFormat("hh:mm a").format(
-                                                _createReplyController
-                                                        .createModal[index]
-                                                        .time ??
-                                                    DateTime.now()),
-                                            textAlign: TextAlign.end,
-                                            fontSize: SizeUtils.fSize_10(),
-                                            fontWeight: FontWeight.w500,
-                                            color: AppColor.backIconColor
-                                                .withOpacity(0.6),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                            child: Slidable(
+                              direction: Axis.horizontal,
+                              key: const ValueKey(0),
+                              endActionPane: ActionPane(
+                                motion: const ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                    onPressed: (value) {
+                                      setState(() {
+                                        _createReplyController.createModal
+                                            .removeAt(index);
+                                      });
+                                    },
+                                    backgroundColor: AppColor.primaryColor,
+                                    foregroundColor: Colors.white,
+                                    icon: Icons.delete,
+                                    label: 'Delete',
                                   ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal:
+                                      SizeUtils.horizontalBlockSize * 3.5,
+                                  vertical: SizeUtils.verticalBlockSize * 1.2,
                                 ),
-                                SizedBox(
-                                  height: SizeUtils.verticalBlockSize * 1.2,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 60),
-                                  child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
-                                          bottomLeft: Radius.circular(20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 60),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            bottomRight: Radius.circular(20),
+                                            bottomLeft: Radius.circular(20),
+                                          ),
+                                          color: AppColor.primaryColor
+                                              .withOpacity(0.2),
                                         ),
-                                        color: AppColor.primaryColor,
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
                                             vertical:
                                                 SizeUtils.verticalBlockSize * 1,
                                             horizontal:
                                                 SizeUtils.horizontalBlockSize *
-                                                    4),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: [
-                                            AppText(
-                                              "${_createReplyController.createModal[index].replyMassage}",
-                                              color: AppColor.lightThem,
-                                              fontSize: SizeUtils.fSize_16(),
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                            SizedBox(
-                                              height:
-                                                  SizeUtils.verticalBlockSize *
-                                                      1,
-                                            ),
-                                            AppText(
-                                              DateFormat("hh:mm a").format(
-                                                  _createReplyController
-                                                          .createModal[index]
-                                                          .time ??
-                                                      DateTime.now()),
-                                              textAlign: TextAlign.end,
-                                              fontSize: SizeUtils.fSize_10(),
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColor.lightThem
-                                                  .withOpacity(0.7),
-                                            ),
-                                          ],
+                                                    3,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              AppText(
+                                                "${_createReplyController.createModal[index].inComingKeyword}",
+                                                color:
+                                                    ColorRes.textColor(context),
+                                                fontSize: SizeUtils.fSize_16(),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              SizedBox(
+                                                height: SizeUtils
+                                                        .verticalBlockSize *
+                                                    1,
+                                              ),
+                                              AppText(
+                                                DateFormat("hh:mm a").format(
+                                                    _createReplyController
+                                                            .createModal[index]
+                                                            .time ??
+                                                        DateTime.now()),
+                                                textAlign: TextAlign.end,
+                                                fontSize: SizeUtils.fSize_10(),
+                                                fontWeight: FontWeight.w500,
+                                                color: themeController
+                                                        .isSwitched.value
+                                                    ? AppColor.lightThem
+                                                        .withOpacity(0.7)
+                                                    : AppColor.backIconColor
+                                                        .withOpacity(0.6),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
+                                    // SizedBox(
+                                    //   height: SizeUtils.verticalBlockSize * 1.2,
+                                    // ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left:
+                                            SizeUtils.horizontalBlockSize * 3.5,
+                                      ),
+                                      child: Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              bottomRight: Radius.circular(20),
+                                              bottomLeft: Radius.circular(20),
+                                            ),
+                                            color: AppColor.primaryColor,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: SizeUtils
+                                                        .verticalBlockSize *
+                                                    1,
+                                                horizontal: SizeUtils
+                                                        .horizontalBlockSize *
+                                                    4),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                AppText(
+                                                  "${_createReplyController.createModal[index].replyMassage}",
+                                                  color: AppColor.lightThem,
+                                                  fontSize:
+                                                      SizeUtils.fSize_16(),
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                                SizedBox(
+                                                  height: SizeUtils
+                                                          .verticalBlockSize *
+                                                      1,
+                                                ),
+                                                AppText(
+                                                  DateFormat("hh:mm a").format(
+                                                      _createReplyController
+                                                              .createModal[
+                                                                  index]
+                                                              .time ??
+                                                          DateTime.now()),
+                                                  textAlign: TextAlign.end,
+                                                  fontSize:
+                                                      SizeUtils.fSize_10(),
+                                                  fontWeight: FontWeight.w500,
+                                                  color: AppColor.lightThem
+                                                      .withOpacity(0.7),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // SizedBox(
+                                    //   height: SizeUtils.verticalBlockSize * 1.2,
+                                    // ),
+                                    // Divider(
+                                    //   thickness: 0.2,
+                                    //   color: ColorRes.textColor(context),
+                                    // )
+                                  ],
                                 ),
-                                SizedBox(
-                                    height: SizeUtils.verticalBlockSize * 1.2),
-                                // Divider(
-                                //   thickness: 0.2,
-                                //   color: ColorRes.textColor(context),
-                                // )
-                              ],
+                              ),
                             ),
                           ),
                         );

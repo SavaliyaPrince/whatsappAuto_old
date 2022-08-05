@@ -15,7 +15,7 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 
 class SettingPage extends StatelessWidget {
   SettingPage({Key? key}) : super(key: key);
-  final SettingController settingController = Get.put(SettingController());
+  final SettingController settingController = Get.find();
   final ThemeController themeController = Get.find();
 
   @override
@@ -59,12 +59,6 @@ class SettingPage extends StatelessWidget {
           if (Platform.isIOS)
             Column(
               children: [
-                _settingItem(
-                  context,
-                  AppIcons.upgrade,
-                  AppString.upgrade,
-                  onTap: () {},
-                ),
                 // _settingItem(
                 //   context,
                 //   AppIcons.advance,
@@ -77,6 +71,7 @@ class SettingPage extends StatelessWidget {
                   context,
                   AppIcons.appearance,
                   AppString.Appearance,
+                  width: SizeUtils.fSize_24(),
                   onTap: () {
                     Navigation.pushNamed(Routes.appearance);
                   },
@@ -107,24 +102,25 @@ class SettingPage extends StatelessWidget {
                 ),
                 _settingItem(
                   context,
+                  AppIcons.upgrade,
+                  AppString.upgrade,
+                  width: SizeUtils.fSize_20(),
+                  onTap: () {},
+                ),
+                _settingItem(
+                  context,
                   AppIcons.privacy,
                   AppString.Privacy,
+                  width: SizeUtils.fSize_24(),
                   onTap: () {},
                 ),
                 _settingItem(
                   context,
                   AppIcons.help,
                   AppString.Help,
+                  width: SizeUtils.fSize_24(),
                   onTap: () {},
                 ),
-                _settingItem(
-                  context,
-                  AppIcons.inviteFriends,
-                  AppString.InviteFriends,
-                  onTap: () async {
-                    settingController.shareNoteLink(title: "Test");
-                  },
-                )
               ],
             )
           else
@@ -134,15 +130,19 @@ class SettingPage extends StatelessWidget {
                   context,
                   AppIcons.autoReply,
                   AppString.autoReply,
+                  width: SizeUtils.fSize_24(),
                   onTap: () {
                     Navigation.pushNamed(Routes.autoReplyMassage);
                   },
                 ),
                 _settingItem(
                   context,
-                  AppIcons.upgrade,
-                  AppString.upgrade,
-                  onTap: () {},
+                  AssetsPath.category,
+                  AppString.categoryTitle,
+                  width: SizeUtils.fSize_24(),
+                  onTap: () {
+                    Navigation.pushNamed(Routes.supportedApp);
+                  },
                 ),
                 // _settingItem(
                 //   context,
@@ -156,6 +156,7 @@ class SettingPage extends StatelessWidget {
                   context,
                   AppIcons.appearance,
                   AppString.Appearance,
+                  width: SizeUtils.fSize_24(),
                   onTap: () {
                     Navigation.pushNamed(Routes.appearance);
                   },
@@ -186,32 +187,41 @@ class SettingPage extends StatelessWidget {
                 ),
                 _settingItem(
                   context,
-                  AppIcons.profileContact,
-                  AppString.contact,
-                  onTap: () {
-                    Navigation.pushNamed(Routes.contactPage);
-                  },
+                  AppIcons.upgrade,
+                  AppString.upgrade,
+                  width: SizeUtils.fSize_20(),
+                  onTap: () {},
                 ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.profileContact,
+                //   AppString.contact,
+                //   onTap: () {
+                //     Navigation.pushNamed(Routes.contactPage);
+                //   },
+                // ),
                 _settingItem(
                   context,
                   AppIcons.privacy,
                   AppString.Privacy,
+                  width: SizeUtils.fSize_24(),
                   onTap: () {},
                 ),
                 _settingItem(
                   context,
                   AppIcons.help,
                   AppString.Help,
+                  width: SizeUtils.fSize_24(),
                   onTap: () {},
                 ),
-                _settingItem(
-                  context,
-                  AppIcons.inviteFriends,
-                  AppString.InviteFriends,
-                  onTap: () async {
-                    settingController.shareNoteLink(title: "Test");
-                  },
-                ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.inviteFriends,
+                //   AppString.InviteFriends,
+                //   onTap: () async {
+                //     settingController.shareNoteLink(title: "Test");
+                //   },
+                // ),
               ],
             )
         ],
@@ -221,9 +231,10 @@ class SettingPage extends StatelessWidget {
 
   Widget _settingItem(
     BuildContext context,
-    final String? image,
-    final String? text, {
-    final GestureTapCallback? onTap,
+    String? image,
+    String? text, {
+    GestureTapCallback? onTap,
+    double? width,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -232,7 +243,7 @@ class SettingPage extends StatelessWidget {
         visualDensity: const VisualDensity(vertical: -3),
         leading: Image.asset(
           image ?? '',
-          width: SizeUtils.fSize_24(),
+          width: width,
           color: ColorRes.textColor(context),
         ),
         title: Text(
@@ -248,3 +259,16 @@ class SettingPage extends StatelessWidget {
     );
   }
 }
+
+// customCategoriesBox(
+//   context,
+//   titleText: AppString.categoryTitle,
+//   subtitle: AppString.categorySubTile,
+//   image: AssetsPath.category,
+//   onTap: () {
+//     Navigation.pushNamed(Routes.supportedApp);
+//   },
+// ),
+// SizedBox(
+//   height: SizeUtils.verticalBlockSize * 1.5,
+// ),

@@ -207,7 +207,7 @@ WhatsReNotificationListner extends NotificationListenerService {
 
 
 //        Log.d("message-=-=-=-111111=-=-=--==-" + message);
-        if (sender == null) {
+        if(sender == null) {
             return;
         }
         Log.d("TAG", "id~~>2");
@@ -247,38 +247,43 @@ WhatsReNotificationListner extends NotificationListenerService {
 //                    isReplyEnable = true;
                     if (!prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
                         isReplyEnable = true;
-                        if (isReplyEnable) {
-                            String[] messageStr = message.split(":");
-                            message = messageStr[messageStr.length - 1].trim();
-                            sender = messageStr[messageStr.length - 2];
-                            appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=-" + messageStr);
-                            appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=-" + message);
-                            appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=-" + sender);
-                        }
-                        appendLog("----------isReplyEnable=========" + isReplyEnable);
+                        appendLog("----------isReplyEnable========= " + isReplyEnable);
+                        String[] messageStr = message.split(":");
+                        message = messageStr[messageStr.length - 1];
+                        sender = messageStr[messageStr.length - 2];
+                        appendLog("-=-=-=-=-=-=-=-messageStr-=-=-=-=-=-=- " + messageStr);
+                        appendLog("-=-=-=-=-=-=-=-message-=-=-=-=-=-=- " + message);
+                        appendLog("-=-=-=-=-=-=-=-sender-=-=-=-=-=-=- " + sender);
                     }
                 } else {
                     isReplyEnable = true;
-                    appendLog("isReplyEnable" + isReplyEnable);
+                    appendLog("isReplyEnable: " + isReplyEnable);
                 }
 
                 Log.d("TAG", "id~~>11");
                 break;
             case ApplicationPackageNames.WHATSAPP_PACKNAME:
             case ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS:
-                Log.d("TAG", "TEST-REPLY 0");
-//                if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME, false)) {
-//                    Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS");
-//
-//                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME))
-//                        Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS 0 return");
-//                        return;
-//                }
-//                if (!prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS, false)) {
-//                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS))
-//                        Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS 1 return");
-//                        return;
-//                }
+                Log.d("TAG", "TEST-REPLY 0 packageName: " + packageName);
+                boolean whatsappStatus = prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME, false);
+                boolean whatsappBusinessStatus = prefs.getBoolean(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS, false);
+
+                Log.d("TAG", "TEST-REPLY status whatsappStatus: " + whatsappStatus + " whatsappBusinessStatus: " + whatsappBusinessStatus);
+
+                if (!whatsappStatus) {
+                    Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS");
+
+                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME)) {
+                        Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS 0 return");
+                        return;
+                    }
+                }
+                if (!whatsappBusinessStatus) {
+                    if (packageName.equals(ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS)) {
+                        Log.d("TAG", "WHATSAPP_PACKNAME_BUSINESS 1 return");
+                        return;
+                    }
+                }
                 Log.d("TAG", "TEST-REPLY sender: " + sender);
                 if (sender != null && !sender.equalsIgnoreCase("tú") && !sender.equalsIgnoreCase("you")) {
                     Log.d("TAG", "arrayList --1 start");
@@ -357,7 +362,7 @@ WhatsReNotificationListner extends NotificationListenerService {
 
             if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.everyone)) {
 
-                String key = "botMessage-" + message.toLowerCase();
+                String key = "botMessage-" + message.toLowerCase().trim();
                 String repliedMessage = prefs.getString(key, "Hi");
 
                 appendLog("repliedMessage---: " + repliedMessage);
@@ -380,7 +385,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                     Log.d("checkAllData11--", "--" + lst.contains(sender.trim()));
 
 
-                    if (lst.contains(sender.trim())) {
+                    if(lst.contains(sender.trim())) {
 
                         String key = "botMessage-" + message.toLowerCase();
                         String repliedMessage = prefs.getString(key, "Hi");
