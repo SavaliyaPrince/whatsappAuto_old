@@ -15,7 +15,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -28,28 +27,19 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
-import com.whatsapp_auto.app.BuildConfig;
-import com.whatsapp_auto.app.R;
-
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -217,7 +207,7 @@ WhatsReNotificationListner extends NotificationListenerService {
 
 
 //        Log.d("message-=-=-=-111111=-=-=--==-" + message);
-        if(sender == null) {
+        if (sender == null) {
             return;
         }
         Log.d("TAG", "id~~>2");
@@ -363,10 +353,9 @@ WhatsReNotificationListner extends NotificationListenerService {
             appendLog("message---: " + (message));
             Log.d("TAG", "isReplyEnable 0");
             String autoReplyTo = prefs.getString("autoReplyTo", AutoReplyToType.everyone);
-            String allContacts = prefs.getString("contactList", "");
             Log.d("TAG", "isReplyEnable 1 autoReplyTo: " + autoReplyTo);
-            Log.d("TAG", "isReplyEnable 2 allContacts: " + allContacts.length());
-            if(autoReplyTo.equalsIgnoreCase(AutoReplyToType.everyone)) {
+
+            if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.everyone)) {
 
                 String key = "botMessage-" + message.toLowerCase();
                 String repliedMessage = prefs.getString(key, "Hi");
@@ -376,15 +365,11 @@ WhatsReNotificationListner extends NotificationListenerService {
 
 
                 replayNotification(sbn, bundle, repliedMessage);
-            } else if(autoReplyTo.equalsIgnoreCase(AutoReplyToType.myContactList)) {
-                if(!allContacts.isEmpty()) {
+            } else if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.myContactList)) {
+                String allContacts = prefs.getString("contactList", "");
+                Log.d("TAG", "isReplyEnable 2 allContacts: " + allContacts.length());
+                if (!allContacts.isEmpty()) {
 
-                    // String data = "[Raj, Paras]";
-                    // List<String> = [Raj, Paras];
-
-//                    String[] sArr = allContacts.split(",");
-//                    List<String> lst = Arrays.asList(Arrays.toString(sArr).trim());
-//                    List<String> lst = Arrays.asList(sArr);
                     List<String> lst = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(allContacts));
 
                     for (int i = 0; i < lst.size(); i++) {
@@ -395,7 +380,31 @@ WhatsReNotificationListner extends NotificationListenerService {
                     Log.d("checkAllData11--", "--" + lst.contains(sender.trim()));
 
 
-                    if(lst.contains(sender.trim())) {
+                    if (lst.contains(sender.trim())) {
+
+                        String key = "botMessage-" + message.toLowerCase();
+                        String repliedMessage = prefs.getString(key, "Hi");
+
+                        appendLog("repliedMessage---: " + repliedMessage);
+                        appendLog("key----------: " + key);
+
+
+                        replayNotification(sbn, bundle, repliedMessage);
+                    }
+                }
+            } else if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.exceptMyContactList)) {
+                String selectedContact = prefs.getString("selectedContact", "");
+                Log.d("TAG", "isReplyEnable 2 allContacts: " + selectedContact.length());
+                if (!selectedContact.isEmpty()) {
+
+                    Gson gson = new Gson();
+                    ContactModel[] selectedAllContacts = gson.fromJson(selectedContact, ContactModel[].class);
+
+                    Log.d("tag", "selectedContact selectedAllContacts === >>>> " + selectedAllContacts.length);
+
+                    ContactModel item = findUsingEnhancedForLoop(sender.trim(), selectedAllContacts);
+
+                    if (item != null) {
 
                         String key = "botMessage-" + message.toLowerCase();
                         String repliedMessage = prefs.getString(key, "Hi");
@@ -433,6 +442,16 @@ WhatsReNotificationListner extends NotificationListenerService {
 //                    });
         }
         appendLog("packageName ---:" + packageName);
+    }
+
+    public ContactModel findUsingEnhancedForLoop(String name, ContactModel[] customers) {
+
+        for (ContactModel customer : customers) {
+            if (customer.getDisplayName().equals(name) || customer.getMobileNumber().equals(name)) {
+                return customer;
+            }
+        }
+        return null;
     }
 
     @SuppressLint("Range")

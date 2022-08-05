@@ -160,7 +160,7 @@ class ContactPage extends StatelessWidget {
                   onChanged: (value) {
                     if (contactController.isSwitchPhoneContact.value == false) {
                       contactController.isSwitchPhoneContact.value = true;
-                      AppPreference.setBoolean("phoneContact", value: contactController.isSwitchPhoneContact.value);
+                      AppPreference.setBoolean("checkEnable", value: contactController.isSwitchPhoneContact.value);
                       //     contactController.changeAutoReplyTo(contactController.isSwitchPhoneContact.value);
                       contactController.changeAutoReplyTo(AutoReplyTo.except_my_phone_contacts);
                       AppPreference.clearSharedPreferences("everyone");
@@ -198,6 +198,8 @@ class ContactPage extends StatelessWidget {
                             ),
                             onChanged: (value) {
                               contactController.checkEnable.value = value!;
+                              AppPreference.setBoolean("checkEnable", value: contactController.checkEnable.value);
+
                             },
                           ),
                         ),
@@ -215,7 +217,9 @@ class ContactPage extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       onTap: () {
-                        Navigation.pushNamed(Routes.groupsSettingPage);
+                        if(contactController.checkEnable.value == true) {
+                          Navigation.pushNamed(Routes.groupsSettingPage);
+                        }
                       },
                       child: SizedBox(
                         width: SizeUtils.horizontalBlockSize * 4.8,
@@ -274,77 +278,80 @@ class ContactPage extends StatelessWidget {
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 2.7,
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: demoController.selectedContactModel.length,
-                  itemBuilder: (context, index) {
-                    final selectedContact = demoController.selectedContactModel[index];
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        top: SizeUtils.verticalBlockSize * 1,
-                        bottom: SizeUtils.verticalBlockSize * 1,
-                        right: SizeUtils.horizontalBlockSize * 1,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: SizeUtils.horizontalBlockSize * 7.6,
-                            height: SizeUtils.verticalBlockSize * 4.5,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColor.primaryColor,
-                            ),
-                            child: Center(
-                              child: AppText(
-                                selectedContact.displayName![0].toUpperCase(),
-                                fontWeight: FontWeight.w600,
-                                color: AppColor.whiteColor,
+                if (demoController.selectedContactModel.isEmpty == true)
+                  const SizedBox()
+                else
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: demoController.selectedContactModel.length,
+                    itemBuilder: (context, index) {
+                      final selectedContact = demoController.selectedContactModel[index];
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          top: SizeUtils.verticalBlockSize * 1,
+                          bottom: SizeUtils.verticalBlockSize * 1,
+                          right: SizeUtils.horizontalBlockSize * 1,
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: SizeUtils.horizontalBlockSize * 7.6,
+                              height: SizeUtils.verticalBlockSize * 4.5,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColor.primaryColor,
+                              ),
+                              child: Center(
+                                child: AppText(
+                                  selectedContact.displayName![0].toUpperCase(),
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.whiteColor,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: SizeUtils.horizontalBlockSize * 5,
-                          ),
-                          AppText(
-                            selectedContact.displayName.toString().toLowerCase(),
-                            fontWeight: FontWeight.w400,
-                            color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
-                            fontSize: SizeUtils.fSize_14(),
-                          ),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () async {
-                              try {
-                                if (contactServiceController.contactModel[index].isCheck?.value == true) {
-                                  contactServiceController.contactModel[index].isCheck?.value = false;
-                                  demoController.selectedContactModel.removeAt(index);
-                                } else {
-                                  contactServiceController.contactModel[index].isCheck?.value = true;
-                                }
-                              } catch (e, st) {
-                                print('-------$e-------$st------');
-                              }
-                            },
-                            child: Icon(
-                              Icons.close,
-                              color: themeController.isSwitched.value
-                                  ? AppColor.whiteColor.withOpacity(0.5)
-                                  : AppColor.textColor.withOpacity(
-                                      0.5,
-                                    ),
+                            SizedBox(
+                              width: SizeUtils.horizontalBlockSize * 5,
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                            AppText(
+                              selectedContact.displayName.toString().toLowerCase(),
+                              fontWeight: FontWeight.w400,
+                              color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
+                              fontSize: SizeUtils.fSize_14(),
+                            ),
+                            const Spacer(),
+                            InkWell(
+                              onTap: () async {
+                                try {
+                                  final int index1 = contactServiceController.contactModel.indexWhere(
+                                    (element) => element.displayName == contactServiceController.selectedContactModel[index].displayName,
+                                  );
+                                  contactServiceController.contactModel[index1].isCheck?.value = false;
+                                  demoController.selectedContactModel.removeAt(index);
+                                  await contactServiceController.contactStoreModel();
+                              //      AppPreference.clearSharedPreferences('selectedContactModel');
+                                  contactServiceController.contactModel.refresh();
+                                } catch (e, st) {
+                                  print('-------$e-------$st------');
+                                }
+                              },
+                              child: Icon(
+                                Icons.close,
+                                color: themeController.isSwitched.value
+                                    ? AppColor.whiteColor.withOpacity(0.5)
+                                    : AppColor.textColor.withOpacity(
+                                        0.5,
+                                      ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 Obx(
                   () => SizedBox(
-                    height: isBannerLoaded.value
-                        ? SizeUtils.verticalBlockSize * 6
-                        : 0,
+                    height: isBannerLoaded.value ? SizeUtils.verticalBlockSize * 6 : 0,
                   ),
                 ),
               ],

@@ -23,6 +23,8 @@ class ContactListPage extends StatelessWidget {
   final GroupController groupController = Get.find();
   RxBool val = false.obs;
 
+
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -165,9 +167,8 @@ class ContactListPage extends StatelessWidget {
                                                 contactServiceController.contactModel.refresh();
                                               } else {
                                                 contact.isCheck?.value = false;
-                                                contactServiceController.selectedContactModel.removeWhere(
-                                                  (element) => element.displayName == contactServiceController.contactModel[index].displayName,
-                                                );
+                                                contactServiceController.selectedContactModel.removeWhere((element) => element.displayName ==
+                                                    contactServiceController.contactModel[index].displayName,);
                                               }
                                             },
                                           ),
