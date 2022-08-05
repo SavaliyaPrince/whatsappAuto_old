@@ -60,7 +60,7 @@ class _HomePageScreenState extends State<HomePageScreen>
       isPaused = true;
       print("user go to background");
     }
-    if (state == AppLifecycleState.resumed && isPaused) {
+    if (state == AppLifecycleState.inactive && isPaused) {
       print("State Resumed===========");
       AppOpenAdManager.showOpenAdIfAvailable();
       isPaused = false;
@@ -171,21 +171,6 @@ class _HomePageScreenState extends State<HomePageScreen>
                                   title: AppString.InviteFriends);
                             },
                           ),
-                          SizedBox(
-                            height: SizeUtils.verticalBlockSize * 1.5,
-                          ),
-                          customCategoriesBox(
-                            context,
-                            titleText: AppString.contactUsTitle,
-                            subtitle: AppString.contactUsSubTile,
-                            image: AssetsPath.document,
-                            onTap: () {
-                              Navigation.pushNamed(Routes.contactPage);
-                            },
-                          ),
-                          SizedBox(
-                            height: SizeUtils.verticalBlockSize * 1.5,
-                          ),
                           // customCategoriesBox(
                           //   context,
                           //   titleText: AppString.categoryTitle,
@@ -204,6 +189,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.settingSubTile,
                             image: AssetsPath.setting,
                             onTap: () {
+                              InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.settingPage);
                             },
                           ),
