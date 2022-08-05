@@ -9,6 +9,7 @@ class AppPreference {
   static const _whatsAppBusi = 'whatsAppBusi';
   static const _telegram = 'telegram';
   static const _twitter = 'twitter';
+  static const _notification = 'notification';
 
   static Future initMySharedPreferences() async {
     _prefs = await SharedPreferences.getInstance();
@@ -104,6 +105,11 @@ class AppPreference {
     prefs.setBool(_twitter, twitter);
   }
 
+  static Future<void> setNotification({required bool notification}) async {
+    final SharedPreferences prefs = _prefs;
+    prefs.setBool(_notification, notification);
+  }
+
   static bool get whatsApp {
     final bool value = _prefs.getBool(_whatsApp) ?? false;
     return value;
@@ -139,10 +145,13 @@ class AppPreference {
     return value;
   }
 
+  static bool get notification {
+    final bool value = _prefs.getBool(_notification) ?? false;
+    return value;
+  }
 
-    // final bool value = _prefs.getBool(_everyone) ?? false;
-    // return value;
-
+  // final bool value = _prefs.getBool(_everyone) ?? false;
+  // return value;
 
 // static Future setUserToken(String token) async {
 //   await _prefs.setString(Constants.keyToken, token);

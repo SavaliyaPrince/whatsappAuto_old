@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:whatsapp_auto/helper/admanag.dart';
 
 RxBool isBannerLoaded = false.obs;
 
@@ -22,6 +23,8 @@ class _BannerAdViewState extends State<BannerAdView> {
     contentUrl: 'http://foo.com/bar.html',
     nonPersonalizedAds: true,
   );
+  static final String appBannerId = FirebaseRemoteConfigUtils.appBannerId;
+  static final String iosBannerId = FirebaseRemoteConfigUtils.iosBannerId;
 
   @override
   void dispose() {
@@ -33,6 +36,8 @@ class _BannerAdViewState extends State<BannerAdView> {
 
   @override
   Widget build(BuildContext context) {
+    print("appBannerId----$appBannerId");
+    print("iosBannerId----$iosBannerId");
     return Builder(
       builder: (BuildContext context) {
         if (!_loadingAnchoredBanner) {
@@ -75,9 +80,7 @@ class _BannerAdViewState extends State<BannerAdView> {
       //     : '',
 
       ///test
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/6300978111'
-          : 'ca-app-pub-3940256099942544/2934735716',
+      adUnitId: Platform.isAndroid ? appBannerId : iosBannerId,
 
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {

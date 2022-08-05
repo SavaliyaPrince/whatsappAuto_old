@@ -1,9 +1,16 @@
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
+import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 
 class SettingController extends GetxController {
-  RxBool isSwitch = false.obs;
+  RxBool isSwitchNotification = false.obs;
+
+  void onInit() {
+    super.onInit();
+    isSwitchNotification.value = AppPreference.notification;
+  }
+
   Future<void> shareNoteLink({required String title}) async {
     try {
       await FlutterShare.share(
