@@ -1,24 +1,20 @@
 package com.whatsapp_auto.app
 
-import android.app.AlertDialog
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.ComponentName
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
-import android.widget.CompoundButton
 import androidx.annotation.RequiresApi
+import com.google.common.reflect.TypeToken
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import android.content.Context
+import java.lang.reflect.Type
 
 
 class MainActivity : FlutterActivity() {
@@ -389,6 +385,30 @@ class MainActivity : FlutterActivity() {
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
                 var allContactList = get.getString("contactList", "")
                 Log.d("tag", "ALL CONTACTS contactList === >>>> " + allContactList)
+            }
+
+            if (call.method == "selectedContact") {
+
+
+
+                val selectedContact = call.argument<String>("selectedContact");
+                Log.d("tag", "selectedContact selectedContact === >>>> " + selectedContact)
+
+                val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+                editor.putString("selectedContact", selectedContact)
+                editor.apply()
+                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+                val allSelectedContact = get.getString("selectedContact", "")
+                Log.d("tag", "selectedContact allSelectedContact === >>>> " + allSelectedContact)
+
+//                val gson = Gson();
+//                val arrayOfDogs: Array<ContactModel> = gson.fromJson(
+//                    allSelectedContact,
+//                    Array<ContactModel>::class.java
+//                )
+//
+//                Log.d("tag", "selectedContact arrayList === >>>> " + arrayOfDogs.size)
+
             }
         }
 

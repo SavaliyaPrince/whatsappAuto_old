@@ -23,6 +23,8 @@ class ContactListPage extends StatelessWidget {
   final GroupController groupController = Get.find();
   RxBool val = false.obs;
 
+
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -83,13 +85,10 @@ class ContactListPage extends StatelessWidget {
                       )
                     : Expanded(
                         child: ListView.builder(
-                          itemCount:
-                              contactServiceController.contactModel.length,
+                          itemCount: contactServiceController.contactModel.length,
                           itemBuilder: (context, index) {
-                            final contact =
-                                contactServiceController.contactModel[index];
-                            print(
-                                '=====${contactServiceController.contactModel[index].avatar}=====');
+                            final contact = contactServiceController.contactModel[index];
+                            print('=====${contactServiceController.contactModel[index].avatar}=====');
                             return Padding(
                               padding: EdgeInsets.only(
                                 top: SizeUtils.verticalBlockSize * 1,
@@ -100,8 +99,7 @@ class ContactListPage extends StatelessWidget {
                                 children: [
                                   if (contact.avatar != null)
                                     Container(
-                                      width:
-                                          SizeUtils.horizontalBlockSize * 7.6,
+                                      width: SizeUtils.horizontalBlockSize * 7.6,
                                       height: SizeUtils.verticalBlockSize * 4.5,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
@@ -115,8 +113,7 @@ class ContactListPage extends StatelessWidget {
                                     )
                                   else
                                     Container(
-                                      width:
-                                          SizeUtils.horizontalBlockSize * 7.6,
+                                      width: SizeUtils.horizontalBlockSize * 7.6,
                                       height: SizeUtils.verticalBlockSize * 4.5,
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
@@ -134,14 +131,9 @@ class ContactListPage extends StatelessWidget {
                                     width: SizeUtils.horizontalBlockSize * 5,
                                   ),
                                   AppText(
-                                    contact.displayName
-                                        .toString()
-                                        .toString()
-                                        .toLowerCase(),
+                                    contact.displayName.toString().toString().toLowerCase(),
                                     fontWeight: FontWeight.w400,
-                                    color: themeController.isSwitched.value
-                                        ? AppColor.whiteColor
-                                        : AppColor.textColor,
+                                    color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
                                     fontSize: SizeUtils.fSize_14(),
                                   ),
                                   const Spacer(),
@@ -151,74 +143,35 @@ class ContactListPage extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: Theme(
                                       data: ThemeData(
-                                        unselectedWidgetColor:
-                                            ColorRes.textColor(context)
-                                                .withOpacity(0.3),
+                                        unselectedWidgetColor: ColorRes.textColor(context).withOpacity(0.3),
                                       ),
                                       child: Transform.scale(
                                         scale: 1.1,
                                         child: Obx(
                                           () => Checkbox(
                                             value: contact.isCheck!.value,
-                                            activeColor:
-                                                ColorCollection.greenColor,
+                                            activeColor: ColorCollection.greenColor,
                                             shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
+                                              borderRadius: BorderRadius.circular(5),
                                             ),
                                             onChanged: (value) async {
-                                              final groupSelectedModel
-                                                  selectedContactModels =
-                                                  groupSelectedModel(
-                                                displayName:
-                                                    contact.displayName,
-                                                mobileNumber:
-                                                    contact.mobileNumber,
+                                              final groupSelectedModel selectedContactModels = groupSelectedModel(
+                                                displayName: contact.displayName,
+                                                mobileNumber: contact.mobileNumber,
                                                 avatar: contact.avatar,
                                               );
-                                              if (contact.isCheck?.value ==
-                                                  false) {
+                                              if (contact.isCheck?.value == false) {
                                                 contact.isCheck?.value = true;
-                                                contactServiceController
-                                                    .selectedContactModel
-                                                    .add(
+                                                contactServiceController.selectedContactModel.add(
                                                   selectedContactModels,
                                                 );
-                                                await contactServiceController
-                                                    .contactStoreModel();
-                                                contactServiceController
-                                                    .contactModel
-                                                    .refresh();
+                                                await contactServiceController.contactStoreModel();
+                                                contactServiceController.contactModel.refresh();
                                               } else {
                                                 contact.isCheck?.value = false;
-                                                contactServiceController
-                                                    .selectedContactModel
-                                                    .removeWhere(
-                                                  (element) =>
-                                                      element.displayName ==
-                                                      contactServiceController
-                                                          .contactModel[index]
-                                                          .displayName,
-                                                );
+                                                contactServiceController.selectedContactModel.removeWhere((element) => element.displayName ==
+                                                    contactServiceController.contactModel[index].displayName,);
                                               }
-                                              // final groupSelectedModel selectedContactModels = groupSelectedModel(
-                                              //   displayName: contact.displayName,
-                                              //   mobileNumber: contact.mobileNumber,
-                                              //   avatar: contact.avatar,
-                                              // );
-                                              // if (contact.isCheck?.value == false) {
-                                              //   contact.isCheck?.value = true;
-                                              //   contactServiceController.selectedContactModel.add(
-                                              //     selectedContactModels,
-                                              //   );
-                                              //   await contactServiceController.contactStoreModel();
-                                              //   contactServiceController.contactModel.refresh();
-                                              // } else {
-                                              //   contact.isCheck?.value = false;
-                                              //   contactServiceController.selectedContactModel.removeWhere(
-                                              //     (element) => element.displayName == contactServiceController.contactModel[index].displayName,
-                                              //   );
-                                              // }
                                             },
                                           ),
                                         ),
