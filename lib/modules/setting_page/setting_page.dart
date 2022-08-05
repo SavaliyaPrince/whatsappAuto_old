@@ -7,6 +7,7 @@ import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
+import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
@@ -16,8 +17,14 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class SettingPage extends StatelessWidget {
   SettingPage({Key? key}) : super(key: key);
   final SettingController settingController = Get.find();
-  final ThemeController themeController = Get.find();
-
+  final ThemeController themeController = Get.find()
+    ..getWhatsappMessageCount()
+    ..getFbMessageCount()
+    ..getTelegramMessageCount()
+    ..getTwitterMessageCount()
+    ..getWhatsappBusiMessageCount()
+    ..getInstaMessageCount()
+    ..getTotalCount();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,9 +100,13 @@ class SettingPage extends StatelessWidget {
                   trailing: Obx(
                     () => Switch(
                       activeColor: AppColor.primaryColor,
-                      value: settingController.isSwitch.value,
+                      value: settingController.isSwitchNotification.value,
                       onChanged: (value) {
-                        settingController.isSwitch.value = value;
+                        settingController.isSwitchNotification.value = value;
+                        AppPreference.setNotification(
+                          notification:
+                              settingController.isSwitchNotification.value,
+                        );
                       },
                     ),
                   ),
@@ -137,7 +148,7 @@ class SettingPage extends StatelessWidget {
                 ),
                 _settingItem(
                   context,
-                  AssetsPath.category,
+                  AppIcons.element,
                   AppString.categoryTitle,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
@@ -178,9 +189,17 @@ class SettingPage extends StatelessWidget {
                   trailing: Obx(
                     () => Switch(
                       activeColor: AppColor.primaryColor,
-                      value: settingController.isSwitch.value,
+                      value: settingController.isSwitchNotification.value,
                       onChanged: (value) {
-                        settingController.isSwitch.value = value;
+                        settingController.isSwitchNotification.value = value;
+                        print(
+                            "notification ----${settingController.isSwitchNotification.value}");
+                        AppPreference.setNotification(
+                          notification:
+                              settingController.isSwitchNotification.value,
+                        );
+                        print(
+                            "AppPreference ----${AppPreference.notification}");
                       },
                     ),
                   ),

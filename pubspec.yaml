@@ -57,6 +57,7 @@ dependencies:
   package_info_plus: ^1.4.3
   firebase_crashlytics: ^2.8.6
   firebase_core: ^1.20.0
+  firebase_remote_config: ^2.0.8
 
 dev_dependencies:
   flutter_test:

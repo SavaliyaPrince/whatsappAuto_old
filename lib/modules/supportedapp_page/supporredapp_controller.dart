@@ -6,9 +6,11 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
+import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
 class SupportedAppController extends GetxController {
+  final ThemeController themeController = Get.find();
   RxBool isSwitchWhatsApp = false.obs;
   RxBool isSwitchMessanger = false.obs;
   RxBool isSwitchInstagram = false.obs;
@@ -81,7 +83,11 @@ class SupportedAppController extends GetxController {
       if (result == false) {
         Get.dialog(
           SimpleDialog(
-            backgroundColor: AppColor.primaryColor,
+            elevation: 0,
+            backgroundColor: themeController.isSwitched.value
+                ? ColorCollection.backGroundColorDark
+                : AppColor.primaryColor,
+            // backgroundColor: AppColor.primaryColor,
             title: Text(
               "Do you want to activate whatsapp auto response service?",
               style: TextStyle(

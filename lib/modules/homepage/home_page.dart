@@ -95,29 +95,29 @@ class _HomePageScreenState extends State<HomePageScreen>
             ),
           ),
           body: Padding(
-            padding: EdgeInsets.only(
-              left: SizeUtils.horizontalBlockSize * 5,
-              right: SizeUtils.horizontalBlockSize * 5,
+            padding: EdgeInsets.symmetric(
+              vertical: SizeUtils.verticalBlockSize * 2,
+              horizontal: SizeUtils.horizontalBlockSize * 5,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: SizeUtils.verticalBlockSize * 2,
-                  ),
-                  child: SizedBox(
-                    // height: SizeUtils.verticalBlockSize * 7,
-                    child: Text(
-                      AppString.availableCategories,
-                      style: TextStyle(
-                        color: ColorRes.textColor(context),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(
+                //     vertical: SizeUtils.verticalBlockSize * 2,
+                //   ),
+                //   child: SizedBox(
+                //     // height: SizeUtils.verticalBlockSize * 7,
+                //     child: Text(
+                //       AppString.availableCategories,
+                //       style: TextStyle(
+                //         color: ColorRes.textColor(context),
+                //         fontSize: 18,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 if (Platform.isIOS)
                   Expanded(
                     child: SingleChildScrollView(
@@ -165,7 +165,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             context,
                             titleText: AppString.InviteFriends,
                             subtitle: AppString.testReplySubTile,
-                            image: AssetsPath.category,
+                            image: AssetsPath.invite,
                             onTap: () {
                               settingController.shareNoteLink(
                                   title: AppString.InviteFriends);
@@ -244,7 +244,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                           customCategoriesBox(
                             context,
                             titleText: AppString.emojiTitle,
-                            subtitle: AppString.emojiSubTile,
+                            subtitle: AppString.menuReplySubTile,
                             image: AssetsPath.emoji,
                             onTap: () {
                               InterstitalAd.showInterstitialAd();
@@ -257,7 +257,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                           customCategoriesBox(
                             context,
                             titleText: AppString.contact,
-                            subtitle: AppString.documentSubTile,
+                            subtitle: AppString.emojiSubTile,
                             image: AssetsPath.document,
                             onTap: () {
                               Navigation.pushNamed(Routes.contactPage);
@@ -269,8 +269,8 @@ class _HomePageScreenState extends State<HomePageScreen>
                           customCategoriesBox(
                             context,
                             titleText: AppString.InviteFriends,
-                            subtitle: AppString.testReplySubTile,
-                            image: AssetsPath.category,
+                            subtitle: AppString.documentSubTile,
+                            image: AssetsPath.invite,
                             onTap: () {
                               settingController.shareNoteLink(
                                   title: AppString.InviteFriends);

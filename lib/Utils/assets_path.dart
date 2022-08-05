@@ -4,11 +4,12 @@ class AssetsPath {
   static const appLogoNew = "${image}applogo_new.png";
   static const notification = "${image}notification.png";
   static const star = "${image}star.png";
+  static const invite = "${image}invite.png";
   static const messages = "${image}messages.png";
   static const emoji = "${image}emoji.png";
   static const setting = "${image}setting.png";
   static const category = "${image}category.png";
-  static const document = "${image}document.png";
+  static const document = "${image}contact.png";
   static const upBottomNavigationBarItem = "${image}up-bottom-navigation.png";
   static const homeBottomNavigationBarItem =
       "${image}home-bottom-navigation.png";
@@ -33,6 +34,7 @@ class AssetsPath {
 class AppIcons {
   static const icons = "assets/icons/";
   static const autoReply = "${icons}auto.png";
+  static const element = "${icons}element.png";
   static const whatsappBusiness = "${icons}whatsapp_business.png";
   static const instagram = "${icons}instagram.png";
   static const twitter = "${icons}twitter.png";

@@ -2,17 +2,21 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:whatsapp_auto/helper/admanag.dart';
 
 class AppOpenAdManager {
   static AppOpenAd? appOpenAd;
   static bool isShowingAd = false;
   static bool isLoaded = false;
 
+  static final String appOpenId = FirebaseRemoteConfigUtils.appOpenId;
+  static final String iosOpenId = FirebaseRemoteConfigUtils.iosOpenId;
+
   static Future<void> loadAd() async {
+    print("appopenId----$appOpenId");
+    print("iosOpenId----$iosOpenId");
     AppOpenAd.load(
-      adUnitId: Platform.isAndroid
-          ? 'ca-app-pub-3940256099942544/3419835294'
-          : 'ca-app-pub-3940256099942544/5662855259',
+      adUnitId: Platform.isAndroid ? appOpenId : iosOpenId,
       orientation: AppOpenAd.orientationPortrait,
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(

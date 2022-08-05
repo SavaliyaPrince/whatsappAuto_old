@@ -13,14 +13,7 @@ class AutoReply extends StatelessWidget {
   AutoReply({Key? key}) : super(key: key);
 
   final ValueNotifier<bool> _isDisable = ValueNotifier(true);
-  final ThemeController themeController = Get.find()
-    ..getWhatsappMessageCount()
-    ..getFbMessageCount()
-    ..getTelegramMessageCount()
-    ..getTwitterMessageCount()
-    ..getWhatsappBusiMessageCount()
-    ..getInstaMessageCount()
-    ..getTotalCount();
+  final ThemeController themeController = Get.find();
   // ..getMessageCount();
   @override
   Widget build(BuildContext context) {

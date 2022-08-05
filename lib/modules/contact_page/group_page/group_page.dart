@@ -294,6 +294,10 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          elevation: 0,
+          backgroundColor: themeController.isSwitched.value
+              ? ColorCollection.backGroundColorDark
+              : AppColor.homeScreen,
           title: const Text('Add Group List'),
           content: TextFormField(
             cursorColor: AppColor.primaryColor,
@@ -352,11 +356,18 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                 ),
               ),
             ),
-            FlatButton(
-              child: const Text('CANCEL'),
+            TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
+              child: Text(
+                'CANCEL',
+                style: TextStyle(
+                  color: themeController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.backIconColor,
+                ),
+              ),
             ),
           ],
         );
@@ -369,6 +380,10 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          elevation: 0,
+          backgroundColor: themeController.isSwitched.value
+              ? ColorCollection.backGroundColorDark
+              : AppColor.homeScreen,
           title: const Text('Edit Group Name'),
           content: TextFormField(
             cursorColor: AppColor.primaryColor,
@@ -425,8 +440,15 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                 ),
               ),
             ),
-            FlatButton(
-              child: const Text('CANCEL'),
+            TextButton(
+              child: Text(
+                'CANCEL',
+                style: TextStyle(
+                  color: themeController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.backIconColor,
+                ),
+              ),
               onPressed: () {
                 Navigation.pop();
               },
