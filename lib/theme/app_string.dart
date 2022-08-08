@@ -6,28 +6,27 @@ class AppString {
   static const availableCategories = 'Available Categories';
   static const welcomeMessageTitle = 'Send message';
   static const welcomeMessageSubTile =
-      'Send a message when\nsomeone message you first...';
+      'Send message without saving\ncontact details';
   static const menuReplyTitle = 'Menu reply';
   static const menuReplySubTile =
-      'Create a list of menu to send it\nas an auto-reply';
+      'Set up your auto response to\nautomate message';
   static const testReplyTitle = 'Test reply';
   static const testReplySubTile =
       'Test your auto-reply message\nwith this simulation';
   static const emojiTitle = 'Set Up Your Bot';
-  static const emojiSubTile = 'Create your own chatbot by \ncustomising rep...';
+  static const emojiSubTile =
+      'Set up your contact/group list to auto respond message';
   static const settingTitle = 'Settings';
-  static const settingSubTile =
-      'Test your auto-reply message\nwith this simulation';
+  static const settingSubTile = 'Configure your custom reference';
   static const contactUsTitle = 'Contact Us';
   static const contactUsSubTile =
       'Generate notes to share with\nothers messaging apps';
   static const categoryTitle = 'Supported apps';
   static const categorySubTile =
-      'Turn on/off messaging apps to\nsend auto reply';
+      'Give us your valuable feedbacks and rate us so we can provide better service and quality.';
   static const documentTitle = 'Rate Us';
   static const contact = 'Contact';
-  static const documentSubTile =
-      'Generate notes to share with\nothers messaging apps';
+  static const documentSubTile = 'Share with your friends and family';
   static const sendWelcomeMessage = 'Send welcome message';
   static const sendAWelcome =
       'send a welcome message when someone message you first time or every 3 days once';
@@ -104,9 +103,9 @@ class AppString {
 
   /// Supported Apps
   static const supportedApps = 'Supported apps';
-  static const enableDisabble = 'Enable & disabble apps';
+  static const enableDisabble = 'Enable & disable apps';
   static const description =
-      'Amet minim mollit non deserunt ullmco est sit \naliqua dolor do amet sint';
+      'List of apps that you can enable and disable by clicking on/off switch';
 
   /// contact screen
   static const autoReplyTo = 'Auto reply to';
@@ -143,11 +142,11 @@ class AppString {
   static const availableContactsList = 'Available contacts list';
 
   /// create reply
-  static const createReply = "Auto reply";
+  static const createReply = "Your Auto Response";
   static const customReply = "custome reply";
   static const tapToBelow =
       "Tap to below button to create\ncustome reply text easily";
-  static const create = "Auto Create";
+  static const create = "Add New Response";
 
   /// create custom reply
   static const createCustomReply = "Create custome reply";
