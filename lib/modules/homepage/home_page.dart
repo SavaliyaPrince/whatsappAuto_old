@@ -40,16 +40,14 @@ class _HomePageScreenState extends State<HomePageScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
-    // AppOpenAdManager.loadAd();
-
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance?.addObserver(this);
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance?.removeObserver(this);
   }
 
   @override
@@ -58,10 +56,8 @@ class _HomePageScreenState extends State<HomePageScreen>
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.paused) {
       isPaused = true;
-      print("user go to background");
     }
     if (state == AppLifecycleState.inactive && isPaused) {
-      print("State Resumed===========");
       AppOpenAdManager.showOpenAdIfAvailable();
       isPaused = false;
     }
@@ -102,22 +98,6 @@ class _HomePageScreenState extends State<HomePageScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Padding(
-                //   padding: EdgeInsets.symmetric(
-                //     vertical: SizeUtils.verticalBlockSize * 2,
-                //   ),
-                //   child: SizedBox(
-                //     // height: SizeUtils.verticalBlockSize * 7,
-                //     child: Text(
-                //       AppString.availableCategories,
-                //       style: TextStyle(
-                //         color: ColorRes.textColor(context),
-                //         fontSize: 18,
-                //         fontWeight: FontWeight.w600,
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 if (Platform.isIOS)
                   Expanded(
                     child: SingleChildScrollView(
@@ -133,31 +113,6 @@ class _HomePageScreenState extends State<HomePageScreen>
                               Navigation.pushNamed(Routes.sendMassagePage);
                             },
                           ),
-
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.emojiTitle,
-                          //   subtitle: AppString.emojiSubTile,
-                          //   image: AssetsPath.emoji,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.createReply);
-                          //   },
-                          // ),
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.testReplyTitle,
-                          //   subtitle: AppString.testReplySubTile,
-                          //   image: AssetsPath.messages,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.chatTestReply);
-                          //   },
-                          // ),
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),
@@ -171,15 +126,6 @@ class _HomePageScreenState extends State<HomePageScreen>
                                   title: AppString.InviteFriends);
                             },
                           ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.categoryTitle,
-                          //   subtitle: AppString.categorySubTile,
-                          //   image: AssetsPath.category,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.supportedApp);
-                          //   },
-                          // ),
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),
@@ -203,17 +149,11 @@ class _HomePageScreenState extends State<HomePageScreen>
                             image: AssetsPath.star,
                             onTap: () async {
                               if (await inAppReview.isAvailable()) {
-                                print(
-                                    "---appreview---:${inAppReview.isAvailable()}");
                                 inAppReview.requestReview();
                               } else {
-                                print("---appreview--tost--");
-
                                 AppToast.toastMessage(
                                     "app review not available at time.");
                               }
-
-                              // Navigation.pushNamed(Routes.chatPage);
                             },
                           ),
                           SizedBox(
@@ -276,18 +216,6 @@ class _HomePageScreenState extends State<HomePageScreen>
                                   title: AppString.InviteFriends);
                             },
                           ),
-                          // SizedBox(
-                          //   height: SizeUtils.verticalBlockSize * 1.5,
-                          // ),
-                          // customCategoriesBox(
-                          //   context,
-                          //   titleText: AppString.contactUsTitle,
-                          //   subtitle: AppString.contactUsSubTile,
-                          //   image: AssetsPath.document,
-                          //   onTap: () {
-                          //     Navigation.pushNamed(Routes.contactPage);
-                          //   },
-                          // ),
                           SizedBox(
                             height: SizeUtils.verticalBlockSize * 1.5,
                           ),
@@ -314,16 +242,11 @@ class _HomePageScreenState extends State<HomePageScreen>
                             image: AssetsPath.star,
                             onTap: () async {
                               if (await inAppReview.isAvailable()) {
-                                print(
-                                    "---appreview---:${inAppReview.isAvailable()}");
                                 inAppReview.requestReview();
                               } else {
-                                print("---appreview--tost--");
-
                                 AppToast.toastMessage(
                                     "app review not available at time.");
                               }
-                              // Navigation.pushNamed(Routes.chatPage);
                             },
                           ),
                           SizedBox(
@@ -356,7 +279,6 @@ class _HomePageScreenState extends State<HomePageScreen>
           color: themeController.isSwitched.value
               ? AppColor.homeScreen.withOpacity(0.1)
               : AppColor.whiteColor,
-          // border: Border.all(width: 0.1, color: AppColor.textColor),
           borderRadius:
               BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
         ),

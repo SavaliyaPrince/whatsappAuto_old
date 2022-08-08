@@ -25,6 +25,7 @@ class ThemeController extends GetxController {
     getTwitterMessageCount();
     getWhatsappBusiMessageCount();
     getInstaMessageCount();
+    getTotalCount();
     super.onInit();
   }
 
@@ -38,8 +39,6 @@ class ThemeController extends GetxController {
   }
 
   Future<String> getWhatsappMessageCount() async {
-    print("-----instagramResponse-000000--------");
-
     const platform = MethodChannel('samples.flutter.dev/battery');
     final String result = await platform.invokeMethod('getMessageCount');
     whatsAppMassageSent.value = int.parse(result);
@@ -51,8 +50,6 @@ class ThemeController extends GetxController {
   }
 
   Future<String> getFbMessageCount() async {
-    print("------1111111--------");
-
     const platform = MethodChannel('samples.flutter.dev/battery');
     final String result = await platform.invokeMethod('getFbMessageCount');
     fbMassangerMassageSent.value = int.parse(result);
@@ -61,8 +58,6 @@ class ThemeController extends GetxController {
   }
 
   Future<String> getTelegramMessageCount() async {
-    print("------222222222--------");
-
     // telegramMassageSent.value = telegramMassageSent.value;
     const platform = MethodChannel('samples.flutter.dev/battery');
     final String result =
@@ -81,7 +76,6 @@ class ThemeController extends GetxController {
   }
 
   Future<String> getWhatsappBusiMessageCount() async {
-    print("------444444444--------");
     const platform = MethodChannel('samples.flutter.dev/battery');
     final String result =
         await platform.invokeMethod('getWhatsappBusiMessageCount');
@@ -91,7 +85,6 @@ class ThemeController extends GetxController {
   }
 
   Future<String> getInstaMessageCount() async {
-    print("------5555555--------");
     const platform = MethodChannel('samples.flutter.dev/battery');
     final String result = await platform.invokeMethod('getInstaMessageCount');
     instaMassageSent.value = int.parse(result);
@@ -99,12 +92,13 @@ class ThemeController extends GetxController {
     return result;
   }
 
-  void getTotalCount() {
+  Future<int?> getTotalCount() async {
     totalMassageSent.value = whatsAppMassageSent.value +
         fbMassangerMassageSent.value +
         telegramMassageSent.value +
         twitterMassageSent.value +
         whatsAppBusiMassageSent.value +
         instaMassageSent.value;
+    print("----getTotalCount--02------${totalMassageSent.value}--");
   }
 }

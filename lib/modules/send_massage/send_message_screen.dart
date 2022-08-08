@@ -34,7 +34,6 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // showAndHideKeyboardEvent();
   }
 
   @override
@@ -70,20 +69,6 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
           ),
         ),
       ),
-      // floatingActionButton: Obx(
-      //   () => !_sendMessageController.isShowCallHistory.value
-      //       ? FloatingActionButton(
-      //           backgroundColor: AppColor.appBackgroundColor,
-      //           onPressed: () async {
-      //             _sendMessageController.isShowDialPad.value =
-      //                 !_sendMessageController.isShowDialPad.value;
-      //             _sendMessageController.isShowCallHistory.value =
-      //                 !_sendMessageController.isShowCallHistory.value;
-      //           },
-      //           child: const Icon(Icons.dialpad),
-      //         )
-      //       : const SizedBox(),
-      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -114,10 +99,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 child: AppTextField(
                   contentPadding: EdgeInsets.symmetric(
                       horizontal: SizeUtils.horizontalBlockSize * 4),
-                  onChanged: (value) {
-                    // _sendMessageController.phoneController.text =
-                    //     value.toString().replaceAll(' ', "");
-                  },
+                  onChanged: (value) {},
                   controller: _sendMessageController.phoneController,
                   hintText: AppString.phoneNumber,
                   keyboardType: TextInputType.phone,
@@ -138,10 +120,6 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                   maxLines: 50,
                   onChanged: (value) {},
                   controller: _sendMessageController.textController,
-                  // suffixIcon: const SizedBox(
-                  //   width: 0,
-                  //   height: 0,
-                  // ),
                   hintText: AppString.typeMassage,
                   keyboardType: TextInputType.text,
                 ),
@@ -151,15 +129,11 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
               ),
               ImageTextButton(
                 onTap: () async {
-                  print(
-                      "phone number  --- >${_sendMessageController.phoneController.text}");
                   if (_sendMessageController.phoneController.text != "") {
-                    print("----------0000000---------");
                     _sendMessageController.onOpenWhatsApp(
                         _sendMessageController.phoneController.text,
                         _sendMessageController.textController.text);
                   } else {
-                    print("----------11111---------");
                     AppToast.toastMessage("Enter Mobile Number");
                   }
                 },
@@ -203,7 +177,6 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 icon: Icons.message,
                 width: SizeUtils.horizontalBlockSize * 48,
               ),
-
               Obx(
                 () => SizedBox(
                   height: isBannerLoaded.value
@@ -211,23 +184,6 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                       : 0,
                 ),
               ),
-
-              // ImageTextButton(
-              //   width: SizeUtils.horizontalBlockSize * 40,
-              //   onTap: () async {
-              //     if (_sendMessageController.phoneController.text != "") {
-              //       await FlutterPhoneDirectCaller.callNumber(
-              //         _sendMessageController.phoneController.text,
-              //       );
-              //     } else {
-              //       AppToast.toastMessage("Enter Mobile Number");
-              //     }
-              //   },
-              //   text: AppString.openCall,
-              //   buttonColor: AppColor.primaryColor,
-              //   textColor: AppColor.whiteColor,
-              //   icon: Icons.call,
-              // )
             ],
           ),
         ),

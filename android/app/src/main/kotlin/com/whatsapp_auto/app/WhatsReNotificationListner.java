@@ -230,7 +230,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                     return;
                 }
                 CharSequence[] textLine = bundle.getCharSequenceArray(InterceptedNotificationParseCode.ANDROID_TEXT_LINE);
-                appendLog("textLine**********1213123132132123*********" + textLine);
+
                 if (textLine != null) {
                     appendLog("textLine*******************" + textLine);
                     String firstUser = textLine[textLine.length - 2].toString().split(":")[0];
