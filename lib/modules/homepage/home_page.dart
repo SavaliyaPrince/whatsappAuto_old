@@ -238,7 +238,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                           customCategoriesBox(
                             context,
                             titleText: AppString.documentTitle,
-                            subtitle: AppString.documentSubTile,
+                            subtitle: AppString.categorySubTile,
                             image: AssetsPath.star,
                             onTap: () async {
                               if (await inAppReview.isAvailable()) {
