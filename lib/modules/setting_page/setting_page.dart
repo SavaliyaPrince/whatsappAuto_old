@@ -17,14 +17,7 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class SettingPage extends StatelessWidget {
   SettingPage({Key? key}) : super(key: key);
   final SettingController settingController = Get.find();
-  final ThemeController themeController = Get.find()
-    ..getWhatsappMessageCount()
-    ..getFbMessageCount()
-    ..getTelegramMessageCount()
-    ..getTwitterMessageCount()
-    ..getWhatsappBusiMessageCount()
-    ..getInstaMessageCount()
-    ..getTotalCount();
+  final ThemeController themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,14 +59,6 @@ class SettingPage extends StatelessWidget {
           if (Platform.isIOS)
             Column(
               children: [
-                // _settingItem(
-                //   context,
-                //   AppIcons.advance,
-                //   AppString.advance,
-                //   onTap: () {
-                //     Navigation.pushNamed(Routes.asPage);
-                //   },
-                // ),
                 _settingItem(
                   context,
                   AppIcons.appearance,
@@ -155,14 +140,6 @@ class SettingPage extends StatelessWidget {
                     Navigation.pushNamed(Routes.supportedApp);
                   },
                 ),
-                // _settingItem(
-                //   context,
-                //   AppIcons.advance,
-                //   AppString.advance,
-                //   onTap: () {
-                //     Navigation.pushNamed(Routes.asPage);
-                //   },
-                // ),
                 _settingItem(
                   context,
                   AppIcons.appearance,
@@ -192,14 +169,11 @@ class SettingPage extends StatelessWidget {
                       value: settingController.isSwitchNotification.value,
                       onChanged: (value) {
                         settingController.isSwitchNotification.value = value;
-                        print(
-                            "notification ----${settingController.isSwitchNotification.value}");
+
                         AppPreference.setNotification(
                           notification:
                               settingController.isSwitchNotification.value,
                         );
-                        print(
-                            "AppPreference ----${AppPreference.notification}");
                       },
                     ),
                   ),
@@ -211,14 +185,6 @@ class SettingPage extends StatelessWidget {
                   width: SizeUtils.fSize_20(),
                   onTap: () {},
                 ),
-                // _settingItem(
-                //   context,
-                //   AppIcons.profileContact,
-                //   AppString.contact,
-                //   onTap: () {
-                //     Navigation.pushNamed(Routes.contactPage);
-                //   },
-                // ),
                 _settingItem(
                   context,
                   AppIcons.privacy,
@@ -233,14 +199,6 @@ class SettingPage extends StatelessWidget {
                   width: SizeUtils.fSize_24(),
                   onTap: () {},
                 ),
-                // _settingItem(
-                //   context,
-                //   AppIcons.inviteFriends,
-                //   AppString.InviteFriends,
-                //   onTap: () async {
-                //     settingController.shareNoteLink(title: "Test");
-                //   },
-                // ),
               ],
             )
         ],
@@ -278,16 +236,3 @@ class SettingPage extends StatelessWidget {
     );
   }
 }
-
-// customCategoriesBox(
-//   context,
-//   titleText: AppString.categoryTitle,
-//   subtitle: AppString.categorySubTile,
-//   image: AssetsPath.category,
-//   onTap: () {
-//     Navigation.pushNamed(Routes.supportedApp);
-//   },
-// ),
-// SizedBox(
-//   height: SizeUtils.verticalBlockSize * 1.5,
-// ),
