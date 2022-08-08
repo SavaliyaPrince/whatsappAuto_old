@@ -54,15 +54,10 @@ class SendMessageController extends GetxController {
   }
 
   Future<void> onOpenWhatsApp(String countryCode, String message) async {
-    print("----------2222222---------");
     final prefs = await SharedPreferences.getInstance();
     if (phoneController.text != "") {
       try {
-        print("----------3333333---------");
-
         if (Platform.isIOS) {
-          print("----------ios---------");
-
           // for iOS phone only
           String mobileNumber = await getCountryNumber();
 
@@ -79,19 +74,14 @@ class SendMessageController extends GetxController {
             await launch(redirectUrl, forceSafariVC: false);
           }
         } else {
-          print("----------android---------");
-
           final String mobileNumber = await getCountryNumber();
           final redirectUrl =
               "https://wa.me/$mobileNumber?text=${Uri.parse(message.replaceAll(":", ""))}";
 
-          print("----------android--------- $mobileNumber");
           //await launch(redirectUrl);
           if (await canLaunch(redirectUrl)) {
             await launch(redirectUrl, forceSafariVC: false);
           }
-
-          print("----------android-----field----");
         }
       } catch (e) {
         AppToast.toastMessage("Invalid Mobile Number");

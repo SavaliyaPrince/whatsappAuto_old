@@ -13,8 +13,15 @@ class AutoReply extends StatelessWidget {
   AutoReply({Key? key}) : super(key: key);
 
   final ValueNotifier<bool> _isDisable = ValueNotifier(true);
-  final ThemeController themeController = Get.find();
-  // ..getMessageCount();
+  final ThemeController themeController = Get.find()
+    ..getWhatsappMessageCount()
+    ..getFbMessageCount()
+    ..getTelegramMessageCount()
+    ..getTwitterMessageCount()
+    ..getWhatsappBusiMessageCount()
+    ..getInstaMessageCount()
+    ..getTotalCount();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,31 +54,18 @@ class AutoReply extends StatelessWidget {
               ? AppColor.whiteColor
               : AppColor.backIconColor,
         ),
-        // actions: [
-        //   Padding(
-        //     padding: EdgeInsets.only(right: SizeUtils.horizontalBlockSize * 4),
-        //     child: GestureDetector(
-        //       onTap: () {},
-        //       child: Image.asset(
-        //         AppIcons.import,
-        //         width: SizeUtils.fSize_24(),
-        //         color: themeController.isSwitched.value
-        //             ? AppColor.whiteColor
-        //             : AppColor.backIconColor,
-        //       ),
-        //     ),
-        //   ),
-        // ],
       ),
       body: Center(
         child: Column(
           children: [
             SizedBox(height: SizeUtils.verticalBlockSize * 2.7),
-            AppText(
-              "${themeController.totalMassageSent.value}",
-              color: AppColor.primaryColor,
-              fontSize: SizeUtils.fSize_24(),
-              fontWeight: FontWeight.w600,
+            Obx(
+              () => AppText(
+                "${themeController.totalMassageSent.value}",
+                color: AppColor.primaryColor,
+                fontSize: SizeUtils.fSize_24(),
+                fontWeight: FontWeight.w600,
+              ),
             ),
             SizedBox(height: SizeUtils.verticalBlockSize * 0.7),
             AppText(
@@ -90,92 +84,96 @@ class AutoReply extends StatelessWidget {
             ValueListenableBuilder(
               valueListenable: _isDisable,
               builder: (BuildContext context, bool value, Widget? child) {
-                return Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        replyMassageItem(
-                          context,
-                          AppIcons.whatsapp,
-                          AppString.welcomeMessage,
-                          "${AppString.massageSent} ${themeController.whatsAppMassageSent == 0 ? 0 : themeController.whatsAppMassageSent}",
-                          colorText:
-                              // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.whatsAppMassageSent == 0
-                                  ? false
-                                  : value,
-                        ),
-                        replyMassageItem(
-                          context,
-                          AppIcons.telegram,
-                          AppString.Telegram,
-                          "${AppString.massageSent} ${themeController.telegramMassageSent == 0 ? 0 : themeController.telegramMassageSent}",
-                          colorText:
-                              // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.telegramMassageSent == 0
-                                  ? false
-                                  : value,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        replyMassageItem(
-                          context,
-                          AppIcons.instagram,
-                          AppString.instagram,
-                          "${AppString.massageSent} ${themeController.instaMassageSent == 0 ? 0 : themeController.instaMassageSent}",
-                          colorText:
-                              // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.instaMassageSent == 0
-                                  ? false
-                                  : value,
-                        ),
-                        replyMassageItem(
-                          context,
-                          AppIcons.fbMessenger,
-                          AppString.massanger,
-                          "${AppString.massageSent} ${themeController.fbMassangerMassageSent == 0 ? 0 : themeController.fbMassangerMassageSent}",
-                          colorText:
-                              // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.fbMassangerMassageSent == 0
-                                  ? false
-                                  : value,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        replyMassageItem(
-                          context,
-                          AppIcons.twitter,
-                          AppString.twitter,
-                          "${AppString.massageSent} ${themeController.twitterMassageSent == 0 ? 0 : themeController.twitterMassageSent}",
-                          colorText:
-                              // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.twitterMassageSent == 0
-                                  ? false
-                                  : value,
-                        ),
-                        replyMassageItem(
-                          context,
-                          AppIcons.whatsappBusiness,
-                          AppString.whatsappBusiness,
-                          "${AppString.massageSent} ${themeController.whatsAppBusiMassageSent == 0 ? 0 : themeController.whatsAppBusiMassageSent}",
-                          colorText:
-                              // ignore: avoid_bool_literals_in_conditional_expressions
-                              themeController.whatsAppBusiMassageSent == 0
-                                  ? false
-                                  : value,
-                        ),
-                      ],
-                    ),
-                  ],
+                return Obx(
+                  () => Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          replyMassageItem(
+                            context,
+                            AppIcons.whatsapp,
+                            AppString.welcomeMessage,
+                            "${AppString.massageSent} ${themeController.whatsAppMassageSent.value == 0 ? 0 : themeController.whatsAppMassageSent.value}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.whatsAppMassageSent.value == 0
+                                    ? false
+                                    : value,
+                          ),
+                          replyMassageItem(
+                            context,
+                            AppIcons.telegram,
+                            AppString.Telegram,
+                            "${AppString.massageSent} ${themeController.telegramMassageSent.value == 0 ? 0 : themeController.telegramMassageSent.value}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.telegramMassageSent.value == 0
+                                    ? false
+                                    : value,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          replyMassageItem(
+                            context,
+                            AppIcons.instagram,
+                            AppString.instagram,
+                            "${AppString.massageSent} ${themeController.instaMassageSent.value == 0 ? 0 : themeController.instaMassageSent.value}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.instaMassageSent.value == 0
+                                    ? false
+                                    : value,
+                          ),
+                          replyMassageItem(
+                            context,
+                            AppIcons.fbMessenger,
+                            AppString.massanger,
+                            "${AppString.massageSent} ${themeController.fbMassangerMassageSent.value == 0 ? 0 : themeController.fbMassangerMassageSent.value}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.fbMassangerMassageSent.value ==
+                                        0
+                                    ? false
+                                    : value,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: SizeUtils.verticalBlockSize * 2.1),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          replyMassageItem(
+                            context,
+                            AppIcons.twitter,
+                            AppString.twitter,
+                            "${AppString.massageSent} ${themeController.twitterMassageSent.value == 0 ? 0 : themeController.twitterMassageSent.value}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.twitterMassageSent.value == 0
+                                    ? false
+                                    : value,
+                          ),
+                          replyMassageItem(
+                            context,
+                            AppIcons.whatsappBusiness,
+                            AppString.whatsappBusiness,
+                            "${AppString.massageSent} ${themeController.whatsAppBusiMassageSent.value == 0 ? 0 : themeController.whatsAppBusiMassageSent.value}",
+                            colorText:
+                                // ignore: avoid_bool_literals_in_conditional_expressions
+                                themeController.whatsAppBusiMassageSent.value ==
+                                        0
+                                    ? false
+                                    : value,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -203,7 +201,6 @@ class AutoReply extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          // horizontal: SizeUtils.horizontalBlockSize * 4.5,
           vertical: SizeUtils.verticalBlockSize * 1.5,
         ),
         child: Column(

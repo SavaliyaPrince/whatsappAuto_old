@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
@@ -91,7 +89,6 @@ class AppearancePage extends StatelessWidget {
                 );
                 AppPreference.setBoolean("theme",
                     value: themeController.isSwitched.value);
-                log("AppPreference---->>>${AppPreference.getBoolean("theme")}");
               },
             ),
           ],

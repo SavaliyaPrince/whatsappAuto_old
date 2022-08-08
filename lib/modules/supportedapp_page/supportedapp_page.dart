@@ -16,7 +16,6 @@ class SupportedAppPage extends StatelessWidget {
   SupportedAppPage({Key? key}) : super(key: key);
   final ThemeController themeController = Get.find();
   final SupportedAppController supportedAppController = Get.find();
-  // final HomePageController _homePageController = Get.find();
 
   @override
   Widget build(BuildContext context) {

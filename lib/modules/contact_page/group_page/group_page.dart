@@ -290,6 +290,7 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
 
   Future<Future> displayDialog(BuildContext context) async {
     return showDialog(
+      barrierColor: Colors.transparent,
       context: context,
       builder: (context) {
         return AlertDialog(

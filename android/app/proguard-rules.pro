@@ -8,6 +8,5 @@
 -keep class  com.amazonaws.** { *; }
 -keep class  com.aldiferdiyan.** { *; }
 -keep class  org.jivesoftware.** { *; }
-
   -dontwarn us.zoom.**
   -dontwarn com.zipow.**

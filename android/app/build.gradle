@@ -59,6 +59,7 @@ android {
         versionName flutterVersionName
     }
 
+
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -67,12 +68,10 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-
     buildTypes {
         debug {
             signingConfig signingConfigs.release
         }
-
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

@@ -17,14 +17,7 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class SettingPage extends StatelessWidget {
   SettingPage({Key? key}) : super(key: key);
   final SettingController settingController = Get.find();
-  final ThemeController themeController = Get.find()
-    ..getWhatsappMessageCount()
-    ..getFbMessageCount()
-    ..getTelegramMessageCount()
-    ..getTwitterMessageCount()
-    ..getWhatsappBusiMessageCount()
-    ..getInstaMessageCount()
-    ..getTotalCount();
+  final ThemeController themeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,6 +169,7 @@ class SettingPage extends StatelessWidget {
                       value: settingController.isSwitchNotification.value,
                       onChanged: (value) {
                         settingController.isSwitchNotification.value = value;
+
                         AppPreference.setNotification(
                           notification:
                               settingController.isSwitchNotification.value,

@@ -127,7 +127,6 @@ class ASpage extends StatelessWidget {
                           value: asController.drivingMode.value,
                           onChanged: (val) {
                             asController.drivingMode.value = val;
-                            print("----------drivingMode-------");
                           },
                         ),
                         SizedBox(height: SizeUtils.verticalBlockSize * 2),
@@ -157,9 +156,7 @@ class ASpage extends StatelessWidget {
                           isSwitch: value,
                           value: asController.waitTime.value,
                           onChanged: (val) {
-                            print("----------waitTime-------");
                             asController.waitTime.value = val;
-                            print("----------waitTime-------");
                           },
                         ),
                         SizedBox(height: SizeUtils.verticalBlockSize * 2),
@@ -170,9 +167,7 @@ class ASpage extends StatelessWidget {
                           isSwitch: value,
                           value: asController.replyOnce.value,
                           onChanged: (val) {
-                            print("----------replyOnce-------");
                             asController.replyOnce.value = val;
-                            print("----------replyOnce-------");
                           },
                         ),
                         SizedBox(height: SizeUtils.verticalBlockSize * 3.5),
@@ -190,9 +185,7 @@ class ASpage extends StatelessWidget {
                           isSwitch: value,
                           value: asController.enable.value,
                           onChanged: (val) {
-                            print("----------waitTime-------");
                             asController.enable.value = val;
-                            print("----------waitTime-------");
                           },
                         ),
                         SizedBox(height: SizeUtils.verticalBlockSize * 2),
@@ -216,9 +209,7 @@ class ASpage extends StatelessWidget {
                           isSwitch: value,
                           value: asController.appLockPassword.value,
                           onChanged: (val) {
-                            print("----------waitTime-------");
                             asController.appLockPassword.value = val;
-                            print("----------waitTime-------");
                           },
                         ),
                         SizedBox(height: SizeUtils.verticalBlockSize * 4),
