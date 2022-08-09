@@ -14,31 +14,36 @@ class ContactServiceController extends GetxController {
   RxList<Contact> contacts = <Contact>[].obs;
   RxBool isLoader = false.obs;
   RxBool isSelectedContactsView = false.obs;
-  final RxList<ContactModel> contactModel = <ContactModel>[].obs;
+   RxList<ContactModel> contactModel = <ContactModel>[].obs;
   RxList<groupSelectedModel> selectedContactModel = <groupSelectedModel>[].obs;
   static const platform = MethodChannel('samples.flutter.dev/battery');
+
 
   Future<void> getPhoneContacts() async {
     try {
       isLoader.value = true;//84c090b1 //e1989614 //21531
-      print("getPhoneContacts :- 1 ${isLoader.value}");
+      print("---getphonecontect----1-");
       final PermissionStatus contactsPermissionsStatus = await _contactsPermissions();
-      print("getPhoneContacts :- 2 $contactsPermissionsStatus");
+      print("---getphonecontect----2-");
       if (contactsPermissionsStatus == PermissionStatus.granted) {
-        Navigation.pushNamed(Routes.contactPage);
-        print('------GET-------${PermissionStatus.granted}-------GET-------');
+        print("---getphonecontect----3-");
         final List<Contact> contacts = await FlutterContacts.getContacts(withPhoto: true,withProperties: true);
-        print("getPhoneContacts :- 3 ${contacts.length}");
+        print("---getphonecontect----4-");
         for (var i = 0; i < contacts.length; i++) {
           final String number = contacts[i].phones.isNotEmpty ? contacts[i].phones[0].number : contacts[i].displayName;
-          log("getPhoneContacts :- 4 displayName: ${contacts[i].displayName} number $number ===>>$i");
+          print("---getphonecontect----5-");
           final ContactModel model = ContactModel(
             displayName: contacts[i].displayName,
             mobileNumber: number,
             avatar: contacts[i].photo,
             isCheck: false.obs,
           );
+          print("---getphonecontect----6-");
+
           contactModel.add(model);
+          print("---getphonecontect----7-");
+
+
         }
         passAllContacts();
         isLoader.value = false;
@@ -94,7 +99,6 @@ class ContactServiceController extends GetxController {
         'selectedContact',
         {"selectedContact": encodedData},
       );
-
       log("groupStore 2:");
     } catch (e, st) {
       print('-----$e-----STORE MODEL-----$st------');
@@ -119,7 +123,9 @@ class ContactServiceController extends GetxController {
 
   @override
   void onInit() {
+  //  getPhoneContacts();
     getPhoneContacts();
+
     contactGetModel();
     super.onInit();
   }

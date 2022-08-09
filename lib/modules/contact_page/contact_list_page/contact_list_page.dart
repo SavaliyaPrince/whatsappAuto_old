@@ -23,8 +23,6 @@ class ContactListPage extends StatelessWidget {
   final GroupController groupController = Get.find();
   RxBool val = false.obs;
 
-
-
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -32,9 +30,7 @@ class ContactListPage extends StatelessWidget {
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.2,
-          backgroundColor: themeController.isSwitched.value
-              ? AppColor.darkThem.withOpacity(0.2)
-              : AppColor.whiteColor,
+          backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
@@ -61,7 +57,7 @@ class ContactListPage extends StatelessWidget {
           padding: EdgeInsets.only(
             left: SizeUtils.horizontalBlockSize * 4.5,
             right: SizeUtils.horizontalBlockSize * 4.5,
-            top: SizeUtils.horizontalBlockSize * 5.5,
+            top: SizeUtils.verticalBlockSize * 3,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,28 +66,34 @@ class ContactListPage extends StatelessWidget {
                 AppString.availableContactsList,
                 fontSize: SizeUtils.fSize_16(),
                 fontWeight: FontWeight.w500,
+                color: ColorRes.textColor(context),
               ),
               SizedBox(
-                height: SizeUtils.verticalBlockSize * 2,
+                height: SizeUtils.verticalBlockSize * 2.5,
               ),
               Obx(
-                () => contactServiceController.isLoader.value == true
-                    ? const Expanded(
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: ColorCollection.greenColor,
-                          ),
+                () => contactServiceController.contactModel.isEmpty == true
+                    ? Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: SizeUtils.verticalBlockSize * 38),
+                        child: Column(
+                          children: const [
+                            CircularProgressIndicator(
+                              color: AppColor.primaryColor,
+                            )
+                          ],
                         ),
-                      )
+                      ),
+                    )
                     : Expanded(
                         child: ListView.builder(
                           itemCount: contactServiceController.contactModel.length,
+                          physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             final contact = contactServiceController.contactModel[index];
-                            print('=====${contactServiceController.contactModel[index].avatar}=====');
                             return Padding(
                               padding: EdgeInsets.only(
-                                top: SizeUtils.verticalBlockSize * 1,
+                                top: SizeUtils.verticalBlockSize * 0.6,
                                 bottom: SizeUtils.verticalBlockSize * 1,
                                 right: SizeUtils.horizontalBlockSize * 1,
                               ),
@@ -143,10 +145,10 @@ class ContactListPage extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: Theme(
                                       data: ThemeData(
-                                        unselectedWidgetColor: ColorRes.textColor(context).withOpacity(0.3),
+                                        unselectedWidgetColor: ColorRes.textColor(context).withOpacity(0.1),
                                       ),
                                       child: Transform.scale(
-                                        scale: 1.1,
+                                        scale: 1.2,
                                         child: Obx(
                                           () => Checkbox(
                                             value: contact.isCheck!.value,
@@ -169,10 +171,14 @@ class ContactListPage extends StatelessWidget {
                                                 contactServiceController.contactModel.refresh();
                                               } else {
                                                 contact.isCheck?.value = false;
-                                                contactServiceController.selectedContactModel.removeWhere((element) => element.displayName ==
-                                                    contactServiceController.contactModel[index].displayName,);
+                                                contactServiceController.selectedContactModel.removeWhere(
+                                                  (element) => element.displayName == contactServiceController.contactModel[index].displayName,
+                                                );
                                               }
                                             },
+                                            side: BorderSide(
+                                              color: AppColor.textColor.withOpacity(0.2),
+                                            ),
                                           ),
                                         ),
                                       ),
