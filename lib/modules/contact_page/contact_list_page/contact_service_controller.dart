@@ -14,23 +14,26 @@ class ContactServiceController extends GetxController {
   RxList<Contact> contacts = <Contact>[].obs;
   RxBool isLoader = false.obs;
   RxBool isSelectedContactsView = false.obs;
-   RxList<ContactModel> contactModel = <ContactModel>[].obs;
+  RxList<ContactModel> contactModel = <ContactModel>[].obs;
   RxList<groupSelectedModel> selectedContactModel = <groupSelectedModel>[].obs;
   static const platform = MethodChannel('samples.flutter.dev/battery');
 
-
   Future<void> getPhoneContacts() async {
     try {
-      isLoader.value = true;//84c090b1 //e1989614 //21531
+      isLoader.value = true; //84c090b1 //e1989614 //21531
       print("---getphonecontect----1-");
-      final PermissionStatus contactsPermissionsStatus = await _contactsPermissions();
+      final PermissionStatus contactsPermissionsStatus =
+          await _contactsPermissions();
       print("---getphonecontect----2-");
       if (contactsPermissionsStatus == PermissionStatus.granted) {
         print("---getphonecontect----3-");
-        final List<Contact> contacts = await FlutterContacts.getContacts(withPhoto: true,withProperties: true);
+        final List<Contact> contacts = await FlutterContacts.getContacts(
+            withPhoto: true, withProperties: true);
         print("---getphonecontect----4-");
         for (var i = 0; i < contacts.length; i++) {
-          final String number = contacts[i].phones.isNotEmpty ? contacts[i].phones[0].number : contacts[i].displayName;
+          final String number = contacts[i].phones.isNotEmpty
+              ? contacts[i].phones[0].number
+              : contacts[i].displayName;
           print("---getphonecontect----5-");
           final ContactModel model = ContactModel(
             displayName: contacts[i].displayName,
@@ -42,8 +45,6 @@ class ContactServiceController extends GetxController {
 
           contactModel.add(model);
           print("---getphonecontect----7-");
-
-
         }
         passAllContacts();
         isLoader.value = false;
@@ -68,7 +69,6 @@ class ContactServiceController extends GetxController {
   }
 
   Future<PermissionStatus> _contactsPermissions() async {
-    print("_contactsPermissions");
     final PermissionStatus permission = await Permission.contacts.status;
     if (permission != PermissionStatus.granted) {
       final Map<Permission, PermissionStatus> permissionStatus =
@@ -124,10 +124,9 @@ class ContactServiceController extends GetxController {
     }
   }
 
-
   @override
   void onInit() {
- //   getPhoneContacts();
+    //   getPhoneContacts();
     contactGetModel();
     super.onInit();
   }

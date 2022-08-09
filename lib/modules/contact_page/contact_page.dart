@@ -33,12 +33,16 @@ class ContactPage extends StatelessWidget {
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.2,
-          backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.whiteColor
+              : AppColor.appBarColors,
           title: AppText(
             AppString.contacts,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: ColorRes.textColor(context),
+            color: themeController.isSwitched.value
+                ? AppColor.textColor
+                : AppColor.whiteColor,
           ),
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
@@ -51,7 +55,9 @@ class ContactPage extends StatelessWidget {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.textColor
+                    : AppColor.whiteColor,
               ),
             ),
           ),
@@ -374,6 +380,12 @@ class ContactPage extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            if (contactServiceController.contactModel.length <= index)
+                              const SizedBox()
+                            else
+                              const AppText(
+                                'No more contact available',
+                              )
                           ],
                         ),
                       );
@@ -381,7 +393,9 @@ class ContactPage extends StatelessWidget {
                   ),
                 Obx(
                   () => SizedBox(
-                    height: isBannerLoaded.value ? SizeUtils.verticalBlockSize * 6 : 0,
+                    height: isBannerLoaded.value
+                        ? SizeUtils.verticalBlockSize * 6
+                        : 0,
                   ),
                 ),
               ],

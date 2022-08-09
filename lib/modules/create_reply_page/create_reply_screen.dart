@@ -248,8 +248,169 @@ class _CreateReplyState extends State<CreateReply> {
                                     right: -15,
                                     child: IconButton(
                                       onPressed: () {
-                                        _createReplyController.createModal
-                                            .removeAt(index);
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (BuildContext context) {
+                                            return Dialog(
+                                              elevation: 0,
+                                              backgroundColor: themeController
+                                                      .isSwitched.value
+                                                  ? ColorCollection
+                                                      .backGroundColorDark
+                                                  : AppColor.homeScreen,
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: SizeUtils
+                                                            .verticalBlockSize *
+                                                        1.2,
+                                                    horizontal: SizeUtils
+                                                            .horizontalBlockSize *
+                                                        5),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Image.asset(
+                                                        AppIcons.deleteIcon),
+                                                    SizedBox(
+                                                        height: SizeUtils
+                                                                .verticalBlockSize *
+                                                            1.2),
+                                                    AppText(
+                                                      "Delete blog post",
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize:
+                                                          SizeUtils.fSize_16(),
+                                                    ),
+                                                    SizedBox(
+                                                        height: SizeUtils
+                                                                .verticalBlockSize *
+                                                            1.5),
+                                                    AppText(
+                                                      "Are you sure you want "
+                                                      "to delete this "
+                                                      "message?",
+                                                      color: ColorRes.textColor(
+                                                              context)
+                                                          .withOpacity(0.7),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize:
+                                                          SizeUtils.fSize_14(),
+                                                    ),
+                                                    SizedBox(
+                                                        height: SizeUtils
+                                                                .verticalBlockSize *
+                                                            1.5),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Navigation.pop();
+                                                          },
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border:
+                                                                  Border.all(
+                                                                color: ColorRes
+                                                                        .textColor(
+                                                                            context)
+                                                                    .withOpacity(
+                                                                        0.3),
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                            ),
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                vertical: SizeUtils
+                                                                        .verticalBlockSize *
+                                                                    1.2,
+                                                                horizontal:
+                                                                    SizeUtils
+                                                                            .horizontalBlockSize *
+                                                                        8,
+                                                              ),
+                                                              child: AppText(
+                                                                "Cancel",
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: SizeUtils
+                                                                    .fSize_16(),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            _createReplyController
+                                                                .createModal
+                                                                .removeAt(
+                                                                    index);
+                                                            Navigation.pop();
+                                                          },
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Colors
+                                                                  .red.shade500,
+                                                              border:
+                                                                  Border.all(
+                                                                color: ColorRes
+                                                                        .textColor(
+                                                                            context)
+                                                                    .withOpacity(
+                                                                        0.3),
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                            ),
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                vertical: SizeUtils
+                                                                        .verticalBlockSize *
+                                                                    1.3,
+                                                                horizontal:
+                                                                    SizeUtils
+                                                                            .horizontalBlockSize *
+                                                                        8.3,
+                                                              ),
+                                                              child: AppText(
+                                                                "Delete",
+                                                                color: AppColor
+                                                                    .whiteColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: SizeUtils
+                                                                    .fSize_16(),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
                                       },
                                       icon: Icon(
                                         Icons.delete,
@@ -322,18 +483,18 @@ class _CreateReplyState extends State<CreateReply> {
     );
   }
 
-  // InkWell(
-  // onTap: () {
-  // setState(() {
-  // _createReplyController.createModal
-  //     .removeAt(index);
-  // });
-  // },
-  // child: Icon(
-  // Icons.close,
-  // color: ColorRes.textColor(context)
-  //     .withOpacity(0.5),
-  // ),
-  // ),
+// InkWell(
+// onTap: () {
+// setState(() {
+// _createReplyController.createModal
+//     .removeAt(index);
+// });
+// },
+// child: Icon(
+// Icons.close,
+// color: ColorRes.textColor(context)
+//     .withOpacity(0.5),
+// ),
+// ),
 
 }
