@@ -203,11 +203,14 @@ class ContactListPage extends StatelessWidget {
                                               }
                                             },
                                             side: BorderSide(
-                                              color: themeController.isSwitched.value
-                                                  ? AppColor.whiteColor.withOpacity(0.3)
-                                                  : AppColor.textColor.withOpacity(
-                                                0.2,
-                                              ),
+                                              color: themeController
+                                                      .isSwitched.value
+                                                  ? AppColor.whiteColor
+                                                      .withOpacity(0.3)
+                                                  : AppColor.textColor
+                                                      .withOpacity(
+                                                      0.2,
+                                                    ),
                                             ),
                                           ),
                                         ),
