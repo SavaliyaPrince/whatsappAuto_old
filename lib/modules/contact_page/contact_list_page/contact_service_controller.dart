@@ -127,7 +127,7 @@ class ContactServiceController extends GetxController {
 
   @override
   void onInit() {
-    getPhoneContacts();
+ //   getPhoneContacts();
     contactGetModel();
     super.onInit();
   }
