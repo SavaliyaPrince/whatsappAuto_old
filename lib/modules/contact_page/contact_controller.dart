@@ -27,6 +27,7 @@ class ContactController extends GetxController {
 
   @override
   void onInit() {
+  //  contactServiceController.getPhoneContacts();
     isSwitchEveryone.value = AppPreference.getBoolean("everyone");
     isSwitchMyContact.value = AppPreference.getBoolean("contactList");
     isSwitchExpectContact.value = AppPreference.getBoolean('expectContact');

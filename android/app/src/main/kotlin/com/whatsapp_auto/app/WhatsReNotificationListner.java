@@ -379,7 +379,6 @@ WhatsReNotificationListner extends NotificationListenerService {
 
                     for (int i = 0; i < lst.size(); i++) {
                         Log.d("checkAllData--", "--" + lst.get(i).trim() + "--");
-
                     }
 
                     Log.d("checkAllData11--", "--" + lst.contains(sender.trim()));
