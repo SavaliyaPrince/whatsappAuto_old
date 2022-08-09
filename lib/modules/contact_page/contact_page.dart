@@ -27,6 +27,7 @@ class ContactPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("----ContactPage--0---");
     return Obx(
       () => Scaffold(
         backgroundColor: ColorRes.backgroundColor(context),

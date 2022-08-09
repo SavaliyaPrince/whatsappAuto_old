@@ -77,7 +77,7 @@ class AutoReply extends StatelessWidget {
             SizedBox(height: SizeUtils.verticalBlockSize * 0.7),
             AppText(
               AppString.lastSync,
-              color: ColorRes.textColor(context),
+              color: ColorRes.textColor(context).withOpacity(0.7),
               fontSize: SizeUtils.fSize_14(),
             ),
             SizedBox(height: SizeUtils.verticalBlockSize * 3.2),
@@ -196,7 +196,8 @@ class AutoReply extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: ColorRes.textColor(context),
+          width: 0.5,
+          color: ColorRes.textColor(context).withOpacity(0.2),
         ),
       ),
       child: Padding(
@@ -223,7 +224,7 @@ class AutoReply extends StatelessWidget {
               fontSize: SizeUtils.fSize_12(),
               color: colorText
                   ? AppColor.primaryColor
-                  : ColorRes.textColor(context),
+                  : ColorRes.textColor(context).withOpacity(0.7),
             ),
           ],
         ),

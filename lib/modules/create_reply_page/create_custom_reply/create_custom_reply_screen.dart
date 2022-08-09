@@ -82,6 +82,9 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                 AppTextField(
                   controller: _createReplyController.inComingKeywordController,
                   hintText: AppString.incomingKeyword,
+                  contentPadding: EdgeInsets.symmetric(
+                      vertical: SizeUtils.verticalBlockSize * 0.5,
+                      horizontal: SizeUtils.horizontalBlockSize * 4),
                 ),
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 2,

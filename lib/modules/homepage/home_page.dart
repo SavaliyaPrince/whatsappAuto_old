@@ -75,17 +75,16 @@ class _HomePageScreenState extends State<HomePageScreen>
               ? ColorCollection.backGroundColorDark
               : AppColor.homeScreen,
           appBar: AppBar(
-            elevation: 0.5,
+            elevation: 0.2,
             backgroundColor: themeController.isSwitched.value
-                ? AppColor.darkThem.withOpacity(0.2)
-                : AppColor.homeScreen,
+                ? AppColor.whiteColor
+                : AppColor.appBarColors,
             automaticallyImplyLeading: false,
-            centerTitle: true,
             title: AppText(
               AppString.whatsAuto,
               color: themeController.isSwitched.value
-                  ? AppColor.whiteColor
-                  : AppColor.backIconColor,
+                  ? AppColor.backIconColor
+                  : AppColor.whiteColor,
               fontWeight: FontWeight.w600,
               fontSize: SizeUtils.fSize_18(),
             ),
@@ -238,7 +237,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                           customCategoriesBox(
                             context,
                             titleText: AppString.documentTitle,
-                            subtitle: AppString.documentSubTile,
+                            subtitle: AppString.categorySubTile,
                             image: AssetsPath.star,
                             onTap: () async {
                               if (await inAppReview.isAvailable()) {
@@ -272,7 +271,7 @@ class _HomePageScreenState extends State<HomePageScreen>
     required String? image,
     required GestureTapCallback? onTap,
   }) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
@@ -288,14 +287,14 @@ class _HomePageScreenState extends State<HomePageScreen>
             horizontal: SizeUtils.horizontalBlockSize * 4,
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
                 "$image",
                 width: SizeUtils.horizontalBlockSize * 12,
               ),
               SizedBox(
-                width: SizeUtils.horizontalBlockSize * 3,
+                width: SizeUtils.horizontalBlockSize * 5,
               ),
               Expanded(
                 child: Column(
@@ -315,7 +314,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                     Text(
                       "$subtitle",
                       style: TextStyle(
-                        color: ColorRes.textColor(context),
+                        color: ColorRes.textColor(context).withOpacity(0.5),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
@@ -323,14 +322,10 @@ class _HomePageScreenState extends State<HomePageScreen>
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                    EdgeInsets.only(top: SizeUtils.verticalBlockSize * 1.8),
-                child: Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: SizeUtils.horizontalBlockSize * 5,
-                  color: ColorRes.textColor(context),
-                ),
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: SizeUtils.horizontalBlockSize * 5,
+                color: ColorRes.textColor(context).withOpacity(0.5),
               )
             ],
           ),

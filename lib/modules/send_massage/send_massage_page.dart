@@ -22,7 +22,7 @@ class SendMassagePage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0.2,
           backgroundColor: ColorRes.appBarBackground(context),
-          leadingWidth: SizeUtils.fSize_40(),
+          leadingWidth: SizeUtils.horizontalBlockSize * 20,
           leading: GestureDetector(
             onTap: () {
               Navigation.pop();

@@ -16,7 +16,7 @@ Widget createButton({
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          vertical: SizeUtils.verticalBlockSize * 1.4,
+          vertical: SizeUtils.verticalBlockSize * 1.8,
         ),
         child: Text(
           "$text",
