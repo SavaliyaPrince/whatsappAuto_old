@@ -41,13 +41,14 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
           backgroundColor: themeController.isSwitched.value
               ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.whiteColor,
-          leadingWidth: SizeUtils.fSize_40(),
+          leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
           leading: GestureDetector(
             onTap: () {
               Navigation.pop();
             },
             child: Padding(
-              padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
+              padding:
+                  EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 4.2),
               child: Image.asset(
                 AppIcons.backIcon,
                 color: ColorRes.appBarBackground(context),

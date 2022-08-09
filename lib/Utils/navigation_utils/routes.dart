@@ -12,7 +12,7 @@ import 'package:whatsapp_auto/modules/setting_page/setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/Advance_setting/advance_setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/appearance/appearance.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/auto_reply_message_sent/auto_reply_massege_page.dart';
-import 'package:whatsapp_auto/modules/supportedapp_page/supportedapp_page.dart';
+import 'package:whatsapp_auto/modules/setting_page/widget/supportedapp_page/supportedapp_page.dart';
 import 'package:whatsapp_auto/splashScreen.dart';
 
 mixin Routes {
