@@ -45,13 +45,13 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
         backgroundColor: themeController.isSwitched.value
             ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.whiteColor,
-        leadingWidth: SizeUtils.horizontalBlockSize * 10,
+        leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
         leading: GestureDetector(
           onTap: () {
             Navigation.pop();
           },
           child: Padding(
-            padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 3),
+            padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 4.2),
             child: Image.asset(
               AppIcons.backIcon,
               color: themeController.isSwitched.value

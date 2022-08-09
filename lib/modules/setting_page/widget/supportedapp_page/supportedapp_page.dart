@@ -6,7 +6,7 @@ import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
-import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
+import 'package:whatsapp_auto/modules/setting_page/widget/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -25,7 +25,7 @@ class SupportedAppPage extends StatelessWidget {
         backgroundColor: themeController.isSwitched.value
             ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.whiteColor,
-        leadingWidth: SizeUtils.fSize_40(),
+        leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
         elevation: 0.2,
         leading: GestureDetector(
           onTap: () {
@@ -33,7 +33,7 @@ class SupportedAppPage extends StatelessWidget {
           },
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.horizontalBlockSize * 3,
+              left: SizeUtils.horizontalBlockSize * 4.2,
             ),
             child: Image.asset(
               AppIcons.backIcon,

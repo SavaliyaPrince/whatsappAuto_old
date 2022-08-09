@@ -13,7 +13,7 @@ import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_controller.dart';
-import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
+import 'package:whatsapp_auto/modules/setting_page/widget/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -80,13 +80,17 @@ class _HomePageScreenState extends State<HomePageScreen>
                 ? AppColor.whiteColor
                 : AppColor.appBarColors,
             automaticallyImplyLeading: false,
-            title: AppText(
-              AppString.whatsAuto,
-              color: themeController.isSwitched.value
-                  ? AppColor.backIconColor
-                  : AppColor.whiteColor,
-              fontWeight: FontWeight.w600,
-              fontSize: SizeUtils.fSize_18(),
+            title: Padding(
+              padding:
+                  EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 1.2),
+              child: AppText(
+                AppString.whatsAuto,
+                color: themeController.isSwitched.value
+                    ? AppColor.backIconColor
+                    : AppColor.whiteColor,
+                fontWeight: FontWeight.w600,
+                fontSize: SizeUtils.fSize_18(),
+              ),
             ),
           ),
           body: Padding(
