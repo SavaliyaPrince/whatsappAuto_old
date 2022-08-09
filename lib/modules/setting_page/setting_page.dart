@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notification_permissions/notification_permissions.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
@@ -14,10 +16,64 @@ import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
-class SettingPage extends StatelessWidget {
+class SettingPage extends StatefulWidget {
   SettingPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
   final SettingController settingController = Get.find();
+  Future<String>? permissionStatusFuture;
   final ThemeController themeController = Get.find();
+  String permGranted = "granted";
+  String permDenied = "denied";
+  String permUnknown = "unknown";
+  String permProvisional = "provisional";
+  @override
+  Future<void> initState() async {
+    super.initState();
+    // PermissionStatus p =
+    //     await NotificationPermissions.getNotificationPermissionStatus();
+    NotificationPermissions.getNotificationPermissionStatus()
+        .asStream()
+        .listen((S) {
+      print('Notification permissions: ${S}');
+    });
+    // // permissionStatusFuture = getCheckNotificationPermStatus();
+    //
+    // // WidgetsBinding.instance.addObserver(this);
+  }
+
+  /// When the application has a resumed status, check for the permission
+  /// status
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setState(() {});
+    }
+  }
+
+  /// Checks the notification permission status
+  // Future<String> getCheckNotificationPermStatus() {
+  //   return NotificationPermissions.getNotificationPermissionStatus()
+  //       .then((status) {
+  //     switch (status) {
+  //       case PermissionStatus.denied:
+  //         return permDenied;
+  //       case PermissionStatus.granted:
+  //         return permGranted;
+  //       case PermissionStatus.unknown:
+  //         return permUnknown;
+  //       case PermissionStatus.provisional:
+  //         return permProvisional;
+  //       default:
+  //         return null;
+  //     }
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,12 +140,31 @@ class SettingPage extends StatelessWidget {
                     () => Switch(
                       activeColor: AppColor.primaryColor,
                       value: settingController.isSwitchNotification.value,
-                      onChanged: (value) {
+                      onChanged: (value) async {
                         settingController.isSwitchNotification.value = value;
+                        print(
+                            "notifiction --${settingController.isSwitchNotification.value}");
+
+                        if (settingController.isSwitchNotification.value ==
+                            true) {
+                          print(
+                              "notifiction --1--${settingController.isSwitchNotification.value}");
+                          await Permission.notification.request().isGranted;
+                        } else {
+                          print(
+                              "notifiction --2--${settingController.isSwitchNotification.value}");
+                          await Permission.notification.request().isDenied;
+                        }
                         AppPreference.setNotification(
                           notification:
                               settingController.isSwitchNotification.value,
                         );
+
+                        // final PermissionStatus permission =
+                        //     await Permission.notification.status;
+                        // settingController.isSwitchNotification.value == true
+                        //     ? PermissionStatus.granted
+                        //     : PermissionStatus.denied;
                       },
                     ),
                   ),
@@ -165,8 +240,20 @@ class SettingPage extends StatelessWidget {
                     () => Switch(
                       activeColor: AppColor.primaryColor,
                       value: settingController.isSwitchNotification.value,
-                      onChanged: (value) {
+                      onChanged: (value) async {
                         settingController.isSwitchNotification.value = value;
+
+                        print(
+                            "notifiction --${settingController.isSwitchNotification.value}");
+
+                        if (settingController.isSwitchNotification.value ==
+                            true) {
+                          print(
+                              "notifiction --1--${settingController.isSwitchNotification.value}");
+                        } else {
+                          print(
+                              "notifiction --2--${settingController.isSwitchNotification.value}");
+                        }
 
                         AppPreference.setNotification(
                           notification:

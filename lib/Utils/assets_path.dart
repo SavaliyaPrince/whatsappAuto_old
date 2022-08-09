@@ -61,4 +61,5 @@ class AppIcons {
   static const search = "${icons}search.png";
   static const send = "${icons}Send.png";
   static const iconBack = "${icons}back.png";
+  static const deleteIcon = "${icons}delete.png";
 }

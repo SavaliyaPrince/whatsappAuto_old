@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -41,6 +43,16 @@ class _HomePageScreenState extends State<HomePageScreen>
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+      log("home Screen test");
+      if (message != null) {
+        // if (message.data["page"] == "example") {
+        //   // Get.to(const NotificationOpenScreen());
+        // }
+      }
+    });
   }
 
   @override
