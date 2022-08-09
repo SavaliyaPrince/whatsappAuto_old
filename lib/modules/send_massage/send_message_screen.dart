@@ -45,7 +45,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
         backgroundColor: themeController.isSwitched.value
             ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.whiteColor,
-        leadingWidth: SizeUtils.fSize_40(),
+        leadingWidth: SizeUtils.horizontalBlockSize * 10,
         leading: GestureDetector(
           onTap: () {
             Navigation.pop();

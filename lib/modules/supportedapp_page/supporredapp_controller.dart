@@ -51,7 +51,6 @@ class SupportedAppController extends GetxController {
     try {
       final PermissionStatus contactsPermissionsStatus =
           await contactsPermissions();
-      print("getPhoneContacts :- 2 $contactsPermissionsStatus");
       if (contactsPermissionsStatus == PermissionStatus.granted) {}
     } catch (e, st) {
       print('------e----$e----+----st-------$st-----');
@@ -64,7 +63,6 @@ class SupportedAppController extends GetxController {
     if (permission != PermissionStatus.granted) {
       final Map<Permission, PermissionStatus> permissionStatus = await [
         Permission.contacts,
-        Permission.phone,
       ].request();
       return permissionStatus[Permission.contacts] ?? PermissionStatus.denied;
     } else {

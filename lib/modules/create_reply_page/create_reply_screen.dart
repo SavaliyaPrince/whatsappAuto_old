@@ -31,7 +31,7 @@ class _CreateReplyState extends State<CreateReply> {
       () => Scaffold(
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          elevation: 0.5,
+          elevation: 0.2,
           backgroundColor: themeController.isSwitched.value
               ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.whiteColor,
@@ -294,7 +294,7 @@ class _CreateReplyState extends State<CreateReply> {
                         textAlign: TextAlign.center,
                         fontSize: SizeUtils.fSize_14(),
                         fontWeight: FontWeight.w400,
-                        color: ColorRes.textColor(context),
+                        color: ColorRes.textColor(context).withOpacity(0.5),
                       ),
                     ],
                   ),
@@ -302,7 +302,7 @@ class _CreateReplyState extends State<CreateReply> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                bottom: SizeUtils.horizontalBlockSize * 5,
+                bottom: SizeUtils.horizontalBlockSize * 8,
                 left: SizeUtils.horizontalBlockSize * 4,
                 right: SizeUtils.horizontalBlockSize * 4,
               ),

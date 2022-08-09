@@ -330,17 +330,17 @@ class SupportedAppPage extends StatelessWidget {
     ValueChanged<bool>? onChanged,
   }) {
     return Container(
-      height: SizeUtils.verticalBlockSize * 10.5,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
+          width: 0.5,
           color: ColorRes.textColor(context).withOpacity(0.2),
         ),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.horizontalBlockSize * 2,
-        ),
+            horizontal: SizeUtils.horizontalBlockSize * 2,
+            vertical: SizeUtils.verticalBlockSize * 1.1),
         child: Row(
           children: [
             SizedBox(
