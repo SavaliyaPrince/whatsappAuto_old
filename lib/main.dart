@@ -15,6 +15,8 @@ import 'package:whatsapp_auto/modules/send_massage/send_message_controller.dart'
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
+import 'modules/setting_page/widget/push_notification/push_notification.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -25,6 +27,7 @@ Future<void> main() async {
     FlutterError.onError = crashlytics.recordFlutterError;
     await AppPreference.initMySharedPreferences();
     MobileAds.instance.initialize();
+    FirebaseMessagingUtils().init();
     runApp(MyApp());
   }, (error, stack) => crashlytics.recordError(error, stack));
 }
