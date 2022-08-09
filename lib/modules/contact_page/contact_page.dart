@@ -201,7 +201,11 @@ class ContactPage extends StatelessWidget {
                               AppPreference.setBoolean("checkEnable", value: contactController.checkEnable.value);
                             },
                             side: BorderSide(
-                              color: AppColor.textColor.withOpacity(0.2),
+                              color: themeController.isSwitched.value
+                                  ? AppColor.whiteColor.withOpacity(0.3)
+                                  : AppColor.textColor.withOpacity(
+                                0.2,
+                              ),
                             ),
                           ),
                         ),
@@ -370,12 +374,6 @@ class ContactPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            if (contactServiceController.contactModel.length <= index)
-                              const SizedBox()
-                            else
-                              const AppText(
-                                'No more contact available',
-                              )
                           ],
                         ),
                       );
@@ -435,7 +433,11 @@ class ContactPage extends StatelessWidget {
             child: Switch(
               value: value!,
               activeColor: ColorCollection.greenColor,
-              inactiveTrackColor: AppColor.textColor.withOpacity(0.2),
+              inactiveTrackColor: themeController.isSwitched.value
+                  ? AppColor.whiteColor.withOpacity(0.2)
+                  : AppColor.textColor.withOpacity(
+                0.2,
+              ),
               onChanged: onChanged,
             ),
           ),
