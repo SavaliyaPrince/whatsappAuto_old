@@ -289,7 +289,6 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
 
   Future<Future> displayDialog(BuildContext context) async {
     return showDialog(
-      barrierColor: Colors.transparent,
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -487,7 +486,11 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
           child: Switch(
             value: value!,
             activeColor: ColorCollection.greenColor,
-            inactiveTrackColor: AppColor.textColor.withOpacity(0.2),
+            inactiveTrackColor: themeController.isSwitched.value
+                ? AppColor.whiteColor.withOpacity(0.2)
+                : AppColor.textColor.withOpacity(
+              0.2,
+            ),
             onChanged: onChanged,
           ),
         )
@@ -499,7 +502,6 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
     AppPreference.setString("groupname", json.encode(groupController.groupName));
     final Iterable l = json.decode(AppPreference.getString("groupname"));
     final List<GroupModal> posts = List<GroupModal>.from(l.map((model) => GroupModal.fromJson(model)));
-
     groupController.groupName.clear();
     groupController.groupName.addAll(posts);
   }
