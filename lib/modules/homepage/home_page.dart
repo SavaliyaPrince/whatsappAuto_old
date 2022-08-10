@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -13,7 +15,7 @@ import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_controller.dart';
-import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
+import 'package:whatsapp_auto/modules/setting_page/widget/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -41,6 +43,16 @@ class _HomePageScreenState extends State<HomePageScreen>
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage? message) {
+      log("home Screen test");
+      if (message != null) {
+        // if (message.data["page"] == "example") {
+        //   // Get.to(const NotificationOpenScreen());
+        // }
+      }
+    });
   }
 
   @override
@@ -55,9 +67,11 @@ class _HomePageScreenState extends State<HomePageScreen>
     // TODO: implement didChangeAppLifecycleState
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.paused) {
+      print("------AppLifecycleState---1-->$state");
       isPaused = true;
     }
     if (state == AppLifecycleState.inactive && isPaused) {
+      print("------AppLifecycleState---2->$state");
       AppOpenAdManager.showOpenAdIfAvailable();
       isPaused = false;
     }
@@ -79,16 +93,17 @@ class _HomePageScreenState extends State<HomePageScreen>
 
             backgroundColor: themeController.isSwitched.value
                 ? AppColor.darkThem.withOpacity(0.2)
-                : AppColor.homeScreen,
+                : AppColor.appBarColors,
             automaticallyImplyLeading: false,
-            centerTitle: true,
-            title: AppText(
-              AppString.whatsAuto,
-              color: themeController.isSwitched.value
-                  ? AppColor.whiteColor
-                  : AppColor.backIconColor,
-              fontWeight: FontWeight.w600,
-              fontSize: SizeUtils.fSize_18(),
+            title: Padding(
+              padding:
+                  EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 1.2),
+              child: AppText(
+                AppString.whatsAuto,
+                color: AppColor.whiteColor,
+                fontWeight: FontWeight.w600,
+                fontSize: SizeUtils.fSize_18(),
+              ),
             ),
           ),
           body: Padding(
@@ -273,7 +288,7 @@ class _HomePageScreenState extends State<HomePageScreen>
     required String? image,
     required GestureTapCallback? onTap,
   }) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
@@ -289,14 +304,14 @@ class _HomePageScreenState extends State<HomePageScreen>
             horizontal: SizeUtils.horizontalBlockSize * 4,
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
                 "$image",
                 width: SizeUtils.horizontalBlockSize * 12,
               ),
               SizedBox(
-                width: SizeUtils.horizontalBlockSize * 3,
+                width: SizeUtils.horizontalBlockSize * 5,
               ),
               Expanded(
                 child: Column(
@@ -316,7 +331,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                     Text(
                       "$subtitle",
                       style: TextStyle(
-                        color: ColorRes.textColor(context),
+                        color: ColorRes.textColor(context).withOpacity(0.5),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
@@ -324,14 +339,10 @@ class _HomePageScreenState extends State<HomePageScreen>
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                    EdgeInsets.only(top: SizeUtils.verticalBlockSize * 1.8),
-                child: Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: SizeUtils.horizontalBlockSize * 5,
-                  color: ColorRes.textColor(context),
-                ),
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: SizeUtils.horizontalBlockSize * 5,
+                color: ColorRes.textColor(context).withOpacity(0.5),
               )
             ],
           ),

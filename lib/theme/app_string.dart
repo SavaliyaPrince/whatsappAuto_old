@@ -112,7 +112,7 @@ class AppString {
   static const everyone = 'Everyone';
   static const everyoneDescription = 'To send auto reply to all your incoming'
       ' \n messages.';
-  static const myContactList = 'My contact List';
+  static const myContactList = 'My contact list';
   static const contactListDescription = "To send auto reply only to your "
       "contact \nlist you've added in WhatsAuto app.";
   static const exceptMyContactList = 'Except my contact list';
@@ -120,10 +120,11 @@ class AppString {
       'WhatAuto contact list';
   static const exceptMyPhoneContacts = 'Except my phone contacts';
   static const exceptMyPhoneDescription = 'To send auto reply except your '
-      'phone \n contact list';
+      'phone \n contact list.';
   static const enableGroups = 'Enable Groups';
   static const contactList = 'Contact list';
   static const gropeSetting = 'Group Settings';
+  static const noData = 'No data';
 
   /// Group Screen
   static const allGroups = 'All groups';
@@ -136,6 +137,10 @@ class AppString {
       '\nWhatsAuto contact list.';
   static const groupList = 'Group list';
   static const noMoreContact = "No more contacts available";
+  static const addGroupList = "Add group list";
+  static const add = "Add";
+  static const update = "Update";
+  static const editGroupName = "Edit group name";
 
   /// contactList Screen
   static const contacts = 'Contacts';

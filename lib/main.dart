@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -15,6 +16,8 @@ import 'package:whatsapp_auto/modules/send_massage/send_message_controller.dart'
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 
+import 'modules/setting_page/widget/push_notification/push_notification.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -25,8 +28,14 @@ Future<void> main() async {
     FlutterError.onError = crashlytics.recordFlutterError;
     await AppPreference.initMySharedPreferences();
     MobileAds.instance.initialize();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    FirebaseMessagingUtils().init();
     runApp(MyApp());
   }, (error, stack) => crashlytics.recordError(error, stack));
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 }
 
 // Future<void> main() async {

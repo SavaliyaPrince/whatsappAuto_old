@@ -6,7 +6,7 @@ import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
-import 'package:whatsapp_auto/modules/supportedapp_page/supporredapp_controller.dart';
+import 'package:whatsapp_auto/modules/setting_page/widget/supportedapp_page/supporredapp_controller.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -25,15 +25,15 @@ class SupportedAppPage extends StatelessWidget {
         backgroundColor: themeController.isSwitched.value
             ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.whiteColor,
-        leadingWidth: SizeUtils.fSize_40(),
-        elevation: 0.2,
+        leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
+        elevation: 0.5,
         leading: GestureDetector(
           onTap: () {
             Navigation.pop();
           },
           child: Padding(
             padding: EdgeInsets.only(
-              left: SizeUtils.horizontalBlockSize * 3,
+              left: SizeUtils.horizontalBlockSize * 4.2,
             ),
             child: Image.asset(
               AppIcons.backIcon,
@@ -330,17 +330,17 @@ class SupportedAppPage extends StatelessWidget {
     ValueChanged<bool>? onChanged,
   }) {
     return Container(
-      height: SizeUtils.verticalBlockSize * 10.5,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
+          width: 0.5,
           color: ColorRes.textColor(context).withOpacity(0.2),
         ),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: SizeUtils.horizontalBlockSize * 2,
-        ),
+            horizontal: SizeUtils.horizontalBlockSize * 2,
+            vertical: SizeUtils.verticalBlockSize * 1.1),
         child: Row(
           children: [
             SizedBox(
