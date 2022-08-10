@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -19,6 +20,7 @@ class FirebaseMessagingUtils {
     // description
     importance: Importance.max,
   );
+
   Future<void> init() async {
     FirebaseMessaging.onMessage.listen(
       (RemoteMessage message) async {
@@ -81,6 +83,7 @@ class FirebaseMessagingUtils {
         }
       },
     );
+
     FirebaseMessaging.onBackgroundMessage((message) async {
       log("bg msg");
       // notificationCounter = notificationCounter + 1 ;

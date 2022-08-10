@@ -1,7 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
@@ -14,10 +17,59 @@ import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 import 'package:whatsapp_auto/widgets/app_text.dart';
 
-class SettingPage extends StatelessWidget {
+class SettingPage extends StatefulWidget {
   SettingPage({Key? key}) : super(key: key);
+
+  @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   final SettingController settingController = Get.find();
+  Future<String>? permissionStatusFuture;
   final ThemeController themeController = Get.find();
+  Permission _permission = Permission.notification;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        log("app in resumed");
+        await grantedPermission();
+        break;
+      case AppLifecycleState.inactive:
+        await grantedPermission();
+        log("app in inactive"); //app in background
+        break;
+      case AppLifecycleState.paused:
+        log("app in paused"); //app in background
+        break;
+      case AppLifecycleState.detached:
+        log("app in detached"); //app remove from background
+        break;
+    }
+  }
+
+  Future<void> grantedPermission() async {
+    _permission = Permission.notification;
+    final status = await _permission.isGranted;
+    settingController.isNotificationCheck.value = status;
+    AppPreference.setNotification(
+        notification: settingController.isNotificationCheck.value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,13 +135,11 @@ class SettingPage extends StatelessWidget {
                   trailing: Obx(
                     () => Switch(
                       activeColor: AppColor.primaryColor,
-                      value: settingController.isSwitchNotification.value,
+                      value: settingController.isNotificationCheck.value,
                       onChanged: (value) {
-                        settingController.isSwitchNotification.value = value;
-                        AppPreference.setNotification(
-                          notification:
-                              settingController.isSwitchNotification.value,
-                        );
+                        settingController.isNotificationCheck.value = value;
+
+                        AppSettings.openNotificationSettings();
                       },
                     ),
                   ),
@@ -164,14 +214,11 @@ class SettingPage extends StatelessWidget {
                   trailing: Obx(
                     () => Switch(
                       activeColor: AppColor.primaryColor,
-                      value: settingController.isSwitchNotification.value,
-                      onChanged: (value) {
-                        settingController.isSwitchNotification.value = value;
+                      value: settingController.isNotificationCheck.value,
+                      onChanged: (value) async {
+                        settingController.isNotificationCheck.value = value;
 
-                        AppPreference.setNotification(
-                          notification:
-                              settingController.isSwitchNotification.value,
-                        );
+                        AppSettings.openNotificationSettings();
                       },
                     ),
                   ),
