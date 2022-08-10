@@ -40,14 +40,14 @@ class _HomePageScreenState extends State<HomePageScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   @override
@@ -76,6 +76,7 @@ class _HomePageScreenState extends State<HomePageScreen>
               : AppColor.homeScreen,
           appBar: AppBar(
             elevation: 0.5,
+
             backgroundColor: themeController.isSwitched.value
                 ? AppColor.darkThem.withOpacity(0.2)
                 : AppColor.homeScreen,
