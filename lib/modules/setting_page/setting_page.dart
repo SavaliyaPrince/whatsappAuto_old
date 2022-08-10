@@ -1,8 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notification_permissions/notification_permissions.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
@@ -23,56 +24,51 @@ class SettingPage extends StatefulWidget {
   State<SettingPage> createState() => _SettingPageState();
 }
 
-class _SettingPageState extends State<SettingPage> {
+class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   final SettingController settingController = Get.find();
   Future<String>? permissionStatusFuture;
   final ThemeController themeController = Get.find();
-  String permGranted = "granted";
-  String permDenied = "denied";
-  String permUnknown = "unknown";
-  String permProvisional = "provisional";
+  Permission _permission = Permission.notification;
+
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    // PermissionStatus p =
-    //     await NotificationPermissions.getNotificationPermissionStatus();
-    NotificationPermissions.getNotificationPermissionStatus()
-        .asStream()
-        .listen((S) {
-      print('Notification permissions: ${S}');
-    });
-    // // permissionStatusFuture = getCheckNotificationPermStatus();
-    //
-    // // WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
-  /// When the application has a resumed status, check for the permission
-  /// status
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      setState(() {});
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        log("app in resumed");
+        await grantedPermission();
+        break;
+      case AppLifecycleState.inactive:
+        await grantedPermission();
+        log("app in inactive"); //app in background
+        break;
+      case AppLifecycleState.paused:
+        log("app in paused"); //app in background
+        break;
+      case AppLifecycleState.detached:
+        log("app in detached"); //app remove from background
+        break;
     }
   }
 
-  /// Checks the notification permission status
-  // Future<String> getCheckNotificationPermStatus() {
-  //   return NotificationPermissions.getNotificationPermissionStatus()
-  //       .then((status) {
-  //     switch (status) {
-  //       case PermissionStatus.denied:
-  //         return permDenied;
-  //       case PermissionStatus.granted:
-  //         return permGranted;
-  //       case PermissionStatus.unknown:
-  //         return permUnknown;
-  //       case PermissionStatus.provisional:
-  //         return permProvisional;
-  //       default:
-  //         return null;
-  //     }
-  //   });
-  // }
+  Future<void> grantedPermission() async {
+    _permission = Permission.notification;
+    final status = await _permission.isGranted;
+    settingController.isNotificationCheck.value = status;
+    AppPreference.setNotification(
+        notification: settingController.isNotificationCheck.value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,32 +135,11 @@ class _SettingPageState extends State<SettingPage> {
                   trailing: Obx(
                     () => Switch(
                       activeColor: AppColor.primaryColor,
-                      value: settingController.isSwitchNotification.value,
-                      onChanged: (value) async {
-                        settingController.isSwitchNotification.value = value;
-                        print(
-                            "notifiction --${settingController.isSwitchNotification.value}");
+                      value: settingController.isNotificationCheck.value,
+                      onChanged: (value) {
+                        settingController.isNotificationCheck.value = value;
 
-                        if (settingController.isSwitchNotification.value ==
-                            true) {
-                          print(
-                              "notifiction --1--${settingController.isSwitchNotification.value}");
-                          await Permission.notification.request().isGranted;
-                        } else {
-                          print(
-                              "notifiction --2--${settingController.isSwitchNotification.value}");
-                          await Permission.notification.request().isDenied;
-                        }
-                        AppPreference.setNotification(
-                          notification:
-                              settingController.isSwitchNotification.value,
-                        );
-
-                        // final PermissionStatus permission =
-                        //     await Permission.notification.status;
-                        // settingController.isSwitchNotification.value == true
-                        //     ? PermissionStatus.granted
-                        //     : PermissionStatus.denied;
+                        AppSettings.openNotificationSettings();
                       },
                     ),
                   ),
@@ -239,26 +214,11 @@ class _SettingPageState extends State<SettingPage> {
                   trailing: Obx(
                     () => Switch(
                       activeColor: AppColor.primaryColor,
-                      value: settingController.isSwitchNotification.value,
+                      value: settingController.isNotificationCheck.value,
                       onChanged: (value) async {
-                        settingController.isSwitchNotification.value = value;
+                        settingController.isNotificationCheck.value = value;
 
-                        print(
-                            "notifiction --${settingController.isSwitchNotification.value}");
-
-                        if (settingController.isSwitchNotification.value ==
-                            true) {
-                          print(
-                              "notifiction --1--${settingController.isSwitchNotification.value}");
-                        } else {
-                          print(
-                              "notifiction --2--${settingController.isSwitchNotification.value}");
-                        }
-
-                        AppPreference.setNotification(
-                          notification:
-                              settingController.isSwitchNotification.value,
-                        );
+                        AppSettings.openNotificationSettings();
                       },
                     ),
                   ),
