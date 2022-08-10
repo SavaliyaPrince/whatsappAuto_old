@@ -420,6 +420,41 @@ WhatsReNotificationListner extends NotificationListenerService {
                         replayNotification(sbn, bundle, repliedMessage);
                     }
                 }
+            } else if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.exceptMyPhoneContacts)) {
+                String allContacts = prefs.getString("contactList", "");
+                Log.d("TAG", "isReplyEnable 2 allContacts: " + allContacts.length());
+                if (!allContacts.isEmpty()) {
+
+                    List<String> lst = Lists.newArrayList(Splitter.on(',').trimResults().omitEmptyStrings().splitToList(allContacts));
+
+                    for (int i = 0; i < lst.size(); i++) {
+                        Log.d("checkAllData--", "--" + lst.get(i).trim() + "--");
+                    }
+
+                    Log.d("checkAllData11--", "--" + lst.contains(sender.trim()));
+
+
+                    if(!lst.contains(sender.trim())) {
+
+                        String key = "botMessage-" + message.toLowerCase();
+                        String repliedMessage = prefs.getString(key, "Hi");
+
+                        appendLog("repliedMessage---: " + repliedMessage);
+                        appendLog("key----------: " + key);
+
+
+                        replayNotification(sbn, bundle, repliedMessage);
+                    }
+                } else {
+                    String key = "botMessage-" + message.toLowerCase();
+                    String repliedMessage = prefs.getString(key, "Hi");
+
+                    appendLog("repliedMessage---: " + repliedMessage);
+                    appendLog("key----------: " + key);
+
+
+                    replayNotification(sbn, bundle, repliedMessage);
+                }
             }
 
 

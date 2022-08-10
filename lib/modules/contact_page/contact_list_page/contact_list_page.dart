@@ -73,15 +73,10 @@ class ContactListPage extends StatelessWidget {
               ),
               Obx(
                 () => contactServiceController.contactModel.isEmpty == true
-                    ? Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: SizeUtils.verticalBlockSize * 38),
-                        child: Column(
-                          children: const [
-                            CircularProgressIndicator(
-                              color: AppColor.primaryColor,
-                            )
-                          ],
+                    ? const Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: AppColor.primaryColor,
                         ),
                       ),
                     )

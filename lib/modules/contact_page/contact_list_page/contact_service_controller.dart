@@ -129,6 +129,7 @@ class ContactServiceController extends GetxController {
   void onInit() {
  //   getPhoneContacts();
     contactGetModel();
+    passAllContacts();
     super.onInit();
   }
 }
