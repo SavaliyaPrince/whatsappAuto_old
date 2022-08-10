@@ -137,8 +137,6 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       activeColor: AppColor.primaryColor,
                       value: settingController.isNotificationCheck.value,
                       onChanged: (value) {
-                        settingController.isNotificationCheck.value = value;
-
                         AppSettings.openNotificationSettings();
                       },
                     ),
@@ -216,8 +214,6 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       activeColor: AppColor.primaryColor,
                       value: settingController.isNotificationCheck.value,
                       onChanged: (value) async {
-                        settingController.isNotificationCheck.value = value;
-
                         AppSettings.openNotificationSettings();
                       },
                     ),
