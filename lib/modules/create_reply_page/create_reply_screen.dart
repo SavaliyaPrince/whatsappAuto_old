@@ -275,7 +275,7 @@ class _CreateReplyState extends State<CreateReply> {
                                                         5),
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.center,
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
@@ -286,7 +286,7 @@ class _CreateReplyState extends State<CreateReply> {
                                                                 .verticalBlockSize *
                                                             1.2),
                                                     AppText(
-                                                      "Delete blog post",
+                                                      "Whatsapp Auto Delete",
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       fontSize:

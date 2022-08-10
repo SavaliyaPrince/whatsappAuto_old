@@ -115,8 +115,8 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchMyContact.value = true;
                       AppPreference.setBoolean("contactList",
                           value: contactController.isSwitchMyContact.value);
-                      contactController
-                          .changeAutoReplyTo(AutoReplyTo.my_contact_list);
+                      contactController.changeAutoReplyTo(
+                          AutoReplyTo.except_my_contact_list);
                       contactServiceController.getPhoneContacts();
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -408,13 +408,6 @@ class ContactPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            if (contactServiceController.contactModel.length <=
-                                index)
-                              const SizedBox()
-                            else
-                              const AppText(
-                                'No more contact available',
-                              )
                           ],
                         ),
                       );
