@@ -229,13 +229,13 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   width: SizeUtils.fSize_24(),
                   onTap: () {},
                 ),
-                _settingItem(
-                  context,
-                  AppIcons.help,
-                  AppString.Help,
-                  width: SizeUtils.fSize_24(),
-                  onTap: () {},
-                ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.help,
+                //   AppString.Help,
+                //   width: SizeUtils.fSize_24(),
+                //   onTap: () {},
+                // ),
               ],
             )
         ],
