@@ -11,6 +11,7 @@ import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_lis
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_service_controller.dart';
 import 'package:whatsapp_auto/modules/contact_page/group_page/group_controller.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
+import 'package:whatsapp_auto/modules/homepage/home_page.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
@@ -46,7 +47,7 @@ class ContactPage extends StatelessWidget {
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
-              Navigation.pop();
+              Navigation.leftToRight(HomePageScreen());
             },
             child: Padding(
               padding: EdgeInsets.only(

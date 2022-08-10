@@ -65,11 +65,12 @@ class _HomePageScreenState extends State<HomePageScreen>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // TODO: implement didChangeAppLifecycleState
+    print("------00000------");
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.paused) {
       isPaused = true;
     }
-    if (state == AppLifecycleState.inactive && isPaused) {
+    if (state == AppLifecycleState.inactive) {
       AppOpenAdManager.showOpenAdIfAvailable();
       isPaused = false;
     }

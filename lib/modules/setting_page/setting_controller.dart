@@ -4,12 +4,12 @@ import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/theme/app_string.dart';
 
 class SettingController extends GetxController {
-  RxBool isSwitchNotification = false.obs;
+  RxBool isNotificationCheck = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    isSwitchNotification.value = AppPreference.notification;
+    isNotificationCheck.value = AppPreference.notification;
   }
 
   Future<void> shareNoteLink({required String title}) async {
