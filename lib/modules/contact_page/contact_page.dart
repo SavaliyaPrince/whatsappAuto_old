@@ -34,17 +34,15 @@ class ContactPage extends StatelessWidget {
       () => Scaffold(
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          elevation: 0.2,
+          elevation: 0.5,
           backgroundColor: themeController.isSwitched.value
-              ? AppColor.whiteColor
+              ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.appBarColors,
           title: AppText(
             AppString.contacts,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value
-                ? AppColor.textColor
-                : AppColor.whiteColor,
+            color: AppColor.whiteColor,
           ),
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
@@ -57,9 +55,7 @@ class ContactPage extends StatelessWidget {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value
-                    ? AppColor.textColor
-                    : AppColor.whiteColor,
+                color: AppColor.whiteColor,
               ),
             ),
           ),
@@ -119,8 +115,8 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchMyContact.value = true;
                       AppPreference.setBoolean("contactList",
                           value: contactController.isSwitchMyContact.value);
-                      contactController
-                          .changeAutoReplyTo(AutoReplyTo.my_contact_list);
+                      contactController.changeAutoReplyTo(
+                          AutoReplyTo.except_my_contact_list);
                       contactServiceController.getPhoneContacts();
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -412,13 +408,6 @@ class ContactPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            if (contactServiceController.contactModel.length <=
-                                index)
-                              const SizedBox()
-                            else
-                              const AppText(
-                                'No more contact available',
-                              )
                           ],
                         ),
                       );

@@ -6,6 +6,7 @@ import 'package:whatsapp_auto/theme/app_string.dart';
 class SettingController extends GetxController {
   RxBool isNotificationCheck = false.obs;
 
+  @override
   void onInit() {
     super.onInit();
     isNotificationCheck.value = AppPreference.notification;
@@ -18,7 +19,6 @@ class SettingController extends GetxController {
           text: "",
           linkUrl: '',
           chooserTitle: 'WhatsApp Tool');
-    } catch (e) {
     } finally {}
   }
 // void basicStatusCheck() {

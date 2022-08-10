@@ -26,7 +26,7 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   final SettingController settingController = Get.find();
-  Future<String>? permissionStatusFuture;
+  // Future<String>? permissionStatusFuture;
   final ThemeController themeController = Get.find();
   Permission _permission = Permission.notification;
 
@@ -78,7 +78,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
       appBar: AppBar(
         elevation: 0.2,
         backgroundColor: themeController.isSwitched.value
-            ? AppColor.whiteColor
+            ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.appBarColors,
         leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
         leading: GestureDetector(
@@ -89,17 +89,13 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 4.2),
             child: Image.asset(
               AppIcons.backIcon,
-              color: themeController.isSwitched.value
-                  ? AppColor.backIconColor
-                  : AppColor.whiteColor,
+              color: AppColor.whiteColor,
             ),
           ),
         ),
-        title: AppText(
+        title: const AppText(
           AppString.setting,
-          color: themeController.isSwitched.value
-              ? AppColor.backIconColor
-              : AppColor.whiteColor,
+          color: AppColor.whiteColor,
           fontWeight: FontWeight.w600,
         ),
       ),
