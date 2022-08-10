@@ -20,7 +20,7 @@ class AppearancePage extends StatelessWidget {
       bottomSheet: const BannerAdView(),
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
-        elevation: 0.2,
+        elevation: 0.5,
         backgroundColor: themeController.isSwitched.value
             ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.whiteColor,

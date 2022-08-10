@@ -37,8 +37,10 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
       () => Scaffold(
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          elevation: 0.2,
-          backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
+          elevation: 0.5,
+          backgroundColor: themeController.isSwitched.value
+              ? AppColor.darkThem.withOpacity(0.2)
+              : AppColor.whiteColor,
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
             onTap: () {
@@ -50,7 +52,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
+                    : AppColor.backIconColor,
               ),
             ),
           ),
@@ -58,7 +62,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
             AppString.gropeSetting,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
+            color: themeController.isSwitched.value
+                ? AppColor.whiteColor
+                : AppColor.backIconColor,
           ),
         ),
         body: SingleChildScrollView(
@@ -77,7 +83,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                     AppString.autoReplyTo,
                     fontSize: SizeUtils.fSize_16(),
                     fontWeight: FontWeight.w500,
-                    color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
+                    color: themeController.isSwitched.value
+                        ? AppColor.whiteColor
+                        : AppColor.textColor,
                   ),
                   SizedBox(
                     height: SizeUtils.verticalBlockSize * 4,
@@ -89,8 +97,10 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                     onChanged: (value) {
                       if (groupController.isSwitchAllGroups.value == false) {
                         groupController.isSwitchAllGroups.value = true;
-                        AppPreference.setBoolean("SwitchAllGroups", value: groupController.isSwitchAllGroups.value);
-                        AppPreference.clearSharedPreferences("SwitchGroupsList");
+                        AppPreference.setBoolean("SwitchAllGroups",
+                            value: groupController.isSwitchAllGroups.value);
+                        AppPreference.clearSharedPreferences(
+                            "SwitchGroupsList");
                         AppPreference.clearSharedPreferences("ExpectList");
                         groupController.isSwitchGroupsList.value = false;
                         groupController.isSwitchExpectList.value = false;
@@ -110,14 +120,16 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                     onChanged: (value) {
                       if (groupController.isSwitchGroupsList.value == false) {
                         groupController.isSwitchGroupsList.value = true;
-                        AppPreference.setBoolean("SwitchGroupsList", value: groupController.isSwitchGroupsList.value);
+                        AppPreference.setBoolean("SwitchGroupsList",
+                            value: groupController.isSwitchGroupsList.value);
                         AppPreference.clearSharedPreferences("SwitchAllGroups");
                         AppPreference.clearSharedPreferences("ExpectList");
                         groupController.isSwitchAllGroups.value = false;
                         groupController.isSwitchExpectList.value = false;
                       } else {
                         groupController.isSwitchGroupsList.value = false;
-                        AppPreference.clearSharedPreferences("SwitchGroupsList");
+                        AppPreference.clearSharedPreferences(
+                            "SwitchGroupsList");
                       }
                     },
                   ),
@@ -131,9 +143,11 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                     onChanged: (value) {
                       if (groupController.isSwitchExpectList.value == false) {
                         groupController.isSwitchExpectList.value = true;
-                        AppPreference.setBoolean("ExpectList", value: groupController.isSwitchExpectList.value);
+                        AppPreference.setBoolean("ExpectList",
+                            value: groupController.isSwitchExpectList.value);
                         AppPreference.clearSharedPreferences("SwitchAllGroups");
-                        AppPreference.clearSharedPreferences("SwitchGroupsList");
+                        AppPreference.clearSharedPreferences(
+                            "SwitchGroupsList");
                         groupController.isSwitchAllGroups.value = false;
                         groupController.isSwitchGroupsList.value = false;
                       } else {
@@ -151,7 +165,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                       AppText(
                         AppString.groupList,
                         fontSize: SizeUtils.fSize_16(),
-                        color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
+                        color: themeController.isSwitched.value
+                            ? AppColor.whiteColor
+                            : AppColor.textColor,
                         fontWeight: FontWeight.w500,
                       ),
                       InkWell(
@@ -191,7 +207,8 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                   if (groupController.groupName.isEmpty == true)
                     Center(
                       child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: SizeUtils.verticalBlockSize * 14),
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeUtils.verticalBlockSize * 14),
                         child: Column(
                           children: [
                             AppText(
@@ -218,7 +235,8 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                               SlidableAction(
                                 onPressed: (value) {
                                   setState(() {
-                                    groupController.groupName.remove(groupController.groupName[index]);
+                                    groupController.groupName.remove(
+                                        groupController.groupName[index]);
                                     save();
                                   });
                                 },
@@ -246,7 +264,10 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                                   ),
                                   child: Center(
                                     child: AppText(
-                                      groupController.groupName[index].group.toString().substring(0, 1).toUpperCase(),
+                                      groupController.groupName[index].group
+                                          .toString()
+                                          .substring(0, 1)
+                                          .toUpperCase(),
                                       fontWeight: FontWeight.w600,
                                       color: AppColor.whiteColor,
                                     ),
@@ -258,7 +279,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                                 AppText(
                                   groupController.groupName[index].group ?? "",
                                   fontWeight: FontWeight.w400,
-                                  color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
+                                  color: themeController.isSwitched.value
+                                      ? AppColor.whiteColor
+                                      : AppColor.textColor,
                                   fontSize: SizeUtils.fSize_14(),
                                 ),
                                 const Spacer(),
@@ -292,11 +315,15 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          shape:RoundedRectangleBorder(
-            borderRadius:BorderRadius.circular(10.0,),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              10.0,
+            ),
           ),
           elevation: 0,
-          backgroundColor: themeController.isSwitched.value ? ColorCollection.backGroundColorDark : AppColor.homeScreen,
+          backgroundColor: themeController.isSwitched.value
+              ? ColorCollection.backGroundColorDark
+              : AppColor.homeScreen,
           title: const Text(AppString.addGroupList),
           content: TextFormField(
             cursorColor: AppColor.primaryColor,
@@ -348,7 +375,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                   ),
                   child: const Text(
                     AppString.add,
-                    style: TextStyle(color: AppColor.whiteColor, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: AppColor.whiteColor,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -360,7 +389,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
               child: Text(
                 AppString.cancel,
                 style: TextStyle(
-                  color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
+                  color: themeController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.backIconColor,
                 ),
               ),
             ),
@@ -375,11 +406,15 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          shape:RoundedRectangleBorder(
-            borderRadius:BorderRadius.circular(10.0,),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              10.0,
+            ),
           ),
           elevation: 0,
-          backgroundColor: themeController.isSwitched.value ? ColorCollection.backGroundColorDark : AppColor.homeScreen,
+          backgroundColor: themeController.isSwitched.value
+              ? ColorCollection.backGroundColorDark
+              : AppColor.homeScreen,
           title: const Text(AppString.editGroupName),
           content: TextFormField(
             cursorColor: AppColor.primaryColor,
@@ -408,7 +443,8 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
               onTap: () {
                 if (groupController.updateController.text.isNotEmpty) {
                   print("index :- $index");
-                  groupController.groupName[index ?? 0].group = groupController.updateController.text;
+                  groupController.groupName[index ?? 0].group =
+                      groupController.updateController.text;
                   groupController.groupName.refresh();
                   Navigation.pop();
                   groupController.updateController.clear();
@@ -427,8 +463,10 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                     horizontal: SizeUtils.horizontalBlockSize * 6.5,
                   ),
                   child: const Text(
-                   AppString.update,
-                    style: TextStyle(color: AppColor.whiteColor, fontWeight: FontWeight.w600),
+                    AppString.update,
+                    style: TextStyle(
+                        color: AppColor.whiteColor,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -437,7 +475,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
               child: Text(
                 AppString.cancel,
                 style: TextStyle(
-                  color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
+                  color: themeController.isSwitched.value
+                      ? AppColor.whiteColor
+                      : AppColor.backIconColor,
                 ),
               ),
               onPressed: () {
@@ -466,7 +506,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                 title!,
                 fontSize: SizeUtils.fSize_14(),
                 fontWeight: FontWeight.w500,
-                color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor
+                    : AppColor.textColor,
               ),
               SizedBox(
                 height: SizeUtils.verticalBlockSize * 0.7,
@@ -475,7 +517,9 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
                 description!,
                 fontWeight: FontWeight.w400,
                 fontSize: SizeUtils.fSize_14(),
-                color: themeController.isSwitched.value ? AppColor.whiteColor.withOpacity(0.6) : AppColor.textColor.withOpacity(0.6),
+                color: themeController.isSwitched.value
+                    ? AppColor.whiteColor.withOpacity(0.6)
+                    : AppColor.textColor.withOpacity(0.6),
               ),
             ],
           ),
@@ -489,8 +533,8 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
             inactiveTrackColor: themeController.isSwitched.value
                 ? AppColor.whiteColor.withOpacity(0.2)
                 : AppColor.textColor.withOpacity(
-              0.2,
-            ),
+                    0.2,
+                  ),
             onChanged: onChanged,
           ),
         )
@@ -499,9 +543,11 @@ class _GroupsSettingsPageState extends State<GroupsSettingsPage> {
   }
 
   void save() {
-    AppPreference.setString("groupname", json.encode(groupController.groupName));
+    AppPreference.setString(
+        "groupname", json.encode(groupController.groupName));
     final Iterable l = json.decode(AppPreference.getString("groupname"));
-    final List<GroupModal> posts = List<GroupModal>.from(l.map((model) => GroupModal.fromJson(model)));
+    final List<GroupModal> posts =
+        List<GroupModal>.from(l.map((model) => GroupModal.fromJson(model)));
     groupController.groupName.clear();
     groupController.groupName.addAll(posts);
   }

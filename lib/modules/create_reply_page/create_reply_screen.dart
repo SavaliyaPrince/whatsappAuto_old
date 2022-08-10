@@ -31,7 +31,7 @@ class _CreateReplyState extends State<CreateReply> {
       () => Scaffold(
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          elevation: 0.2,
+          elevation: 0.5,
           backgroundColor: themeController.isSwitched.value
               ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.whiteColor,
@@ -254,16 +254,22 @@ class _CreateReplyState extends State<CreateReply> {
                                           builder: (BuildContext context) {
                                             return Dialog(
                                               elevation: 0,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  10.0,
+                                                ),
+                                              ),
                                               backgroundColor: themeController
                                                       .isSwitched.value
                                                   ? ColorCollection
                                                       .backGroundColorDark
-                                                  : AppColor.homeScreen,
+                                                  : AppColor.lightThem,
                                               child: Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: SizeUtils
                                                             .verticalBlockSize *
-                                                        1.2,
+                                                        3,
                                                     horizontal: SizeUtils
                                                             .horizontalBlockSize *
                                                         5),

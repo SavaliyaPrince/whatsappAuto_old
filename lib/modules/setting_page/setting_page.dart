@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notification_permissions/notification_permissions.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
@@ -25,35 +24,21 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   final SettingController settingController = Get.find();
-  Future<String>? permissionStatusFuture;
+  // Future<String>? permissionStatusFuture;
   final ThemeController themeController = Get.find();
-  String permGranted = "granted";
-  String permDenied = "denied";
-  String permUnknown = "unknown";
-  String permProvisional = "provisional";
-  @override
-  Future<void> initState() async {
-    super.initState();
-    // PermissionStatus p =
-    //     await NotificationPermissions.getNotificationPermissionStatus();
-    NotificationPermissions.getNotificationPermissionStatus()
-        .asStream()
-        .listen((S) {
-      print('Notification permissions: ${S}');
-    });
-    // // permissionStatusFuture = getCheckNotificationPermStatus();
-    //
-    // // WidgetsBinding.instance.addObserver(this);
-  }
-
-  /// When the application has a resumed status, check for the permission
-  /// status
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      setState(() {});
-    }
-  }
+  // String permGranted = "granted";
+  // String permDenied = "denied";
+  // String permUnknown = "unknown";
+  // String permProvisional = "provisional";
+  //
+  // /// When the application has a resumed status, check for the permission
+  // /// status
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   if (state == AppLifecycleState.resumed) {
+  //     setState(() {});
+  //   }
+  // }
 
   /// Checks the notification permission status
   // Future<String> getCheckNotificationPermStatus() {
@@ -82,7 +67,7 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         elevation: 0.2,
         backgroundColor: themeController.isSwitched.value
-            ? AppColor.whiteColor
+            ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.appBarColors,
         leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
         leading: GestureDetector(
@@ -93,17 +78,13 @@ class _SettingPageState extends State<SettingPage> {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 4.2),
             child: Image.asset(
               AppIcons.backIcon,
-              color: themeController.isSwitched.value
-                  ? AppColor.backIconColor
-                  : AppColor.whiteColor,
+              color: AppColor.whiteColor,
             ),
           ),
         ),
-        title: AppText(
+        title: const AppText(
           AppString.setting,
-          color: themeController.isSwitched.value
-              ? AppColor.backIconColor
-              : AppColor.whiteColor,
+          color: AppColor.whiteColor,
           fontWeight: FontWeight.w600,
         ),
       ),

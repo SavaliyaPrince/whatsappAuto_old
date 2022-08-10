@@ -19,7 +19,8 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class ContactPage extends StatelessWidget {
   final ThemeController themeController = Get.find();
   final ContactController contactController = Get.put(ContactController());
-  final ContactListController contactListController = Get.put(ContactListController());
+  final ContactListController contactListController =
+      Get.put(ContactListController());
   final ContactServiceController demoController = Get.find();
   final GroupController groupController = Get.put(GroupController());
   final HomePageController homePageController = Get.find();
@@ -32,17 +33,15 @@ class ContactPage extends StatelessWidget {
       () => Scaffold(
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
-          elevation: 0.2,
+          elevation: 0.5,
           backgroundColor: themeController.isSwitched.value
-              ? AppColor.whiteColor
+              ? AppColor.darkThem.withOpacity(0.2)
               : AppColor.appBarColors,
           title: AppText(
             AppString.contacts,
             fontSize: SizeUtils.fSize_18(),
             fontWeight: FontWeight.w600,
-            color: themeController.isSwitched.value
-                ? AppColor.textColor
-                : AppColor.whiteColor,
+            color: AppColor.whiteColor,
           ),
           leadingWidth: SizeUtils.fSize_40(),
           leading: GestureDetector(
@@ -55,9 +54,7 @@ class ContactPage extends StatelessWidget {
               ),
               child: Image.asset(
                 AppIcons.backIcon,
-                color: themeController.isSwitched.value
-                    ? AppColor.textColor
-                    : AppColor.whiteColor,
+                color: AppColor.whiteColor,
               ),
             ),
           ),
@@ -89,7 +86,8 @@ class ContactPage extends StatelessWidget {
                   onChanged: (value) {
                     if (contactController.isSwitchEveryone.value == false) {
                       contactController.isSwitchEveryone.value = true;
-                      AppPreference.setBoolean("everyone", value: contactController.isSwitchEveryone.value);
+                      AppPreference.setBoolean("everyone",
+                          value: contactController.isSwitchEveryone.value);
                       contactController.changeAutoReplyTo(AutoReplyTo.everyone);
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -114,8 +112,10 @@ class ContactPage extends StatelessWidget {
                   onChanged: (value) {
                     if (contactController.isSwitchMyContact.value == false) {
                       contactController.isSwitchMyContact.value = true;
-                      AppPreference.setBoolean("contactList", value: contactController.isSwitchMyContact.value);
-                      contactController.changeAutoReplyTo(AutoReplyTo.my_contact_list);
+                      AppPreference.setBoolean("contactList",
+                          value: contactController.isSwitchMyContact.value);
+                      contactController
+                          .changeAutoReplyTo(AutoReplyTo.my_contact_list);
                       contactServiceController.getPhoneContacts();
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -138,10 +138,13 @@ class ContactPage extends StatelessWidget {
                   description: AppString.exceptContactDescription,
                   value: contactController.isSwitchExpectContact.value,
                   onChanged: (value) {
-                    if (contactController.isSwitchExpectContact.value == false) {
+                    if (contactController.isSwitchExpectContact.value ==
+                        false) {
                       contactController.isSwitchExpectContact.value = true;
-                      AppPreference.setBoolean("expectContact", value: contactController.isSwitchExpectContact.value);
-                      contactController.changeAutoReplyTo(AutoReplyTo.except_my_contact_list);
+                      AppPreference.setBoolean("expectContact",
+                          value: contactController.isSwitchExpectContact.value);
+                      contactController.changeAutoReplyTo(
+                          AutoReplyTo.except_my_contact_list);
                       // contactServiceController.getPhoneContacts();
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
@@ -150,7 +153,8 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchMyContact.value = false;
                       contactController.isSwitchEveryone.value = false;
                     } else {
-                      print("isSwitchExpectContact  4----->:${contactController.isSwitchExpectContact.value}");
+                      print(
+                          "isSwitchExpectContact  4----->:${contactController.isSwitchExpectContact.value}");
                       contactController.isSwitchExpectContact.value = false;
                       AppPreference.clearSharedPreferences("expectContact");
                     }
@@ -167,8 +171,10 @@ class ContactPage extends StatelessWidget {
                   onChanged: (value) {
                     if (contactController.isSwitchPhoneContact.value == false) {
                       contactController.isSwitchPhoneContact.value = true;
-                      AppPreference.setBoolean("checkEnable", value: contactController.isSwitchPhoneContact.value);
-                      contactController.changeAutoReplyTo(AutoReplyTo.except_my_phone_contacts);
+                      AppPreference.setBoolean("checkEnable",
+                          value: contactController.isSwitchPhoneContact.value);
+                      contactController.changeAutoReplyTo(
+                          AutoReplyTo.except_my_phone_contacts);
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -192,7 +198,8 @@ class ContactPage extends StatelessWidget {
                       color: Colors.transparent,
                       child: Theme(
                         data: ThemeData(
-                          unselectedWidgetColor: ColorRes.textColor(context).withOpacity(0.3),
+                          unselectedWidgetColor:
+                              ColorRes.textColor(context).withOpacity(0.3),
                         ),
                         child: Transform.scale(
                           scale: 1.1,
@@ -204,14 +211,15 @@ class ContactPage extends StatelessWidget {
                             ),
                             onChanged: (value) {
                               contactController.checkEnable.value = value!;
-                              AppPreference.setBoolean("checkEnable", value: contactController.checkEnable.value);
+                              AppPreference.setBoolean("checkEnable",
+                                  value: contactController.checkEnable.value);
                             },
                             side: BorderSide(
                               color: themeController.isSwitched.value
                                   ? AppColor.whiteColor.withOpacity(0.3)
                                   : AppColor.textColor.withOpacity(
-                                0.2,
-                              ),
+                                      0.2,
+                                    ),
                             ),
                           ),
                         ),
@@ -299,7 +307,8 @@ class ContactPage extends StatelessWidget {
                 if (demoController.selectedContactModel.isEmpty == true)
                   Center(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: SizeUtils.verticalBlockSize * 5),
+                      padding: EdgeInsets.symmetric(
+                          vertical: SizeUtils.verticalBlockSize * 5),
                       child: Column(
                         children: [
                           AppText(
@@ -318,7 +327,8 @@ class ContactPage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: demoController.selectedContactModel.length,
                     itemBuilder: (context, index) {
-                      final selectedContact = demoController.selectedContactModel[index];
+                      final selectedContact =
+                          demoController.selectedContactModel[index];
                       return Padding(
                         padding: EdgeInsets.only(
                           top: SizeUtils.verticalBlockSize * 1,
@@ -338,7 +348,8 @@ class ContactPage extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: AppText(
-                                      selectedContact.displayName![0].toUpperCase(),
+                                      selectedContact.displayName![0]
+                                          .toUpperCase(),
                                       fontWeight: FontWeight.w600,
                                       color: AppColor.whiteColor,
                                     ),
@@ -348,23 +359,39 @@ class ContactPage extends StatelessWidget {
                                   width: SizeUtils.horizontalBlockSize * 5,
                                 ),
                                 AppText(
-                                  selectedContact.displayName.toString().toLowerCase(),
+                                  selectedContact.displayName
+                                      .toString()
+                                      .toLowerCase(),
                                   fontWeight: FontWeight.w400,
-                                  color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
+                                  color: themeController.isSwitched.value
+                                      ? AppColor.whiteColor
+                                      : AppColor.textColor,
                                   fontSize: SizeUtils.fSize_14(),
                                 ),
                                 const Spacer(),
                                 InkWell(
                                   onTap: () async {
                                     try {
-                                      final int index1 = contactServiceController.contactModel.indexWhere(
-                                        (element) => element.displayName == contactServiceController.selectedContactModel[index].displayName,
+                                      final int index1 =
+                                          contactServiceController.contactModel
+                                              .indexWhere(
+                                        (element) =>
+                                            element.displayName ==
+                                            contactServiceController
+                                                .selectedContactModel[index]
+                                                .displayName,
                                       );
-                                      contactServiceController.contactModel[index1].isCheck?.value = false;
-                                      demoController.selectedContactModel.removeAt(index);
-                                      await contactServiceController.contactStoreModel();
+                                      contactServiceController
+                                          .contactModel[index1]
+                                          .isCheck
+                                          ?.value = false;
+                                      demoController.selectedContactModel
+                                          .removeAt(index);
+                                      await contactServiceController
+                                          .contactStoreModel();
                                       //      AppPreference.clearSharedPreferences('selectedContactModel');
-                                      contactServiceController.contactModel.refresh();
+                                      contactServiceController.contactModel
+                                          .refresh();
                                     } catch (e, st) {
                                       print('-------$e-------$st------');
                                     }
@@ -380,7 +407,8 @@ class ContactPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            if (contactServiceController.contactModel.length <= index)
+                            if (contactServiceController.contactModel.length <=
+                                index)
                               const SizedBox()
                             else
                               const AppText(
@@ -450,8 +478,8 @@ class ContactPage extends StatelessWidget {
               inactiveTrackColor: themeController.isSwitched.value
                   ? AppColor.whiteColor.withOpacity(0.2)
                   : AppColor.textColor.withOpacity(
-                0.2,
-              ),
+                      0.2,
+                    ),
               onChanged: onChanged,
             ),
           ),
