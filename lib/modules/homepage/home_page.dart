@@ -243,7 +243,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.settingSubTile,
                             image: AssetsPath.setting,
                             onTap: () {
-                              InterstitalAd.showInterstitialAd();
+                              // InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.settingPage);
                             },
                           ),

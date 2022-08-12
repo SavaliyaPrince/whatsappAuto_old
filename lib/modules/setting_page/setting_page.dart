@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
+import 'package:whatsapp_auto/Utils/interstitial_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
@@ -130,7 +131,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     fontSize: SizeUtils.fSize_14(),
                   ),
                   trailing: Obx(
-                        () => Switch(
+                    () => Switch(
                       activeColor: AppColor.primaryColor,
                       value: settingController.isNotificationCheck.value,
                       onChanged: (value) {
@@ -152,9 +153,10 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
-                    final Uri _url = Uri.parse('http://144.126.254.69/whatsauto/terms.html');
+                    final Uri url =
+                        Uri.parse('http://144.126.254.69/whatsauto/index.html');
 
-                    _launchUrl(_url);
+                    _launchUrl(url);
                   },
                 ),
                 // _settingItem(
@@ -184,6 +186,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.categoryTitle,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
+                    InterstitalAd.showInterstitialAd();
                     Navigation.pushNamed(Routes.supportedApp);
                   },
                 ),

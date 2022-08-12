@@ -8,6 +8,7 @@ import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/theme_controller.dart';
 import 'package:whatsapp_auto/theme/app_color.dart';
+import 'package:whatsapp_auto/widgets/app_text.dart';
 
 class SupportedAppController extends GetxController {
   final ThemeController themeController = Get.find();
@@ -104,7 +105,7 @@ class SupportedAppController extends GetxController {
                     style: ElevatedButton.styleFrom(
                       primary: AppColor.green38,
                     ),
-                    child: const Text('Not Now'),
+                    child: const AppText('Not Now', color: AppColor.whiteColor),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
@@ -115,7 +116,8 @@ class SupportedAppController extends GetxController {
                       style: ElevatedButton.styleFrom(
                         primary: AppColor.green38,
                       ),
-                      child: const Text('Activate')),
+                      child: const AppText('Activate',
+                          color: AppColor.whiteColor)),
                   const SizedBox(width: 10),
                 ],
               ),
