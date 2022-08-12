@@ -5,8 +5,10 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
+import 'package:whatsapp_auto/Utils/interstitial_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
@@ -150,15 +152,20 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppIcons.privacy,
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
-                  onTap: () {},
+                  onTap: () {
+                    final Uri url =
+                        Uri.parse('http://144.126.254.69/whatsauto/index.html');
+
+                    _launchUrl(url);
+                  },
                 ),
-                _settingItem(
-                  context,
-                  AppIcons.help,
-                  AppString.Help,
-                  width: SizeUtils.fSize_24(),
-                  onTap: () {},
-                ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.help,
+                //   AppString.Help,
+                //   width: SizeUtils.fSize_24(),
+                //   onTap: () {},
+                // ),
               ],
             )
           else
@@ -179,6 +186,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.categoryTitle,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
+                    InterstitalAd.showInterstitialAd();
                     Navigation.pushNamed(Routes.supportedApp);
                   },
                 ),
@@ -227,7 +235,12 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppIcons.privacy,
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
-                  onTap: () {},
+                  onTap: () {
+                    final Uri url =
+                        Uri.parse('http://144.126.254.69/whatsauto/index.html');
+
+                    _launchUrl(url);
+                  },
                 ),
                 // _settingItem(
                 //   context,
@@ -241,6 +254,12 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
         ],
       ),
     );
+  }
+
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
   }
 
   Widget _settingItem(
