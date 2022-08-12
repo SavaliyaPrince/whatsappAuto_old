@@ -27,7 +27,7 @@ class AutoReply extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
-        elevation: 0.2,
+        elevation: 0.5,
         backgroundColor: themeController.isSwitched.value
             ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.whiteColor,

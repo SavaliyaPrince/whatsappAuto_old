@@ -91,7 +91,7 @@ class _HomePageScreenState extends State<HomePageScreen>
           appBar: AppBar(
             elevation: 0.2,
             backgroundColor: themeController.isSwitched.value
-                ? AppColor.whiteColor
+                ? AppColor.darkThem.withOpacity(0.2)
                 : AppColor.appBarColors,
             automaticallyImplyLeading: false,
             title: Padding(
@@ -99,9 +99,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                   EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 1.2),
               child: AppText(
                 AppString.whatsAuto,
-                color: themeController.isSwitched.value
-                    ? AppColor.backIconColor
-                    : AppColor.whiteColor,
+                color: AppColor.whiteColor,
                 fontWeight: FontWeight.w600,
                 fontSize: SizeUtils.fSize_18(),
               ),

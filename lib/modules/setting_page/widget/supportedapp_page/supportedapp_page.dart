@@ -26,7 +26,7 @@ class SupportedAppPage extends StatelessWidget {
             ? AppColor.darkThem.withOpacity(0.2)
             : AppColor.whiteColor,
         leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
-        elevation: 0.2,
+        elevation: 0.5,
         leading: GestureDetector(
           onTap: () {
             Navigation.pop();
