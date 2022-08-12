@@ -5,6 +5,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
@@ -129,7 +130,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     fontSize: SizeUtils.fSize_14(),
                   ),
                   trailing: Obx(
-                    () => Switch(
+                        () => Switch(
                       activeColor: AppColor.primaryColor,
                       value: settingController.isNotificationCheck.value,
                       onChanged: (value) {
@@ -150,15 +151,19 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppIcons.privacy,
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
-                  onTap: () {},
+                  onTap: () {
+                    final Uri _url = Uri.parse('http://144.126.254.69/whatsauto/terms.html');
+
+                    _launchUrl(_url);
+                  },
                 ),
-                _settingItem(
-                  context,
-                  AppIcons.help,
-                  AppString.Help,
-                  width: SizeUtils.fSize_24(),
-                  onTap: () {},
-                ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.help,
+                //   AppString.Help,
+                //   width: SizeUtils.fSize_24(),
+                //   onTap: () {},
+                // ),
               ],
             )
           else
@@ -206,7 +211,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     fontSize: SizeUtils.fSize_14(),
                   ),
                   trailing: Obx(
-                    () => Switch(
+                        () => Switch(
                       activeColor: AppColor.primaryColor,
                       value: settingController.isNotificationCheck.value,
                       onChanged: (value) async {
@@ -227,15 +232,19 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppIcons.privacy,
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
-                  onTap: () {},
+                  onTap: () {
+                    final Uri _url = Uri.parse('http://144.126.254.69/whatsauto/terms.html');
+
+                    _launchUrl(_url);
+                  },
                 ),
-                _settingItem(
-                  context,
-                  AppIcons.help,
-                  AppString.Help,
-                  width: SizeUtils.fSize_24(),
-                  onTap: () {},
-                ),
+                // _settingItem(
+                //   context,
+                //   AppIcons.help,
+                //   AppString.Help,
+                //   width: SizeUtils.fSize_24(),
+                //   onTap: () {},
+                // ),
               ],
             )
         ],
@@ -243,13 +252,19 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
     );
   }
 
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
+  }
+
   Widget _settingItem(
-    BuildContext context,
-    String? image,
-    String? text, {
-    GestureTapCallback? onTap,
-    double? width,
-  }) {
+      BuildContext context,
+      String? image,
+      String? text, {
+        GestureTapCallback? onTap,
+        double? width,
+      }) {
     return GestureDetector(
       onTap: onTap,
       child: ListTile(
