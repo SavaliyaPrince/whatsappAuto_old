@@ -2,21 +2,22 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:whatsapp_auto/helper/admanag.dart';
 
 class InterstitalAd {
   static InterstitialAd? _interstitialAd;
   static int maxFailedLoadAttempts = 3;
   static int _numInterstitialLoadAttempts = 0;
-  static final String appInterstitialId =
-      FirebaseRemoteConfigUtils.appInterstitialId;
-  static final String iosInterstitialId =
-      FirebaseRemoteConfigUtils.iosInterstitialId;
+
+  // static final String appInterstitialId =
+  //     FirebaseRemoteConfigUtils.appInterstitialId;
+  // static final String iosInterstitialId =
+  //     FirebaseRemoteConfigUtils.iosInterstitialId;
   static const AdRequest request = AdRequest(
     keywords: <String>['foo', 'bar'],
     contentUrl: 'http://foo.com/bar.html',
     nonPersonalizedAds: true,
   );
+
   // @override
   // void initState() {
   //   createInterstitialAd();
@@ -58,12 +59,11 @@ class InterstitalAd {
   // );
 
   static Future<void> createInterstitialAd() async {
-    print("appInterstitialId----$appInterstitialId");
-    print("iosInterstitialId----$iosInterstitialId");
     await InterstitialAd.load(
       adUnitId: Platform.isAndroid
-          ? appInterstitialId
-          : iosInterstitialId, //and:ca-app-pub-3940256099942544/6300978111
+          ? "ca-app-pub-3940256099942544/1033173712"
+          : "ca-app-pub-3940256099942544/4411468910",
+      //and:ca-app-pub-3940256099942544/6300978111
       request: request,
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
