@@ -206,9 +206,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                               Navigation.pushNamed(Routes.createReply);
                             },
                           ),
-                          SizedBox(
-                            height: SizeUtils.verticalBlockSize * 1.5,
-                          ),
+                          SizedBox(height: SizeUtils.verticalBlockSize * 1.5),
                           customCategoriesBox(
                             context,
                             titleText: AppString.contact,

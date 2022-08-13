@@ -107,65 +107,57 @@ class _CreateReplyState extends State<CreateReply> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topRight: Radius.circular(20),
-                                              bottomRight: Radius.circular(20),
-                                              bottomLeft: Radius.circular(20),
-                                            ),
-                                            color: AppColor.primaryColor
-                                                .withOpacity(0.2),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            bottomRight: Radius.circular(20),
+                                            bottomLeft: Radius.circular(20),
                                           ),
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              vertical:
-                                                  SizeUtils.verticalBlockSize *
-                                                      1,
-                                              horizontal: SizeUtils
-                                                      .horizontalBlockSize *
-                                                  3,
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                AppText(
-                                                  "${_createReplyController.createModal[index].inComingKeyword}",
-                                                  color: ColorRes.textColor(
-                                                      context),
-                                                  fontSize:
-                                                      SizeUtils.fSize_16(),
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                                SizedBox(
-                                                  height: SizeUtils
-                                                          .verticalBlockSize *
-                                                      1,
-                                                ),
-                                                AppText(
-                                                  DateFormat("hh:mm a").format(
-                                                      _createReplyController
-                                                              .createModal[
-                                                                  index]
-                                                              .time ??
-                                                          DateTime.now()),
-                                                  textAlign: TextAlign.end,
-                                                  fontSize:
-                                                      SizeUtils.fSize_10(),
-                                                  fontWeight: FontWeight.w500,
-                                                  color: themeController
-                                                          .isSwitched.value
-                                                      ? AppColor.lightThem
-                                                          .withOpacity(0.7)
-                                                      : AppColor.backIconColor
-                                                          .withOpacity(0.6),
-                                                ),
-                                              ],
-                                            ),
+                                          color: AppColor.primaryColor
+                                              .withOpacity(0.2),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            vertical:
+                                                SizeUtils.verticalBlockSize * 1,
+                                            horizontal:
+                                                SizeUtils.horizontalBlockSize *
+                                                    3,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              AppText(
+                                                "${_createReplyController.createModal[index].inComingKeyword}",
+                                                color:
+                                                    ColorRes.textColor(context),
+                                                fontSize: SizeUtils.fSize_16(),
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              SizedBox(
+                                                height: SizeUtils
+                                                        .verticalBlockSize *
+                                                    1,
+                                              ),
+                                              AppText(
+                                                DateFormat("hh:mm a").format(
+                                                    _createReplyController
+                                                            .createModal[index]
+                                                            .time ??
+                                                        DateTime.now()),
+                                                textAlign: TextAlign.end,
+                                                fontSize: SizeUtils.fSize_10(),
+                                                fontWeight: FontWeight.w500,
+                                                color: themeController
+                                                        .isSwitched.value
+                                                    ? AppColor.lightThem
+                                                        .withOpacity(0.7)
+                                                    : AppColor.backIconColor
+                                                        .withOpacity(0.6),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
