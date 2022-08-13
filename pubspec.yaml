@@ -59,7 +59,7 @@ dependencies:
   firebase_core: ^1.20.0
 #  firebase_remote_config: ^2.0.8
   firebase_messaging: ^12.0.1
-  flutter_local_notifications: ^9.7.0
+  flutter_local_notifications: ^9.5.0
   push_notification: ^1.1.1
   app_settings: ^4.1.5
 
@@ -88,7 +88,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/old
+    - assets/images/
     - assets/icons/
   #   - images/a_dot_ham.jpeg
 
