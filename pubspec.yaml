@@ -47,7 +47,7 @@ dependencies:
   flutter_phone_direct_caller: ^2.1.1
   geolocator: ^9.0.1
   contacts_service: ^0.6.3
-  permission_handler: ^10.0.0
+  permission_handler: ^9.2.0
   flutter_share: ^2.0.0
   in_app_review: ^2.0.4
   flutter_launcher_icons: ^0.9.3

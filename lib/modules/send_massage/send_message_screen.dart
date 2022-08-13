@@ -177,6 +177,9 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 icon: Icons.message,
                 width: SizeUtils.horizontalBlockSize * 48,
               ),
+              SizedBox(
+                height: SizeUtils.verticalBlockSize * 1.5,
+              ),
               Obx(
                 () => SizedBox(
                   height: isBannerLoaded.value

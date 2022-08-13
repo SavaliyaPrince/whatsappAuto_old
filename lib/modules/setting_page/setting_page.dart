@@ -48,28 +48,33 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
     switch (state) {
       case AppLifecycleState.resumed:
-        log("app in resumed");
+        log("app is 0 ${AppLifecycleState.resumed}");
         await grantedPermission();
         break;
       case AppLifecycleState.inactive:
-        await grantedPermission();
-        log("app in inactive"); //app in background
+        // await grantedPermission();
+        log("app is 0 ${AppLifecycleState.inactive}");
         break;
       case AppLifecycleState.paused:
-        log("app in paused"); //app in background
+        log("app is 0 ${AppLifecycleState.paused}");
         break;
       case AppLifecycleState.detached:
-        log("app in detached"); //app remove from background
+        log("app is 0 ${AppLifecycleState.detached}");
         break;
     }
   }
 
   Future<void> grantedPermission() async {
     _permission = Permission.notification;
+    print("_permission---$_permission");
+
     final status = await _permission.isGranted;
     settingController.isNotificationCheck.value = status;
     AppPreference.setNotification(
         notification: settingController.isNotificationCheck.value);
+    print("status---$status");
+    print("settingController---${settingController.isNotificationCheck.value}");
+    print("notification-status--${AppPreference.notification}");
   }
 
   @override
@@ -135,6 +140,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                       activeColor: AppColor.primaryColor,
                       value: settingController.isNotificationCheck.value,
                       onChanged: (value) {
+                        print("settingController-0--${settingController.isNotificationCheck.value}");
                         AppSettings.openNotificationSettings();
                       },
                     ),
