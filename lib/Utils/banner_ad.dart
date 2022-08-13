@@ -80,8 +80,8 @@ class _BannerAdViewState extends State<BannerAdView> {
       ///test
       adUnitId: Platform.isAndroid
           ? "ca-app-pub-3940256099942544/6300978111"
-          : "ca-app-pub-3940256099942544/2934735716",
-
+          // : "ca-app-pub-3940256099942544/2934735716",
+          : "ca-app-pub-3197546275943457/1753312942",
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           print('AdMob Banner Ad onAdLoaded:');
