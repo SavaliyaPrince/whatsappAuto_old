@@ -35,12 +35,12 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance?.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
   }
 
@@ -52,7 +52,6 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
         await grantedPermission();
         break;
       case AppLifecycleState.inactive:
-        await grantedPermission();
         log("app in inactive"); //app in background
         break;
       case AppLifecycleState.paused:
@@ -68,6 +67,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
     _permission = Permission.notification;
     final status = await _permission.isGranted;
     settingController.isNotificationCheck.value = status;
+    print("status0--$status");
     AppPreference.setNotification(
         notification: settingController.isNotificationCheck.value);
   }
