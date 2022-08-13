@@ -8,7 +8,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
-import 'package:whatsapp_auto/Utils/interstitial_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
@@ -186,7 +185,6 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.categoryTitle,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
-                    InterstitalAd.showInterstitialAd();
                     Navigation.pushNamed(Routes.supportedApp);
                   },
                 ),
