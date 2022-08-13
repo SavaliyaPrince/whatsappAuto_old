@@ -103,7 +103,7 @@ class SupportedAppController extends GetxController {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: AppColor.green38,
+                      primary: AppColor.primaryColor,
                     ),
                     child: const AppText('Not Now', color: AppColor.whiteColor),
                   ),
@@ -114,7 +114,7 @@ class SupportedAppController extends GetxController {
                         await platform.invokeMethod('serviceEnable');
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: AppColor.green38,
+                        primary: AppColor.primaryColor,
                       ),
                       child: const AppText('Activate',
                           color: AppColor.whiteColor)),
