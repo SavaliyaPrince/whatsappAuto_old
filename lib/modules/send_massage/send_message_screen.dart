@@ -1,11 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
@@ -191,137 +187,6 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Future<void> getPermission() async {
-    await Geolocator.requestPermission();
-    final permission = await Permission.location.status.isGranted;
-
-    if (permission) {
-      // final Position position = await Geolocator.getCurrentPosition(
-      //     desiredAccuracy: LocationAccuracy.high);
-      // _homePageController.countryCode.value = country.phoneCode;
-      // await prefs.setString("countryCode", country.phoneCode);
-    }
-  }
-
-  Future<void> callHistoryButtonClick() async {
-    try {
-      if (_sendMessageController.contactList.isEmpty) {
-        await CallLog.get();
-      }
-    } catch (e) {
-      await openAppSettings();
-    }
-    if (!_sendMessageController.isShowDialPad.value) {
-      if (await Permission.phone.status == PermissionStatus.permanentlyDenied) {
-        await openAppSettings();
-      } else {
-        if (_sendMessageController.contactList.isEmpty) {
-          await getContact();
-        }
-      }
-    }
-    _sendMessageController.isShowDialPad.value =
-        !_sendMessageController.isShowDialPad.value;
-    _sendMessageController.isShowCallHistory.value =
-        !_sendMessageController.isShowCallHistory.value;
-  }
-
-  Future<void> getContact() async {
-    try {
-      _sendMessageController.contactList.clear();
-      final entries = await CallLog.get();
-      for (var element in entries) {
-        if (_sendMessageController.contactList.length < 100 &&
-            _sendMessageController.contactList.indexWhere(
-                    (elementInner) => elementInner.name == element.name) ==
-                -1) {
-          _sendMessageController.contactList.add(element);
-        }
-      }
-    } catch (e, st) {
-      log("e : $e , st $st");
-    }
-    setState(() {});
-  }
-
-  Future<void> dialogBox(BuildContext context) async {
-    await showDialog(
-      barrierColor: Colors.black38,
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return WillPopScope(
-          onWillPop: () {
-            return Future.value(false);
-          },
-          child: AlertDialog(
-            title: Center(
-              child: Text(
-                "Attention",
-                style: TextStyle(
-                  // height: 1.2,
-                  fontSize: SizeUtils.fSize_18(),
-                  fontWeight: FontWeight.w500,
-                  // fontFamily: StringRes.mukta,
-                ),
-              ),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "We need the call log permission to fetch the recent call history to make the life easier for sending whatsapp message by single tap",
-                  style: TextStyle(
-                    height: 1.5,
-                    fontSize: SizeUtils.fSize_14(),
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(
-                  height: SizeUtils.horizontalBlockSize * 7,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context).pop(true);
-                      },
-                      child: Text(
-                        "Cancel",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: SizeUtils.fSize_14(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: SizeUtils.horizontalBlockSize * 5,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        Navigator.of(context).pop(true);
-                        callHistoryButtonClick();
-                      },
-                      child: Text(
-                        "Allow",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: SizeUtils.fSize_14(),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }
