@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:call_log/call_log.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +15,6 @@ import 'package:whatsapp_auto/modules/send_massage/datasources/send_message_serv
 class SendMessageController extends GetxController {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController textController = TextEditingController();
-  RxList<CallLogEntry> contactList = <CallLogEntry>[].obs;
   Rx<CountryCodeModel> countryCodeModel = CountryCodeModel().obs;
   RxString countryCode = "".obs;
 

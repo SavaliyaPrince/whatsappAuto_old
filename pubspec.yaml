@@ -40,7 +40,6 @@ dependencies:
   intl: ^0.17.0
   http: ^0.13.4
   google_mobile_ads: ^1.2.0
-  call_log: ^3.2.3
   url_launcher: ^6.1.0
   #permission_handler: ^8.3.0
   flutter_keyboard_visibility: ^5.2.0
