@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
 class AppException implements Exception {
-  //un_known error code -> 0
-
   late String message;
   String? tag;
   int errorCode;
