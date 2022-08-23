@@ -42,7 +42,7 @@ class _HomePageScreenState extends State<HomePageScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {
@@ -59,7 +59,7 @@ class _HomePageScreenState extends State<HomePageScreen>
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   @override
@@ -126,6 +126,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.welcomeMessageSubTile,
                             image: AssetsPath.messages,
                             onTap: () {
+                              InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.sendMassagePage);
                             },
                           ),
@@ -191,6 +192,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.welcomeMessageSubTile,
                             image: AssetsPath.messages,
                             onTap: () {
+                              InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.sendMassagePage);
                             },
                           ),
@@ -214,6 +216,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.emojiSubTile,
                             image: AssetsPath.document,
                             onTap: () {
+                              InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.contactPage);
                             },
                           ),
@@ -241,7 +244,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.settingSubTile,
                             image: AssetsPath.setting,
                             onTap: () {
-                              // InterstitalAd.showInterstitialAd();
+                              InterstitalAd.showInterstitialAd();
                               Navigation.pushNamed(Routes.settingPage);
                             },
                           ),
