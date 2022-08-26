@@ -154,9 +154,10 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
     const platform = MethodChannel('samples.flutter.dev/battery');
 
     platform.invokeMethod('addNewMessage', {
-      "message": _createReplyController.inComingKeywordController.text
-          .toLowerCase()
-          .trim(),
+      "[[[[[[[[[[[[[[[[[[[[[message]]]]]]]]]]]]]]]]]]]]]":
+          _createReplyController.inComingKeywordController.text
+              .toLowerCase()
+              .trim(),
       "replyMessage": _createReplyController.replyMassageController.text.trim(),
     });
     print(
