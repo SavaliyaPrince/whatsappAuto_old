@@ -12,6 +12,7 @@ import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/open_ad.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
+import 'package:whatsapp_auto/helper/firebase_analytics.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_controller.dart';
@@ -42,6 +43,7 @@ class _HomePageScreenState extends State<HomePageScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
+    FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.home);
     WidgetsBinding.instance.addObserver(this);
     FirebaseMessaging.instance
         .getInitialMessage()

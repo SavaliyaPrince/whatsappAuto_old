@@ -277,7 +277,11 @@ class MainActivity : FlutterActivity() {
 
             if (call.method == "addNewMessage") {
                 val message = call.argument<String>("message");
+                Log.d("tag", "newCreatedMessage 0000=== >>>> " + message)
+
                 val replyMessage = call.argument<String>("replyMessage");
+                Log.d("tag", "newCreatedMessage 111=== >>>> " + replyMessage)
+
                 val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
                 editor.putString("botMessage-" + message, replyMessage)
                 editor.apply()
