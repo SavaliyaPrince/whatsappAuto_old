@@ -145,7 +145,6 @@ class SupportedAppPage extends StatelessWidget {
                     } else {
                       supportedAppController.whatsappBusiness.value = value;
                       AppPreference.setWhatsAppBusi(whatsAppBusi: true);
-
                       platform.invokeMethod(
                         'setWhatsappBusiness',
                         {

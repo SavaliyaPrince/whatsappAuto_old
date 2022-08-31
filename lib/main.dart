@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:whatsapp_auto/Utils/my_behavior.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
+import 'package:whatsapp_auto/helper/firebase_analytics.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_controller.dart';
 import 'package:whatsapp_auto/modules/homepage/homePageCantroller.dart';
@@ -20,6 +21,7 @@ import 'modules/setting_page/widget/push_notification/push_notification.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseAnalyticsUtils.init();
   // FirebaseRemoteConfigUtils.initMethod();
   final FirebaseCrashlytics crashlytics = FirebaseCrashlytics.instance;
   runZonedGuarded<Future<void>>(() async {
