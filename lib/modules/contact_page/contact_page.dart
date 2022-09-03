@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/banner_ad.dart';
-import 'package:whatsapp_auto/Utils/interstitial_ad.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
-import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_controller.dart';
@@ -116,8 +114,8 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchMyContact.value = true;
                       AppPreference.setBoolean("contactList",
                           value: contactController.isSwitchMyContact.value);
-                      contactController.changeAutoReplyTo(
-                          AutoReplyTo.except_my_contact_list);
+                      contactController
+                          .changeAutoReplyTo(AutoReplyTo.my_contact_list);
                       contactServiceController.getPhoneContacts();
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -190,73 +188,100 @@ class ContactPage extends StatelessWidget {
                   },
                 ),
                 SizedBox(
-                  height: SizeUtils.verticalBlockSize * 3.3,
+                  height: SizeUtils.verticalBlockSize * 3.1,
                 ),
-                Row(
-                  children: [
-                    Container(
-                      width: SizeUtils.horizontalBlockSize * 4.8,
-                      height: SizeUtils.verticalBlockSize * 2.8,
-                      color: Colors.transparent,
-                      child: Theme(
-                        data: ThemeData(
-                          unselectedWidgetColor:
-                              ColorRes.textColor(context).withOpacity(0.3),
-                        ),
-                        child: Transform.scale(
-                          scale: 1.1,
-                          child: Checkbox(
-                            value: contactController.checkEnable.value,
-                            activeColor: ColorCollection.greenColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            onChanged: (value) {
-                              contactController.checkEnable.value = value!;
-                              AppPreference.setBoolean("checkEnable",
-                                  value: contactController.checkEnable.value);
-                            },
-                            side: BorderSide(
-                              color: themeController.isSwitched.value
-                                  ? AppColor.whiteColor.withOpacity(0.3)
-                                  : AppColor.textColor.withOpacity(
-                                      0.2,
-                                    ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: SizeUtils.horizontalBlockSize * 2.5,
-                    ),
-                    AppText(
-                      AppString.enableGroups,
-                      fontSize: SizeUtils.fSize_14(),
-                      fontWeight: FontWeight.w500,
-                      color: ColorRes.textColor(context),
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {
-                        if (contactController.checkEnable.value == true) {
-                          InterstitalAd.showInterstitialAd();
-                          Navigation.pushNamed(Routes.groupsSettingPage);
-                        }
-                      },
-                      child: SizedBox(
-                        width: SizeUtils.horizontalBlockSize * 5,
-                        height: SizeUtils.verticalBlockSize * 2.6,
-                        child: Image.asset(
-                          AppIcons.setting_bold,
-                          width: SizeUtils.horizontalBlockSize * 3,
-                          height: SizeUtils.verticalBlockSize * 3,
-                          color: ColorRes.textColor(context),
-                        ),
-                      ),
-                    ),
-                  ],
+                _autoReplyWidget(
+                  context,
+                  title: AppString.exceptMyPhoneContacts,
+                  description: AppString.exceptMyPhoneDescription,
+                  value: contactController.isSwitchPhoneContact.value,
+                  onChanged: (value) {
+                    if (contactController.isSwitchPhoneContact.value == false) {
+                      contactController.isSwitchPhoneContact.value = true;
+                      AppPreference.setBoolean("checkEnable",
+                          value: contactController.isSwitchPhoneContact.value);
+                      contactController.changeAutoReplyTo(
+                          AutoReplyTo.except_my_phone_contacts);
+                      AppPreference.clearSharedPreferences("everyone");
+                      AppPreference.clearSharedPreferences("contactList");
+                      AppPreference.clearSharedPreferences("expectContact");
+                      contactController.isSwitchExpectContact.value = false;
+                      contactController.isSwitchMyContact.value = false;
+                      contactController.isSwitchEveryone.value = false;
+                    } else {
+                      contactController.isSwitchPhoneContact.value = false;
+                      AppPreference.clearSharedPreferences("phoneContact");
+                    }
+                  },
                 ),
+                // SizedBox(
+                //   height: SizeUtils.verticalBlockSize * 3.3,
+                // ),
+                // Row(
+                //   children: [
+                //     Container(
+                //       width: SizeUtils.horizontalBlockSize * 4.8,
+                //       height: SizeUtils.verticalBlockSize * 2.8,
+                //       color: Colors.transparent,
+                //       child: Theme(
+                //         data: ThemeData(
+                //           unselectedWidgetColor:
+                //               ColorRes.textColor(context).withOpacity(0.3),
+                //         ),
+                //         child: Transform.scale(
+                //           scale: 1.1,
+                //           child: Checkbox(
+                //             value: contactController.checkEnable.value,
+                //             activeColor: ColorCollection.greenColor,
+                //             shape: RoundedRectangleBorder(
+                //               borderRadius: BorderRadius.circular(5),
+                //             ),
+                //             onChanged: (value) {
+                //               contactController.checkEnable.value = value!;
+                //               AppPreference.setBoolean("checkEnable",
+                //                   value: contactController.checkEnable.value);
+                //             },
+                //             side: BorderSide(
+                //               color: themeController.isSwitched.value
+                //                   ? AppColor.whiteColor.withOpacity(0.3)
+                //                   : AppColor.textColor.withOpacity(
+                //                       0.2,
+                //                     ),
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       width: SizeUtils.horizontalBlockSize * 2.5,
+                //     ),
+                //     AppText(
+                //       AppString.enableGroups,
+                //       fontSize: SizeUtils.fSize_14(),
+                //       fontWeight: FontWeight.w500,
+                //       color: ColorRes.textColor(context),
+                //     ),
+                //     const Spacer(),
+                //     InkWell(
+                //       onTap: () {
+                //         if (contactController.checkEnable.value == true) {
+                //           InterstitalAd.showInterstitialAd();
+                //           Navigation.pushNamed(Routes.groupsSettingPage);
+                //         }
+                //       },
+                //       child: SizedBox(
+                //         width: SizeUtils.horizontalBlockSize * 5,
+                //         height: SizeUtils.verticalBlockSize * 2.6,
+                //         child: Image.asset(
+                //           AppIcons.setting_bold,
+                //           width: SizeUtils.horizontalBlockSize * 3,
+                //           height: SizeUtils.verticalBlockSize * 3,
+                //           color: ColorRes.textColor(context),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 4,
                 ),

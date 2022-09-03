@@ -278,7 +278,7 @@ class _CreateReplyState extends State<CreateReply> {
                                                                 .verticalBlockSize *
                                                             1.2),
                                                     AppText(
-                                                      "Whatsapp Auto Delete",
+                                                      "Are you sure you wanted to delete this auto response ?",
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       fontSize:

@@ -39,7 +39,7 @@ class AppString {
 
   ///   setting page
   static const setting = 'Settings';
-  static const autoReply = 'Auto reply message sent';
+  static const autoReply = 'Message Response Stats';
   static const upgrade = 'Upgrade App';
   static const advance = 'Advance Settings';
   static const Appearance = 'Appearance';
@@ -55,7 +55,7 @@ class AppString {
   static const WhatsApp = "WhatsApp";
   static const Telegram = "Telegram";
   static const instagram = "Instagram";
-  static const massanger = "Massanger";
+  static const messenger = "Messenger";
   static const whatsappBusiness = "Whatsapp Business";
   static const whatsAppBusi = "WhatsApp Business";
   static const telegram = "Telegram";

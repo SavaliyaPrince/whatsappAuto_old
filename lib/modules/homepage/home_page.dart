@@ -42,6 +42,7 @@ class _HomePageScreenState extends State<HomePageScreen>
   @override
   void initState() {
     // TODO: implement initState
+    supportedAppController.getPhoneContacts();
     super.initState();
     FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.home);
     WidgetsBinding.instance.addObserver(this);
@@ -70,7 +71,6 @@ class _HomePageScreenState extends State<HomePageScreen>
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.paused) {
       print("------AppLifecycleState---1-->$state");
-      isPaused = true;
     }
     if (state == AppLifecycleState.inactive && isPaused) {
       print("------AppLifecycleState---2->$state");

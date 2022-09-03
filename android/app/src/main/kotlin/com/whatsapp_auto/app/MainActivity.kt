@@ -169,6 +169,7 @@ class MainActivity : FlutterActivity() {
             if (call.method == "setWhatsApp") {
                 var text: Boolean? = call.argument<Boolean>("whatsapp");
                 Log.d("Enter", "Working  " + text.toString())
+                Log.d("tag", "language === >>>>123 ")
 
                 val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
                 if (text == true) {
