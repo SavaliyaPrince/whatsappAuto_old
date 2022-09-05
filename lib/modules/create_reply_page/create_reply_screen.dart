@@ -281,25 +281,27 @@ class _CreateReplyState extends State<CreateReply> {
                                                       "Are you sure you wanted to delete this auto response ?",
                                                       fontWeight:
                                                           FontWeight.w600,
+                                                      textAlign:
+                                                          TextAlign.center,
                                                       fontSize:
                                                           SizeUtils.fSize_16(),
                                                     ),
-                                                    SizedBox(
-                                                        height: SizeUtils
-                                                                .verticalBlockSize *
-                                                            1.5),
-                                                    AppText(
-                                                      "Are you sure you want "
-                                                      "to delete this "
-                                                      "message?",
-                                                      color: ColorRes.textColor(
-                                                              context)
-                                                          .withOpacity(0.7),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize:
-                                                          SizeUtils.fSize_14(),
-                                                    ),
+                                                    // SizedBox(
+                                                    //     height: SizeUtils
+                                                    //             .verticalBlockSize *
+                                                    //         1.5),
+                                                    // AppText(
+                                                    //   "Are you sure you want "
+                                                    //   "to delete this "
+                                                    //   "message?",
+                                                    //   color: ColorRes.textColor(
+                                                    //           context)
+                                                    //       .withOpacity(0.7),
+                                                    //   fontWeight:
+                                                    //       FontWeight.w400,
+                                                    //   fontSize:
+                                                    //       SizeUtils.fSize_14(),
+                                                    // ),
                                                     SizedBox(
                                                         height: SizeUtils
                                                                 .verticalBlockSize *
