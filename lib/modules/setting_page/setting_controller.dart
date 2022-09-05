@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
@@ -17,7 +19,10 @@ class SettingController extends GetxController {
       await FlutterShare.share(
           title: AppString.InviteFriends,
           text: "",
-          linkUrl: '',
+          linkUrl: Platform.isAndroid
+              ? 'https://play.google.com/store/apps/details?id=com'
+                  '.whatsapp_auto.app'
+              : "https://apps.apple.com/app/id1638722301",
           chooserTitle: 'WhatsApp Tool');
     } finally {}
   }
