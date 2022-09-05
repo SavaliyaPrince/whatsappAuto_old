@@ -149,9 +149,11 @@ class ContactPage extends StatelessWidget {
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("phoneContact");
+                      AppPreference.clearSharedPreferences("groupContact");
                       contactController.isSwitchPhoneContact.value = false;
                       contactController.isSwitchMyContact.value = false;
                       contactController.isSwitchEveryone.value = false;
+                      contactController.isSwitchGroup.value = false;
                     } else {
                       print(
                           "isSwitchExpectContact  4----->:${contactController.isSwitchExpectContact.value}");
@@ -178,9 +180,11 @@ class ContactPage extends StatelessWidget {
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
+                      AppPreference.clearSharedPreferences("groupContact");
                       contactController.isSwitchExpectContact.value = false;
                       contactController.isSwitchMyContact.value = false;
                       contactController.isSwitchEveryone.value = false;
+                      contactController.isSwitchGroup.value = false;
                     } else {
                       contactController.isSwitchPhoneContact.value = false;
                       AppPreference.clearSharedPreferences("phoneContact");
@@ -205,9 +209,11 @@ class ContactPage extends StatelessWidget {
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
+                      AppPreference.clearSharedPreferences("groupContact");
                       contactController.isSwitchExpectContact.value = false;
                       contactController.isSwitchMyContact.value = false;
                       contactController.isSwitchEveryone.value = false;
+                      contactController.isSwitchGroup.value = false;
                     } else {
                       contactController.isSwitchPhoneContact.value = false;
                       AppPreference.clearSharedPreferences("phoneContact");
