@@ -5,31 +5,24 @@ class AppString {
   static const whatsAuto = 'WhatsAuto';
   static const availableCategories = 'Available Categories';
   static const welcomeMessageTitle = 'Send message';
-  static const welcomeMessageSubTile =
-      'Send message without saving\ncontact details';
+  static const welcomeMessageSubTile = 'Send message without saving\ncontact details';
   static const menuReplyTitle = 'Menu reply';
-  static const menuReplySubTile =
-      'Set up your auto response to\nautomate message';
+  static const menuReplySubTile = 'Set up your auto response to\nautomate message';
   static const testReplyTitle = 'Test reply';
-  static const testReplySubTile =
-      'Test your auto-reply message\nwith this simulation';
+  static const testReplySubTile = 'Test your auto-reply message\nwith this simulation';
   static const emojiTitle = 'Set Up Your Bot';
-  static const emojiSubTile =
-      'Set up your contact/group list to auto respond message';
+  static const emojiSubTile = 'Set up your contact/group list to auto respond message';
   static const settingTitle = 'Settings';
   static const settingSubTile = 'Configure your custom reference';
   static const contactUsTitle = 'Contact Us';
-  static const contactUsSubTile =
-      'Generate notes to share with\nothers messaging apps';
+  static const contactUsSubTile = 'Generate notes to share with\nothers messaging apps';
   static const categoryTitle = 'Supported apps';
-  static const categorySubTile =
-      'Give us your valuable feedbacks and rate us so we can provide better service and quality.';
+  static const categorySubTile = 'Give us your valuable feedbacks and rate us so we can provide better service and quality.';
   static const documentTitle = 'Rate Us';
   static const contact = 'Contact';
   static const documentSubTile = 'Share with your friends and family';
   static const sendWelcomeMessage = 'Send welcome message';
-  static const sendAWelcome =
-      'send a welcome message when someone message you first time or every 3 days once';
+  static const sendAWelcome = 'send a welcome message when someone message you first time or every 3 days once';
   static const createWelcomeMessage = 'Create welcome message';
   static const welcomeMessage = 'Welcome message';
   static const inputNewWelcomeMessage = 'Input new welcome message';
@@ -71,14 +64,12 @@ class AppString {
   static const openWhatsapp = 'Open Whatsapp';
   static const openMessage = 'Open Message';
   static const openCall = 'Open Call';
-  static const anyoneSend =
-      "Send message to  anyone without saving their contact";
+  static const anyoneSend = "Send message to  anyone without saving their contact";
 
   ///  Advance Settings
   static const modes = "Modes";
   static const PhoneIdle = "Phone Idle";
-  static const whatsAusto =
-      "Turn on WhatsAusto automatically when the phone screen is locked and idle";
+  static const whatsAusto = "Turn on WhatsAuto automatically when the phone screen is locked and idle";
   static const DrivingModes = "Driving Mode";
   static const driving = "Trun on WatsAuto autometically when driving";
   static const ReplyM = "Reply message";
@@ -98,14 +89,12 @@ class AppString {
   static const AutoReply = "Auto reply";
   static const AppSecurity = "App security";
   static const AppLockPassword = "App lock password";
-  static const AppLockPasswordMassage =
-      "Secure access to whatsAuto app by using the same Pattern/PIN/Password you use to unlock your phone.";
+  static const AppLockPasswordMassage = "Secure access to whatsAuto app by using the same Pattern/PIN/Password you use to unlock your phone.";
 
   /// Supported Apps
   static const supportedApps = 'Supported apps';
   static const enableDisabble = 'Enable & disable apps';
-  static const description =
-      'List of apps that you can enable and disable by clicking on/off switch';
+  static const description = 'List of apps that you can enable and disable by clicking on/off switch';
 
   /// contact screen
   static const autoReplyTo = 'Auto reply to';
@@ -117,10 +106,12 @@ class AppString {
       "contact \nlist you've added in WhatsAuto app.";
   static const exceptMyContactList = 'Except my contact list';
   static const exceptContactDescription = 'To send auto reply except your \n '
-      'WhatAuto contact list';
+      'WhatAuto contact list.';
   static const exceptMyPhoneContacts = 'Except my phone contacts';
   static const exceptMyPhoneDescription = 'To send auto reply except your '
       'phone \n contact list.';
+  static const groupMassage = 'Group Message';
+  static const groupMassageDescription = 'Turn on WhatsAusto automatically when the phone screen is locked and idle in group.';
   static const enableGroups = 'Enable Groups';
   static const contactList = 'Contact list';
   static const gropeSetting = 'Group Settings';
@@ -149,14 +140,12 @@ class AppString {
   /// create reply
   static const createReply = "Your Auto Response";
   static const customReply = "custome reply";
-  static const tapToBelow =
-      "Tap to below button to create\ncustome reply text easily";
+  static const tapToBelow = "Tap to below button to create\ncustome reply text easily";
   static const create = "Add New Response";
 
   /// create custom reply
   static const createCustomReply = "Create custome reply";
-  static const CreateYourOwnChatBot =
-      "Create your own chatbot by customizing\nincoming and reply massages";
+  static const CreateYourOwnChatBot = "Create your own chatbot by customizing\nincoming and reply massages";
   static const incomingKeyword = "Incoming keyword";
   static const replyMassage = "Reply massage";
   static const enterInComingKeyword = "Please enter a incoming keyword.";

@@ -22,7 +22,6 @@ class AppPreference {
 
   // static const String theme = "theme";
 
-
   ///-------------
   static Future setString(String key, String value) async {
     await _prefs.setString(key, value);

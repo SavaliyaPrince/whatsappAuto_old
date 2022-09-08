@@ -19,8 +19,7 @@ import 'package:whatsapp_auto/widgets/app_text.dart';
 class ContactPage extends StatelessWidget {
   final ThemeController themeController = Get.find();
   final ContactController contactController = Get.put(ContactController());
-  final ContactListController contactListController =
-      Get.put(ContactListController());
+  final ContactListController contactListController = Get.put(ContactListController());
   final ContactServiceController demoController = Get.find();
   final GroupController groupController = Get.put(GroupController());
   final HomePageController homePageController = Get.find();
@@ -34,9 +33,7 @@ class ContactPage extends StatelessWidget {
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.5,
-          backgroundColor: themeController.isSwitched.value
-              ? AppColor.darkThem.withOpacity(0.2)
-              : AppColor.appBarColors,
+          backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.appBarColors,
           title: AppText(
             AppString.contacts,
             fontSize: SizeUtils.fSize_18(),
@@ -86,8 +83,7 @@ class ContactPage extends StatelessWidget {
                   onChanged: (value) {
                     if (contactController.isSwitchEveryone.value == false) {
                       contactController.isSwitchEveryone.value = true;
-                      AppPreference.setBoolean("everyone",
-                          value: contactController.isSwitchEveryone.value);
+                      AppPreference.setBoolean("everyone", value: contactController.isSwitchEveryone.value);
                       contactController.changeAutoReplyTo(AutoReplyTo.everyone);
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -95,6 +91,7 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchMyContact.value = false;
                       contactController.isSwitchExpectContact.value = false;
                       contactController.isSwitchPhoneContact.value = false;
+                      contactController.isSwitchGroup.value = false;
                     } else {
                       contactController.isSwitchEveryone.value = false;
                       AppPreference.clearSharedPreferences("everyone");
@@ -112,10 +109,8 @@ class ContactPage extends StatelessWidget {
                   onChanged: (value) {
                     if (contactController.isSwitchMyContact.value == false) {
                       contactController.isSwitchMyContact.value = true;
-                      AppPreference.setBoolean("contactList",
-                          value: contactController.isSwitchMyContact.value);
-                      contactController
-                          .changeAutoReplyTo(AutoReplyTo.my_contact_list);
+                      AppPreference.setBoolean("contactList", value: contactController.isSwitchMyContact.value);
+                      contactController.changeAutoReplyTo(AutoReplyTo.my_contact_list);
                       contactServiceController.getPhoneContacts();
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -123,6 +118,7 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchExpectContact.value = false;
                       contactController.isSwitchEveryone.value = false;
                       contactController.isSwitchPhoneContact.value = false;
+                      contactController.isSwitchGroup.value = false;
                     } else {
                       contactController.isSwitchMyContact.value = false;
                       AppPreference.clearSharedPreferences("contactList");
@@ -138,13 +134,10 @@ class ContactPage extends StatelessWidget {
                   description: AppString.exceptContactDescription,
                   value: contactController.isSwitchExpectContact.value,
                   onChanged: (value) {
-                    if (contactController.isSwitchExpectContact.value ==
-                        false) {
+                    if (contactController.isSwitchExpectContact.value == false) {
                       contactController.isSwitchExpectContact.value = true;
-                      AppPreference.setBoolean("expectContact",
-                          value: contactController.isSwitchExpectContact.value);
-                      contactController.changeAutoReplyTo(
-                          AutoReplyTo.except_my_contact_list);
+                      AppPreference.setBoolean("expectContact", value: contactController.isSwitchExpectContact.value);
+                      contactController.changeAutoReplyTo(AutoReplyTo.except_my_contact_list);
                       // contactServiceController.getPhoneContacts();
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
@@ -155,8 +148,7 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchEveryone.value = false;
                       contactController.isSwitchGroup.value = false;
                     } else {
-                      print(
-                          "isSwitchExpectContact  4----->:${contactController.isSwitchExpectContact.value}");
+                      print("isSwitchExpectContact  4----->:${contactController.isSwitchExpectContact.value}");
                       contactController.isSwitchExpectContact.value = false;
                       AppPreference.clearSharedPreferences("expectContact");
                     }
@@ -173,10 +165,8 @@ class ContactPage extends StatelessWidget {
                   onChanged: (value) {
                     if (contactController.isSwitchPhoneContact.value == false) {
                       contactController.isSwitchPhoneContact.value = true;
-                      AppPreference.setBoolean("checkEnable",
-                          value: contactController.isSwitchPhoneContact.value);
-                      contactController.changeAutoReplyTo(
-                          AutoReplyTo.except_my_phone_contacts);
+                      AppPreference.setBoolean("checkEnable", value: contactController.isSwitchPhoneContact.value);
+                      contactController.changeAutoReplyTo(AutoReplyTo.except_my_phone_contacts);
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -196,16 +186,14 @@ class ContactPage extends StatelessWidget {
                 ),
                 _autoReplyWidget(
                   context,
-                  title: AppString.exceptMyPhoneContacts,
-                  description: AppString.exceptMyPhoneDescription,
-                  value: contactController.isSwitchPhoneContact.value,
+                  title: AppString.groupMassage,
+                  description: AppString.groupMassageDescription,
+                  value: contactController.isSwitchGroup.value,
                   onChanged: (value) {
-                    if (contactController.isSwitchPhoneContact.value == false) {
-                      contactController.isSwitchPhoneContact.value = true;
-                      AppPreference.setBoolean("checkEnable",
-                          value: contactController.isSwitchPhoneContact.value);
-                      contactController.changeAutoReplyTo(
-                          AutoReplyTo.except_my_phone_contacts);
+                    if (contactController.isSwitchGroup.value == false) {
+                      contactController.isSwitchGroup.value = true;
+                      AppPreference.setBoolean("checkEnable", value: contactController.isSwitchGroup.value);
+                      contactController.changeAutoReplyTo(AutoReplyTo.except_my_phone_contacts_group);
                       AppPreference.clearSharedPreferences("everyone");
                       AppPreference.clearSharedPreferences("contactList");
                       AppPreference.clearSharedPreferences("expectContact");
@@ -213,10 +201,10 @@ class ContactPage extends StatelessWidget {
                       contactController.isSwitchExpectContact.value = false;
                       contactController.isSwitchMyContact.value = false;
                       contactController.isSwitchEveryone.value = false;
-                      contactController.isSwitchGroup.value = false;
-                    } else {
                       contactController.isSwitchPhoneContact.value = false;
-                      AppPreference.clearSharedPreferences("phoneContact");
+                    } else {
+                      contactController.isSwitchGroup.value = false;
+                      AppPreference.clearSharedPreferences("groupContact");
                     }
                   },
                 ),
@@ -341,8 +329,7 @@ class ContactPage extends StatelessWidget {
                 if (demoController.selectedContactModel.isEmpty == true)
                   Center(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: SizeUtils.verticalBlockSize * 5),
+                      padding: EdgeInsets.symmetric(vertical: SizeUtils.verticalBlockSize * 5),
                       child: Column(
                         children: [
                           AppText(
@@ -361,8 +348,7 @@ class ContactPage extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: demoController.selectedContactModel.length,
                     itemBuilder: (context, index) {
-                      final selectedContact =
-                          demoController.selectedContactModel[index];
+                      final selectedContact = demoController.selectedContactModel[index];
                       return Padding(
                         padding: EdgeInsets.only(
                           top: SizeUtils.verticalBlockSize * 1,
@@ -382,8 +368,7 @@ class ContactPage extends StatelessWidget {
                                   ),
                                   child: Center(
                                     child: AppText(
-                                      selectedContact.displayName![0]
-                                          .toUpperCase(),
+                                      selectedContact.displayName![0].toUpperCase(),
                                       fontWeight: FontWeight.w600,
                                       color: AppColor.whiteColor,
                                     ),
@@ -393,39 +378,23 @@ class ContactPage extends StatelessWidget {
                                   width: SizeUtils.horizontalBlockSize * 5,
                                 ),
                                 AppText(
-                                  selectedContact.displayName
-                                      .toString()
-                                      .toLowerCase(),
+                                  selectedContact.displayName.toString().toLowerCase(),
                                   fontWeight: FontWeight.w400,
-                                  color: themeController.isSwitched.value
-                                      ? AppColor.whiteColor
-                                      : AppColor.textColor,
+                                  color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.textColor,
                                   fontSize: SizeUtils.fSize_14(),
                                 ),
                                 const Spacer(),
                                 InkWell(
                                   onTap: () async {
                                     try {
-                                      final int index1 =
-                                          contactServiceController.contactModel
-                                              .indexWhere(
-                                        (element) =>
-                                            element.displayName ==
-                                            contactServiceController
-                                                .selectedContactModel[index]
-                                                .displayName,
+                                      final int index1 = contactServiceController.contactModel.indexWhere(
+                                        (element) => element.displayName == contactServiceController.selectedContactModel[index].displayName,
                                       );
-                                      contactServiceController
-                                          .contactModel[index1]
-                                          .isCheck
-                                          ?.value = false;
-                                      demoController.selectedContactModel
-                                          .removeAt(index);
-                                      await contactServiceController
-                                          .contactStoreModel();
+                                      contactServiceController.contactModel[index1].isCheck?.value = false;
+                                      demoController.selectedContactModel.removeAt(index);
+                                      await contactServiceController.contactStoreModel();
                                       //      AppPreference.clearSharedPreferences('selectedContactModel');
-                                      contactServiceController.contactModel
-                                          .refresh();
+                                      contactServiceController.contactModel.refresh();
                                     } catch (e, st) {
                                       print('-------$e-------$st------');
                                     }
@@ -448,9 +417,7 @@ class ContactPage extends StatelessWidget {
                   ),
                 Obx(
                   () => SizedBox(
-                    height: isBannerLoaded.value
-                        ? SizeUtils.verticalBlockSize * 6
-                        : 0,
+                    height: isBannerLoaded.value ? SizeUtils.verticalBlockSize * 6 : 0,
                   ),
                 ),
               ],
