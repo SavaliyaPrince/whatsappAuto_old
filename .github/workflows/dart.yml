@@ -60,8 +60,8 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        channel: ${{ env.FLUTTER_CHANNEL }}
-        # flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
+        #channel: ${{ env.FLUTTER_CHANNEL }}
+         flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
     
     - name: Flutter doctor
       run: flutter doctor # this is an optional step and can be removed
