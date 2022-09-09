@@ -79,7 +79,7 @@ jobs:
         path: ${{ env.PATH_TO_AAB }}
 
     - name: Upload to Play Store
-      run: |
+      run: 
         fastlane supply --aab ${{ env.PATH_TO_AAB }} --json_key_data '${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}' --package_name '${{ env.ANDROID_PACKAGE_NAME }}' --track 'internal'
   ios:
     if: false
