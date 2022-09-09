@@ -55,6 +55,7 @@ jobs:
         base64 --decode key.jks.base64 > key.jks
         echo "Convert key.properties secret string to a file"
         echo "$KEY_PROPERTIES_FILE" >> key.properties
+        echo "$pwd"
       working-directory: 'android/'
      
     - name: Set up Flutter
