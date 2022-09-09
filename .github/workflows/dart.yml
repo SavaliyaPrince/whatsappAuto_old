@@ -15,7 +15,7 @@ env:
   FLUTTER_VERSION: '3.1.0'
   XCODE_VERSION: '13.4'
   PATH_TO_AAB: 'build/app/outputs/bundle/release/app-release.aab'
-  ANDROID_PACKAGE_NAME: 'com.daniilshumko.woeios'
+  ANDROID_PACKAGE_NAME: 'com.whatsapp_auto.app'
   PATH_TO_IPA: 'build/ios/ipa/flutter_github_actions_basics.ipa'
 
 jobs:
