@@ -30,7 +30,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        #channel: ${{ env.FLUTTER_CHANNEL }}
+         channel: ${{ env.FLUTTER_CHANNEL }}
          flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
 
     - name: Get pub dependencies
@@ -60,7 +60,7 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        #channel: ${{ env.FLUTTER_CHANNEL }}
+         channel: ${{ env.FLUTTER_CHANNEL }}
          flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
     
     - name: Flutter doctor
