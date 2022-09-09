@@ -36,10 +36,6 @@ jobs:
     - name: Get pub dependencies
       run: flutter pub get
 
-    - name: Flutter analyze
-      run: flutter analyze
-
-
   android:
     name: Android CI/CD
     needs: code-analysis-and-testing
