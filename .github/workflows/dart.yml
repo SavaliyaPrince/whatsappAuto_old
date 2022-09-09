@@ -20,7 +20,6 @@ env:
 
 jobs:
   code-analysis-and-testing:
-    if: false
     name: Code analysis and testing
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -39,9 +38,6 @@ jobs:
 
     - name: Flutter analyze
       run: flutter analyze
-
-    - name: Flutter test
-      run: flutter test
 
 
   android:
