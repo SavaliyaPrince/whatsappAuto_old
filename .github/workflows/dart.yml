@@ -11,16 +11,15 @@ on:
  # workflow_dispatch: # to manually run this workflow
 
 env:
-  FLUTTER_CHANNEL: 'stable' # 'stable', 'beta', or 'master', default to: 'stable'
-  FLUTTER_VERSION: '3.0.1'
+  FLUTTER_CHANNEL: 'beta' # 'stable', 'beta', or 'master', default to: 'stable'
+  FLUTTER_VERSION: '3.1.0'
   XCODE_VERSION: '13.4'
   PATH_TO_AAB: 'build/app/outputs/bundle/release/app-release.aab'
-  ANDROID_PACKAGE_NAME: 'com.daniilshumko.woeios'
+  ANDROID_PACKAGE_NAME: 'com.whatsapp_auto.app'
   PATH_TO_IPA: 'build/ios/ipa/flutter_github_actions_basics.ipa'
 
 jobs:
   code-analysis-and-testing:
-    if: false
     name: Code analysis and testing
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -31,21 +30,13 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        channel: ${{ env.FLUTTER_CHANNEL }}
-        # flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
+         channel: ${{ env.FLUTTER_CHANNEL }}
+         flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
 
     - name: Get pub dependencies
       run: flutter pub get
 
-    - name: Flutter analyze
-      run: flutter analyze
-
-    - name: Flutter test
-      run: flutter test
-
-
   android:
-    if: false
     name: Android CI/CD
     needs: code-analysis-and-testing
     runs-on: ubuntu-latest
@@ -60,8 +51,8 @@ jobs:
         KEY_PROPERTIES_FILE: ${{ secrets.KEY_PROPERTIES_FILE }}
       run: |
         echo "Convert key base64 string to a file"
-        echo "$KEYSTORE_FILE_BASE64" >> key.jks.base64
-        base64 --decode key.jks.base64 > key.jks
+        echo "$KEYSTORE_FILE_BASE64" >> whatsapptool.jks.base64
+        base64 --decode whatsapptool.jks.base64 > whatsapptool.jks
         echo "Convert key.properties secret string to a file"
         echo "$KEY_PROPERTIES_FILE" >> key.properties
       working-directory: 'android/'
@@ -69,15 +60,15 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        channel: ${{ env.FLUTTER_CHANNEL }}
-        # flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
+         channel: ${{ env.FLUTTER_CHANNEL }}
+         flutter-version: ${{ env.FLUTTER_VERSION }} # you can also specify exact version of flutter
     
     - name: Flutter doctor
       run: flutter doctor # this is an optional step and can be removed
     
     - name: Build AAB
       run: |
-        flutter build appbundle --release
+        flutter build appbundle --release --info
         echo "Removing signing files for extra security"
         rm android/key.*
     
@@ -91,6 +82,7 @@ jobs:
       run: |
         fastlane supply --aab ${{ env.PATH_TO_AAB }} --json_key_data '${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}' --package_name '${{ env.ANDROID_PACKAGE_NAME }}' --track 'internal'
   ios:
+    if: false
     name: iOS CI/CD
     # needs: code-analysis-and-testing
     runs-on: macos-12
