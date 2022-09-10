@@ -33,12 +33,12 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance?.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
   }
 
@@ -66,8 +66,8 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
     _permission = Permission.notification;
     final status = await _permission.isGranted;
     settingController.isNotificationCheck.value = status;
-    AppPreference.setNotification(
-        notification: settingController.isNotificationCheck.value);
+    print("status0--$status");
+    AppPreference.setNotification(notification: settingController.isNotificationCheck.value);
   }
 
   @override
@@ -77,9 +77,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
         elevation: 0.2,
-        backgroundColor: themeController.isSwitched.value
-            ? AppColor.darkThem.withOpacity(0.2)
-            : AppColor.appBarColors,
+        backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.appBarColors,
         leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
         leading: GestureDetector(
           onTap: () {
@@ -151,8 +149,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
-                    final Uri url =
-                        Uri.parse('http://144.126.254.69/whatsauto/index.html');
+                    final Uri url = Uri.parse('http://144.126.254.69/whatsauto/index.html');
 
                     _launchUrl(url);
                   },
@@ -233,8 +230,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
-                    final Uri url =
-                        Uri.parse('http://144.126.254.69/whatsauto/index.html');
+                    final Uri url = Uri.parse('http://144.126.254.69/whatsauto/index.html');
 
                     _launchUrl(url);
                   },

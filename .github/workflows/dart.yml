@@ -68,7 +68,7 @@ jobs:
     
     - name: Build AAB
       run: |
-        flutter build appbundle --release --info
+        flutter build appbundle --release --verbose
         echo "Removing signing files for extra security"
         rm android/key.*
     
@@ -156,4 +156,3 @@ jobs:
         PATH_TO_IPA: ${{ env.PATH_TO_IPA }}
       run: |
         xcrun altool --upload-app -t ios -f $PATH_TO_IPA --apiKey "$IOS_API_KEY_ID" --apiIssuer "$IOS_API_ISSUER_ID"
-        

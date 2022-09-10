@@ -179,7 +179,7 @@ WhatsReNotificationListner extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
 
-
+        android.util.Log.d("TAG~~~", "onNotificationPosted: ");
         SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         if (!prefs.getBoolean(InterceptedNotificationSharedPref.PREF_IS_CHECKED, true)) {
             return;
@@ -207,7 +207,7 @@ WhatsReNotificationListner extends NotificationListenerService {
 
 
 //        Log.d("message-=-=-=-111111=-=-=--==-" + message);
-        if(sender == null) {
+        if (sender == null) {
             return;
         }
         Log.d("TAG", "id~~>2");
@@ -235,19 +235,25 @@ WhatsReNotificationListner extends NotificationListenerService {
                     appendLog("textLine*******************" + textLine);
                     String firstUser = textLine[textLine.length - 2].toString().split(":")[0];
                     String secUser = textLine[textLine.length - 1].toString().split(":")[0];
+                    if(firstUser.equalsIgnoreCase(secUser)){
+                        secUser = textLine[textLine.length - 1].toString().split(":")[1];
+                        secUser = secUser.split(":")[0];
+                    }
+                    appendLog("User:***" + textLine[textLine.length - 1].toString() + " : " + textLine[textLine.length - 2].toString());
+                    appendLog("firstUser*******************" + firstUser + " secUser: " + secUser);
                     if (prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, null) == null) {
                         if (!firstUser.equalsIgnoreCase(secUser)) {
-                            appendLog("secUser*******************" + secUser);
-                            appendLog("firstUser*******12121212121************" + firstUser);
+                            appendLog("secUser*********" + secUser);
+                            appendLog("firstUser*******" + firstUser);
                             prefs.edit().putString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, secUser).apply();
                         }
-                        return;
+//                        return;
                     }
                     android.util.Log.d("TAG~~~", "onNotificationPosted: " + prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "") + " : " + secUser);
 //                    isReplyEnable = true;
-                    if (!prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
+                    if (prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, "").equalsIgnoreCase(secUser)) {
                         isReplyEnable = true;
-                        appendLog("----------isReplyEnable========= " + isReplyEnable);
+                        appendLog("`----------isReplyEnable=========` " + isReplyEnable);
                         String[] messageStr = message.split(":");
                         message = messageStr[messageStr.length - 1];
                         sender = messageStr[messageStr.length - 2];
@@ -368,8 +374,8 @@ WhatsReNotificationListner extends NotificationListenerService {
                 appendLog("repliedMessage---: " + repliedMessage);
                 appendLog("key----------: " + key);
 
-
                 replayNotification(sbn, bundle, repliedMessage);
+
             } else if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.myContactList)) {
                 String allContacts = prefs.getString("contactList", "");
                 Log.d("TAG", "isReplyEnable 2 allContacts: " + allContacts.length());
@@ -385,7 +391,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                     Log.d("checkAllData11--", "--" + lst.contains(sender.trim()));
 
 
-                    if(lst.contains(sender.trim())) {
+                    if (lst.contains(sender.trim())) {
 
                         String key = "botMessage-" + message.toLowerCase();
                         String repliedMessage = prefs.getString(key, "Hi");
@@ -435,7 +441,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                     Log.d("checkAllData11--", "--" + lst.contains(sender.trim()));
 
 
-                    if(!lst.contains(sender.trim())) {
+                    if (!lst.contains(sender.trim())) {
 
                         String key = "botMessage-" + message.toLowerCase();
                         String repliedMessage = prefs.getString(key, "Hi");

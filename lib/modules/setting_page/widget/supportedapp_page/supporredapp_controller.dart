@@ -50,8 +50,7 @@ class SupportedAppController extends GetxController {
 
   Future<void> getPhoneContacts() async {
     try {
-      final PermissionStatus contactsPermissionsStatus =
-          await contactsPermissions();
+      final PermissionStatus contactsPermissionsStatus = await contactsPermissions();
       if (contactsPermissionsStatus == PermissionStatus.granted) {
         const platform = MethodChannel('samples.flutter.dev/battery');
         log("contactsPermissionsStatus--$contactsPermissionsStatus");
@@ -60,10 +59,15 @@ class SupportedAppController extends GetxController {
         // whatsApp.value = isSwitchWhatsApp.value;
 
         // AppPreference.setWhatsApp(whatsApp: false);
-        platform.invokeMethod(
-          'setWhatsApp',
-          {"whatsapp": true},
-        );
+        ///
+        // platform.invokeMethod(
+        //   'setWhatsApp',
+        //   {"whatsapp": true},
+        // );
+        // platform.invokeMethod(
+        //   'setWhatsappBusiness',
+        //   {"whatsappBusiness": true},
+        // );
         log("contactsPermissionsStatus-0-$contactsPermissionsStatus");
 
         // }
@@ -76,55 +80,75 @@ class SupportedAppController extends GetxController {
         //       {"whatsapp": whatsApp.value},
         //     );
         //   }
+        whatsApp.value = isSwitchWhatsApp.value;
         isSwitchWhatsApp.value = true;
-        AppPreference.setWhatsApp(
-          whatsApp: isSwitchWhatsApp.value,
+        AppPreference.setWhatsApp(whatsApp: false);
+        platform.invokeMethod(
+          'setWhatsApp',
+          {"whatsapp": whatsApp.value},
         );
+        whatsappBusiness.value = true;
         isSwitchWhatsAppBusi.value = true;
-        AppPreference.setWhatsAppBusi(
-          whatsAppBusi: isSwitchWhatsAppBusi.value,
+        AppPreference.setWhatsAppBusi(whatsAppBusi: false);
+        platform.invokeMethod(
+          'setWhatsappBusiness',
+          {"whatsappBusiness": whatsappBusiness.value},
         );
+        facebook.value = true;
         isSwitchMessanger.value = true;
-        AppPreference.setFbMassager(
-          fbMassager: isSwitchMessanger.value,
+        AppPreference.setFbMassager(fbMassager: false);
+        platform.invokeMethod(
+          'setFacebook',
+          {"facebook": facebook.value},
         );
+        instagram.value = true;
         isSwitchInstagram.value = true;
-        AppPreference.setInstagram(
-          instagram: isSwitchInstagram.value,
+        AppPreference.setInstagram(instagram: false);
+        platform.invokeMethod(
+          'setInstagramResponse',
+          {"instagramResponse": instagram.value},
         );
+        telegram.value = true;
         isSwitchTelegram.value = true;
-        AppPreference.setTelegram(
-          telegram: isSwitchTelegram.value,
+        AppPreference.setTelegram(telegram: false);
+        platform.invokeMethod(
+          'setTelegram',
+          {"telegram": telegram.value},
         );
+        twitter.value = true;
         isSwitchTwitter.value = true;
-        AppPreference.setTwitter(
-          twitter: isSwitchTwitter.value,
+        AppPreference.setTwitter(twitter: false);
+        platform.invokeMethod(
+          'setTwitter',
+          {"twitter": twitter.value},
         );
       } else {
-        isSwitchWhatsApp.value = false;
-        AppPreference.setWhatsApp(
-          whatsApp: isSwitchWhatsApp.value,
-        );
-        isSwitchWhatsAppBusi.value = false;
-        AppPreference.setWhatsAppBusi(
-          whatsAppBusi: isSwitchWhatsAppBusi.value,
-        );
-        isSwitchMessanger.value = false;
-        AppPreference.setFbMassager(
-          fbMassager: isSwitchMessanger.value,
-        );
-        isSwitchInstagram.value = false;
-        AppPreference.setInstagram(
-          instagram: isSwitchInstagram.value,
-        );
-        isSwitchTelegram.value = false;
-        AppPreference.setTelegram(
-          telegram: isSwitchTelegram.value,
-        );
-        isSwitchTwitter.value = false;
-        AppPreference.setTwitter(
-          twitter: isSwitchTwitter.value,
-        );
+        // isSwitchWhatsApp.value = false;
+        // whatsApp.value = false;
+        // AppPreference.setWhatsApp(whatsApp: true);
+        //  platform.invokeMethod(
+        //   'setWhatsApp',
+        //   {"whatsapp": whatsApp.value},
+        // );
+        // // AppPreference.setWhatsAppBusi(
+        // //   whatsAppBusi: isSwitchWhatsAppBusi.value,
+        // // );
+        // isSwitchMessanger.value = false;
+        // // AppPreference.setFbMassager(
+        // //   fbMassager: isSwitchMessanger.value,
+        // // );
+        // isSwitchInstagram.value = false;
+        // // AppPreference.setInstagram(
+        // //   instagram: isSwitchInstagram.value,
+        // // );
+        // isSwitchTelegram.value = false;
+        // // AppPreference.setTelegram(
+        // //   telegram: isSwitchTelegram.value,
+        // // );
+        // isSwitchTwitter.value = false;
+        // // AppPreference.setTwitter(
+        // //   twitter: isSwitchTwitter.value,
+        // // );
       }
     } catch (e, st) {
       print('------e----$e----+----st-------$st-----');
@@ -149,16 +173,13 @@ class SupportedAppController extends GetxController {
 
     String batteryLevel;
     try {
-      final result =
-          await platform.invokeMethod('checkNotificationServiceEnabled');
+      final result = await platform.invokeMethod('checkNotificationServiceEnabled');
 
       if (result == false) {
         Get.dialog(
           SimpleDialog(
             elevation: 0,
-            backgroundColor: themeController.isSwitched.value
-                ? ColorCollection.backGroundColorDark
-                : AppColor.primaryColor,
+            backgroundColor: themeController.isSwitched.value ? ColorCollection.backGroundColorDark : AppColor.primaryColor,
             // backgroundColor: AppColor.primaryColor,
             title: Text(
               "Do you want to activate whatsapp auto response service?",
@@ -189,8 +210,7 @@ class SupportedAppController extends GetxController {
                       style: ElevatedButton.styleFrom(
                         primary: AppColor.primaryColor,
                       ),
-                      child: const AppText('Activate',
-                          color: AppColor.whiteColor)),
+                      child: const AppText('Activate', color: AppColor.whiteColor)),
                   const SizedBox(width: 10),
                 ],
               ),

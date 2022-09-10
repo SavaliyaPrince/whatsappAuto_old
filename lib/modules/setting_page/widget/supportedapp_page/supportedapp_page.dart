@@ -22,9 +22,7 @@ class SupportedAppPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorRes.backgroundColor(context),
       appBar: AppBar(
-        backgroundColor: themeController.isSwitched.value
-            ? AppColor.darkThem.withOpacity(0.2)
-            : AppColor.whiteColor,
+        backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
         leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
         elevation: 0.5,
         leading: GestureDetector(
@@ -37,18 +35,14 @@ class SupportedAppPage extends StatelessWidget {
             ),
             child: Image.asset(
               AppIcons.backIcon,
-              color: themeController.isSwitched.value
-                  ? AppColor.whiteColor
-                  : AppColor.backIconColor,
+              color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
             ),
           ),
         ),
         title: AppText(
           AppString.supportedApps,
           fontWeight: FontWeight.w600,
-          color: themeController.isSwitched.value
-              ? AppColor.whiteColor
-              : AppColor.backIconColor,
+          color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
         ),
       ),
       body: SingleChildScrollView(
@@ -88,25 +82,24 @@ class SupportedAppPage extends StatelessWidget {
                   onChanged: (value) async {
                     print("value---$value");
 
-                    // supportedAppController.isSwitchWhatsApp.value = value;
-                    // AppPreference.setWhatsApp(
-                    //   whatsApp: supportedAppController.isSwitchWhatsApp.value,
-                    // );
-                    // print("value-1--$value");
+                    supportedAppController.isSwitchWhatsApp.value = value;
+                    AppPreference.setWhatsApp(
+                      whatsApp: supportedAppController.isSwitchWhatsApp.value,
+                    );
+                    print("supportedAppController.isSwitchWhatsApp.value ---- > ${supportedAppController.isSwitchWhatsApp.value}");
+                    print("value-1--$value");
 
                     if (supportedAppController.isSwitchWhatsApp.value == true) {
                       print("------12312312321312-3--");
                     }
-                    const platform =
-                        MethodChannel('samples.flutter.dev/battery');
+                    print("supportedAppController.isSwitchWhatsApp.value ---- > ${supportedAppController.isSwitchWhatsApp.value}");
+                    const platform = MethodChannel('samples.flutter.dev/battery');
 
-                    if (supportedAppController.isSwitchWhatsApp.value ==
-                        false) {
+                    if (supportedAppController.isSwitchWhatsApp.value == false) {
                       // supportedAppController.getPhoneContacts();
-                      supportedAppController.whatsApp.value =
-                          supportedAppController.isSwitchWhatsApp.value;
-
-                      // AppPreference.setWhatsApp(whatsApp: false);
+                      supportedAppController.whatsApp.value = supportedAppController.isSwitchWhatsApp.value;
+                      print("supportedAppController.whatsApp.value ---- > ${supportedAppController.whatsApp.value}");
+                      AppPreference.setWhatsApp(whatsApp: false);
                       platform.invokeMethod(
                         'setWhatsApp',
                         {"whatsapp": supportedAppController.whatsApp.value},
@@ -114,6 +107,7 @@ class SupportedAppPage extends StatelessWidget {
                     } else {
                       // supportedAppController.getPhoneContacts();
                       supportedAppController.whatsApp.value = value;
+                      print("supportedAppController.whatsApp.value ---- > ${supportedAppController.whatsApp.value}");
                       AppPreference.setWhatsApp(whatsApp: true);
                       await platform.invokeMethod(
                         'setWhatsApp',
@@ -133,35 +127,26 @@ class SupportedAppPage extends StatelessWidget {
                   text: AppString.whatsappBusiness,
                   value: supportedAppController.isSwitchWhatsAppBusi.value,
                   onChanged: (value) {
-                    // supportedAppController.isSwitchWhatsAppBusi.value = value;
-                    // AppPreference.setWhatsAppBusi(
-                    //   whatsAppBusi:
-                    //       supportedAppController.isSwitchWhatsAppBusi.value,
-                    // );
-                    const platform =
-                        MethodChannel('samples.flutter.dev/battery');
+                    supportedAppController.isSwitchWhatsAppBusi.value = value;
+                    AppPreference.setWhatsAppBusi(
+                      whatsAppBusi: supportedAppController.isSwitchWhatsAppBusi.value,
+                    );
+                    const platform = MethodChannel('samples.flutter.dev/battery');
 
-                    if (supportedAppController.isSwitchWhatsAppBusi.value ==
-                        false) {
+                    if (supportedAppController.isSwitchWhatsAppBusi.value == false) {
                       supportedAppController.whatsappBusiness.value = value;
 
                       AppPreference.setWhatsAppBusi(whatsAppBusi: false);
                       platform.invokeMethod(
                         'setWhatsappBusiness',
-                        {
-                          "whatsappBusiness":
-                              supportedAppController.whatsappBusiness.value
-                        },
+                        {"whatsappBusiness": supportedAppController.whatsappBusiness.value},
                       );
                     } else {
                       supportedAppController.whatsappBusiness.value = value;
                       AppPreference.setWhatsAppBusi(whatsAppBusi: true);
                       platform.invokeMethod(
                         'setWhatsappBusiness',
-                        {
-                          "whatsappBusiness":
-                              supportedAppController.whatsappBusiness.value
-                        },
+                        {"whatsappBusiness": supportedAppController.whatsappBusiness.value},
                       );
                     }
                   },
@@ -177,15 +162,12 @@ class SupportedAppPage extends StatelessWidget {
                   text: AppString.messenger,
                   value: supportedAppController.isSwitchMessanger.value,
                   onChanged: (value) {
-                    // supportedAppController.isSwitchMessanger.value = value;
-                    // AppPreference.setFbMassager(
-                    //   fbMassager:
-                    //       supportedAppController.isSwitchMessanger.value,
-                    // );
-                    const platform =
-                        MethodChannel('samples.flutter.dev/battery');
-                    if (supportedAppController.isSwitchMessanger.value ==
-                        false) {
+                    supportedAppController.isSwitchMessanger.value = value;
+                    AppPreference.setFbMassager(
+                      fbMassager: supportedAppController.isSwitchMessanger.value,
+                    );
+                    const platform = MethodChannel('samples.flutter.dev/battery');
+                    if (supportedAppController.isSwitchMessanger.value == false) {
                       supportedAppController.facebook.value = value;
                       AppPreference.setFbMassager(fbMassager: false);
                       platform.invokeMethod(
@@ -213,32 +195,24 @@ class SupportedAppPage extends StatelessWidget {
                   text: AppString.instagram,
                   value: supportedAppController.isSwitchInstagram.value,
                   onChanged: (value) {
-                    // supportedAppController.isSwitchInstagram.value = value;
-                    // AppPreference.setInstagram(
-                    //   instagram: supportedAppController.isSwitchInstagram.value,
-                    // );
-                    const platform =
-                        MethodChannel('samples.flutter.dev/battery');
-                    if (supportedAppController.isSwitchInstagram.value ==
-                        false) {
+                    supportedAppController.isSwitchInstagram.value = value;
+                    AppPreference.setInstagram(
+                      instagram: supportedAppController.isSwitchInstagram.value,
+                    );
+                    const platform = MethodChannel('samples.flutter.dev/battery');
+                    if (supportedAppController.isSwitchInstagram.value == false) {
                       supportedAppController.instagram.value = value;
                       AppPreference.setInstagram(instagram: false);
                       platform.invokeMethod(
                         'setInstagramResponse',
-                        {
-                          "instagramResponse":
-                              supportedAppController.instagram.value
-                        },
+                        {"instagramResponse": supportedAppController.instagram.value},
                       );
                     } else {
                       supportedAppController.instagram.value = value;
                       AppPreference.setInstagram(instagram: true);
                       platform.invokeMethod(
                         'setInstagramResponse',
-                        {
-                          "instagramResponse":
-                              supportedAppController.instagram.value
-                        },
+                        {"instagramResponse": supportedAppController.instagram.value},
                       );
                     }
                   },
@@ -254,15 +228,13 @@ class SupportedAppPage extends StatelessWidget {
                   text: AppString.telegram,
                   value: supportedAppController.isSwitchTelegram.value,
                   onChanged: (value) {
-                    // supportedAppController.isSwitchTelegram.value = value;
-                    // AppPreference.setTelegram(
-                    //   telegram: supportedAppController.isSwitchTelegram.value,
-                    // );
-                    const platform =
-                        MethodChannel('samples.flutter.dev/battery');
+                    supportedAppController.isSwitchTelegram.value = value;
+                    AppPreference.setTelegram(
+                      telegram: supportedAppController.isSwitchTelegram.value,
+                    );
+                    const platform = MethodChannel('samples.flutter.dev/battery');
 
-                    if (supportedAppController.isSwitchTelegram.value ==
-                        false) {
+                    if (supportedAppController.isSwitchTelegram.value == false) {
                       supportedAppController.telegram.value = value;
 
                       AppPreference.setTelegram(telegram: false);
@@ -292,12 +264,11 @@ class SupportedAppPage extends StatelessWidget {
                   text: AppString.twitter,
                   value: supportedAppController.isSwitchTwitter.value,
                   onChanged: (value) {
-                    // supportedAppController.isSwitchTwitter.value = value;
-                    // AppPreference.setTwitter(
-                    //   twitter: supportedAppController.isSwitchTwitter.value,
-                    // );
-                    const platform =
-                        MethodChannel('samples.flutter.dev/battery');
+                    supportedAppController.isSwitchTwitter.value = value;
+                    AppPreference.setTwitter(
+                      twitter: supportedAppController.isSwitchTwitter.value,
+                    );
+                    const platform = MethodChannel('samples.flutter.dev/battery');
 
                     if (supportedAppController.isSwitchTwitter.value == false) {
                       supportedAppController.twitter.value = value;
@@ -321,9 +292,7 @@ class SupportedAppPage extends StatelessWidget {
               ),
               Obx(
                 () => SizedBox(
-                  height: isBannerLoaded.value
-                      ? SizeUtils.verticalBlockSize * 8
-                      : 0,
+                  height: isBannerLoaded.value ? SizeUtils.verticalBlockSize * 8 : 0,
                 ),
               ),
             ],
@@ -350,9 +319,7 @@ class SupportedAppPage extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: SizeUtils.horizontalBlockSize * 2,
-            vertical: SizeUtils.verticalBlockSize * 1.1),
+        padding: EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 2, vertical: SizeUtils.verticalBlockSize * 1.1),
         child: Row(
           children: [
             SizedBox(

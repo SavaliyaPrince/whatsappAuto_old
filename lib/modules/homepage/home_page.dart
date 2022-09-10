@@ -29,12 +29,10 @@ class HomePageScreen extends StatefulWidget {
   State<HomePageScreen> createState() => _HomePageScreenState();
 }
 
-class _HomePageScreenState extends State<HomePageScreen>
-    with WidgetsBindingObserver {
+class _HomePageScreenState extends State<HomePageScreen> with WidgetsBindingObserver {
   final ThemeController themeController = Get.find();
   final HomePageController homePageController = Get.put(HomePageController());
-  final SupportedAppController supportedAppController =
-      Get.put(SupportedAppController())..getWhatsAuto();
+  final SupportedAppController supportedAppController = Get.put(SupportedAppController())..getWhatsAuto();
   final SettingController settingController = Get.put(SettingController());
   final InAppReview inAppReview = InAppReview.instance;
   bool isPaused = false;
@@ -45,10 +43,8 @@ class _HomePageScreenState extends State<HomePageScreen>
     supportedAppController.getPhoneContacts();
     super.initState();
     FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.home);
-    WidgetsBinding.instance.addObserver(this);
-    FirebaseMessaging.instance
-        .getInitialMessage()
-        .then((RemoteMessage? message) {
+    WidgetsBinding.instance?.addObserver(this);
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
       log("home Screen test");
       if (message != null) {
         // if (message.data["page"] == "example") {
@@ -62,7 +58,7 @@ class _HomePageScreenState extends State<HomePageScreen>
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance?.removeObserver(this);
   }
 
   @override
@@ -87,19 +83,13 @@ class _HomePageScreenState extends State<HomePageScreen>
           exit(0);
         },
         child: Scaffold(
-          backgroundColor: themeController.isSwitched.value
-              ? ColorCollection.backGroundColorDark
-              : AppColor.homeScreen,
+          backgroundColor: themeController.isSwitched.value ? ColorCollection.backGroundColorDark : AppColor.homeScreen,
           appBar: AppBar(
-            elevation: 0.5,
-
-            backgroundColor: themeController.isSwitched.value
-                ? AppColor.darkThem.withOpacity(0.2)
-                : AppColor.appBarColors,
+            elevation: 0.2,
+            backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.appBarColors,
             automaticallyImplyLeading: false,
             title: Padding(
-              padding:
-                  EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 1.2),
+              padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 1.2),
               child: AppText(
                 AppString.whatsAuto,
                 color: AppColor.whiteColor,
@@ -141,8 +131,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.testReplySubTile,
                             image: AssetsPath.invite,
                             onTap: () {
-                              settingController.shareNoteLink(
-                                  title: AppString.InviteFriends);
+                              settingController.shareNoteLink(title: AppString.InviteFriends);
                             },
                           ),
                           SizedBox(
@@ -170,8 +159,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                               if (await inAppReview.isAvailable()) {
                                 inAppReview.requestReview();
                               } else {
-                                AppToast.toastMessage(
-                                    "app review not available at time.");
+                                AppToast.toastMessage("app review not available at time.");
                               }
                             },
                           ),
@@ -231,8 +219,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             subtitle: AppString.documentSubTile,
                             image: AssetsPath.invite,
                             onTap: () {
-                              settingController.shareNoteLink(
-                                  title: AppString.InviteFriends);
+                              settingController.shareNoteLink(title: AppString.InviteFriends);
                             },
                           ),
                           SizedBox(
@@ -263,8 +250,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                               if (await inAppReview.isAvailable()) {
                                 inAppReview.requestReview();
                               } else {
-                                AppToast.toastMessage(
-                                    "app review not available at time.");
+                                AppToast.toastMessage("app review not available at time.");
                               }
                             },
                           ),
@@ -295,11 +281,8 @@ class _HomePageScreenState extends State<HomePageScreen>
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: themeController.isSwitched.value
-              ? AppColor.homeScreen.withOpacity(0.1)
-              : AppColor.whiteColor,
-          borderRadius:
-              BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
+          color: themeController.isSwitched.value ? AppColor.homeScreen.withOpacity(0.1) : AppColor.whiteColor,
+          borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
