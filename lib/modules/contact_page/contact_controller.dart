@@ -3,16 +3,10 @@ import 'package:get/get.dart';
 import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/modules/contact_page/contact_list_page/contact_service_controller.dart';
 
-enum AutoReplyTo {
-  everyone,
-  my_contact_list,
-  except_my_contact_list,
-  except_my_phone_contacts
-}
+enum AutoReplyTo { everyone, my_contact_list, except_my_contact_list, except_my_phone_contacts, except_my_phone_contacts_group }
 
 class ContactController extends GetxController {
-  final ContactServiceController contactServiceController =
-      Get.put(ContactServiceController());
+  final ContactServiceController contactServiceController = Get.put(ContactServiceController());
   RxBool isSwitchEveryone = false.obs;
   RxBool isSwitchMyContact = false.obs;
   RxBool isSwitchExpectContact = false.obs;
