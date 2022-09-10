@@ -33,12 +33,12 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -124,7 +124,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     AppString.Notification,
                     color: ColorRes.textColor(context),
                     fontWeight: FontWeight.w600,
-                    fontSize: SizeUtils.fSize_24(),
+                    fontSize: SizeUtils.fSize_16(),
                   ),
                   trailing: Obx(
                     () => Switch(

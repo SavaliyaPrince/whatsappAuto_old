@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     AppOpenAdManager.loadAd();
     InterstitalAd.createInterstitialAd();
-    startTimeOut();
+    // startTimeOut();
   }
 
   @override
@@ -31,24 +32,45 @@ class _SplashScreenState extends State<SplashScreen> {
     SizeUtils().init(context);
     return Stack(
       children: [
-        Container(
-          color: AppColor.primaryColor,
-          // decoration:  const BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage(AppString.splashScreen),
-          //     fit: BoxFit.fill,
-          //   ),
-          // ),
-          child: Center(
-            child: SizedBox(
-              width: SizeUtils.horizontalBlockSize * 37,
-              child: Image.asset(
-                AssetsPath.appLogoNew,
-                fit: BoxFit.cover,
+        if(Platform.isIOS)
+          Container(
+            color: AppColor.primaryColor,
+            // decoration:  const BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage(AppString.splashScreen),
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+            child: Center(
+              child: SizedBox(
+                width: SizeUtils.horizontalBlockSize * 27,
+                child: Image.asset(
+                  AssetsPath.whatsappLogo,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-        ),
+        if(Platform.isAndroid)
+          Container(
+            color: AppColor.primaryColor,
+            // decoration:  const BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage(AppString.splashScreen),
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+            child: Center(
+              child: SizedBox(
+                width: SizeUtils.horizontalBlockSize * 37,
+                child: Image.asset(
+                  AssetsPath.appLogoNew,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+
       ],
     );
   }
