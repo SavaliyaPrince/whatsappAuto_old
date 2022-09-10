@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -127,7 +126,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     AppString.Notification,
                     color: ColorRes.textColor(context),
                     fontWeight: FontWeight.w600,
-                    fontSize: SizeUtils.fSize_14(),
+                    fontSize: SizeUtils.fSize_24(),
                   ),
                   trailing: Obx(
                     () => Switch(
@@ -270,6 +269,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
     return GestureDetector(
       onTap: onTap,
       child: ListTile(
+        minVerticalPadding: SizeUtils.verticalBlockSize * 1.8,
         horizontalTitleGap: SizeUtils.horizontalBlockSize * 1,
         visualDensity: const VisualDensity(vertical: -3),
         leading: Image.asset(
@@ -280,7 +280,8 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
         title: Text(
           text ?? '',
           style: TextStyle(
-            fontSize: SizeUtils.fSize_14(),
+            letterSpacing: 0.5,
+            fontSize: SizeUtils.fSize_15(),
             color: ColorRes.textColor(context),
             fontWeight: FontWeight.w600,
             fontFamily: AppString.fonts,

@@ -52,7 +52,80 @@ class SupportedAppController extends GetxController {
     try {
       final PermissionStatus contactsPermissionsStatus =
           await contactsPermissions();
-      if (contactsPermissionsStatus == PermissionStatus.granted) {}
+      if (contactsPermissionsStatus == PermissionStatus.granted) {
+        const platform = MethodChannel('samples.flutter.dev/battery');
+        log("contactsPermissionsStatus--$contactsPermissionsStatus");
+        // if (isSwitchWhatsApp.value == false) {
+        // supportedAppController.getPhoneContacts();
+        // whatsApp.value = isSwitchWhatsApp.value;
+
+        // AppPreference.setWhatsApp(whatsApp: false);
+        platform.invokeMethod(
+          'setWhatsApp',
+          {"whatsapp": true},
+        );
+        log("contactsPermissionsStatus-0-$contactsPermissionsStatus");
+
+        // }
+        // else {
+        //     // supportedAppController.getPhoneContacts();
+        //     // supportedAppController.whatsApp.value = value;
+        //     AppPreference.setWhatsApp(whatsApp: true);
+        //     await platform.invokeMethod(
+        //       'setWhatsApp',
+        //       {"whatsapp": whatsApp.value},
+        //     );
+        //   }
+        isSwitchWhatsApp.value = true;
+        AppPreference.setWhatsApp(
+          whatsApp: isSwitchWhatsApp.value,
+        );
+        isSwitchWhatsAppBusi.value = true;
+        AppPreference.setWhatsAppBusi(
+          whatsAppBusi: isSwitchWhatsAppBusi.value,
+        );
+        isSwitchMessanger.value = true;
+        AppPreference.setFbMassager(
+          fbMassager: isSwitchMessanger.value,
+        );
+        isSwitchInstagram.value = true;
+        AppPreference.setInstagram(
+          instagram: isSwitchInstagram.value,
+        );
+        isSwitchTelegram.value = true;
+        AppPreference.setTelegram(
+          telegram: isSwitchTelegram.value,
+        );
+        isSwitchTwitter.value = true;
+        AppPreference.setTwitter(
+          twitter: isSwitchTwitter.value,
+        );
+      } else {
+        isSwitchWhatsApp.value = false;
+        AppPreference.setWhatsApp(
+          whatsApp: isSwitchWhatsApp.value,
+        );
+        isSwitchWhatsAppBusi.value = false;
+        AppPreference.setWhatsAppBusi(
+          whatsAppBusi: isSwitchWhatsAppBusi.value,
+        );
+        isSwitchMessanger.value = false;
+        AppPreference.setFbMassager(
+          fbMassager: isSwitchMessanger.value,
+        );
+        isSwitchInstagram.value = false;
+        AppPreference.setInstagram(
+          instagram: isSwitchInstagram.value,
+        );
+        isSwitchTelegram.value = false;
+        AppPreference.setTelegram(
+          telegram: isSwitchTelegram.value,
+        );
+        isSwitchTwitter.value = false;
+        AppPreference.setTwitter(
+          twitter: isSwitchTwitter.value,
+        );
+      }
     } catch (e, st) {
       print('------e----$e----+----st-------$st-----');
     }

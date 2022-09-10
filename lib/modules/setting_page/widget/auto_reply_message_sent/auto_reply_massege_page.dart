@@ -132,7 +132,7 @@ class AutoReply extends StatelessWidget {
                           replyMassageItem(
                             context,
                             AppIcons.fbMessenger,
-                            AppString.massanger,
+                            AppString.messenger,
                             "${AppString.massageSent} ${themeController.fbMassangerMassageSent.value == 0 ? 0 : themeController.fbMassangerMassageSent.value}",
                             colorText:
                                 // ignore: avoid_bool_literals_in_conditional_expressions
