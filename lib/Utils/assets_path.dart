@@ -1,7 +1,7 @@
 class AssetsPath {
   static const image = "assets/images/";
   static const appLogo = "${image}applogo.png";
-  static const appLogoNew = "${image}applogo_new.png";
+  static const appLogoNew = "${image}appIcon.png";
   static const notification = "${image}notification.png";
   static const star = "${image}star.png";
   static const invite = "${image}invite.png";
