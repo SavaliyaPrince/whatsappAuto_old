@@ -49,7 +49,7 @@ jobs:
       env:
         KEYSTORE_FILE_BASE64: ${{ secrets.KEYSTORE_FILE_BASE64 }}
         KEY_PROPERTIES_FILE: ${{ secrets.KEY_PROPERTIES_FILE }}
-      run: |
+      run: 
         echo "Convert key base64 string to a file"
         echo "$KEYSTORE_FILE_BASE64" >> key.jks.base64
         base64 --decode key.jks.base64 > key.jks
