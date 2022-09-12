@@ -68,7 +68,7 @@ jobs:
     
     - name: Build AAB
       run: |
-        flutter build appbundle --release
+        flutter build appbundle --release --verbose
         echo "Removing signing files for extra security"
         rm android/key.*
     
