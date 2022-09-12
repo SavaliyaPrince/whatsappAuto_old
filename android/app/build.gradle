@@ -23,10 +23,10 @@ if (flutterVersionName == null) {
 
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('android/key.properties')
-if (keystorePropertiesFile.exists()) {
+//if (keystorePropertiesFile.exists()) {
     project.logger.lifecycle('~~~>file exits')
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-}
+//}
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
