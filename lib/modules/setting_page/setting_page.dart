@@ -46,17 +46,18 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
     switch (state) {
       case AppLifecycleState.resumed:
-        log("app in resumed");
+        log("app is 0 ${AppLifecycleState.resumed}");
         await grantedPermission();
         break;
       case AppLifecycleState.inactive:
+        await grantedPermission();
         log("app in inactive"); //app in background
         break;
       case AppLifecycleState.paused:
-        log("app in paused"); //app in background
+        log("app is 0 ${AppLifecycleState.paused}");
         break;
       case AppLifecycleState.detached:
-        log("app in detached"); //app remove from background
+        log("app is 0 ${AppLifecycleState.detached}");
         break;
     }
   }
@@ -123,7 +124,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     AppString.Notification,
                     color: ColorRes.textColor(context),
                     fontWeight: FontWeight.w600,
-                    fontSize: SizeUtils.fSize_24(),
+                    fontSize: SizeUtils.fSize_16(),
                   ),
                   trailing: Obx(
                     () => Switch(
@@ -207,7 +208,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                     fontSize: SizeUtils.fSize_14(),
                   ),
                   trailing: Obx(
-                    () => Switch(
+                        () => Switch(
                       activeColor: AppColor.primaryColor,
                       value: settingController.isNotificationCheck.value,
                       onChanged: (value) async {
@@ -255,12 +256,12 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
   }
 
   Widget _settingItem(
-    BuildContext context,
-    String? image,
-    String? text, {
-    GestureTapCallback? onTap,
-    double? width,
-  }) {
+      BuildContext context,
+      String? image,
+      String? text, {
+        GestureTapCallback? onTap,
+        double? width,
+      }) {
     return GestureDetector(
       onTap: onTap,
       child: ListTile(

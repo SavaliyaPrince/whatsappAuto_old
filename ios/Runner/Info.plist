@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Whatsapp Auto</string>
+	<string>Direct Whatsapp Messanger</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -33,9 +33,13 @@
 	<key>NSLocationUsageDescription</key>
 	<string>Location use</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location use</string>
+	<string>Location permission is required send your current location to other users via whatsapp.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
