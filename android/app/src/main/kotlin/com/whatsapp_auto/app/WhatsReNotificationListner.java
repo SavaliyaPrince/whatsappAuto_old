@@ -736,6 +736,22 @@ WhatsReNotificationListner extends NotificationListenerService {
                 prefs.edit().putInt("messageCount", messageCount).apply();*/
 
                 pendingIntent.send(this, 0, intent);
+////////////
+//                String sender = null;
+//                try {
+//                    sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                appendLog("-----" + sender);
+//                Intent sendIntent = new Intent("android.intent.action.MAIN");
+//                sendIntent.putExtra("jid", sender + "@s.whatsapp.net");
+//                sendIntent.putExtra(Intent.EXTRA_TEXT, messages);
+//                sendIntent.setAction(Intent.ACTION_SEND);
+//                sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                sendIntent.setPackage("com.whatsapp.w4b");
+//                sendIntent.setType("text/plain");
+//                startActivity(sendIntent);
 
             } catch (PendingIntent.CanceledException e2) {
                 e2.printStackTrace();

@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_auto/Utils/assets_path.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/navigation.dart';
 import 'package:whatsapp_auto/Utils/navigation_utils/routes.dart';
 import 'package:whatsapp_auto/Utils/size_utils.dart';
-import 'package:whatsapp_auto/helper/shared_preference.dart';
 import 'package:whatsapp_auto/helper/toast_helper.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/create_reply_controller.dart';
 import 'package:whatsapp_auto/modules/create_reply_page/datasources/create_reply_model.dart';
@@ -38,17 +34,14 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
         backgroundColor: ColorRes.backgroundColor(context),
         appBar: AppBar(
           elevation: 0.5,
-          backgroundColor: themeController.isSwitched.value
-              ? AppColor.darkThem.withOpacity(0.2)
-              : AppColor.whiteColor,
+          backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
           leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
           leading: GestureDetector(
             onTap: () {
               Navigation.pop();
             },
             child: Padding(
-              padding:
-                  EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 4.2),
+              padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 4.2),
               child: Image.asset(
                 AppIcons.backIcon,
                 color: ColorRes.appBarBackground(context),
@@ -63,9 +56,7 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: SizeUtils.horizontalBlockSize * 5,
-              vertical: SizeUtils.verticalBlockSize * 3),
+          padding: EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 5, vertical: SizeUtils.verticalBlockSize * 3),
           child: Form(
             key: createReplyKey,
             child: Column(
@@ -83,9 +74,7 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                 AppTextField(
                   controller: _createReplyController.inComingKeywordController,
                   hintText: AppString.incomingKeyword,
-                  contentPadding: EdgeInsets.symmetric(
-                      vertical: SizeUtils.verticalBlockSize * 0.5,
-                      horizontal: SizeUtils.horizontalBlockSize * 4),
+                  contentPadding: EdgeInsets.symmetric(vertical: SizeUtils.verticalBlockSize * 0.5, horizontal: SizeUtils.horizontalBlockSize * 4),
                 ),
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 2,
@@ -97,37 +86,27 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
                 const Spacer(),
                 createButton(
                   onTap: () {
-                    final CreateReplyModel createReplyModel =
-                        CreateReplyModel();
-                    if (_createReplyController
-                            .inComingKeywordController.text.isEmpty &&
-                        _createReplyController
-                            .replyMassageController.text.isEmpty) {
+                    final CreateReplyModel createReplyModel = CreateReplyModel();
+                    if (_createReplyController.inComingKeywordController.text.isEmpty && _createReplyController.replyMassageController.text.isEmpty) {
                       AppToast.toastMessage(
                         AppString.invalidArgument,
                       );
-                    } else if (_createReplyController
-                            .replyMassageController.text.isEmpty &&
-                        _createReplyController
-                            .inComingKeywordController.text.isNotEmpty) {
+                    } else if (_createReplyController.replyMassageController.text.isEmpty &&
+                        _createReplyController.inComingKeywordController.text.isNotEmpty) {
                       AppToast.toastMessage(
                         AppString.enterReplyMassage,
                       );
-                    } else if (_createReplyController
-                            .inComingKeywordController.text.isEmpty &&
-                        _createReplyController
-                            .replyMassageController.text.isNotEmpty) {
+                    } else if (_createReplyController.inComingKeywordController.text.isEmpty &&
+                        _createReplyController.replyMassageController.text.isNotEmpty) {
                       AppToast.toastMessage(
                         AppString.enterInComingKeyword,
                       );
                     } else {
-                      createReplyModel.inComingKeyword =
-                          _createReplyController.inComingKeywordController.text;
-                      createReplyModel.replyMassage =
-                          _createReplyController.replyMassageController.text;
+                      createReplyModel.inComingKeyword = _createReplyController.inComingKeywordController.text;
+                      createReplyModel.replyMassage = _createReplyController.replyMassageController.text;
                       createReplyModel.time = DateTime.now();
                       _createReplyController.createModal.add(createReplyModel);
-                      saveMethode();
+                      _createReplyController.saveMethode();
                       // setState(() {});
                       Navigation.pushNamed(Routes.createReply);
                     }
@@ -140,28 +119,5 @@ class _CreateCustomReplyState extends State<CreateCustomReply> {
         ),
       ),
     );
-  }
-
-  void saveMethode() {
-    AppPreference.setString(
-        "CreateReplyModel", json.encode(_createReplyController.createModal));
-    final Iterable l = json.decode(AppPreference.getString("CreateReplyModel"));
-    final List<CreateReplyModel> posts = List<CreateReplyModel>.from(
-        l.map((model) => CreateReplyModel.fromJson(model)));
-    _createReplyController.createModal.clear();
-    _createReplyController.createModal.addAll(posts);
-
-    const platform = MethodChannel('samples.flutter.dev/battery');
-
-    platform.invokeMethod('addNewMessage', {
-      "message": _createReplyController.inComingKeywordController.text
-          .toLowerCase()
-          .trim(),
-      "replyMessage": _createReplyController.replyMassageController.text.trim(),
-    });
-    print(
-        "message---------->>>>>>>> ${_createReplyController.inComingKeywordController.text}");
-    print(
-        "replyMessage---------->>>>>>>> ${_createReplyController.replyMassageController.text.trim()}");
   }
 }
