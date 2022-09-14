@@ -291,6 +291,31 @@ class MainActivity : FlutterActivity() {
                 Log.d("tag", "newCreatedMessage === >>>> " + botMessage)
             }
 
+            ///
+
+//            if (call.method == "addNewMessageReplay") {
+//                val message = call.argument<String>("message");
+//                Log.d("tag", "addNewMessageReplay 111111=== >>>> " + message)
+//
+//                val intent = Intent(this, WhatsReNotificationListner::class.java)
+//                Log.d("tag", "language === >>>>111 ")
+//
+//                intent.action = "START_FOREGROUND_REMOVE"
+//                Log.d("tag", "language === >>>>222")
+//
+//                startForegroundService(intent)
+//
+//                val replyMessage = call.argument<String>("replyMessageAuto");
+//                Log.d("tag", "addNewMessageReplay 222222=== >>>> " + replyMessage)
+//
+//                val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+//                editor.putString("botMessage----" + message, replyMessage)
+//                editor.apply()
+//                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+//                var botMessage = get.getString("botMessage-" + message, "")
+//                Log.d("tag", "addNewMessageReplay === >>>> " + botMessage)
+//            }
+
             if (call.method == "getMessageCount") {
 
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
