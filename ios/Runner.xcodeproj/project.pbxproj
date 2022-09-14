@@ -388,13 +388,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<<<< Temporary merge branch 1
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.whatsappAuto;
-=========
+
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.whatsapp.auto.app;
->>>>>>>>> Temporary merge branch 2
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -526,13 +523,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<<<< Temporary merge branch 1
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.whatsappAuto;
-=========
+
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.whatsapp.auto.app;
->>>>>>>>> Temporary merge branch 2
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -558,13 +552,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<<<< Temporary merge branch 1
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.whatsappAuto;
-=========
+
 				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.whatsapp.auto.app;
->>>>>>>>> Temporary merge branch 2
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
