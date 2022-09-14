@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     AppOpenAdManager.loadAd();
     InterstitalAd.createInterstitialAd();
-    // startTimeOut();
+    startTimeOut();
   }
 
   @override
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SizeUtils().init(context);
     return Stack(
       children: [
-        if(Platform.isIOS)
+        if (Platform.isIOS)
           Container(
             color: AppColor.primaryColor,
             // decoration:  const BoxDecoration(
@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
           ),
-        if(Platform.isAndroid)
+        if (Platform.isAndroid)
           Container(
             color: AppColor.primaryColor,
             // decoration:  const BoxDecoration(
@@ -62,15 +62,14 @@ class _SplashScreenState extends State<SplashScreen> {
             // ),
             child: Center(
               child: SizedBox(
-                width: SizeUtils.horizontalBlockSize * 37,
+                width: SizeUtils.horizontalBlockSize * 27,
                 child: Image.asset(
-                  AssetsPath.appLogoNew,
+                  AssetsPath.whatsappLogo,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-
       ],
     );
   }
