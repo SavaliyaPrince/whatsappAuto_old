@@ -43,7 +43,7 @@ class _HomePageScreenState extends State<HomePageScreen> with WidgetsBindingObse
     supportedAppController.getPhoneContacts();
     super.initState();
     FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.home);
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
       log("home Screen test");
       if (message != null) {
@@ -58,7 +58,7 @@ class _HomePageScreenState extends State<HomePageScreen> with WidgetsBindingObse
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
   }
 
   @override

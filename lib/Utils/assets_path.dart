@@ -1,9 +1,10 @@
 class AssetsPath {
   static const image = "assets/images/";
   static const appLogo = "${image}applogo.png";
-  static const appLogoNew = "${image}applogo_new.png";
+  static const appLogoNew = "${image}appIcon.png";
   static const notification = "${image}notification.png";
   static const star = "${image}star.png";
+  static const whatsappLogo = "${image}whatsapp_logo.png";
   static const invite = "${image}invite.png";
   static const messages = "${image}messages.png";
   static const emoji = "${image}emoji.png";

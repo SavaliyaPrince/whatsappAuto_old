@@ -21,6 +21,7 @@ env:
 jobs:
   code-analysis-and-testing:
     name: Code analysis and testing
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -38,6 +39,7 @@ jobs:
 
   android:
     name: Android CI/CD
+    if: false
     needs: code-analysis-and-testing
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -68,7 +70,7 @@ jobs:
     
     - name: Build AAB
       run: |
-        flutter build appbundle --release --info
+        flutter build appbundle --release --verbose
         echo "Removing signing files for extra security"
         rm android/key.*
     
@@ -82,7 +84,6 @@ jobs:
       run: |
         fastlane supply --aab ${{ env.PATH_TO_AAB }} --json_key_data '${{ secrets.ANDROID_SERVICE_ACCOUNT_JSON }}' --package_name '${{ env.ANDROID_PACKAGE_NAME }}' --track 'internal'
   ios:
-    if: false
     name: iOS CI/CD
     # needs: code-analysis-and-testing
     runs-on: macos-12
@@ -156,3 +157,4 @@ jobs:
         PATH_TO_IPA: ${{ env.PATH_TO_IPA }}
       run: |
         xcrun altool --upload-app -t ios -f $PATH_TO_IPA --apiKey "$IOS_API_KEY_ID" --apiIssuer "$IOS_API_ISSUER_ID"
+        

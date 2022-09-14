@@ -70,13 +70,15 @@ class FirebaseMessagingUtils {
           //     ),
           //   ),
           // );
+
+            // showNotification(message);
         }
-        firebaseMessaging.requestPermission(
-          sound: true,
-          badge: true,
-          alert: true,
-          provisional: false,
-        );
+        // firebaseMessaging.requestPermission(
+        //   sound: true,
+        //   badge: true,
+        //   alert: true,
+        //   provisional: false,
+        // );
         if (message.data["body"] != null) {
           final String messageString = message.data["body"];
           log("messageString ;-$messageString");
@@ -145,9 +147,9 @@ class FirebaseMessagingUtils {
       const initializationSettingsAndroid =
           AndroidInitializationSettings('app_icon');
       const initializationSettingsIOS = IOSInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
+        requestAlertPermission: false,
+        requestBadgePermission: false,
+        requestSoundPermission: false,
       );
       const initializationSettings = InitializationSettings(
           android: initializationSettingsAndroid,
@@ -160,4 +162,33 @@ class FirebaseMessagingUtils {
   }
 
   Future<dynamic> onSelectNotification(String? payload) async {}
+
+
+  // void showNotification(RemoteMessage message) async {
+  //   isSelectPage = selectPage(message);
+  //   RemoteNotification? notification = message.notification;
+  //   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  //     channel!.id,
+  //     channel!.name,
+  //     channel!.description,
+  //     icon: 'launch_background',
+  //     playSound: true,
+  //     enableVibration: true,
+  //     importance: Importance.max,
+  //     priority: Priority.high,
+  //   );
+  //   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  //   var platformChannelSpecifics = NotificationDetails(
+  //       android: androidPlatformChannelSpecifics,
+  //       iOS: iOSPlatformChannelSpecifics);
+  //
+  //   await flutterLocalNotificationsPlugin!.show(
+  //       notification.hashCode,
+  //       notification?.title.toString(),
+  //       notification?.body.toString(),
+  //       platformChannelSpecifics,
+  //       payload: message.data['screeDetails']);
+  // }
 }
+
+
