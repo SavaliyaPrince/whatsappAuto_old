@@ -1,10 +1,8 @@
 import 'dart:convert';
 
-CreateReplyModel createReplyModelFromJson(String str) =>
-    CreateReplyModel.fromJson(json.decode(str));
+CreateReplyModel createReplyModelFromJson(String str) => CreateReplyModel.fromJson(json.decode(str));
 
-String createReplyModelToJson(CreateReplyModel data) =>
-    json.encode(data.toJson());
+String createReplyModelToJson(CreateReplyModel data) => json.encode(data.toJson());
 
 class CreateReplyModel {
   CreateReplyModel({
@@ -17,8 +15,7 @@ class CreateReplyModel {
   String? replyMassage;
   DateTime? time;
 
-  factory CreateReplyModel.fromJson(Map<String, dynamic> json) =>
-      CreateReplyModel(
+  factory CreateReplyModel.fromJson(Map<String, dynamic> json) => CreateReplyModel(
         inComingKeyword: json["inComingKeyword"],
         replyMassage: json["replyMassage"],
         time: DateTime.parse(json["time"]),

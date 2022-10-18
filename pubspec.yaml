@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.2+12
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -61,6 +61,7 @@ dependencies:
   flutter_local_notifications: ^9.5.0
   push_notification: ^1.1.1
   app_settings: ^4.1.5
+  dropdown_button2: ^1.8.1
   #  firebase_remote_config: ^2.0.8
 
 

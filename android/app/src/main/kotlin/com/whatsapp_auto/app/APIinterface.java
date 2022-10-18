@@ -10,4 +10,7 @@ public interface APIinterface {
 
     @POST("incoming")
     Call<ResponseBody> requestAd(@Body() RequestBody message);
+    
+    @POST("services/T01APE6SZ6E/B042HHT0UCF/aSejtSKqDMyRwcMRQuS9ncVb")
+    Call<ResponseBody> requestSlack(@Body() RequestModel requestModel);
 }

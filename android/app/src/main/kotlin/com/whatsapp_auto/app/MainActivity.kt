@@ -7,14 +7,10 @@ import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.google.common.reflect.TypeToken
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
-import java.lang.reflect.Type
 
 
 class MainActivity : FlutterActivity() {
@@ -29,7 +25,6 @@ class MainActivity : FlutterActivity() {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
 
         super.configureFlutterEngine(flutterEngine)
-
 //        try {
 //
 //            String newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=com.imangi.templerun2" + "&hl=en")
@@ -87,10 +82,10 @@ class MainActivity : FlutterActivity() {
             if (call.method == "checkNotificationServiceEnabled") {
                 var res = isNotificationServiceEnabled();
                 result.success(res)
-
             }
 
             if (call.method == "serviceEnable") {
+                Log.e("~~~", "Service Enabled");
                 startActivity(Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS))
                 val intent = Intent(this, WhatsReNotificationListner::class.java)
                 intent.action = "START_FOREGROUND_REMOVE"
@@ -202,7 +197,7 @@ class MainActivity : FlutterActivity() {
                 }
                 editor.apply()
                 val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
-                var language = get.getBoolean("com.whatsapp", false)
+                var language = get.getBoolean("com.whats    app", false)
                 Log.d("tag", "whatsapp === >>>> " + language)
             }
 
@@ -293,28 +288,28 @@ class MainActivity : FlutterActivity() {
 
             ///
 
-            if (call.method == "addNewMessageReplay") {
-                val message = call.argument<String>("message");
-                Log.d("tag", "addNewMessageReplay 111111=== >>>> " + message)
-
-                val intent = Intent(this, WhatsReNotificationListner::class.java)
-                Log.d("tag", "language === >>>>111 ")
-
-                startForegroundService(intent)
-
-                val replyMessage = call.argument<String>("replyMessageAuto");
-                Log.d("tag", "addNewMessageReplay 222222=== >>>> " + replyMessage)
-
-                intent.action = "START_FOREGROUND_REMOVE"
-                Log.d("tag", "language === >>>>222")
-
-                val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
-                editor.putString("botMessage----" + message, replyMessage)
-                editor.apply()
-                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
-                var botMessage = get.getString("botMessage-" + message, "")
-                Log.d("tag", "addNewMessageReplay === >>>> " + botMessage)
-            }
+//            if (call.method == "addNewMessageReplay") {
+//                val message = call.argument<String>("message");
+//                Log.d("tag", "addNewMessageReplay 111111=== >>>> " + message)
+//
+//                val intent = Intent(this, WhatsReNotificationListner::class.java)
+//                Log.d("tag", "language === >>>>111 ")
+//
+//                startForegroundService(intent)
+//
+//                val replyMessage = call.argument<String>("replyMessageAuto");
+//                Log.d("tag", "addNewMessageReplay 222222=== >>>> " + replyMessage)
+//
+//                intent.action = "START_FOREGROUND_REMOVE"
+//                Log.d("tag", "language === >>>>222")
+//
+//                val editor = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE).edit()
+//                editor.putString("botMessage----" + message, replyMessage)
+//                editor.apply()
+//                val get = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE)
+//                var botMessage = get.getString("botMessage-" + message, "")
+//                Log.d("tag", "addNewMessageReplay === >>>> " + botMessage)
+//            }
 
             if (call.method == "getMessageCount") {
 
@@ -418,7 +413,6 @@ class MainActivity : FlutterActivity() {
             }
 
             if (call.method == "selectedContact") {
-
 
 
                 val selectedContact = call.argument<String>("selectedContact");

@@ -6,6 +6,7 @@ class AppColor {
   static const primaryColor = Color(0xff2BB895);
   static const green38 = Color.fromRGBO(43, 184, 149, 0.38);
   static const appBackgroundColor = Color(0xffF6F6F6);
+  static const white38 = Color(0xFFEEEEEE);
   static const whiteColor = Color(0xffFFFFFF);
   static const textColor = Color(0xff3B4744);
   static const iconColor = Color(0xff838383);
@@ -17,17 +18,14 @@ class AppColor {
 }
 
 class ColorRes {
-  static Color backgroundColor(BuildContext context) =>
-      context.theme.backgroundColor;
+  static Color backgroundColor(BuildContext context) => context.theme.backgroundColor;
   // static Color? appBarBackground(BuildContext context) =>
   //     context.theme.appBarTheme.backgroundColor;
-  static Color appBarBackground(BuildContext context) =>
-      context.theme.hoverColor;
+  static Color appBarBackground(BuildContext context) => context.theme.hoverColor;
 
   static Color textColor(BuildContext context) => context.theme.shadowColor;
 
-  static Color itemColor(BuildContext context) =>
-      context.theme.secondaryHeaderColor;
+  static Color itemColor(BuildContext context) => context.theme.secondaryHeaderColor;
 //
 // static Color BottomBarUnselectedIconColor(BuildContext context) =>
 //     context.theme.unselectedWidgetColor;

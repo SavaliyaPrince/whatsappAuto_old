@@ -46,7 +46,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class
@@ -55,7 +54,6 @@ WhatsReNotificationListner extends NotificationListenerService {
 
     // Constants
     private static final int ID_SERVICE = 101;
-    String packageName;
     String[] senders;
 
     public List<Long> waLastRawId = new ArrayList<>();
@@ -191,7 +189,7 @@ WhatsReNotificationListner extends NotificationListenerService {
         boolean isReplyEnable = false;
         Bundle bundle = sbn.getNotification().extras;
         Log.d("TAG", "bundle~~>----" + bundle.toString());
-        packageName = sbn.getPackageName();
+        String packageName = sbn.getPackageName();
         if (packageName.equals(BuildConfig.APPLICATION_ID)) {
             return;
         }
@@ -204,7 +202,7 @@ WhatsReNotificationListner extends NotificationListenerService {
             e.printStackTrace();
         }
         String message = "" + bundle.getString(InterceptedNotificationParseCode.ANDROID_TEXT);
-
+        System.out.println("sender ---- >>  " + sender);
 
 //        Log.d("message-=-=-=-111111=-=-=--==-" + message);
         if (sender == null) {
@@ -232,15 +230,17 @@ WhatsReNotificationListner extends NotificationListenerService {
                 CharSequence[] textLine = bundle.getCharSequenceArray(InterceptedNotificationParseCode.ANDROID_TEXT_LINE);
 
                 if (textLine != null) {
-                    appendLog("textLine*******************" + textLine);
+//                    appendLog("textLine*******************" + textLine);
                     String firstUser = textLine[textLine.length - 2].toString().split(":")[0];
                     String secUser = textLine[textLine.length - 1].toString().split(":")[0];
-                    if(firstUser.equalsIgnoreCase(secUser)){
+                    if (firstUser.equalsIgnoreCase(secUser)) {
                         secUser = textLine[textLine.length - 1].toString().split(":")[1];
                         secUser = secUser.split(":")[0];
                     }
                     appendLog("User:***" + textLine[textLine.length - 1].toString() + " : " + textLine[textLine.length - 2].toString());
                     appendLog("firstUser*******************" + firstUser + " secUser: " + secUser);
+                    appendLog("notifuser*******************" + prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, null));
+
                     if (prefs.getString(InterceptedNotificationSharedPref.PREF_INSTAGRAM_UNAME, null) == null) {
                         if (!firstUser.equalsIgnoreCase(secUser)) {
                             appendLog("secUser*********" + secUser);
@@ -358,10 +358,11 @@ WhatsReNotificationListner extends NotificationListenerService {
         }
 
         if (isReplyEnable) {
+
             Log.d("TAG", "isReplyEnable" + isReplyEnable);
 
             appendLog("sender----:" + (sender));
-            appendLog("message---: " + (message));
+            appendLog("message---:" + (message));
             Log.d("TAG", "isReplyEnable 0");
             String autoReplyTo = prefs.getString("autoReplyTo", AutoReplyToType.everyone);
             Log.d("TAG", "isReplyEnable 1 autoReplyTo: " + autoReplyTo);
@@ -374,7 +375,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                 appendLog("repliedMessage---: " + repliedMessage);
                 appendLog("key----------: " + key);
 
-                replayNotification(sbn, bundle, repliedMessage);
+                replayNotification(sbn, bundle, repliedMessage, packageName, sender,message);
 
             } else if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.myContactList)) {
                 String allContacts = prefs.getString("contactList", "");
@@ -400,7 +401,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                         appendLog("key----------: " + key);
 
 
-                        replayNotification(sbn, bundle, repliedMessage);
+                        replayNotification(sbn, bundle, repliedMessage, packageName, sender,message);
                     }
                 }
             } else if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.exceptMyContactList)) {
@@ -424,7 +425,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                         appendLog("key----------: " + key);
 
 
-                        replayNotification(sbn, bundle, repliedMessage);
+                        replayNotification(sbn, bundle, repliedMessage, packageName, sender,message);
                     }
                 }
             } else if (autoReplyTo.equalsIgnoreCase(AutoReplyToType.exceptMyPhoneContacts)) {
@@ -450,7 +451,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                         appendLog("key----------: " + key);
 
 
-                        replayNotification(sbn, bundle, repliedMessage);
+                        replayNotification(sbn, bundle, repliedMessage, packageName, sender,message);
                     }
                 } else {
                     String key = "botMessage-" + message.toLowerCase();
@@ -460,7 +461,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                     appendLog("key----------: " + key);
 
 
-                    replayNotification(sbn, bundle, repliedMessage);
+                    replayNotification(sbn, bundle, repliedMessage, packageName, sender,message);
                 }
             }
 
@@ -488,6 +489,32 @@ WhatsReNotificationListner extends NotificationListenerService {
 //                    });
         }
         appendLog("packageName ---:" + packageName);
+    }
+
+    private void ApiCalling(String replyMsg) {
+
+            String baseUrl = "https://hooks.slack.com/";
+        Retrofit retrofit = new RetrofitHelper().getInstance(baseUrl);
+
+        RequestModel requestModel = new RequestModel();
+        requestModel.setText(replyMsg);
+
+        APIinterface apiService = retrofit.create(APIinterface.class);
+        Call<ResponseBody> response = apiService.requestSlack(requestModel);
+        response.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                Log.d("~~~~>>>", "Success");
+                String resultList = response.body().toString();
+                Log.d("~~~~>>>", "response - " + resultList);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("~~~~>>>", "onFailure");
+            }
+        });
     }
 
     public ContactModel findUsingEnhancedForLoop(String name, ContactModel[] customers) {
@@ -561,9 +588,7 @@ WhatsReNotificationListner extends NotificationListenerService {
                     baseUrl = "http://194.195.119.55:5000/";
                 }
                 Log.d("TAG", "id~~>61" + baseUrl);
-                Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
+                Retrofit retrofit = new RetrofitHelper().getInstance(baseUrl);
 
                 appendLog("Message>>>" + message);
                 appendLog("sender>>>" + sender + "_" + contryCode);
@@ -625,7 +650,7 @@ WhatsReNotificationListner extends NotificationListenerService {
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
-    private void replayNotification(StatusBarNotification statusBarNotification, Bundle bundle, String messages) {
+    private void replayNotification(StatusBarNotification statusBarNotification, Bundle bundle, String messages, String packageName, String sender,String messsage) {
         RemoteInput[] remoteInputArr = new RemoteInput[0];
         Intent intent = new Intent();
         appendLog("intent--------");
@@ -662,104 +687,154 @@ WhatsReNotificationListner extends NotificationListenerService {
 
         RemoteInput.addResultsToIntent(remoteInputArr, intent, bundle);
         if (pendingIntent != null) {
-            try {
-                switch (packageName) {
-                    case ApplicationPackageNames.INSTA_PACKNAME:
 
-                        SharedPreferences prefInsta = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-                        int instaCount = prefInsta.getInt("instaMessageCount", 0);
-                        instaCount = instaCount + 1;
-                        prefInsta.edit().putInt("instaMessageCount", instaCount).apply();
-                        break;
-
-                    case ApplicationPackageNames.TELEGRAM_PACKNAME:
-
-                        SharedPreferences prefsTelegram = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-                        int telegramCount = prefsTelegram.getInt("telegramMessageCount", 0);
-                        telegramCount = telegramCount + 1;
-
-                        Log.d("TAG", "telegramCount~~ 0" + telegramCount);
-
-                        prefsTelegram.edit().putInt("telegramMessageCount", telegramCount).apply();
-                        break;
-
-
-                    case ApplicationPackageNames.FACEBOOK_PACKNAME:
-                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 0");
-
-                        SharedPreferences prefsFacebook = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-                        int facebookCount = prefsFacebook.getInt("facebookMessageCount", 0);
-                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 1" + facebookCount);
-
-                        facebookCount = facebookCount + 1;
-                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 2" + facebookCount);
-
-                        prefsFacebook.edit().putInt("facebookMessageCount", facebookCount).apply();
-                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 3" + pendingIntent);
-
-                        pendingIntent.send(this, 0, intent);
-                        Log.d("TAG", "FACEBOOK_PACKNAME~~ 4" + facebookCount);
-                        break;
-
-
-                    case ApplicationPackageNames.TWITTER_PACKNAME:
-
-                        SharedPreferences prefsTwitter = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-                        int twitterCount = prefsTwitter.getInt("twitterMessageCount", 0);
-                        twitterCount = twitterCount + 1;
-                        prefsTwitter.edit().putInt("twitterMessageCount", twitterCount).apply();
-                        break;
-
-
-                    case ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS:
-
-                        SharedPreferences prefsWhatsappBusi = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-                        int whatsappBusinessCount = prefsWhatsappBusi.getInt("whatsAppBusinessMessageCount", 0);
-                        whatsappBusinessCount = whatsappBusinessCount + 1;
-                        prefsWhatsappBusi.edit().putInt("whatsAppBusinessMessageCount", whatsappBusinessCount).apply();
-                        break;
-
-
-                    case ApplicationPackageNames.WHATSAPP_PACKNAME:
-
-                        SharedPreferences prefsWhatsapp = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
-                        int whatsappCount = prefsWhatsapp.getInt("messageCount", 0);
-                        whatsappCount = whatsappCount + 1;
-                        prefsWhatsapp.edit().putInt("messageCount", whatsappCount).apply();
-                        break;
-
-                }
 
                 /*SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
                 int messageCount = prefs.getInt("messageCount", 0);
                 messageCount = messageCount + 1;
                 prefs.edit().putInt("messageCount", messageCount).apply();*/
 
-                pendingIntent.send(this, 0, intent);
-////////////
-//                String sender = null;
-//                try {
-//                    sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                appendLog("-----" + sender);
-//                Intent sendIntent = new Intent("android.intent.action.MAIN");
-//                sendIntent.putExtra("jid", sender + "@s.whatsapp.net");
-//                sendIntent.putExtra(Intent.EXTRA_TEXT, messages);
-//                sendIntent.setAction(Intent.ACTION_SEND);
-//                sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                sendIntent.setPackage("com.whatsapp.w4b");
-//                sendIntent.setType("text/plain");
-//                startActivity(sendIntent);
+            Log.e("~~~", "notification posttime - " + statusBarNotification.getPostTime());
+//            Constants.intentHashMap.put(statusBarNotification.getPostTime(), intent);
+//            Constants.pendingIntentHashMap.put(statusBarNotification.getPostTime(), pendingIntent);
+//            Constants.packageHashMap.put(statusBarNotification.getPostTime(), packageName);
 
-            } catch (PendingIntent.CanceledException e2) {
-                e2.printStackTrace();
-            }
+            increaseNotifCount(packageName);
+            sendReply(pendingIntent, intent);
+
+            Log.e("~~~", "message - " + messages);
+            Log.e("~~~", "Send message - " + messsage);
+            ApiCalling(sender + " : " + messsage);
+//            Constants.intentHashMap.remove(statusBarNotification.getPostTime());
+//            Constants.pendingIntentHashMap.remove(statusBarNotification.getPostTime());
+//            Constants.packageHashMap.remove(statusBarNotification.getPostTime());
+
+//            int timer_count = 1;
+//            Constants.createTimer(statusBarNotification.getPostTime(), timer_count, timerFinishListener);
+
+
+//                pendingIntent.send(this, 0, intent);
+////////////
+                /*String sender = null;
+                try {
+                    sender = bundle.getString(InterceptedNotificationParseCode.ANDROID_TITLE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                appendLog("-----" + sender);
+                Intent sendIntent = new Intent("android.intent.action.MAIN");
+                sendIntent.putExtra("jid", sender + "@s.whatsapp.net");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, messages);
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                sendIntent.setPackage("com.whatsapp.w4b");
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);*/
+
         }
         appendLog("-----------RemoteInput.addResultsToIntent");
     }
 
+    /*TimerFinishListener timerFinishListener = new TimerFinishListener() {
+        @Override
+        public void onTimerFinished(long notification_id, int timer_count) {
+            Log.e("~~~", "onTimerFinished -- timer_count - " + timer_count);
+//            if (timer_count != 3) {
+//                timer_count++;
+//                Constants.createTimer(notification_id, timer_count, timerFinishListener);
+//                increaseNotifCount(notification_id);
+//                sendReply(notification_id);
+//            } else {
+                increaseNotifCount(notification_id);
+                sendReply(notification_id);
+                Constants.intentHashMap.remove(notification_id);
+                Constants.pendingIntentHashMap.remove(notification_id);
+                Constants.packageHashMap.remove(notification_id);
+//            }
+        }
+    };*/
+
+    private void increaseNotifCount(String packageName) {
+//        String packageName = Constants.packageHashMap.get(notification_id);
+        switch (packageName) {
+            case ApplicationPackageNames.INSTA_PACKNAME:
+
+                SharedPreferences prefInsta = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int instaCount = prefInsta.getInt("instaMessageCount", 0);
+                instaCount = instaCount + 1;
+                prefInsta.edit().putInt("instaMessageCount", instaCount).apply();
+                break;
+
+            case ApplicationPackageNames.TELEGRAM_PACKNAME:
+
+                SharedPreferences prefsTelegram = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int telegramCount = prefsTelegram.getInt("telegramMessageCount", 0);
+                telegramCount = telegramCount + 1;
+
+                Log.d("TAG", "telegramCount~~ 0" + telegramCount);
+
+                prefsTelegram.edit().putInt("telegramMessageCount", telegramCount).apply();
+                break;
+
+
+            case ApplicationPackageNames.FACEBOOK_PACKNAME:
+                Log.d("TAG", "FACEBOOK_PACKNAME~~ 0");
+
+                SharedPreferences prefsFacebook = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int facebookCount = prefsFacebook.getInt("facebookMessageCount", 0);
+                Log.d("TAG", "FACEBOOK_PACKNAME~~ 1" + facebookCount);
+
+                facebookCount = facebookCount + 1;
+                Log.d("TAG", "FACEBOOK_PACKNAME~~ 2" + facebookCount);
+
+                prefsFacebook.edit().putInt("facebookMessageCount", facebookCount).apply();
+
+//                        pendingIntent.send(this, 0, intent);
+                Log.d("TAG", "FACEBOOK_PACKNAME~~ 4" + facebookCount);
+                break;
+
+
+            case ApplicationPackageNames.TWITTER_PACKNAME:
+
+                SharedPreferences prefsTwitter = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int twitterCount = prefsTwitter.getInt("twitterMessageCount", 0);
+                twitterCount = twitterCount + 1;
+                prefsTwitter.edit().putInt("twitterMessageCount", twitterCount).apply();
+                break;
+
+
+            case ApplicationPackageNames.WHATSAPP_PACKNAME_BUSINESS:
+
+                SharedPreferences prefsWhatsappBusi = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int whatsappBusinessCount = prefsWhatsappBusi.getInt("whatsAppBusinessMessageCount", 0);
+                whatsappBusinessCount = whatsappBusinessCount + 1;
+                prefsWhatsappBusi.edit().putInt("whatsAppBusinessMessageCount", whatsappBusinessCount).apply();
+                break;
+
+
+            case ApplicationPackageNames.WHATSAPP_PACKNAME:
+
+                SharedPreferences prefsWhatsapp = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+                int whatsappCount = prefsWhatsapp.getInt("messageCount", 0);
+                whatsappCount = whatsappCount + 1;
+                prefsWhatsapp.edit().putInt("messageCount", whatsappCount).apply();
+                break;
+
+        }
+    }
+
+    private void sendReply(PendingIntent pendingIntent, Intent intent) {
+        try {
+            if (pendingIntent != null) {
+                pendingIntent.send(WhatsReNotificationListner.this, 0, intent);
+            } else {
+                Log.e("~~~", "Pending intent is null");
+            }
+        } catch (PendingIntent.CanceledException e) {
+            Log.e("~~~", "Exception cached");
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {

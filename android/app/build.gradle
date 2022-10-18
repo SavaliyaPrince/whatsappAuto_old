@@ -24,8 +24,8 @@ if (flutterVersionName == null) {
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 //if (keystorePropertiesFile.exists()) {
-    project.logger.lifecycle('~~~>file exits')
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+project.logger.lifecycle('~~~>file exits')
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 //}
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
@@ -66,7 +66,7 @@ android {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-            project.logger.lifecycle('~~~>'+keystoreProperties['storeFile'])
+            project.logger.lifecycle('~~~>' + keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
     }
@@ -101,4 +101,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'org.jsoup:jsoup:1.10.2'
     implementation 'com.google.guava:guava:27.0.1-android'
+
+
+    implementation 'com.google.code.gson:gson:2.6.2'
+
 }

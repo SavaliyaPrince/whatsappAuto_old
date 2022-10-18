@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +15,7 @@ class CreateReplyController extends GetxController {
   final TextEditingController inComingKeywordController = TextEditingController();
   final TextEditingController replyMassageController = TextEditingController();
   RxList<CreateReplyModel> createModal = <CreateReplyModel>[].obs;
-  Timer? _timer;
+  // Timer? _timer;
 
   String? inComingKeywordValidator() {
     if (inComingKeywordController.text.isEmpty) {
@@ -35,11 +34,11 @@ class CreateReplyController extends GetxController {
     return null;
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _timer?.cancel();
+  //   super.dispose();
+  // }
 
   @override
   void onInit() {
@@ -49,11 +48,6 @@ class CreateReplyController extends GetxController {
       createModal.clear();
       createModal.addAll(posts);
     }
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      log('Timer Active');
-      autoReplay();
-    });
     super.onInit();
   }
 
@@ -74,25 +68,25 @@ class CreateReplyController extends GetxController {
     print("replyMessage---------->>>>>>>> ${replyMassageController.text.trim()}");
   }
 
-  Future<void> autoReplay() async {
-    await saveMethode();
-    print("------000000------");
-    AppPreference.setString("CreateReplyModel", json.encode(createModal));
-    print("------111111------");
-    final Iterable l = json.decode(AppPreference.getString("CreateReplyModel"));
-    print("------222222------");
-    final List<CreateReplyModel> posts = List<CreateReplyModel>.from(l.map((model) => CreateReplyModel.fromJson(model)));
-    print("------333333------");
-    createModal.clear();
-    print("------44444------");
-    createModal.addAll(posts);
-    print("------55555------");
-    const platform = MethodChannel('samples.flutter.dev/battery');
-    print("saveMethode ----- >>> ${saveMethode()}");
-    platform.invokeMethod('addNewMessageReplay', {
-      "message": inComingKeywordController.text.toLowerCase().trim(),
-      "replyMessageAuto": replyMassageController.text.trim(),
-    });
-    print("------666666------");
-  }
+  // Future<void> autoReplay() async {
+  //   await saveMethode();
+  //   print("------000000------");
+  //   AppPreference.setString("CreateReplyModel", json.encode(createModal));
+  //   print("------111111------");
+  //   final Iterable l = json.decode(AppPreference.getString("CreateReplyModel"));
+  //   print("------222222------");
+  //   final List<CreateReplyModel> posts = List<CreateReplyModel>.from(l.map((model) => CreateReplyModel.fromJson(model)));
+  //   print("------333333------");
+  //   createModal.clear();
+  //   print("------44444------");
+  //   createModal.addAll(posts);
+  //   print("------55555------");
+  //   const platform = MethodChannel('samples.flutter.dev/battery');
+  //   print("saveMethode ----- >>> ${saveMethode()}");
+  //   platform.invokeMethod('addNewMessageReplay', {
+  //     "message": inComingKeywordController.text.toLowerCase().trim(),
+  //     "replyMessageAuto": replyMassageController.text.trim(),
+  //   });
+  //   print("------666666------");
+  // }
 }
