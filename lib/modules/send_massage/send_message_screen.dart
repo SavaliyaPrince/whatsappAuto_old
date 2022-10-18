@@ -39,9 +39,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
       bottomSheet: const BannerAdView(),
       appBar: AppBar(
         elevation: 0.2,
-        backgroundColor: themeController.isSwitched.value
-            ? AppColor.darkThem.withOpacity(0.2)
-            : AppColor.whiteColor,
+        backgroundColor: themeController.isSwitched.value ? AppColor.darkThem.withOpacity(0.2) : AppColor.whiteColor,
         leadingWidth: SizeUtils.horizontalBlockSize * 11.5,
         leading: GestureDetector(
           onTap: () {
@@ -51,25 +49,20 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
             padding: EdgeInsets.only(left: SizeUtils.horizontalBlockSize * 4.2),
             child: Image.asset(
               AppIcons.backIcon,
-              color: themeController.isSwitched.value
-                  ? AppColor.whiteColor
-                  : AppColor.backIconColor,
+              color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
             ),
           ),
         ),
         title: Text(
           AppString.welcomeMessageTitle,
           style: TextStyle(
-            color: themeController.isSwitched.value
-                ? AppColor.whiteColor
-                : AppColor.backIconColor,
+            color: themeController.isSwitched.value ? AppColor.whiteColor : AppColor.backIconColor,
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: SizeUtils.horizontalBlockSize * 5),
+          padding: EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 5),
           child: Column(
             children: [
               SizedBox(
@@ -94,8 +87,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                   color: AppColor.whiteColor,
                 ),
                 child: AppTextField(
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: SizeUtils.horizontalBlockSize * 4),
+                  contentPadding: EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 4),
                   onChanged: (value) {},
                   controller: _sendMessageController.phoneController,
                   hintText: AppString.phoneNumber,
@@ -127,9 +119,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
               ImageTextButton(
                 onTap: () async {
                   if (_sendMessageController.phoneController.text != "") {
-                    _sendMessageController.onOpenWhatsApp(
-                        _sendMessageController.phoneController.text,
-                        _sendMessageController.textController.text);
+                    _sendMessageController.onOpenWhatsApp(_sendMessageController.phoneController.text, _sendMessageController.textController.text);
                   } else {
                     AppToast.toastMessage("Enter Mobile Number");
                   }
@@ -148,20 +138,18 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                   if (_sendMessageController.phoneController.text != "") {
                     if (Platform.isAndroid) {
                       final prefs = await SharedPreferences.getInstance();
-                      String mobileNumber =
-                          await _sendMessageController.getCountryNumber();
-                      if (mobileNumber == "" &&
-                          prefs.getString("countryCode") != null) {
+                      String mobileNumber = "";
+                      // String mobileNumber =
+                      //     await _sendMessageController.getCountryNumber();
+                      if (mobileNumber == "" && prefs.getString("countryCode") != null) {
                         mobileNumber = prefs.getString("countryCode") ?? "";
                       }
 
-                      final uri =
-                          'sms:$mobileNumber?body=${_sendMessageController.textController.text}%20';
+                      final uri = 'sms:$mobileNumber?body=${_sendMessageController.textController.text}%20';
                       log("Sms :- $uri");
                       await launch(uri);
                     } else if (Platform.isIOS) {
-                      final uri =
-                          'sms:${_sendMessageController.phoneController.text}&body=${_sendMessageController.textController.text}%20';
+                      final uri = 'sms:${_sendMessageController.phoneController.text}&body=${_sendMessageController.textController.text}%20';
                       await launch(uri);
                     }
                   } else {
@@ -179,9 +167,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
               ),
               Obx(
                 () => SizedBox(
-                  height: isBannerLoaded.value
-                      ? SizeUtils.verticalBlockSize * 8
-                      : 0,
+                  height: isBannerLoaded.value ? SizeUtils.verticalBlockSize * 8 : 0,
                 ),
               ),
             ],

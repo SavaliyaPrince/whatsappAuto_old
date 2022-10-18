@@ -48,11 +48,6 @@ class CreateReplyController extends GetxController {
       createModal.clear();
       createModal.addAll(posts);
     }
-    // _timer?.cancel();
-    // _timer = Timer.periodic(const Duration(seconds: 60), (timer) {
-    //   log('Timer Active');
-    //   autoReplay();
-    // });
     super.onInit();
   }
 

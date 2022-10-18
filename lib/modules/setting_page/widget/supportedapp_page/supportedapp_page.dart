@@ -86,12 +86,12 @@ class SupportedAppPage extends StatelessWidget {
                     AppPreference.setWhatsApp(
                       whatsApp: supportedAppController.isSwitchWhatsApp.value,
                     );
-                    print("supportedAppController.isSwitchWhatsApp.value ---- > ${supportedAppController.isSwitchWhatsApp.value}");
-                    print("value-1--$value");
-
-                    if (supportedAppController.isSwitchWhatsApp.value == true) {
-                      print("------12312312321312-3--");
-                    }
+                    // print("supportedAppController.isSwitchWhatsApp.value ---- > ${supportedAppController.isSwitchWhatsApp.value}");
+                    // print("value-1--$value");
+                    //
+                    // if (supportedAppController.isSwitchWhatsApp.value == true) {
+                    //   print("------12312312321312-3--");
+                    // }
                     print("supportedAppController.isSwitchWhatsApp.value ---- > ${supportedAppController.isSwitchWhatsApp.value}");
                     const platform = MethodChannel('samples.flutter.dev/battery');
 

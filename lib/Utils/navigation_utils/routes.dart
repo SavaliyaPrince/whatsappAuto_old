@@ -8,6 +8,7 @@ import 'package:whatsapp_auto/modules/contact_page/group_page/group_page.dart';
 import 'package:whatsapp_auto/modules/homepage/home_page.dart';
 import 'package:whatsapp_auto/modules/chat_page/chat_page.dart';
 import 'package:whatsapp_auto/modules/send_massage/send_message_screen.dart';
+import 'package:whatsapp_auto/modules/set_up_channel_page/set_up_channel_screen.dart';
 import 'package:whatsapp_auto/modules/setting_page/setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/Advance_setting/advance_setting_page.dart';
 import 'package:whatsapp_auto/modules/setting_page/widget/appearance/appearance.dart';
@@ -33,6 +34,7 @@ mixin Routes {
   static const String contactPage = "/contactPage";
   static const String groupsSettingPage = "/groupsSettingPage";
   static const String contactListPage = "/contactListPage";
+  static const String setUpChannelScreen = "/setUpChannelScreen";
 
   static List<GetPage<dynamic>> pages = [
     GetPage(
@@ -108,6 +110,11 @@ mixin Routes {
     GetPage(
       name: contactListPage,
       page: () => ContactListPage(),
+      transition: defaultTransition,
+    ),
+    GetPage(
+      name: setUpChannelScreen,
+      page: () => SetUpChannelScreen(),
       transition: defaultTransition,
     ),
   ];

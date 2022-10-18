@@ -98,17 +98,17 @@ class _HomePageScreenState extends State<HomePageScreen> with WidgetsBindingObse
               ),
             ),
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: SizeUtils.verticalBlockSize * 2,
-              horizontal: SizeUtils.horizontalBlockSize * 5,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (Platform.isIOS)
-                  Expanded(
-                    child: SingleChildScrollView(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (Platform.isIOS)
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: SizeUtils.verticalBlockSize * 2,
+                        horizontal: SizeUtils.horizontalBlockSize * 5,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -169,10 +169,16 @@ class _HomePageScreenState extends State<HomePageScreen> with WidgetsBindingObse
                         ],
                       ),
                     ),
-                  )
-                else
-                  Expanded(
-                    child: SingleChildScrollView(
+                  ),
+                )
+              else
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: SizeUtils.verticalBlockSize * 2,
+                        horizontal: SizeUtils.horizontalBlockSize * 5,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -200,6 +206,18 @@ class _HomePageScreenState extends State<HomePageScreen> with WidgetsBindingObse
                             },
                           ),
                           SizedBox(height: SizeUtils.verticalBlockSize * 1.5),
+                          customCategoriesBox(
+                            context,
+                            titleText: AppString.channelTitle,
+                            subtitle: AppString.menuReplySubTile,
+                            image: AssetsPath.emoji,
+                            onTap: () async {
+                              Navigation.pushNamed(Routes.setUpChannelScreen);
+                            },
+                          ),
+                          SizedBox(
+                            height: SizeUtils.verticalBlockSize * 1.5,
+                          ),
                           customCategoriesBox(
                             context,
                             titleText: AppString.contact,
@@ -261,8 +279,8 @@ class _HomePageScreenState extends State<HomePageScreen> with WidgetsBindingObse
                       ),
                     ),
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
           bottomSheet: const BannerAdView(),
         ),

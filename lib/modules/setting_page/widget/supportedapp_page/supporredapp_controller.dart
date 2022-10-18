@@ -80,48 +80,55 @@ class SupportedAppController extends GetxController {
         //       {"whatsapp": whatsApp.value},
         //     );
         //   }
-        whatsApp.value = isSwitchWhatsApp.value;
-        isSwitchWhatsApp.value = true;
-        AppPreference.setWhatsApp(whatsApp: false);
-        platform.invokeMethod(
-          'setWhatsApp',
-          {"whatsapp": whatsApp.value},
-        );
-        whatsappBusiness.value = true;
-        isSwitchWhatsAppBusi.value = true;
-        AppPreference.setWhatsAppBusi(whatsAppBusi: false);
-        platform.invokeMethod(
-          'setWhatsappBusiness',
-          {"whatsappBusiness": whatsappBusiness.value},
-        );
-        facebook.value = true;
-        isSwitchMessanger.value = true;
-        AppPreference.setFbMassager(fbMassager: false);
-        platform.invokeMethod(
-          'setFacebook',
-          {"facebook": facebook.value},
-        );
-        instagram.value = true;
-        isSwitchInstagram.value = true;
-        AppPreference.setInstagram(instagram: false);
-        platform.invokeMethod(
-          'setInstagramResponse',
-          {"instagramResponse": instagram.value},
-        );
-        telegram.value = true;
-        isSwitchTelegram.value = true;
-        AppPreference.setTelegram(telegram: false);
-        platform.invokeMethod(
-          'setTelegram',
-          {"telegram": telegram.value},
-        );
-        twitter.value = true;
-        isSwitchTwitter.value = true;
-        AppPreference.setTwitter(twitter: false);
-        platform.invokeMethod(
-          'setTwitter',
-          {"twitter": twitter.value},
-        );
+        if (isSwitchWhatsApp.value) {
+          whatsApp.value = isSwitchWhatsApp.value;
+          isSwitchWhatsApp.value = true;
+          AppPreference.setWhatsApp(whatsApp: true);
+          platform.invokeMethod(
+            'setWhatsApp',
+            {"whatsapp": whatsApp.value},
+          );
+        } else if (isSwitchWhatsAppBusi.value) {
+          whatsappBusiness.value = true;
+          isSwitchWhatsAppBusi.value = true;
+          AppPreference.setWhatsAppBusi(whatsAppBusi: false);
+          platform.invokeMethod(
+            'setWhatsappBusiness',
+            {"whatsappBusiness": whatsappBusiness.value},
+          );
+        } else if (isSwitchMessanger.value) {
+          facebook.value = true;
+          isSwitchMessanger.value = true;
+          AppPreference.setFbMassager(fbMassager: false);
+          platform.invokeMethod(
+            'setFacebook',
+            {"facebook": facebook.value},
+          );
+        } else if (isSwitchInstagram.value) {
+          instagram.value = true;
+          isSwitchInstagram.value = true;
+          AppPreference.setInstagram(instagram: false);
+          platform.invokeMethod(
+            'setInstagramResponse',
+            {"instagramResponse": instagram.value},
+          );
+        } else if (isSwitchTelegram.value) {
+          telegram.value = true;
+          isSwitchTelegram.value = true;
+          AppPreference.setTelegram(telegram: false);
+          platform.invokeMethod(
+            'setTelegram',
+            {"telegram": telegram.value},
+          );
+        } else if (isSwitchTwitter.value) {
+          twitter.value = true;
+          isSwitchTwitter.value = true;
+          AppPreference.setTwitter(twitter: false);
+          platform.invokeMethod(
+            'setTwitter',
+            {"twitter": twitter.value},
+          );
+        }
       } else {
         // isSwitchWhatsApp.value = false;
         // whatsApp.value = false;

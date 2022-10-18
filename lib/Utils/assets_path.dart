@@ -12,22 +12,14 @@ class AssetsPath {
   static const category = "${image}category.png";
   static const document = "${image}contact.png";
   static const upBottomNavigationBarItem = "${image}up-bottom-navigation.png";
-  static const homeBottomNavigationBarItem =
-      "${image}home-bottom-navigation.png";
-  static const messageBottomNavigationBarItem =
-      "${image}message-notification-bottom-navigation.png";
-  static const settingBottomNavigationBarItem =
-      "${image}setting-bottom-navigation.png";
-  static const userBottomNavigationBarItem =
-      "${image}user-bottom-navigation.png";
-  static const homeBottomNavigationBarItem1 =
-      "${image}home-bottom-navigation1.png";
-  static const messageBottomNavigationBarItem1 =
-      "${image}message-notification-bottom-navigation1.png";
-  static const settingBottomNavigationBarItem1 =
-      "${image}setting-bottom-navigation1.png";
-  static const userBottomNavigationBarItem1 =
-      "${image}user-bottom-navigation1.png";
+  static const homeBottomNavigationBarItem = "${image}home-bottom-navigation.png";
+  static const messageBottomNavigationBarItem = "${image}message-notification-bottom-navigation.png";
+  static const settingBottomNavigationBarItem = "${image}setting-bottom-navigation.png";
+  static const userBottomNavigationBarItem = "${image}user-bottom-navigation.png";
+  static const homeBottomNavigationBarItem1 = "${image}home-bottom-navigation1.png";
+  static const messageBottomNavigationBarItem1 = "${image}message-notification-bottom-navigation1.png";
+  static const settingBottomNavigationBarItem1 = "${image}setting-bottom-navigation1.png";
+  static const userBottomNavigationBarItem1 = "${image}user-bottom-navigation1.png";
   static const profile = "${image}profile.png";
   static const edit = "${image}edit.png";
 }
@@ -37,6 +29,7 @@ class AppIcons {
   static const autoReply = "${icons}auto.png";
   static const element = "${icons}element.png";
   static const whatsappBusiness = "${icons}whatsapp_business.png";
+  static const slack = "${icons}slack.png";
   static const instagram = "${icons}instagram.png";
   static const twitter = "${icons}twitter.png";
   static const upgrade = "${icons}upgrade.png";

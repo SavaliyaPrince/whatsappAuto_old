@@ -19,6 +19,7 @@ class AppString {
   static const categoryTitle = 'Supported apps';
   static const categorySubTile = 'Give us your valuable feedbacks and rate us so we can provide better service and quality.';
   static const documentTitle = 'Rate Us';
+  static const channelTitle = 'Set Up Your channel';
   static const contact = 'Contact';
   static const documentSubTile = 'Share with your friends and family';
   static const sendWelcomeMessage = 'Send welcome message';
@@ -46,6 +47,7 @@ class AppString {
   static const massageSent = "Messages sent";
   static const lastSync = "Last sync 2 mins ago";
   static const WhatsApp = "WhatsApp";
+  static const slack = "Slack";
   static const Telegram = "Telegram";
   static const instagram = "Instagram";
   static const messenger = "Messenger";
@@ -139,16 +141,21 @@ class AppString {
 
   /// create reply
   static const createReply = "Your Auto Response";
+  static const setUpChannel = "Set Up Your Channel";
   static const customReply = "custome reply";
   static const tapToBelow = "Tap to below button to create\ncustome reply text easily";
   static const create = "Add New Response";
+  static const addChannel = "Add";
 
   /// create custom reply
   static const createCustomReply = "Create custome reply";
   static const CreateYourOwnChatBot = "Create your own chatbot by customizing\nincoming and reply massages";
   static const incomingKeyword = "Incoming keyword";
   static const replyMassage = "Reply massage";
+  static const url = "URL";
   static const enterInComingKeyword = "Please enter a incoming keyword.";
   static const enterReplyMassage = "Please enter a enter reply massage.";
   static const invalidArgument = "Invalid";
+  static const selectYourApp = "Select your app";
+  static const selectYourResponseApp = "Select Your Response App";
 }
