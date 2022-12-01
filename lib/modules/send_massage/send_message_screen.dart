@@ -120,10 +120,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                             ),
                             child: Center(
                               child: Text(
-                                // // _sendMessageController.country.value == Country.worldWide
-                                //     ? 'Choose'
-                                //     : _sendMessageController.country.value.countryCode,
-                                ' ${ _sendMessageController.getCountryCode}',
+                                _sendMessageController.getCountryCode,
                                 style: TextStyle(
                                   fontSize: SizeUtils.fSize_16(),
                                 ),
