@@ -94,54 +94,46 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 3,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      SizeUtils.horizontalBlockSize * 10,
-                    ),
-                    color: AppColor.whiteColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: GestureDetector(
-                          onTap: () {
-                            // _sendMessageController.pickCountry(context);
-                            onPressedShowBottomSheet();
-                            setState(() {});
-                            // Country? _selectedCountry;
-                          },
-                          child: Container(
-                            height: SizeUtils.verticalBlockSize * 5.3,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color:AppColor.white38,
-                            ),
-                            child: Center(
-                              child: Text(
-                                _sendMessageController.getCountryCode,
-                                style: TextStyle(
-                                  fontSize: SizeUtils.fSize_16(),
-                                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        onTap: () {
+                          // _sendMessageController.pickCountry(context);
+                          onPressedShowBottomSheet();
+                          setState(() {});
+                          // Country? _selectedCountry;
+                        },
+                        child: Container(
+                          height: SizeUtils.verticalBlockSize * 7.2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color:AppColor.white38,
+                          ),
+                          child: Center(
+                            child: Text(
+                              _sendMessageController.getCountryCode,
+                              style: TextStyle(
+                                fontSize: SizeUtils.fSize_16(),
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: SizeUtils.horizontalBlockSize * 2),
-                      Expanded(
-                        flex: 4,
-                        child: AppTextField(
-                          contentPadding: EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 4),
-                          onChanged: (value) {},
-                          controller: _sendMessageController.phoneController,
-                          hintText: AppString.phoneNumber,
-                          keyboardType: TextInputType.phone,
-                        ),
+                    ),
+                    SizedBox(width: SizeUtils.horizontalBlockSize * 2),
+                    Expanded(
+                      flex: 4,
+                      child: AppTextField(
+                        contentPadding: EdgeInsets.symmetric(horizontal: SizeUtils.horizontalBlockSize * 4),
+                        onChanged: (value) {},
+                        controller: _sendMessageController.phoneController,
+                        hintText: AppString.phoneNumber,
+                        keyboardType: TextInputType.phone,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: SizeUtils.verticalBlockSize * 1.5,
