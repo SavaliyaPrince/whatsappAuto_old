@@ -106,7 +106,7 @@ class _SendMessageScreenState extends State<SendMessageScreen> {
                           // Country? _selectedCountry;
                         },
                         child: Container(
-                          height: SizeUtils.verticalBlockSize * 7.2,
+                          height: SizeUtils.verticalBlockSize * 7.0,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color:AppColor.white38,

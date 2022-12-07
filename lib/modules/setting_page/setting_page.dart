@@ -149,7 +149,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
-                    final Uri url = Uri.parse('http://144.126.254.69/whatsauto/index.html');
+                    final Uri url = Uri.parse('http://144.126.254.69/responder/index.html');
 
                     _launchUrl(url);
                   },
@@ -230,7 +230,7 @@ class _SettingPageState extends State<SettingPage> with WidgetsBindingObserver {
                   AppString.Privacy,
                   width: SizeUtils.fSize_24(),
                   onTap: () {
-                    final Uri url = Uri.parse('http://144.126.254.69/whatsauto/index.html');
+                    final Uri url = Uri.parse('http://144.126.254.69/responder/index.html');
 
                     _launchUrl(url);
                   },
